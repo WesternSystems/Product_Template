@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">RF & Microwave – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+
+/* COMPANY HEADER */
+.co-header{background:#fff;border-bottom:3px solid #0077aa;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#0077aa;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.co-nav{display:flex;gap:10px;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#0077aa;color:#0077aa;}
+
+.page-inner{padding-top:24px;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,170,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#0077aa;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#0077aa;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #0077aa;color:#0077aa;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,170,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #0077aa;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#0077aa;white-space:nowrap;background:rgba(0,119,170,0.04);}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#0077aa;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+
+/* SECTIONS */
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#0077aa;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#0077aa;box-shadow:0 4px 16px rgba(0,119,170,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#0077aa;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,170,0.08);color:#0077aa;border-color:#0077aa;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#0077aa;letter-spacing:1px;background:rgba(0,119,170,0.03);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+
+/* APPS GRID */
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#0077aa;background:rgba(0,119,170,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#0077aa;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* CONTACT */
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#0077aa;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+
+/* WST FOOTER */
+.wst-footer{margin-top:40px;padding:20px 28px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#0077aa;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+
+<!-- COMPANY HEADER -->
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="co-nav">
+    <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+  </div>
+</div>
+
+<div class="page">
+<div class="page-inner">
+  <div id="root"></div>
+</div>
+</div>
+
+<script>
+const VENDORS = {
+'TICRA':{
+  url:'https://www.ticra.com', email:'info@ticra.com',
+  country:'COPENHAGEN, DENMARK', founded:'1967',
+  sub:'ANTENNA MODELLING & DESIGN SOFTWARE',
+  desc:'TICRA is the world-leading provider of antenna analysis and design software for satellite communications, radio astronomy and defence. Founded in 1967, their TICRA Tools suite — comprising GRASP, ESTEAM, CHAMP 3D, QUPES, POS and UQ — is the global industry standard used by ESA, NASA, Airbus, Thales, Viasat, SES and virtually every major satellite manufacturer. In 2019 TICRA introduced the unified TICRA Tools framework, integrating all products into a single seamless environment. Also available via the Altair Partner Alliance.',
+  badges:['TICRA TOOLS SUITE','ESA / NASA APPROVED','SINCE 1967','ALTAIR PARTNER'],
+  stats:[{v:'1967',l:'FOUNDED'},{v:'8+',l:'SOFTWARE PRODUCTS'},{v:'55+',l:'YEARS OF EXPERTISE'},{v:'100+',l:'GLOBAL CUSTOMERS'}],
+  apps:[
+    {icon:'🛰',name:'SATELLITE',desc:'Reflector antenna synthesis and shaped beam design for GEO/LEO satellite payloads — Airbus, Thales, SES, Viasat'},
+    {icon:'📡',name:'RADIO ASTRONOMY',desc:'Feed horn and reflector analysis for radiotelescope arrays, SKA, and VLBI networks'},
+    {icon:'🛡',name:'DEFENCE',desc:'Platform scattering, RCS analysis and phased array simulation for defence radar and EW systems'},
+    {icon:'🔬',name:'ANTENNA TEST',desc:'Near-field to far-field transformation (SNIFT) for CATR and anechoic chamber data post-processing'},
+    {icon:'🎓',name:'ACADEMIC',desc:'Student Edition for university antenna engineering courses — GRASP and QUPES with reduced functionality'},
+  ],
+  products:[
+    {name:'GRASP — REFLECTOR ANTENNA ANALYSIS & DESIGN',
+     brief:'The world-standard software for Physical Optics, GTD and Method of Moments analysis of single, dual and multiple reflector antenna systems. Used by every major satellite manufacturer globally. Fast, accurate design and optimisation of shaped reflectors and contoured beam antennas.',
+     pills:['PHYSICAL OPTICS','GTD / UTD / BoR-MoM','SHAPED BEAM','SATELLITE STANDARD'],
+     desc:'GRASP is TICRA\'s flagship product and the global benchmark for reflector antenna analysis. It computes radiation patterns for single-reflector, Cassegrain, Gregorian, axially displaced and shaped surface reflector systems using Physical Optics (PO) with Physical Theory of Diffraction (PTD), Geometrical Theory of Diffraction (GTD/UTD) and Body-of-Revolution MoM (BoR-MoM) for rotationally symmetric structures.\n\nFull workflow within TICRA Tools:\n• Antenna model setup via a structured shared interface\n• Five built-in optimisation algorithms for reflector shaping\n• Analysis of multi-antenna platforms (struts, sub-reflectors, mounting effects)\n• Reflectarray designs from QUPES can be directly imported for full system analysis\n• Customer story: Guan at Viasat uses GRASP for high-performance reflector antennas for satellite ground networks',
+     specs:[['Methods','Physical Optics (PO), GTD/UTD, BoR-MoM, MoM, MLFMM'],['Antenna Types','Single, dual, multiple reflectors; shaped surface; Cassegrain; Gregorian'],['Outputs','Far-field patterns, G/T, EIRP, cross-polarisation, sidelobes, near-field'],['Wizards','Single, Cassegrain, Gregorian system setup wizards'],['Optimisation','5 built-in algorithms (gradient, direct, evolutionary, etc.)'],['Integration','TICRA Tools: works directly with CHAMP 3D, ESTEAM, QUPES, POS, UQ'],['Users','ESA, NASA, Airbus, Thales, SES, ViaSat, JAXA'],['Available via','Altair Partner Alliance']],
+     parts:['GRASP (standalone)','GRASP in TICRA Tools Bundle','TICRA Tools Student Edition (GRASP + QUPES, reduced)'],
+     app:'GEO/LEO satellite reflector antenna design and qualification, shaped beam optimisation, radio telescope feed+reflector systems, CATR design validation'},
+    {name:'CHAMP 3D — WAVEGUIDE & HORN ANTENNA ANALYSIS',
+     brief:'Accurate analysis and design of general passive multiport waveguide components and complex feed chains — horns, OMTs, waveguide junctions, bends and diplexers. Uses Mode Matching (MM) method. Integrated with GRASP for full feed+reflector system analysis.',
+     pills:['MODE MATCHING','HORN DESIGN','OMT / DIPLEXER','MULTIPORT WAVEGUIDE'],
+     desc:'CHAMP 3D uses the Mode Matching (MM) method for accurate and fast analysis of corrugated, smooth-walled, Potter, conical and pyramidal horn antennas, along with complete passive waveguide networks including orthomode transducers (OMTs), waveguide bends, irises, junctions, filters and diplexers.\n\nRadiation patterns computed in CHAMP 3D export directly to GRASP for complete feed+reflector system analysis — enabling engineers to analyse secondary patterns, strut effects, and platform scattering all in one workflow.',
+     specs:[['Method','Mode Matching (MM) + full-wave EM'],['Components','Corrugated horn, smooth-wall horn, Potter horn, conical horn, pyramidal horn'],['Networks','OMTs, waveguide bends, irises, junctions, filters, diplexers'],['Outputs','Radiation patterns, S-parameters, return loss, mode coefficients'],['Integration','Direct GRASP feed pattern export; part of TICRA Tools framework']],
+     parts:['CHAMP 3D (standalone)','CHAMP 3D in TICRA Tools Bundle'],
+     app:'Satellite feed horn design, radiometer feed systems, radar feed horns, OMT design, passive waveguide component verification'},
+    {name:'ESTEAM — EM SCATTERING OF LARGE COMPLEX STRUCTURES',
+     brief:'Comprehensive analysis of electromagnetic scattering and radiation problems involving electrically large and complex structures — platform scattering, RCS analysis, large satellite platform antenna installation effects.',
+     pills:['EM SCATTERING','MoM / MLFMM','LARGE STRUCTURES','RCS ANALYSIS'],
+     desc:'ESTEAM (previously called MoM in TICRA Tools) offers full-wave Method of Moments (MoM) and Multi-Level Fast Multipole Method (MLFMM) for analysing EM scattering and radiation from electrically large and complex 3D structures. Particularly suited for spacecraft antenna installation analysis (effects of satellite body, solar panels, booms on radiation patterns) and RCS computation.\n\nIntegrated within TICRA Tools, ESTEAM results can be combined with GRASP Physical Optics analysis and CHAMP 3D feed patterns for complete system-level simulation.',
+     specs:[['Methods','MoM (Method of Moments), MLFMM (Multi-Level Fast Multipole Method)'],['Applications','Platform installation analysis, RCS, spacecraft/aircraft EM scattering'],['Structure Size','Electrically large complex 3D structures'],['Integration','Combined with GRASP PO and CHAMP 3D in TICRA Tools']],
+     parts:['ESTEAM (standalone)','ESTEAM in TICRA Tools Bundle'],
+     app:'Spacecraft antenna installation analysis, satellite platform scattering, aircraft antenna integration, RCS estimation'},
+    {name:'QUPES — QUASI-PERIODIC SURFACE DESIGN',
+     brief:'Dedicated software for the analysis and design of quasi-periodic surfaces — reflectarrays, frequency selective surfaces (FSS), transmitarrays. Built-in unit cell library. Unique capabilities not available in any other commercial product. Direct integration with GRASP.',
+     pills:['REFLECTARRAYS','FSS / TRANSMITARRAYS','UNIT CELL LIBRARY','GRASP INTEGRATION'],
+     desc:'QUPES (QUasi-PEriodic Surfaces) is the result of several years of TICRA research and contains unique capabilities unavailable in any other commercial software. Engineers can select from a built-in library of common periodic unit cell geometries or define custom geometries.\n\nOptimisation within TICRA Tools optimises unit cell geometry to meet reflection/transmission goals. Designed reflectarray surfaces export directly to GRASP for complete antenna system evaluation. Available in a reduced version in the TICRA Tools Student Edition.',
+     specs:[['Surfaces','Reflectarrays, frequency selective surfaces (FSS), transmitarrays'],['Unit Cell Library','Built-in library of common periodic geometries'],['Custom Geometries','User-defined periodic and aperiodic unit cells'],['Optimisation','Direct unit cell optimisation to meet far-field pattern goals'],['Integration','Direct import into GRASP for system-level radiation pattern analysis']],
+     parts:['QUPES (standalone)','QUPES in TICRA Tools Bundle','QUPES in Student Edition (reduced)'],
+     app:'Reflectarray antenna design, FSS filter design for radomes and diplexers, transmitarray beam-steering antennas'},
+    {name:'POS — CONTOURED BEAM & MULTI-FEED OPTIMISATION',
+     brief:'Tailored for the most accurate and efficient contoured beam optimisation of shaped-surface or multi-feed reflector antennas — the specialist tool for satellite payload beam coverage design.',
+     pills:['CONTOURED BEAM','SHAPED SURFACE','MULTI-FEED','SATELLITE PAYLOAD'],
+     desc:'POS is TICRA\'s specialist tool for optimising the beam coverage patterns of shaped reflector or multi-feed reflector antennas for satellite communications payloads. It provides the most accurate and efficient contoured beam optimisation — computing antenna gain, EIRP and co/cross-polarisation performance over defined service areas on Earth.',
+     specs:[['Function','Contoured beam optimisation — satellite payload antenna design'],['Methods','Physical Optics-based optimisation with gain/EIRP/co-pol constraints'],['Antenna Types','Shaped single reflector, shaped dual reflector, multi-feed reflector'],['Output','Gain maps, EIRP maps, co-polarisation isolation over service area'],['Integration','TICRA Tools framework — shared interface with GRASP, CHAMP 3D']],
+     parts:['POS (standalone)','POS in TICRA Tools Bundle'],
+     app:'GEO satellite regional coverage antenna design, multi-beam satellite payload beam shaping, Earth coverage pattern optimisation'},
+    {name:'UQ — UNCERTAINTY QUANTIFICATION',
+     brief:'Augments antenna design with uncertainty analysis on design parameters — providing expected antenna performance and confidence intervals. Quantify how manufacturing tolerances or material property variations affect final antenna patterns.',
+     pills:['UNCERTAINTY ANALYSIS','CONFIDENCE INTERVALS','MANUFACTURING TOLERANCES','ANY TICRA MODEL'],
+     desc:'UQ (Uncertainty Quantification) was introduced in TICRA Tools 22.1. It augments any antenna system modelled in TICRA Tools (GRASP, ESTEAM, CHAMP 3D, QUPES, POS) with stochastic uncertainty analysis. Engineers define uncertain parameters (surface accuracy, material properties, mechanical tolerances) and UQ computes expected performance with confidence intervals — enabling robust design and manufacturing risk assessment.',
+     specs:[['Function','Uncertainty quantification for antenna design parameters'],['Inputs','Any uncertain parameter in GRASP, ESTEAM, CHAMP 3D, QUPES, or POS models'],['Outputs','Expected performance + confidence intervals (e.g. ±3σ gain pattern)'],['Method','Statistical sampling (Monte Carlo) or deterministic UQ algorithms'],['Integration','Fully integrated in TICRA Tools; free trial available on request']],
+     parts:['UQ (standalone)','UQ in TICRA Tools Bundle'],
+     app:'Manufacturing tolerance analysis for satellite antennas, gain/pointing budget with uncertainty, reflector surface accuracy impact, radome tolerance study'},
+    {name:'SNIFT — SPHERICAL NEAR-FIELD TO FAR-FIELD TRANSFORM',
+     brief:'Industry-standard software for spherical near-field to far-field transformation with full probe correction — recognised globally as the first choice for CATR and anechoic chamber measurement post-processing.',
+     pills:['NF-FF TRANSFORM','PROBE CORRECTION','SPHERICAL','ANTENNA TEST STANDARD'],
+     desc:'SNIFT transforms measured spherical near-field antenna data into accurate far-field radiation patterns. Full probe correction accounts for the complete probe radiation pattern. FFT-based algorithms handle antennas of hundreds of wavelengths in seconds on a standard workstation. Non-Maxwellian measurement errors are averaged to physically correct output. Truncated spherical measurements (large AUTs that exceed the scanner range) are also supported.',
+     specs:[['Transform','Spherical near-field to far-field (NF-FF)'],['Probe Correction','Full probe radiation pattern deconvolution'],['Speed','Antennas of hundreds of wavelengths processed in seconds'],['Error Handling','Non-Maxwellian noise averaging to physically correct output'],['Truncation','Truncated spherical measurement support for large AUTs'],['Standards','Compatible with all major antenna test ranges']],
+     parts:['SNIFT (standalone)'],
+     app:'Anechoic chamber measurement post-processing, CATR quiet zone evaluation, satellite antenna qualification test data analysis'},
+    {name:'SATSOFT & DIATOOL',
+     brief:'SATSOFT: satellite mission planning and antenna coverage assessment tool. DIATOOL: advanced diagnostic tool for diagnosing antennas installed on satellite platforms from far-field measurements.',
+     pills:['MISSION PLANNING','COVERAGE MAPS','ANTENNA DIAGNOSIS','SATELLITE PLATFORM'],
+     desc:'SATSOFT allows satellite mission planners to assess antenna coverage, gain, and high-level trade-offs of contoured beam and multi-beam antenna designs — providing an upfront tool for mission concept studies before detailed GRASP design.\n\nDIATOOL provides advanced capabilities for diagnosing the performance of antennas installed on satellite platforms, using far-field measurements or GRASP-computed patterns to identify problem sources such as blockage, scattering or feed positioning errors.',
+     specs:[['SATSOFT','Satellite mission planning, coverage maps, contoured/multi-beam trade-off'],['SATSOFT Output','Gain maps, G/T, EIRP over coverage area, link budget inputs'],['DIATOOL','Antenna diagnosis from far-field patterns — installed on satellite platform'],['DIATOOL Use','Identify blockage, scattering, phase errors from measured data']],
+     parts:['SATSOFT','DIATOOL'],
+     app:'Satellite mission concept studies, antenna coverage planning, satellite antenna diagnostic investigation during integration and test'}
+  ]
+},
+
+'MARCH MICROWAVE':{
+  url:'https://www.marchmicrowave.com', email:'info@marchmicrowave.com',
+  country:'NUENEN, NETHERLANDS', founded:'1975',
+  sub:'COMPACT ANTENNA TEST RANGES & RCS MEASUREMENT',
+  desc:'March Microwave Systems B.V. (Nuenen, Netherlands) is one of Europe\'s most established specialists in Compact Antenna Test Range (CATR) hardware and Antenna / Radar Cross Section (ARCS) measurement software. Their dual-reflector CATRs are installed at major defence labs, space agencies and satellite manufacturers worldwide including DLR Germany, ND SatCom, Royal Netherlands Navy, and university research facilities. The ARCS software suite is an industry-standard tool for antenna pattern and RCS data acquisition, reduction and reporting.',
+  badges:['CATR SPECIALIST','ARCS SOFTWARE','SINCE 1975','DLR / ROYAL NETHERLANDS NAVY'],
+  stats:[{v:'1975',l:'FOUNDED'},{v:'1GHz–110GHz',l:'FREQUENCY COVERAGE'},{v:'< 0.5dB',l:'QUIET ZONE RIPPLE'},{v:'DLR',l:'KEY REFERENCE CUSTOMER'}],
+  apps:[
+    {icon:'🛡',name:'DEFENCE / RCS',desc:'Stealth aircraft, missile, vehicle and ship RCS measurement in compact indoor facilities'},
+    {icon:'📡',name:'ANTENNA TEST',desc:'Gain, pattern, polarisation, EIRP and G/T measurement of satellite and radar antennas'},
+    {icon:'🛰',name:'SATELLITE',desc:'Satellite payload antenna qualification test ranges — compact indoor measurement at space frequencies'},
+    {icon:'✈',name:'AEROSPACE',desc:'Aircraft antenna integration, EMC and platform scattering measurement'},
+    {icon:'🔬',name:'RESEARCH',desc:'University and national lab research CATRs for antenna and EM scattering research'},
+  ],
+  products:[
+    {name:'DUAL-REFLECTOR COMPACT ANTENNA TEST RANGES (CATR)',
+     brief:'High-performance dual-reflector compact test ranges producing large, high-quality plane-wave quiet zones in compact indoor anechoic chambers — from 1 GHz to 110 GHz. Reference installation: CATR Model 8074B at DLR Oberpfaffenhofen, used for mono-static and bi-static RCS measurement.',
+     pills:['1 GHz – 110 GHz','< 0.5 dB QZ AMPLITUDE','< 5° QZ PHASE','LARGE QUIET ZONE'],
+     desc:'March Microwave dual-reflector CATRs use a precision-machined shaped main reflector and a sub-reflector to collimate the feed antenna\'s spherical wave into a large plane-wave quiet zone. This allows measurement of large DUTs (satellites, aircraft fuselage sections, large array antennas) in a compact indoor facility without a costly outdoor far-field test range.\n\nKey installations and references:\n• DLR Oberpfaffenhofen, Germany — CATR Model 8074B, operational HF-TechLab, used for mono/bi-static RCS and component characterisation\n• Royal Netherlands Navy — CATR built for testing Signaal\'s Active Phased Array Radar (APAR) in both transmit and receive modes — capable of CW and pulsed waveform measurement with high dynamic range\n• ND SatCom — 6-axis controlled CATR with 0.03° accuracy; Rohde & Schwarz ZVA40 VNA; < 3.5 µs per test point\n\nEdge treatment options: serrated edge (general purpose) or rolled edge (highest accuracy applications).',
+     specs:[['Quiet Zone Sizes','0.5 m – 10 m diameter (configuration dependent)'],['Frequency Range','1 GHz – 110 GHz (model dependent)'],['QZ Amplitude Ripple','< 0.5 dB peak-to-peak'],['QZ Phase Ripple','< 5° peak-to-peak'],['Edge Treatment','Serrated edge (general) or Rolled edge (highest accuracy)'],['Reflector Accuracy','Surface rms < 0.1 mm (model 8074B verified by laser survey)'],['6-Axis Positioner Option','0.03° positioning accuracy (ND SatCom installation)'],['Measurements','Antenna gain, pattern, EIRP, G/T, RCS, polarisation, ISAR'],['References','DLR Germany (8074B), Royal Netherlands Navy, ND SatCom']],
+     parts:['CATR 4838A','CATR 8074B','CATR custom (specify quiet zone and frequency)'],
+     app:'Satellite antenna qualification, stealth RCS measurement, radar seeker testing, large antenna pattern measurement, defence acceptance testing'},
+    {name:'SINGLE-PLANE COLLIMATING RANGES',
+     brief:'Cost-effective collimating test ranges generating a plane wave in a single plane — suitable for principal-plane antenna pattern cuts and production-line testing where full spherical measurement is not required.',
+     pills:['SINGLE-PLANE','COST EFFECTIVE','PRODUCTION TESTING','1 GHz – 40 GHz'],
+     desc:'Single-plane collimating ranges (SPCR) offer an economical solution for applications requiring antenna pattern cuts in one plane only (e.g., azimuth pattern). A single shaped reflector collimates the feed wave in one axis. Widely used for production testing of directional antennas and R&D work where a single plane cut is sufficient and a full CATR would be excessive cost.',
+     specs:[['Collimation','Single-axis (1D) plane-wave generation'],['Frequency','1 GHz – 40 GHz typical'],['Use Case','Azimuth or elevation pattern cut; production testing; R&D'],['Cost','Significantly lower than full dual-reflector CATR']],
+     parts:['SPCR-custom (specify frequency range and quiet zone width)'],
+     app:'Production-line antenna testing, R&D pattern measurement, educational facilities, cost-optimised antenna test setups'},
+    {name:'ARCS — ANTENNA & RADAR CROSS-SECTION SOFTWARE SUITE',
+     brief:'Complete ARCS measurement software suite — controls positioners and RF instruments, acquires antenna and RCS measurement data, performs data reduction, ISAR imaging and produces professional reports. Industry-validated: < 0.2 dB uncertainty vs. commercial reference (independently verified).',
+     pills:['ANTENNA + RCS MEASUREMENT','ISAR PROCESSING','AUTOMATED CONTROL','MULTI-FORMAT REPORTS'],
+     desc:'The ARCS (Antenna and Radar Cross-Section) software suite by March Microwave is one of the most widely deployed antenna measurement automation packages in the world — installed at DLR, ND SatCom, national defence labs and university CATRs.\n\nARCS key capabilities:\n• Hardware control: positioner controllers, VNAs (Rohde & Schwarz ZVA, Agilent/Keysight), spectrum analysers, attenuator/switch drivers for polarisation control\n• Measurements: antenna gain, radiation pattern, polarisation, EIRP, G/T, noise figure, and RCS\n• Calibration: substitution method, gain transfer, absolute gain, sphere calibration for RCS\n• ISAR processing (Inverse Synthetic Aperture Radar): for RCS target imaging and diagnostic — Analysis, Graphics and ISAR tool\n• Time-domain gating: removes unwanted signals for isolated AUT response\n• Output formats: Touchstone (.sNp), GRASP-compatible, Excel, CSV, PDF reports\n\nIndependently verified: < 0.2 dB uncertainty vs. commercial reference measurement in CATR environments.',
+     specs:[['Control Hardware','Positioner controller, VNA (R&S ZVA, Agilent), spectrum analyser, switch/attenuator driver'],['Measurements','Gain, pattern, polarisation, EIRP, G/T, noise figure, RCS'],['Calibration','Substitution, gain transfer, absolute, RCS sphere calibration'],['ISAR Processing','Yes — target imaging and diagnostic analysis'],['Time-Domain Gating','Yes — isolates AUT response from unwanted signals'],['Sweep Speed','< 3.5 µs per test point (R&S ZVA40 integration, ND SatCom)'],['Dual Computer','Simultaneous acquisition and processing supported'],['Output Formats','Touchstone, GRASP, Excel, CSV, PDF measurement report'],['OS','Windows 10/11'],['Validated','< 0.2 dB uncertainty (independently verified vs. ARCS reference)']],
+     parts:['ARCS-ANT (antenna pattern only)','ARCS-RCS (RCS measurement only)','ARCS-FULL (antenna + RCS + ISAR)'],
+     app:'Defence RCS measurement labs, satellite antenna test and qualification, phased array testing, production test facilities, research institutes, DLR-grade precision measurement'}
+  ]
+},
+
+'MTI':{
+  url:'https://www.mtiwe.com', email:'info@mtiwe.com',
+  country:'ROSH HAAYIN, ISRAEL', founded:'1972',
+  sub:'MILITARY, RFID & 5G BACKHAUL ANTENNA SYSTEMS',
+  desc:'MTI Wireless Edge Ltd., founded in 1972, is a premier global designer, developer and manufacturer of antenna solutions covering HF to 170 GHz (D Band). Headquartered at Afek Industrial Park, Rosh HaAyin, Israel, and part of the MTI Group, MTI Wireless Edge produces commercial off-the-shelf and fully custom antenna solutions for military/defence, RFID, 5G backhaul and commercial wireless applications. ISO 9001-2000 and ISO 14001 certified. CE, RoHS and IEEE standards compliant. First to introduce Dual-Band parabolic antennas, Automatic Beam Steering (ABS) antennas and the only E-Band FCC-compliant flat antenna in the market.',
+  badges:['HF TO 170 GHz','MILITARY & COMMERCIAL','RFID / 5G BACKHAUL','ISO 9001 & 14001'],
+  stats:[{v:'1972',l:'FOUNDED'},{v:'HF–170GHz',l:'FREQUENCY RANGE'},{v:'ISO 9001',l:'QUALITY CERTIFIED'},{v:'3+',l:'MARKET SECTORS'}],
+  apps:[
+    {icon:'🛡',name:'MILITARY / DEFENCE',desc:'Airborne, naval, submarine, ground vehicle, DF/SIGINT and conformal antennas for all military platforms'},
+    {icon:'📶',name:'5G BACKHAUL',desc:'Dual-Band parabolic, E-Band flat and D-Band backhaul antennas for cellular network infrastructure'},
+    {icon:'🏷',name:'RFID',desc:'LHCP/RHCP circularly polarised RFID antennas for toll roads, logistics, warehousing and access control'},
+    {icon:'🌐',name:'COMMERCIAL WIRELESS',desc:'Sector, directional and omni antennas for WiMAX, Wi-Fi, broadband wireless access and LTE'},
+  ],
+  products:[
+    {name:'MILITARY AIRBORNE ANTENNAS',
+     brief:'Wide range of airborne military antennas for fixed-wing aircraft, helicopters, UAVs and missiles — including blade antennas, conformal antennas, spiral DF antennas and GPS/GNSS anti-jam antennas. Qualified to DO-160 and MIL-STD-810.',
+     pills:['BLADE ANTENNAS','CONFORMAL','DF SPIRALS','DO-160 / MIL-STD-810'],
+     desc:'MTI designs and manufactures a comprehensive range of airborne military antennas engineered for the harsh environment of airborne platforms. The range includes:\n\n• Blade antennas (VHF/UHF/L-band): aerodynamically optimised low-drag blade profile for flush or blade mounting on fixed-wing aircraft and helicopters\n• Conformal antennas: low-profile conformal designs that integrate into aircraft fuselage or radome structures without protruding drag\n• Direction-finding (DF) spiral antennas: multi-octave cavity-backed Archimedean spiral antennas for wideband COMINT/SIGINT and ELINT DF on airborne platforms\n• GPS/GNSS anti-jam antennas: controlled reception pattern antennas (CRPA) and anti-jam designs for secure navigation on military UAVs and aircraft\n• Continuity of coverage: MTI continuously develops new radome technologies and RF designs for best-in-class performance.',
+     specs:[['Frequency Coverage','VHF/UHF/L-band (blade); 0.5–18 GHz (DF spiral)'],['Blade Types','Monopole blade, fin blade, low-drag conformal blade'],['DF Spiral','Multi-octave, RHCP/LHCP, cavity-backed Archimedean spiral'],['GPS Anti-Jam','CRPA — Controlled Reception Pattern Antenna'],['Qualification','DO-160 (airborne), MIL-STD-810 vibration/temperature/humidity'],['Certifications','ISO 9001-2000, ISO 14001'],['Custom','Yes — new radome technologies and RF designs continuously developed']],
+     parts:['Blade VHF/UHF (standard variants)','Conformal L-band','DF Spiral 0.5–18 GHz','GPS CRPA Anti-Jam','Custom — contact MTI'],
+     app:'Fixed-wing COMINT/SIGINT, helicopter communication, UAV navigation, missile guidance, airborne EW, direction finding'},
+    {name:'MILITARY GROUND & NAVAL ANTENNAS',
+     brief:'HF to microwave military antennas for ground vehicles, fixed installations, naval ships and submarines — including whip antennas, log-periodics, omnidirectional VHF/UHF and submarine antennas with mast mounting.',
+     pills:['HF – MICROWAVE','GROUND VEHICLE','NAVAL / SUBMARINE','MAST MOUNT'],
+     desc:'MTI\'s ground and naval military antenna range covers the complete spectrum of tactical communication and intelligence-gathering needs:\n\n• HF antennas (2–30 MHz): ruggedised whip, vertical monopole and broadband HF dipole antennas for long-range tactical communication on vehicles and fixed bases\n• VHF/UHF log-periodic arrays: broadband LPDA antennas for multi-octave COMINT and surveillance on ground stations and vehicles\n• Omnidirectional VHF/UHF: vertical monopole and discone antennas for tactical communication\n• Naval/ship antennas: rugged marine-grade communication and SIGINT antennas for above-deck mounting on surface ships\n• Submarine mast antennas: compact, pressure-tolerant antennas for submarine communication mast integration\n\nAll products qualified to MIL-STD-810G for shock, vibration, salt spray and temperature extremes.',
+     specs:[['HF Range','2 – 30 MHz (whip, vertical, dipole, discone)'],['VHF/UHF LPDA','20 MHz – 2 GHz (log-periodic dipole array)'],['VSWR','< 2.5:1 across operational band'],['Naval Rating','Marine-grade corrosion protection, salt-spray tested'],['Submarine','Compact mast-mounted, pressure tolerant'],['MIL Standard','MIL-STD-810G: shock, vibration, temperature, humidity, salt spray']],
+     parts:['HF Whip Series','LPDA VHF/UHF','Naval Com Antenna Series','Submarine Mast Series'],
+     app:'Ground vehicle tactical comms, HF NVIS, naval communication, SIGINT collection, submarine comms mast'},
+    {name:'DF & SIGINT ANTENNAS (DIRECTION FINDING)',
+     brief:'High-performance wideband direction-finding antenna systems covering 0.5–18 GHz — cavity-backed spirals, cross-log-periodics and dedicated DF arrays for SIGINT, ELINT and ESM on ground, airborne and naval platforms.',
+     pills:['0.5 – 18 GHz','CAVITY SPIRAL','CROSS LOG-PERIODIC','DF ARRAY SYSTEMS'],
+     desc:'MTI produces a comprehensive family of direction-finding antennas designed for SIGINT, ELINT and Electronic Support Measures (ESM):\n\n• Cavity-backed Archimedean spiral antennas: multi-octave circular polarisation (RHCP/LHCP) with < 3 dB axial ratio — essential for capturing arbitrary polarisation signals. Available from 500 MHz to 18 GHz in single units\n• Cross log-periodic antennas (LPM series): dual-polarisation LPDA for HF/VHF/UHF DF using amplitude comparison or phase interferometry methods. Military nomenclature AS-3654/G (LPM-28D), AS-3655/G (LPM-28E), AS-3656/G (LPM-28F)\n• Spiral log-periodic (SPR series): military-qualified spiral log-periodic for AS-3476G/AS-3477G/AS-3478G platforms (SPR-230C, SPR-330)\n• Vertical log-periodic (LPV series): vertically polarised LP arrays for HF monitoring and DF\n\nComprehensive DF accuracy: < 2° RMS in calibrated multi-element arrays.',
+     specs:[['Spiral Frequency','0.5 – 18 GHz (model dependent; multi-octave)'],['Spiral Polarisation','RHCP and LHCP (simultaneous from matched pair)'],['Axial Ratio','< 3 dB across operating band'],['DF Accuracy','< 2° RMS (in calibrated DF array)'],['Cross LP Bands','HF/VHF/UHF (30 MHz – 3 GHz, model)'],['Military Nomenclature','AS-3476G, AS-3477G, AS-3478G, AS-3654/G, AS-3655/G (SPR/LPM series)'],['Qualification','MIL-STD-810G; DO-160 for airborne variants']],
+     parts:['SPR-230C / SPR-330 (Spiral LP)','LPM-28D/E/F (Cross LP)','LPH series (Horizontal LP)','LPV-1606 (Vertical LP)','Custom DF array solutions'],
+     app:'SIGINT ground stations, ELINT airborne systems, ship ESM suites, COMINT DF arrays, electronic warfare support'},
+    {name:'5G BACKHAUL ANTENNAS (COMMERCIAL)',
+     brief:'Market-leading commercial 5G backhaul antennas including world-first Dual-Band parabolic, Automatic Beam Steering (ABS) E-Band parabolic and the only E-Band FCC-compliant flat antenna. Covers E-Band (71–86 GHz) and D-Band (141–174 GHz).',
+     pills:['DUAL-BAND PARABOLIC','ABS AUTO-TRACKING','E-BAND / D-BAND','FCC COMPLIANT'],
+     desc:'MTI pioneered several breakthrough commercial antenna technologies for 5G backhaul:\n\n• Dual-Band parabolic antennas: world\'s first dual-band parabolic enabling simultaneous use of microwave and millimetre-wave frequencies on a single antenna — operators enjoy high bandwidth + high availability in one installation\n• ABS (Automatic Beam Steering) E-Band parabolic: a 3ft parabolic antenna with active beam tracking to compensate for wind-induced pointing errors — delivering unrivalled performance where fixed-beam solutions fail\n• E-Band flat antenna (71–86 GHz): the only FCC-compliant E-Band flat panel antenna — compact, low-profile installation for small cells and urban backhaul\n• D-Band antennas (141–174 GHz): MTI is at the frontier of D-Band antenna development for next-generation ultra-high-capacity backhaul',
+     specs:[['Dual-Band','Microwave + E-Band simultaneous (single antenna)'],['ABS 3ft E-Band','Active beam steering compensates wind/vibration'],['E-Band Flat','71–86 GHz; only FCC-compliant E-Band flat antenna'],['D-Band','141–174 GHz — future next-gen backhaul'],['Frequency Innovation','First to introduce Dual-Band parabolic; first E-Band FCC flat']],
+     parts:['Dual-Band Parabolic (specify MW+EBand combo)','ABS 3ft E-Band parabolic','E-Band Flat (FCC)','D-Band antenna series'],
+     app:'5G NR mmWave backhaul, urban microwave+millimetre-wave hybrid links, enterprise campus wireless backbone, small cell high-capacity backhaul'},
+    {name:'RFID ANTENNAS',
+     brief:'Comprehensive RFID antenna range for UHF (860–960 MHz) applications — LHCP and RHCP circular polarisation, linear polarisation, slim/forklift/shelf/under-belt/mat form factors for logistics, toll roads, warehousing and industrial access control.',
+     pills:['UHF 860–960 MHz','LHCP / RHCP / LINEAR','TOLL ROAD','FORKLIFT / SHELF'],
+     desc:'MTI produces one of the widest ranges of RFID antennas in the industry, covering the complete spectrum of UHF RFID deployment scenarios:\n\n• Toll road antennas: weatherproof high-gain RHCP/LHCP for ETC (Electronic Toll Collection) on motorway gantries — high read reliability at vehicle speed\n• Forklift-mounted antennas: ruggedised short-profile antennas for warehouse forklift vehicle tracking\n• Shelf antennas: slim, discreet antennas for retail shelf-level RFID inventory management\n• Under-belt antennas: embedded antennas for conveyor belt item tracking\n• Mat antennas: flat mat-form antennas for zone-based entry/exit asset tracking\n• Linear polarisation: for fixed orientation tag environments\n• CE, RoHS, ETSI and FCC compliance for all commercial RFID products.',
+     specs:[['RFID Frequency','860–960 MHz (UHF RFID, region-specific)'],['Polarisation','LHCP, RHCP, dual-circular, linear'],['Gain','5–9 dBiC (application dependent)'],['Form Factors','Toll road, forklift, shelf, under-belt, mat, standard panel'],['Standards','CE, RoHS, ETSI EN 302 208, FCC Part 15'],['Customisation','Custom form factors for OEM RFID system integrators']],
+     parts:['RFID Toll Antenna (RHCP/LHCP)','Forklift RFID Antenna','Shelf RFID Antenna','Mat Antenna','Under-Belt Antenna'],
+     app:'ETC toll collection, warehouse/logistics asset tracking, retail inventory management, access control, industrial RFID process monitoring'}
+  ]
+},
+
+'ELDES':{
+  url:'https://www.eldesradar.com', email:'info@eldesradar.com',
+  country:'SCANDICCI (FLORENCE), ITALY', founded:'1993',
+  sub:'X-BAND WEATHER RADAR & HWIL DEFENCE SIMULATORS',
+  desc:'ELDES S.r.l., founded in Florence, Italy in 1993, develops and manufactures Excellent Radar Solutions for Meteorology and Defence. With 700+ weather radar installations worldwide and 30+ years of radar technology expertise, ELDES is a leader in compact X-Band weather radar (WR-10X, WR-25XP, WR-J series) and the METRANET II RDP data processing suite. In the Defence sector, ELDES has rapidly become a world leader in Hardware-in-the-Loop (HWIL) radar simulators for Electronic Warfare systems assessment — the E-PRS generic radar simulator and E-PSS Poseidon anti-ship missile seeker simulator. Active in major international exhibitions: AOC Europe, Meteorological Technology World Expo, ERAD.',
+  badges:['700+ RADAR INSTALLATIONS','X-BAND SPECIALIST','HWIL WORLD LEADER','SINCE 1993'],
+  stats:[{v:'700+',l:'GLOBAL INSTALLATIONS'},{v:'1993',l:'FOUNDED'},{v:'30+',l:'YEARS RADAR EXPERTISE'},{v:'WR-J',l:'LATEST RADAR (SOLID STATE)'}],
+  apps:[
+    {icon:'🌩',name:'WEATHER / METEOROLOGY',desc:'Compact X-band Doppler dual-pol weather radar for precipitation mapping, storm tracking, QPE'},
+    {icon:'🌊',name:'HYDROLOGY',desc:'River flood monitoring, quantitative precipitation estimation, civil protection early warning'},
+    {icon:'✈',name:'AVIATION',desc:'Airport weather surveillance, windshear detection, flight safety'},
+    {icon:'🛡',name:'DEFENCE / EW',desc:'HWIL radar simulators for EW system assessment, anti-ship missile seeker simulation'},
+    {icon:'🏙',name:'CIVIL PROTECTION',desc:'Mobile trailer-mounted radar for rapid deployment in disaster risk and densely populated areas'},
+  ],
+  products:[
+    {name:'WR-25XP — X-BAND WEATHER RADAR (DUAL-POL, MAGNETRON)',
+     brief:'Flagship ELDES X-band weather radar with simultaneous dual-polarisation (STAR) and Doppler. Unique price/performance ratio on the market. Trailer-mountable for rapid redeployment. Cluster networking for unlimited mosaic coverage. 700+ units installed worldwide.',
+     pills:['9.3–9.5 GHz','DUAL-POL STAR','DOPPLER','TRAILER MOUNTABLE'],
+     desc:'The WR-25XP is the ELDES flagship product in the magnetron-based radar range — its price/performance ratio is unique on the market. Simultaneous dual-polarisation (Simultaneous Transmit And Receive — STAR mode) with Doppler processing enables:\n\n• Reflectivity (Z), Velocity (V), Spectrum Width (W)\n• Differential Reflectivity (ZDR), Co-Polar Correlation (ρHV), Specific Differential Phase (KDP), Linear Depolarisation Ratio (LDR)\n• Rain rate estimation, hail detection, drop size distribution retrieval, hydrometeor classification\n\nSmall size and weight allow installation on a light trailer for rapid redeployment to hydrological risk areas or civil protection needs. Cluster networking extends coverage practically without limit — mosaics integrate data from all sensors in the network.\n\nMETRANET II RDP software suite (Linux-based workstation) processes polar data and generates all standard products for immediate use even by non-experts.',
+     specs:[['Frequency','9.3 – 9.5 GHz (X-band)'],['Transmitter','Magnetron'],['Peak Power','25 kW'],['Polarisation','Simultaneous dual-pol H+V (STAR mode)'],['Pulse Width','0.1 – 2 µs'],['PRF','250 – 2000 Hz'],['Range','Up to 80 km (precipitation)'],['Beam Width','1.2°'],['Dual-Pol Products','Z, V, W, ZDR, ρHV, KDP, LDR, hydrometeor classification'],['Networking','Cluster networking — unlimited mosaic extension'],['Deployment','Fixed, trailer-mounted (light trailer), vehicle-mounted'],['Software','METRANET II RDP (Linux, web clients, remote control)']],
+     parts:['WR-25XP-FIXED','WR-25XP-MOBILE (trailer)'],
+     app:'National met service gap-filling, flood early warning, airport weather surveillance, civil protection, research meteorology, hydrology'},
+    {name:'WR-J SERIES — X-BAND WEATHER RADAR (SOLID STATE, DUAL-POL)',
+     brief:'Latest-generation ELDES X-band weather radar with Solid-State Power Amplifier (SSPA), dual-polarisation and Doppler. Result of the JUPITER research project. 5 configurations (JS200/JS400/JL400/JL800/JU800), 3 TX power levels (200/400/800 W) and 3 antenna sizes (1.2m/2.0m/2.5m). High resolution up to 16 m. METRANET II + PERSER PC.',
+     pills:['SOLID STATE SSPA','200W / 400W / 800W','16m RESOLUTION','5 CONFIGURATIONS'],
+     desc:'The WR-J is ELDES\'s technological breakthrough — the result of the JUPITER research project in partnership with major Italian universities and research centres. Moving from magnetron to Solid-State Power Amplifier (SSPA) delivers key advantages:\n\n• Pulse compression: detects small precipitation at increased operational range\n• No magnetron degradation: longer operational life, lower maintenance costs\n• Frequency agility: improved clutter rejection and interference immunity\n• High resolution: up to 16 m range resolution — detects fine precipitation structures\n\nFive distinct configurations address all operational requirements:\n• JS200: 200W TX, 1.2m antenna — entry/compact\n• JS400: 400W TX, 1.2m antenna\n• JL400: 400W TX, 2.0m antenna\n• JL800: 800W TX, 2.0m antenna\n• JU800: 800W TX, 2.5m antenna — maximum performance\n\nDeployment: fixed, relocatable, trailer/truck mobile (WR-Mobile option). Low life-cycle costs.',
+     specs:[['Frequency','9.3 – 9.5 GHz (X-band)'],['Transmitter','Solid-State Power Amplifier (SSPA) — no magnetron'],['TX Power','200 W, 400 W, 800 W (model dependent)'],['Configurations','JS200, JS400, JL400, JL800, JU800'],['Antennas','1.2 m, 2.0 m, 2.5 m dish options'],['Range Resolution','Up to 16 m (highest resolution version)'],['Polarisation','Simultaneous dual-pol (H+V)'],['Doppler','Yes — velocity, spectrum width'],['Deployment','Fixed, relocatable, trailer/truck mobile (WR-Mobile)'],['Software','METRANET II RDP + PERSER PC'],['Life-cycle','Low — solid-state, no magnetron replacement needed'],['JUPITER Project','Developed with major Italian universities and research centres']],
+     parts:['WR-J JS200','WR-J JS400','WR-J JL400','WR-J JL800','WR-J JU800'],
+     app:'Advanced research radars, airport/harbour weather surveillance, high-resolution flood monitoring, national radar network nodes'},
+    {name:'WR-10X — COMPACT X-BAND WEATHER RADAR (SINGLE-POL)',
+     brief:'Entry-level compact X-band single-polarisation Doppler weather radar — the most affordable gap-filling and local storm monitoring solution. Simple deployment, low operating costs.',
+     pills:['9.3–9.5 GHz','SINGLE-POL DOPPLER','COMPACT & LOW COST','QUICK DEPLOY'],
+     desc:'The WR-10X is the entry product in the ELDES weather radar range — compact, affordable and rapidly deployable for applications where single-polarisation Doppler data is sufficient. Ideal for small meteorological networks, hydrological field campaigns, university research and cost-sensitive gap-filling between larger C-band national network radars.',
+     specs:[['Frequency','9.3 – 9.5 GHz (X-band)'],['Transmitter','Magnetron'],['Polarisation','Single (horizontal)'],['Doppler','Yes — precipitation velocity measurement'],['Products','Reflectivity (Z), velocity (V)'],['Range','Up to 60 km precipitation'],['Deployment','Fixed or relocatable'],['Use Case','Gap-filling, local storm tracking, research, education']],
+     parts:['WR-10X-COMPACT'],
+     app:'Small national met networks, university research, hydrological field campaigns, cost-effective storm monitoring'},
+    {name:'METRANET II — RADAR DATA PROCESSOR (RDP) SOFTWARE SUITE',
+     brief:'ELDES Radar Data Processor (RDP) software suite — designed for ELDES weather radars (WR-10X/WR-25XP/WR-J), retrofitting existing radars (via PERSER PC) and integrating multi-brand radar networks. Wide variety of meteorological products, configurable processing chain, web-based display.',
+     pills:['RDP SOFTWARE','MULTI-BRAND COMPATIBLE','WEB CLIENT','RETROFIT VIA PERSER-PC'],
+     desc:'METRANET II is a Linux-based software suite running on a workstation networked with the ELDES PERSER-PC signal and control processor and any number of web client workstations. Key capabilities:\n\n• ELDES and multi-brand radar ingest (customised ingest routines for third-party radar formats)\n• Complete configurability: pre-processing, product generation and post-processing — user-created scripts supported\n• Single and multi-radar/multi-brand network mosaics\n• Real-time system status monitoring for maintenance and data quality assessment\n• Wide product suite: reflectivity, precipitation, wind velocity, hydrometeor classification, nowcasting, converting products\n• Output formats: JPG, PNG, GIF, TIFF, GeoTIFF, Opera BUFR, HDF5, UF, ASTERIX-CAT008\n\nPERSER-PC: the ELDES signal and control processor interfaced with METRANET II — enables retrofit of any existing weather radar system.',
+     specs:[['OS','Linux workstation + web client architecture'],['Radar Support','ELDES (WR-10X, WR-25XP, WR-J) + any radar via custom ingest'],['Retrofit','PERSER-PC interfaces METRANET II to existing radars'],['Products','Reflectivity, precipitation rate, velocity, ZDR, ρHV, KDP, nowcasting, composites'],['Formats','JPG, PNG, GIF, TIFF, GeoTIFF, Opera BUFR, HDF5, UF, ASTERIX-CAT008'],['Network','Single and multi-radar/multi-brand supported'],['Processing','User-configurable pre/post-processing and script extensions'],['Access','Web client access — multiple workstations share database']],
+     parts:['METRANET II RDP (bundled with WR radars)','METRANET II (standalone retrofit license)','PERSER-PC (signal processor for retrofit)'],
+     app:'Weather radar network operations centres, meteorological services data processing, radar upgrade/retrofit projects, multi-vendor radar data fusion'},
+    {name:'E-PRS — GENERIC PROGRAMMABLE RADAR SIMULATOR (HWIL)',
+     brief:'ELDES world-leading Hardware-in-the-Loop (HWIL) generic radar simulator for Electronic Warfare systems assessment. Generates programmable RF radar environments to test EW receivers, radar warning receivers (RWR) and AESA systems. Showcased at AOC Europe.',
+     pills:['HWIL EW SIMULATOR','PROGRAMMABLE RADAR ENV.','EW RECEIVER TEST','AESA ASSESSMENT'],
+     desc:'The E-PRS (ELDES Programmable Radar Simulator) is ELDES\'s flagship HWIL defence product and the company\'s most significant expansion beyond weather radar. ELDES applied 30+ years of radar hardware and signal processing expertise directly to the defence EW domain.\n\nThe E-PRS generates a programmable, realistic RF radar environment to test and assess:\n• Electronic Warfare (EW) receiver systems\n• Radar Warning Receivers (RWR) — identifies radar type, mode and threat level\n• Active Electronically Scanned Arrays (AESA) — beam-forming verification\n• Electronic Attack (EA) jamming system performance evaluation\n\nScenarios support multiple simultaneous emitters, jamming waveforms (noise jamming, RGPO, VGPO, deceptive jamming), clutter models and target signatures. Closed-loop integration with the DUT (Device Under Test) via analogue and digital interfaces. Showcased at AOC Europe 2024 (Oslo) and AOC Europe 2025.',
+     specs:[['Type','Hardware-in-the-Loop (HWIL) generic programmable radar simulator'],['Emitters','Multiple simultaneous programmable radar emitters'],['Frequency Coverage','0.5 – 18 GHz (extendable)'],['Jamming Types','Noise, RGPO, VGPO, deceptive, barrage jamming models'],['Scenarios','Multi-emitter, clutter, target signature, jamming scenarios'],['DUT Integration','Closed-loop: analogue and digital interfaces to DUT'],['Software','Scenario Builder GUI + real-time control'],['Standards','NATO STANAG-compatible scenario library'],['Showcased','AOC Europe 2024 (Oslo), AOC Europe 2025']],
+     parts:['E-PRS (configuration on request — contact ELDES)'],
+     app:'EW receiver system qualification, RWR threat library validation, AESA beam-forming evaluation, EW system acceptance testing, electronic attack assessment'},
+    {name:'E-PSS POSEIDON — ANTI-SHIP MISSILE SEEKER SIMULATOR (HWIL)',
+     brief:'Dedicated HWIL simulator for anti-ship missile seeker assessment — the E-PSS Poseidon. Generates realistic ship target radar signatures for testing and evaluating active radar seekers in anti-ship missiles in a controlled laboratory environment.',
+     pills:['ANTI-SHIP MISSILE SEEKER','HWIL SIMULATION','SHIP RADAR SIGNATURE','SEEKER ASSESSMENT'],
+     desc:'The E-PSS Poseidon is ELDES\'s specialist HWIL simulator specifically developed for anti-ship missile seeker systems. As ELDES applied its radar expertise to the defence sector, the E-PSS Poseidon complements the generic E-PRS by providing a dedicated scenario environment for testing active radar seekers used in anti-ship missiles (ASM).\n\nThe Poseidon generates realistic ship target radar signatures (RCS profile, glint, clutter, multipath, sea state effects) enabling closed-loop HWIL evaluation of seeker performance, acquisition, tracking and terminal guidance without the need for live firing. This dramatically reduces the cost and risk of seeker development and acceptance testing.',
+     specs:[['Application','Anti-ship missile (ASM) active radar seeker HWIL testing'],['Scenario','Ship target RCS profiles, glint, sea clutter, multipath, sea state'],['Closed-Loop','Yes — real-time seeker input / simulator output'],['Benefit','Avoids live firing for seeker development and acceptance'],['Complement','Complements E-PRS for dedicated anti-ship scenarios']],
+     parts:['E-PSS Poseidon (configuration on request — contact ELDES)'],
+     app:'Anti-ship missile seeker development, acceptance testing, naval EW assessment, seeker guidance algorithm validation'}
+  ]
+},
+
+'OHB AUSTRIA':{
+  url:'https://www.ohb-austria.at', email:'info@ohb-austria.at',
+  country:'GRAZ, AUSTRIA', founded:'1994',
+  sub:'GNSS QUALITY ASSURANCE, SIMULATION & IoT',
+  desc:'OHB Austria GmbH (Graz, Austria), part of OHB Group — one of Europe\'s leading space technology companies — specialises in GNSS quality assurance (QA) and GNSS signal simulation. Core activities: GIDAS (GNSS Interference Detection and Analysis System) product family for interference monitoring, detection, classification and mitigation; GNSS signal simulation for receiver testing; SARONTAR satellite-based IoT platform for search-and-rescue and asset tracking; and reselling of ORBCOMM Industrial IoT solutions. OHB Austria has executed 80+ research projects and measurement campaigns on GNSS interference over 20+ years. GIDAS is operational at ports, airports and civil protection authorities.',
+  badges:['GIDAS PRODUCT FAMILY','20+ YEARS GNSS QA','OHB GROUP','GRAZ, AUSTRIA'],
+  stats:[{v:'80+',l:'RESEARCH PROJECTS'},{v:'20+',l:'YEARS GNSS QA EXPERTISE'},{v:'GIDAS',l:'FLAGSHIP PRODUCT'},{v:'OHB',l:'GROUP MEMBER'}],
+  apps:[
+    {icon:'📍',name:'GNSS INTEGRITY',desc:'24/7 GNSS interference monitoring, jamming detection and spoofing mitigation for safety-critical infrastructure'},
+    {icon:'✈',name:'AVIATION / AIRPORTS',desc:'GNSS QA for airports and ANSPs — monitoring jamming and GNSS outages threatening air traffic management'},
+    {icon:'🚢',name:'PORTS / MARITIME',desc:'GIDAS operational at ports — securing GNSS navigation for berthing and harbour operations'},
+    {icon:'🚗',name:'AUTOMOTIVE',desc:'GNSS simulation for automotive OEM and Tier-1 testing — eCall, infotainment and ADAS receiver development'},
+    {icon:'🆘',name:'SEARCH & RESCUE',desc:'SARONTAR satellite-based live tracking and coordination system operational in Styria civil protection'},
+  ],
+  products:[
+    {name:'GIDAS — GNSS INTERFERENCE DETECTION & ANALYSIS SYSTEM',
+     brief:'OHB Austria\'s flagship product family — GIDAS detects, classifies, localises and alerts on GNSS jamming and spoofing in real time. Built on 20+ years and 80+ research projects. Operational at ports, airports and civil protection authorities. Addresses both system manufacturers and end customers.',
+     pills:['JAMMING DETECTION','SPOOFING DETECTION','DIRECTION FINDING','REAL-TIME ALERTS'],
+     desc:'GIDAS is OHB Austria\'s core product — the result of over two decades of research into GNSS interference detection techniques. The fundamental insight driving GIDAS: no single detection technique works across all interference scenarios. GIDAS combines a wide range of complementary detection techniques, each operating best in its distinct working range, to achieve robust determination of either jamming or spoofing.\n\nKey detection capabilities:\n• Jamming detection: identifies intentional RF interference broadcasts disrupting GNSS service\n• Spoofing detection: identifies false position/course injection attempts — challenging to detect as spoofed receivers output plausible but incorrect data\n• GNSS interference classification: distinguishes between unintentional interference (multipath, other RF), intentional jamming and spoofing\n• Direction finding: locates the interference source using spatial correlation and DF techniques\n• Real-time alerting: immediate alerts to operators when GNSS integrity is threatened\n\nGIDAS is already operational at ports (securing berthing navigation) and airports (protecting ATC GNSS signals from increasing jamming incidents). Available in different product shapes for different customer platforms and requirements.',
+     specs:[['Core Function','GNSS interference detection, classification, localisation and alerting'],['Techniques','Multiple complementary RF interference detection techniques (20+ years R&D)'],['Detection Types','Jamming, spoofing, multipath, ionospheric anomaly, constellation health'],['Direction Finding','Spatial correlation and DF-based interference source localisation'],['Alerting','Real-time operator alerts when GNSS integrity threatened'],['Applications','Ports, airports, safety-critical infrastructure, military GNSS'],['Product Shapes','Multiple variants for system integrators and direct end customers'],['Research Base','80+ research projects and measurement campaigns'],['Operational','Ports, airports, civil protection authorities']],
+     parts:['GIDAS Stationary (permanent infrastructure monitoring)','GIDAS Mobile (vehicle/field deployment)','GIDAS Embedded (OEM integration for system manufacturers)','GIDAS (contact OHB Austria for configuration)'],
+     app:'Airport GNSS monitoring (ATC safety), port/harbour navigation integrity, critical infrastructure protection, automotive GNSS chipset anti-jam validation'},
+    {name:'GNSS SIGNAL SIMULATION',
+     brief:'High-fidelity GNSS signal simulation for receiver testing and development — supporting aircraft manufacturers for pre-delivery testing, automotive OEMs for eCall/ADAS, satellite manufacturers for spaceborne receiver testing and SBAS service providers for quality assessment.',
+     pills:['MULTI-CONSTELLATION','RECEIVER TESTING','AIRCRAFT / AUTOMOTIVE','SPACEBORNE SIMULATION'],
+     desc:'OHB Austria provides GNSS signal simulation capability as part of its comprehensive GNSS QA portfolio. The simulation solutions are tailored to specific industry needs:\n\n• Aircraft / Aerospace: simulate GNSS signals as received on-board aircraft for pre-delivery testing under controlled conditions — wide range of features meeting aviation quality standards (DO-229)\n• Automotive: simulate GNSS signals for OEM and Tier-1 testing of eCall, infotainment and autonomous driving receiver systems — replicating urban canyons, multipath, tunnel exit conditions\n• Satellite manufacturers: simulate GNSS signals as received on-board satellites for pre-launch hardware-in-the-loop testing\n• SBAS providers (EGNOS): simulate received GNSS signals for evaluating the quality of augmentation services\n\nAlso includes measurement campaigns and permanent on-site installations for real-world signal quality recording.',
+     specs:[['Aviation','DO-229/MOPS compliant aircraft testing; controlled GNSS environment'],['Automotive','eCall, ADAS, infotainment; urban canyon, multipath, tunnel scenarios'],['Satellite','Spaceborne GNSS receiver testing before launch'],['SBAS','EGNOS and other SBAS service quality assessment'],['Constellations','GPS, GLONASS, Galileo, BeiDou, SBAS simulation'],['Custom','Tailored scenarios per customer platform and safety standard']],
+     parts:['GNSS Simulation — Aircraft Testing Package','GNSS Simulation — Automotive Package','GNSS Simulation — Spaceborne Package','Contact OHB Austria for configuration'],
+     app:'Aircraft pre-delivery GNSS testing, automotive OEM receiver development, satellite GNSS hardware-in-the-loop, SBAS system quality assessment'},
+    {name:'SARONTAR — SATELLITE-BASED SEARCH & RESCUE PLATFORM',
+     brief:'SARONTAR is OHB Austria\'s satellite-based live tracking and coordination system for Search & Rescue (SAR) in wilderness environments. Fully operational at the Department of Civil Protection in Styria, Austria. Integrates GNSS positioning, satellite communication, geo-information and mobile interfaces.',
+     pills:['SAR COORDINATION','LIVE TEAM TRACKING','SATELLITE COMMS','STYRIA CIVIL PROTECTION'],
+     desc:'SARONTAR addresses a critical need: rapid, coordinated organisation of search and rescue operations in remote wilderness environments where conventional communication fails and time is life-critical.\n\nThe system architecture:\n• All SAR team positions are tracked in real-time via satellite-based GNSS positioning\n• All position data, received messages and warnings are processed by the SARONTAR platform\n• Information is graphically presented on mobile devices (for field teams) and the Mission Control Centre (for coordinators)\n• Satellite communication enables operation at remote locations beyond cellular coverage\n• Geo-information and remote sensing data (avalanche risk maps, terrain, flooding zones) are integrated to support rescue decision-making\n\nSARUNTAR has been fully operational at the Styrian civil protection authority, supporting avalanche, landslide and flooding rescue coordination. The platform significantly shortens the time to locate and assist casualties, improving survival rates.',
+     specs:[['Function','SAR team live tracking, mission coordination, situation awareness'],['Positioning','GNSS (GPS/Galileo) satellite-based positioning'],['Communication','Satellite communication for beyond-cellular remote areas'],['Display','Mobile devices (field teams) + Mission Control Centre (GIS map)'],['Geo-data','Integrated geo-information, remote sensing, terrain data'],['Operational','Fully operational — Styrian Civil Protection Department, Austria'],['Scenarios','Avalanche, landslide, flooding rescue coordination']],
+     parts:['SARONTAR (contact OHB Austria for deployment configuration)'],
+     app:'Wilderness SAR coordination, civil protection emergency management, mountain rescue, flood/avalanche rescue operations'},
+    {name:'ORBCOMM IoT SOLUTIONS (RESELLER)',
+     brief:'OHB Austria is the authorised reseller of ORBCOMM — a leading global provider of Industrial IoT and Machine-to-Machine (M2M) solutions for remote asset tracking, monitoring and control. Rugged satellite/cellular dual-mode IoT hardware for fleet, cold chain, maritime and heavy industry.',
+     pills:['FLEET MANAGEMENT','COLD CHAIN','MARITIME','SATELLITE + CELLULAR DUAL-MODE'],
+     desc:'Through its ORBCOMM reseller agreement, OHB Austria provides enterprise-grade Industrial IoT solutions for asset visibility and remote monitoring:\n\n• Fleet management: real-time GPS tracking, geofencing, driver behaviour and maintenance alerts for vehicle fleets\n• Cold chain monitoring: temperature, humidity and door-open sensors with satellite uplink for pharmaceutical and food cold chain compliance\n• Container shipping: container condition monitoring (temperature, shock, tilt, light) for global maritime cargo\n• Heavy industry: monitoring of construction machinery, mining equipment, oil & gas infrastructure\n• Maritime: vessel AIS tracking, engine monitoring and cargo condition\n• IoT hardware: rugged ORBCOMM satellite, cellular and dual-mode devices for all asset types\n• Connectivity: satellite (ORBCOMM LEO constellation) and cellular (LTE-M, 2G/3G) for global coverage including remote areas',
+     specs:[['Coverage','Global — satellite ORBCOMM LEO + cellular LTE-M/2G/3G'],['Sectors','Fleet, cold chain, container, heavy industry, maritime, oil & gas, government'],['Hardware','Rugged satellite, cellular and dual-mode IoT devices'],['Sensors','Temperature, humidity, shock, tilt, light, door-open, fuel level'],['Platform','ORBCOMM ONE cloud platform — analytics, alerts, reports'],['API','REST API for third-party ERP/TMS/WMS integration'],['Certification','CE, FCC, PTCRB (hardware)']],
+     parts:['ORBCOMM IoT devices (satellite/cellular/dual-mode)','ORBCOMM ONE cloud platform license','Contact OHB Austria for package'],
+     app:'Pharmaceutical cold chain compliance, reefer container monitoring, heavy equipment fleet management, maritime cargo tracking, government asset tracking'}
+  ]
+}
+};
+
+// URL routing
+const params = new URLSearchParams(window.location.search);
+const vKey = params.get('v') || 'ELDES';
+const V = VENDORS[vKey];
+let cardCount = 0;
+
+function tog(id){
+  const c=document.getElementById('pc'+id),t=document.getElementById('pt'+id);
+  const o=c.classList.toggle('open'); t.textContent=o?'−':'+';
+}
+
+function render(){
+  if(!V){
+    document.getElementById('root').innerHTML='<div style="text-align:center;padding:60px;font-family:Orbitron,monospace;color:#6a8aa0">VENDOR NOT FOUND<br><br><a href="product_explorer.html" style="color:#0077aa;font-size:12px;letter-spacing:2px">← BACK TO EXPLORER</a></div>';
+    return;
+  }
+  document.title = vKey + ' – ' + V.sub;
+  document.getElementById('ptitle').textContent = vKey + ' – Western Systems Technologies LLP';
+
+  const statsHTML = (V.stats||[]).map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML = V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML = (V.apps||[]).map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML = V.products.map((p,i)=>{
+    const id=cardCount++;
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>
+        ${p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}
+        ${p.parts.length?`<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div>`:''}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;}).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// RF & MICROWAVE</div>
+        <div class="hero-name">${vKey}</div>
+        <div class="hero-sub">${V.sub}</div>
+        <div class="hero-country">▸ ${V.country}${V.founded?' &nbsp;·&nbsp; FOUNDED '+V.founded:''}</div>
+        <div class="hero-desc">${V.desc}</div>
+        <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT OFFICIAL WEBSITE</a>
+      </div>
+      <div class="badges">${badgesHTML}</div>
+    </div>
+    ${statsHTML ? `<div class="stats-bar">${statsHTML}</div>` : ''}
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    ${appsHTML ? `<div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>` : ''}
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div><div class="c-sub">Contact ${vKey} for datasheets, pricing and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div>
+        <div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+        <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+      </div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; ${vKey}</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">Optics & Laser – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #cc4400;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#cc4400;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#cc4400;color:#cc4400;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(204,68,0,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#cc4400;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#cc4400;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #cc4400;color:#cc4400;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(204,68,0,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #cc4400;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#cc4400;white-space:nowrap;background:rgba(204,68,0,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#cc4400;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#cc4400;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#cc4400;box-shadow:0 4px 14px rgba(204,68,0,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#cc4400;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(204,68,0,0.08);color:#cc4400;border-color:#cc4400;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(204,68,0,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#cc4400;letter-spacing:1px;background:rgba(204,68,0,0.02);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;}
+.app-card:hover{border-color:#cc4400;background:rgba(204,68,0,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#cc4400;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+/* REFERENCE CUSTOMERS */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.ref-card{border:1px solid #cdd9e5;background:#fff;padding:16px;border-left:3px solid #cc4400;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.ref-agency{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#cc4400;margin-bottom:5px;}
+.ref-detail{font-size:12px;color:#4a6a80;line-height:1.45;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#cc4400;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:36px;padding:18px 26px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#cc4400;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+</div>
+<div class="page"><div class="page-inner"><div id="root"></div></div></div>
+<script>
+const OP_VENDORS={
+
+'MONOCROM':{
+  url:'https://www.monocrom.com',email:'info@monocrom.com',
+  country:'VILANOVA I LA GELTRÚ, SPAIN',founded:'1993',
+  sub:'HIGH POWER DIODE LASER SOLUTIONS',
+  desc:'Monocrom S.L. (Vilanova i la Geltrú, Spain), founded 1993, is a worldwide leading manufacturer of high-power diode laser solutions. With three decades of laser innovation, Monocrom supplies OEM diode laser components and complete systems for medical & aesthetics, industrial, defence & aerospace and research markets. Patented Solder-free Clamping™ technology eliminates the "smile effect", prolongs laser lifetime and enables superior thermal management. Product range: single emitters (375–1550 nm, mW to watts), direct diode laser stacks and modules (up to 8 kW CW), fiber-coupled systems (1 kW single wavelength), high-energy solid state lasers (DPSS, up to 1 J/pulse at 300 Hz) and complete OEM systems. Active at SPIE Photonics West and Laser World of Photonics.',
+  badges:['SOLDER-FREE CLAMPING™','UP TO 8 kW CW','640 nm – 1940 nm','MEDICAL & INDUSTRIAL'],
+  stats:[{v:'1993',l:'FOUNDED'},{v:'8 kW',l:'MAX DIRECT DIODE CW POWER'},{v:'640–1940nm',l:'WAVELENGTH RANGE'},{v:'1kW',l:'FIBER-COUPLED SINGLE WL'}],
+  apps:[
+    {icon:'💆',name:'MEDICAL & AESTHETICS',desc:'Hair removal, dermatology, ophthalmic — CAST platform up to 7200 W; MP532-3W for retinal treatments'},
+    {icon:'🏭',name:'INDUSTRIAL',desc:'Laser welding, brazing, cladding, roll-forming of ultra-high strength steel — up to 8 kW direct diode'},
+    {icon:'🛡',name:'DEFENCE & AEROSPACE',desc:'LiDME module (< 3 kW peak) for remote sensing, environmental monitoring and defence systems'},
+    {icon:'🔬',name:'RESEARCH',desc:'Solid-state laser pumping, spectroscopy, particle image velocimetry, imaging and LIBS'},
+    {icon:'🏃',name:'OEM INTEGRATION',desc:'Complete OEM laser systems: modules + cooling + drivers for seamless product integration'},
+  ],
+  refs:[
+    {agency:'AEROSPACE & AUTOMOTIVE OEMs',detail:'Direct diode systems deployed for heat-assisted roll-forming of ultra-high strength steel and bending of high-strength steel in industrial servo presses'},
+    {agency:'MEDICAL DEVICE MANUFACTURERS',detail:'Number 1 laser manufacturer for hair removal laser diode devices in Spain and Italy — OEM supply to aesthetics equipment companies'},
+    {agency:'SPIE / PHOTONICS COMMUNITY',detail:'Research publications with Raab-Photonik GmbH (Germany), UPC Barcelona and Weierstrass Institute Berlin on 1 kW fiber-coupled diode laser'},
+    {agency:'EFFRA MEMBER',detail:'Member of European Factories of the Future Research Association — supporting innovation in advanced manufacturing in Europe'},
+    {agency:'ECOSWIR PROJECT',detail:'Active in the ECOSWIR R&D project driving semiconductor laser innovation in Spain (2025)'},
+  ],
+  products:[
+    {name:'DIRECT DIODE LASERS & STACKS (UP TO 8 kW)',
+     brief:'High-power direct diode laser stacks and modules delivering up to 8 kW CW across 640–1940 nm. Patented Solder-free Clamping™ technology eliminates smile effect. Conduction or water macro-channel cooling. Vertical and horizontal stack architectures.',
+     pills:['640–1940 nm','UP TO 8 kW CW','SOLDER-FREE CLAMPING™','WATER / CONDUCTION COOLED'],
+     desc:'Monocrom\'s core product line — high-power diode laser stacks built with their patented Solder-free Clamping™ technology. This innovation eliminates thermal solder reflow that causes the "smile effect" (bow in the emitting aperture), resulting in better beam quality, higher coupling efficiency and significantly longer lifetime.\n\nVertical stacks: efficiently cooled with conduction or millimetre water-channel circuits. Available in multiple architectures, bar counts and wavelengths (760, 808, 880, 915, 940, 976, 1060, 1470, 1550, 1940 nm).\n\nHorizontal arrays: CW or QCW operation, 640 nm to 2200 nm.\n\nDirect diode systems validated for industrial use cases including heat-assisted roll-forming of ultra-high strength steel and continuous die processing in industrial servo presses — one of the most demanding direct-diode applications.',
+     specs:[['Wavelengths (Vertical Stack)','760, 808, 880, 915, 940, 976, 1060, 1470, 1550, 1940 nm'],['Wavelengths (Horizontal Array)','640 nm – 2200 nm (CW/QCW)'],['Maximum Power (CW)','Up to 8 kW per direct diode module'],['Fiber-coupled (single WL)','Up to 1 kW in PM or MM fibre (beam combining)'],['Cooling','Conduction or water macro-channel (real water, low maintenance)'],['Clamping Technology','Patented Solder-free Clamping™ — eliminates smile effect'],['Efficiency','> 50% wall-plug efficiency (kW class)'],['Lifetime','>20,000 h at rated power']],
+     parts:['Vertical stack (conduction-cooled)','Vertical stack (water-cooled)','Horizontal array CW','Horizontal array QCW','Custom wavelength/stack configuration'],
+     app:'Nd:YAG/fiber laser pumping, direct diode welding, brazing, heat treatment, cladding, aerospace component forming'},
+    {name:'CAST — MEDICAL / AESTHETICS HIGH-POWER PLATFORM',
+     brief:'CAST: high-power diode laser platform for medical aesthetics up to 7200 W. Customisable wavelengths (755–1060 nm) and spot sizes (0.5–10 cm²). Ideal for hair removal and dermatology OEM integration.',
+     pills:['UP TO 7200 W','755–1060 nm','CUSTOMISABLE SPOT SIZE','HAIR REMOVAL / DERM'],
+     desc:'The CAST platform is Monocrom\'s medical and aesthetics flagship product — a high-power diode laser module designed specifically for hair removal, skin rejuvenation and dermatological treatment equipment. Available with customisable wavelengths from 755 to 1060 nm (matching key hair/skin chromophores) and adjustable spot sizes from 0.5 to 10 cm². Monocrom is the Number 1 laser manufacturer for hair removal laser diode devices in Spain and Italy.',
+     specs:[['Power','Up to 7200 W peak (pulsed)'],['Wavelengths','755 nm (Alex), 808 nm (Diode), 940 nm, 1060 nm (Nd:YAG match)'],['Spot Size','0.5 – 10 cm² (customisable)'],['Application','Hair removal, dermatology, skin rejuvenation OEM systems'],['Form Factor','Plug & play encapsulated module (D36, D49 mm)'],['Delivery','Fast delivery standard products; custom within short lead time']],
+     parts:['CAST platform (specify wavelength, spot size, power)','Encapsulated stack D36 (1 stack)','Encapsulated stack D49 (1-2 stacks)'],
+     app:'Hair removal laser systems, dermatology treatment equipment, aesthetics clinic devices, OEM medical laser integration'},
+    {name:'MP532-3W — OPHTHALMIC LASER MODULE',
+     brief:'Compact diode laser delivering < 3 W at 532 nm. Trusted globally for over 15 years in retinal treatments and ophthalmic applications. Proven clinical heritage.',
+     pills:['532 nm GREEN','< 3W','15+ YEARS HERITAGE','RETINAL TREATMENT'],
+     desc:'The MP532-3W is one of Monocrom\'s longest-running products — a compact 532 nm (green) diode-pumped laser module delivering up to 3 W for ophthalmic applications. Its 15+ year market presence and clinical reliability make it the preferred choice for retinal photocoagulation treatment and other ophthalmic laser procedures.',
+     specs:[['Wavelength','532 nm (green)'],['Output Power','< 3 W CW'],['Heritage','15+ years in clinical ophthalmic use'],['Application','Retinal photocoagulation, ophthalmic treatment']],
+     parts:['MP532-3W'],
+     app:'Retinal photocoagulation, ophthalmic clinics, OEM ophthalmic laser systems'},
+    {name:'LiDME — DEFENCE & REMOTE SENSING LASER MODULE',
+     brief:'Versatile laser module for defence, remote sensing and environmental monitoring. < 3 kW peak power. Wavelength agility from 760 to 2900 nm. Designed for demanding aerospace and defence integration.',
+     pills:['760–2900 nm','< 3 kW PEAK POWER','WAVELENGTH AGILE','DEFENCE / SENSING'],
+     desc:'The LiDME module is Monocrom\'s defence and sensing product — offering wavelength flexibility from 760 nm to 2900 nm (covering NIR, SWIR and MWIR atmospheric windows). With peak power up to 3 kW, it is well suited for laser rangefinding, remote sensing, differential absorption LIDAR (DIAL) and environmental monitoring systems.',
+     specs:[['Wavelength Range','760 – 2900 nm (model dependent)'],['Peak Power','< 3 kW'],['Mode','Pulsed (adjustable pulse width and repetition rate)'],['Applications','Remote sensing, LIDAR, environmental monitoring, defence systems'],['Cooling','Conduction or water-cooled']],
+     parts:['LiDME (specify wavelength and power requirements)'],
+     app:'Atmospheric LIDAR, standoff detection, laser rangefinding, environmental monitoring, defence EO systems'},
+    {name:'DPSS SOLID STATE LASERS (HiEN SERIES)',
+     brief:'High-energy DPSS Nd:YAG and Nd:YLF solid-state lasers. HiEN Pulse 400-YAG: 400 mJ at 1064/532/355 nm, 150 Hz, 10 ns pulses. HiEN 300-YLF: 1 J/pulse at 300 Hz, 300 W average power. Patented solder-free diode pumping extends diode lifetime to > 1 billion shots.',
+     pills:['UP TO 1J/PULSE','300 Hz REP RATE','1064/532/355 nm','PATENTED SOLDER-FREE PUMP'],
+     desc:'The HiEN (High Energy) series are Monocrom\'s solid-state DPSS laser products for research, industrial and defence applications requiring high pulse energy at high repetition rates.\n\nHiEN Pulse 400-YAG:\n• 400 mJ at 1064 nm; frequency-converted outputs at 532 nm and 355 nm\n• 150 Hz repetition rate, 10 ns pulses\n• RMS pulse energy stability ~1% across all wavelengths\n• Super-Gaussian beam profile for uniform energy distribution\n• Ideal for OPO pumping, Ti:Sapphire pumping, non-linear spectroscopy, material ablation\n\nHiEN 300-YLF:\n• 1 J/pulse at 300 Hz = 300 W average power\n• High energy + high speed + high output in one system\n• Patented solder-free clamping: > 1 billion shots diode lifetime\n• Minimal thermal lens, outstanding pulse energy stability, modular platform',
+     specs:[['HiEN 400-YAG','400 mJ @ 1064/532/355 nm, 150 Hz, 10 ns, ~1% RMS stability'],['HiEN 300-YLF','1 J/pulse @ 300 Hz = 300 W average power'],['Crystal','Nd:YAG (high thermal conductivity, isotropic), Nd:YLF'],['Diode Pump','Patented solder-free clamping — > 1 billion shots lifetime'],['Beam Profile','Super-Gaussian (uniform energy distribution)'],['Modularity','Customisable output parameters and modular design']],
+     parts:['HiEN Pulse 400-YAG (1064/532/355 nm)','HiEN Pulse 300-YLF (1 J/pulse, 300 W avg)'],
+     app:'OPO pumping, Ti:Sapphire laser pumping, non-linear spectroscopy, material ablation, LIBS, laser-induced breakdown spectroscopy'}
+  ]
+},
+
+'MENLO SYSTEMS':{
+  url:'https://www.menlosystems.com',email:'info@menlosystems.com',
+  country:'MARTINSRIED (MUNICH), GERMANY',founded:'2001',
+  sub:'OPTICAL FREQUENCY COMBS, FEMTOSECOND LASERS & THz SYSTEMS',
+  desc:'Menlo Systems GmbH (Martinsried near Munich, Germany), founded 2001, is the pioneer and world leader in commercial optical frequency combs — technology co-awarded the 2005 Nobel Prize in Physics to co-founders T.W. Hänsch and J.L. Hall. With subsidiaries in the USA, Japan and China, Menlo offers optical frequency combs (FC1500, SmartComb, OFC Engine), femtosecond fiber lasers (figure 9® mode-locking technology), ultrastable lasers, terahertz time-domain systems (TERA K15, TeraSmart), ultrastable microwave systems and complete quantum technology solutions. Products deployed at NIST, PTB, SYRTE, NPL, NRC, RIKEN, NICT and leading quantum research centres worldwide.',
+  badges:['NOBEL PRIZE TECHNOLOGY','FIGURE 9® MODE-LOCKING','FREQ COMBS PIONEER','NIST / PTB / SYRTE'],
+  stats:[{v:'2001',l:'FOUNDED'},{v:'NOBEL',l:'2005 PHYSICS PRIZE TECH'},{v:'FIGURE 9®',l:'PROPRIETARY MODE-LOCK'},{v:'GLOBAL',l:'USA · JAPAN · CHINA OFFICES'}],
+  apps:[
+    {icon:'⏱',name:'OPTICAL CLOCKS',desc:'Frequency comb clockwork linking optical clocks to microwave — NIST, PTB, SYRTE, NPL optical clock programmes'},
+    {icon:'🔬',name:'SPECTROSCOPY',desc:'Dual-comb spectroscopy, mid-IR molecular fingerprint spectroscopy (FC1500 DFG)'},
+    {icon:'🌊',name:'THz SCIENCE',desc:'THz time-domain spectroscopy for material characterisation, pharmaceutical QC, security screening'},
+    {icon:'⚛',name:'QUANTUM TECH',desc:'Optical frequency references and timing links for quantum computing and sensing systems'},
+    {icon:'🏭',name:'SEMICONDUCTOR',desc:'Laser metrology and test & measurement for semiconductor manufacturing quality control'},
+    {icon:'🌟',name:'ASTROPHOTONICS',desc:'Laser frequency comb calibrator for astronomical spectrographs (exoplanet detection)'},
+  ],
+  refs:[
+    {agency:'NIST (USA)',detail:'Optical frequency combs for optical atomic clock programmes and absolute frequency measurement at the National Institute of Standards and Technology'},
+    {agency:'PTB (Germany)',detail:'FC1500 frequency combs deployed at Physikalisch-Technische Bundesanstalt for hydrogen spectroscopy and SI second redefinition studies'},
+    {agency:'SYRTE (France)',detail:'Optical frequency combs at Observatoire de Paris SYRTE for optical clock comparison and TAI contributions'},
+    {agency:'NPL (UK)',detail:'Femtosecond comb systems for optical frequency standard work at National Physical Laboratory'},
+    {agency:'ESO / VLT',detail:'Laser frequency comb calibrators for the Very Large Telescope ESPRESSO spectrograph for exoplanet detection'},
+    {agency:'FREE ELECTRON LASERS',detail:'Timing distribution systems (ORS-1500) deployed at DESY, SLAC, SwissFEL, European XFEL for < 30 fs synchronisation'},
+    {agency:'SPACE — FOKUS',detail:'FOKUS optical frequency comb instrument flew to space on TEXUS-51 sounding rocket (2015) and ISS (2016) — first optical frequency comb in space'},
+  ],
+  products:[
+    {name:'OPTICAL FREQUENCY COMBS (FC1500 / SMARTCOMB / OFC ENGINE)',
+     brief:'Nobel Prize-winning optical frequency comb technology — turnkey systems providing millions of phase-coherent laser lines as a precision optical ruler. FC1500-250-WG: industry standard rack system. SmartComb 250: compact automated. OFC Engine: world\'s best compact OEM comb.',
+     pills:['NOBEL PRIZE TECH','FC1500-250-WG','SMARTCOMB 250','OFC ENGINE OEM'],
+     desc:'Menlo\'s optical frequency combs are the gold standard for linking optical frequencies to microwave frequency standards and vice versa. The comb produces a series of equally-spaced, fully phase-coherent laser lines across the NIR/visible spectrum — each line traceable to an atomic frequency standard.\n\nKey products:\n• FC1500-250-WG: flagship rack-mounted turnkey comb. 250 MHz repetition rate. CEO and repetition rate stabilised. Simultaneous NIR and visible spectral coverage. Reference input: microwave or optical. Used at NIST, PTB, SYRTE, NPL.\n• SmartComb 250: compact, fully automated turnkey comb in a revolutionary compact package. First fully automated turn-key optical frequency comb for use in and outside the lab.\n• FC1500-Quantum: ultra-low-noise comb providing ultra-stable CW light over wide frequency range.\n• FC1500-ULNnova: redesigned comb laser oscillator for even lower noise.\n• OFC Engine: world\'s best compact frequency comb for OEM integration — designed for miniaturised optical clock and field applications.\n• Mid-IR Comb (DFG-based): 3–14 µm range via difference frequency generation — enables molecular fingerprint spectroscopy.\n• FOKUS heritage: flew to ISS in 2016 (first optical frequency comb in space).',
+     specs:[['FC1500-250-WG Rep. Rate','250 MHz (100 MHz on request)'],['FC1500 CEO Stability','< 1 Hz linewidth (stabilised)'],['Spectral Coverage','NIR (1 µm) + visible (520–1040 nm) simultaneous'],['Mid-IR Comb','3 – 14 µm (DFG-based, molecular fingerprint region)'],['Reference Input','Microwave (10 MHz) or optical cavity reference'],['SmartComb','Compact, fully automated, turnkey — portable'],['OFC Engine','World\'s best compact OEM integration comb'],['Space Heritage','FOKUS instrument — ISS 2016, first frequency comb in space']],
+     parts:['FC1500-250-WG','FC1500-Quantum','FC1500-ULNnova','SmartComb 250','OFC Engine (OEM)','Mid-IR DFG Comb (3–14 µm)'],
+     app:'Optical atomic clocks, absolute frequency measurement, optical frequency synthesis, dual-comb spectroscopy, astrophysical spectrograph calibration'},
+    {name:'FEMTOSECOND FIBER LASERS (FIGURE 9® SERIES)',
+     brief:'Turnkey femtosecond fiber lasers based on Menlo\'s proprietary figure 9® mode-locking technology — lowest phase noise, highest stability. ELMO series (1560 nm Er), YLMO series (1040 nm Yb), C-Fiber (synchronisation), M-Comb (comb seed).',
+     pills:['FIGURE 9® MODE-LOCKING','< 2 fs RMS JITTER','1040 nm & 1560 nm','380 mW HIGH POWER ELMO'],
+     desc:'Menlo\'s femtosecond fiber lasers are built around the proprietary figure 9® mode-locking technology — delivering unprecedented phase noise performance, proven by carrier-envelope (CE) beat note measurements.\n\nKey series:\n• ELMO (1560 nm Er-doped): Up to 380 mW average power. Pulse duration down to 45 fs. 24/7 operation in harsh environments. ELMO 780 High Power: > 1 W at 780 nm (frequency doubled), < 100 fs. YLMO-520: up to 1 W at 520 nm.\n• YLMO (1040 nm Yb-doped): Various power and pulse duration options. XHP model with multicolour ports for pump-probe spectroscopy — wavelength range extendable from 390 nm through visible, mid-IR to THz.\n• C-Fiber (synchronisation): Tunable cavity with piezo-controlled synchronisation. RMS timing jitter < 200 fs [0.1 Hz – 500 kHz] (free running: < 2 fs [10 kHz–1 MHz]). Master-slave: < 20 fs.\n• M-Comb (250 MHz): ideal comb seed oscillator with large comb mode spacing.',
+     specs:[['ELMO Output Power','Up to 380 mW @ 1560 nm; > 1 W @ 780 nm (HP model)'],['ELMO Pulse Duration','Down to 45 fs (1560 nm)'],['YLMO Wavelength','1040 nm (with extensions to 390 nm, 520 nm, mid-IR, THz)'],['C-Fiber Jitter','< 200 fs RMS [0.1 Hz–500 kHz]; < 2 fs [10 kHz–1 MHz free running]'],['M-Comb Rep. Rate','250 MHz (100 MHz option)'],['Mode-Locking','Proprietary figure 9® — all-PM, single mode-lock state'],['Noise Floor','Exceptionally low — CE beat note proof']],
+     parts:['ELMO (1560 nm, standard power)','ELMO High Power (1560 nm, 380 mW)','ELMO 780 High Power (780 nm SHG, >1W)','YLMO-520 (520 nm, up to 1W)','C-Fiber (synchronised)','M-Comb (250 MHz)'],
+     app:'Frequency comb seeding, pump-probe spectroscopy, THz generation, non-linear microscopy, 3D nano-printing, optical frequency combs, timing synchronisation'},
+    {name:'TERAHERTZ TIME-DOMAIN SYSTEMS (TERA K15 / TERASMART)',
+     brief:'Complete THz time-domain spectroscopy (THz-TDS) systems for material characterisation, pharmaceutical QC, security screening and scientific research. TERA K15: up to 4.5 THz bandwidth, 80 dB SNR. TeraSmart: compact automated turnkey.',
+     pills:['0.1–4.5 THz','> 80 dB SNR','TURNKEY THz-TDS','PHARMACEUTICAL QC'],
+     desc:'Menlo\'s THz time-domain systems use femtosecond lasers to generate and detect THz pulses via photoconductive antennas. The system measures the complete THz waveform (amplitude + phase), giving direct access to complex refractive index without Kramers-Kronig processing.\n\n• TERA K15: up to 4.5 THz bandwidth, > 80 dB dynamic range, turnkey. The long-standing workhorse of THz-TDS with optomechanical scanning unit providing > 5 THz and > 90 dB SNR.\n• TeraSmart: compact, turnkey THz spectrometer integrating latest THz-TDS achievements in easy-to-use format.\n\nApplication validation: pharmaceutical tablet coating thickness, polymer film characterisation, security screening, art conservation, semiconductor quality control.',
+     specs:[['TERA K15 Bandwidth','Up to 4.5 THz (up to 5 THz with optomechanical scanner)'],['Dynamic Range','> 80 dB (> 90 dB with optomechanical unit)'],['Measurement','Amplitude + Phase (complex refractive index, no Kramers-Kronig)'],['Measurement Time','< 1 second per spectrum (standard)'],['Modes','Transmission, reflection, fibre-coupled probe'],['TeraSmart','Compact, automated, turnkey — lab and industrial settings']],
+     parts:['TERA K15 (standard THz-TDS)','TERA K15 with optomechanical scanner (> 5 THz)','TeraSmart (compact automated)'],
+     app:'Pharmaceutical tablet QC, polymer characterisation, security screening, art conservation, food safety, semiconductor layer metrology'},
+    {name:'ULTRASTABLE LASERS & MICROWAVE SYSTEMS',
+     brief:'Ultra-narrow linewidth CW lasers stabilised to high-finesse optical cavities (ORS-DL) and ultrastable microwave signal generation from optical frequency combs — used in optical clocks and precision frequency distribution.',
+     pills:['SUB-Hz LINEWIDTH','ORS-DL CAVITY LASER','ULTRASTABLE MICROWAVE','OPTICAL CLOCK SUPPORT'],
+     desc:'For optical clock and precision spectroscopy applications requiring laser linewidths well below 1 Hz, Menlo offers the ORS-DL ultra-narrow linewidth laser system — stabilised to a high-finesse ultra-low-expansion (ULE) glass optical cavity. Combined with an FC1500 comb, this provides a complete optical clock reference chain.\n\nUltrastable microwave extraction: Menlo\'s comb can divide an optical frequency reference to the microwave domain with 10⁻¹⁸ level stability — far exceeding the best microwave atomic clocks.',
+     specs:[['ORS-DL Linewidth','Sub-Hz (cavity-stabilised CW laser)'],['Cavity Material','Ultra-low expansion (ULE) glass'],['Microwave Output','10 MHz / 100 MHz from optical division (10⁻¹⁸ stability)'],['Application','Optical clock local oscillator, ultrastable spectroscopy laser, microwave synthesis from optics']],
+     parts:['ORS-DL (optical reference system)','Ultrastable microwave module (comb + optical reference)'],
+     app:'Optical atomic clocks (local oscillator), hydrogen spectroscopy, Ramsey spectroscopy, fundamental constant measurements'},
+    {name:'TIMING DISTRIBUTION & SYNCHRONISATION (FREE ELECTRON LASERS)',
+     brief:'Femtosecond-precision optical timing distribution for free electron lasers and large scientific facilities. ORS-1500 link: < 30 fs residual jitter over km-scale fibre links. Deployed at DESY, SLAC, SwissFEL, European XFEL.',
+     pills:['< 30 fs RESIDUAL JITTER','KM-SCALE FIBRE LINKS','FEL SYNCHRONISATION','DESY / XFEL / SLAC'],
+     desc:'Free electron lasers and X-ray sources require all laser systems and accelerator components to be synchronised with attosecond-to-femtosecond precision. Menlo provides optical timing distribution over long fibre links using actively stabilised optical pulse trains.\n\nORS-1500 system: distributes femtosecond laser pulses over single-mode fibre with active length stabilisation. Residual timing jitter: < 30 fs integrated. Link length: up to 3 km.\n\nDeployed at: DESY (Hamburg), SLAC (Stanford), SwissFEL (PSI Switzerland), European XFEL (Hamburg). Enables pump-probe experiments at these facilities with unprecedented temporal resolution.',
+     specs:[['Residual Jitter','< 30 fs integrated (optical link)'],['Link Length','Up to 3 km optical fibre'],['Stabilisation','Active length stabilisation via piezo-controlled fibre stretcher'],['Distribution','1-to-N optical fanout with active stabilisation per link'],['Users','DESY, SLAC, SwissFEL, European XFEL']],
+     parts:['ORS-1500 (optical timing link)','SYNC-LINK-500m','SYNC-LINK-3km','Optical fanout unit'],
+     app:'Free electron laser synchronisation, X-ray pump-probe experiments, synchrotron timing, attosecond science facilities'}
+  ]
+},
+
+'QUBIG GMBH':{
+  url:'https://www.qubig.com',email:'mail@qubig.com',
+  country:'MUNICH, GERMANY',founded:'2008',
+  sub:'ELECTRO-OPTIC MODULATORS (EOM) FOR QUANTUM SCIENCE & INDUSTRY',
+  desc:'QUBIG GmbH (Munich, Germany), founded 2008, develops and manufactures world-class Electro-Optic Modulators (EOMs) for scientific and industrial applications. QUBIG\'s high-tech devices are implemented as additional modules in laser systems to precisely control and manipulate laser light properties — frequency, phase, polarisation and position. Products range from DC-coupled phase shifters and broadband EOMs to high-efficiency resonantly enhanced phase and amplitude modulators up to 20 GHz, covering UV to mid-wave IR. Custom predefined models available for specific atomic transitions (Rb, Cs, K, Li, Na, OH). Applications: PDH laser locking, FM spectroscopy, laser cooling & trapping, optical clocks, LiDAR, quantum computation and cryptography.',
+  badges:['EOM SPECIALIST','DC TO 20 GHz','UV TO MWIR','QUANTUM SCIENCE & INDUSTRY'],
+  stats:[{v:'2008',l:'FOUNDED'},{v:'20 GHz',l:'MAX MODULATION FREQ'},{v:'UV–MWIR',l:'SPECTRAL RANGE'},{v:'Q-LOCK',l:'AUTO RESONANCE TRACKING'}],
+  apps:[
+    {icon:'🔒',name:'LASER FREQUENCY LOCKING',desc:'PDH (Pound-Drever-Hall), FM spectroscopy and MTS locking — phase modulators with integrated PDH electronics'},
+    {icon:'❄',name:'LASER COOLING & TRAPPING',desc:'Repumper sideband generation for Rb, Cs, K, Li, Na, OH MOTs — predefined models at exact transition frequencies'},
+    {icon:'⚛',name:'QUANTUM COMPUTATION',desc:'State manipulation in Paul traps (ions), NV centres, quantum dots — resonant amplitude and phase modulators'},
+    {icon:'📡',name:'LiDAR',desc:'Fast amplitude modulation for time-of-flight LiDAR — amplitude modulators as high-speed intensity switches'},
+    {icon:'🌱',name:'SPECTRAL BROADENING',desc:'SBS suppression for laser guide stars (ESO VLT), white MOT, high-power fibre transport — strong phase modulation'},
+    {icon:'🔐',name:'QUANTUM CRYPTOGRAPHY',desc:'Single photon multiplexing and demultiplexing for quantum key distribution'},
+  ],
+  refs:[
+    {agency:'ESO — VLT LASER GUIDE STAR',detail:'QUBIG phase modulators used for spectral broadening of the Wendelstein laser for SBS suppression in the ESO Very Large Telescope laser guide star system'},
+    {agency:'QUANTUM OPTICS LABS WORLDWIDE',detail:'QUBIG EOMs are deployed in MOT setups at leading cold atom laboratories worldwide including major universities and national institutes'},
+    {agency:'ION TRAP QUANTUM COMPUTING',detail:'Resonant amplitude and phase modulators for quantum state manipulation in ion trap quantum computers (Paul trap experiments)'},
+    {agency:'OPTICAL CLOCK GROUPS',detail:'Phase modulators placed in optical cavities for high-resolution spectroscopy and calibration of optical instruments like astronomical spectrometers'},
+    {agency:'MAGNETOMETER RESEARCH',detail:'Amplitude modulators used in Bell-Bloom atomic magnetometers for ultra-sensitive magnetic field sensing'},
+  ],
+  products:[
+    {name:'RESONANT PHASE MODULATORS (PM SERIES)',
+     brief:'High-efficiency resonant phase modulators from kHz to 20 GHz covering UV to MWIR. High-Q tank circuit boosts RF drive reducing required RF power. Predefined models for Rb, Cs, K, Li, Na, OH atomic transitions. Low RAM (Residual Amplitude Modulation).',
+     pills:['kHz TO 20 GHz','HIGH-Q RESONANCE','LOW RAM','ATOMIC TRANSITION MODELS'],
+     desc:'QUBIG\'s resonant phase modulators (PM) consist of an electro-optic crystal coupled via a high-Q tank circuit resonance to an RF input. The resonance boosts the input voltage across the crystal, achieving high modulation depth at drive powers of only 1–10 mW — far lower than non-resonant designs.\n\nSpectral range: UV to MWIR.\n\nKey predefined models:\n• PM-Rb (Rubidium): Frequencies at {2.9, 3.4, 6.6, 6.8, 10.2} GHz for ⁸⁵Rb and ⁸⁷Rb transitions (420, 480, 780, 795 nm) — repumper, Rydberg, Raman applications\n• PM-OH (OH radicals): 54 MHz and 1665 MHz at 282 nm and 308 nm — molecule laser cooling\n• PM-Cs, PM-K, PM-Li, PM-Na: similarly pre-tuned to hyperfine transitions\n\nLow RAM (Residual Amplitude Modulation) is a key feature — critical for PDH locking where RAM creates DC offset errors.\n\nQ-LOCK: QUBIG\'s RF driver includes automatic Q-Lock functionality that finds and tracks the resonance frequency of the modulator — truly plug & play operation.',
+     specs:[['Frequency Range','50 kHz – 20 GHz (model dependent)'],['Crystal Materials','KTP, LiNbO₃, LiTaO₃ (wavelength/frequency dependent)'],['Spectral Range','UV through MWIR (200 nm – 5 µm)'],['Modulation Depth','> 1 rad at < 10 mW drive (resonant)'],['RAM','Low residual amplitude modulation — PDH compatible'],['Predefined Atoms','Rb (85,87), Cs-133, K (39,40,41), Li (6,7), Na-23, OH (radicals)'],['Q-LOCK','Driver auto-finds and tracks resonance frequency']],
+     parts:['PM-Rb (rubidium variants)','PM-Cs (caesium)','PM-K (potassium)','PM-Li (lithium)','PM-Na (sodium)','PM-OH (hydroxyl radical)','Custom resonant PM (any frequency, UV–MWIR)'],
+     app:'PDH laser locking, MOT repumper generation, Raman transitions, optical clocks, molecular laser cooling, astronomical spectrograph calibration'},
+    {name:'RESONANT AMPLITUDE MODULATORS (AM SERIES)',
+     brief:'Free-space resonant amplitude modulators for single-photon applications, LiDAR, Lock-In detection and quantum state manipulation. AM6: 0.1–1.9 MHz. AM8: 31–160 MHz. Extinction ratio > 50:1 (AM8 > 50:1). UV to SWIR.',
+     pills:['0.1 MHz – 160 MHz','> 50:1 EXTINCTION','SINGLE PHOTONS','LiDAR / LOCK-IN'],
+     desc:'QUBIG amplitude modulators (AM) are Pockels cell-based resonant devices providing fast, efficient intensity modulation of laser beams. They consist of one or more EO crystals with compensated birefringence forming a voltage-controlled waveplate — combined with polarisation optics to convert phase to amplitude modulation.\n\nAM6 series (0.1–1.9 MHz): single photon multiplexing, Lock-In amplification.\nAM8 series (31–160 MHz): faster applications — LiDAR TOF, single photon demultiplexing, Bell-Bloom magnetometry.\n\nLow insertion loss, high extinction ratio (> 50:1) and high optical damage threshold make these suitable for high-power laser applications.',
+     specs:[['AM6 Frequency Range','0.1 – 1.9 MHz'],['AM8 Frequency Range','31 – 160 MHz'],['Extinction Ratio','> 50:1 (AM6); > 50:1 (AM8) typical'],['Spectral Range','UV to SWIR'],['Insertion Loss','Very low — specified per model'],['Applications','Single photons, LiDAR, Lock-In amplification, magnetometry, multiplexing']],
+     parts:['AM6 series (0.1–1.9 MHz)','AM8 series (31–160 MHz)'],
+     app:'Single photon sources (QKD), LiDAR time-of-flight, Bell-Bloom atomic magnetometers, Lock-In spectroscopy, optical choppers'},
+    {name:'PHASE SHIFTERS, POCKELS CELLS & TRAVELLING WAVE EOMs',
+     brief:'DC-coupled phase shifters for static phase adjustment, high-voltage Pockels cells for Q-switching and pulse picking, and travelling wave (broadband) EOMs for DC to multi-GHz applications.',
+     pills:['DC-COUPLED PHASE SHIFT','POCKELS CELL','TRAVELLING WAVE','DC TO GHz BROADBAND'],
+     desc:'Beyond resonant devices, QUBIG offers:\n• DC-coupled phase shifters: static or slowly varying phase adjustment without RF drive — used for interferometer arm balancing and slow phase control\n• Pockels cells: high-voltage devices for fast (ns) Q-switching of lasers, pulse picking and electro-optic shutters\n• Travelling wave (TWP) EOMs: broadband frequency response from DC to several GHz — used when multiple modulation frequencies are needed simultaneously or frequency scanning is required. Impedance-matched 50 Ω travelling wave electrode design.',
+     specs:[['Phase Shifter','DC-coupled; static phase adjustment'],['Pockels Cell','High voltage (HV); ns switching for Q-switch/pulse picking'],['Travelling Wave','DC to several GHz; 50 Ω impedance matched electrode'],['Broadband Advantage','Multiple simultaneous modulation frequencies possible']],
+     parts:['Phase shifter (DC-coupled)','Pockels cell (Q-switch/pulse pick)','TWP series (travelling wave)'],
+     app:'Interferometer phase control, laser Q-switching, pulse picking, wideband FM spectroscopy, optical frequency shifting'},
+    {name:'Q-DRIVER RF ELECTRONICS',
+     brief:'QUBIG RF drivers with integrated Q-Lock (automatic resonance tracking), F-Lock (frequency drift compensation), PDH error signal generation, temperature control and Python remote interface. For MHz modulators, GHz modulators and AOMs.',
+     pills:['Q-LOCK AUTO-TRACKING','PDH ERROR SIGNAL','PYTHON INTERFACE','MHz TO GHz'],
+     desc:'QUBIG Q-DRIVER RF electronics are the matched driving solution for all QUBIG free-space EOMs. Their modular slot card design allows flexible adaptation to different applications by inserting functional modules.\n\nKey features:\n• Q-Lock: integrated automatic resonance frequency finding and tracking — works up to 20 GHz. Ensures operation at optimal modulation efficiency without manual tuning.\n• F-Lock: automatic frequency drift compensation — long-term stability of the resonance frequency.\n• PDH error signal generation: heterodyne mixing circuitry for PDH, FM and MTS laser stabilisation techniques with full digital phase control. 3ω mixing for active RAM suppression.\n• Temperature controller: TEC control for resonance frequency stability.\n• Python interface: remote control and integration into experimental control systems.\n• AOM compatible: can drive resonant or broadband AOMs as well as EOMs.',
+     specs:[['Q-Lock','Automatic resonance tracking up to 20 GHz'],['F-Lock','Automatic frequency drift compensation'],['PDH Support','IQ demodulation for PDH/FM/MTS; 3ω RAM suppression'],['Frequency','QDR-series: 50 kHz–180 MHz; GHz models: several GHz'],['RF Power','1–10 W (model dependent)'],['Interface','Python remote control; USB/serial'],['Modularity','Slot card system — add temperature control, PDH, multi-channel modules']],
+     parts:['QDR-series (MHz, 50 kHz–180 MHz, 1–10W)','QDR GHz-series (multi-GHz)','Multi-channel RF driver (AM6-8 series)'],
+     app:'Automated laser locking, MOT experiment control, quantum computer laser control, optical clock frequency stabilisation'}
+  ]
+},
+
+'INFRAMET':{
+  url:'https://www.inframet.com',email:'inframet@inframet.com',
+  country:'WARSAW, POLAND',founded:'N/A',
+  sub:'ELECTRO-OPTICAL SYSTEM TEST EQUIPMENT & SIMULATORS',
+  desc:'INFRAMET (Warsaw, Poland) is the only company that can deliver equipment for testing all types of electro-optical imaging and laser systems — thermal imagers, VIS-NIR cameras, night vision devices, SWIR imagers, laser systems, THz cameras, multi-sensor systems, UV cameras, IR FPAs, CCD/CMOS/ICCD sensors and space imagers. INFRAMET specialises in three fields: (1) test equipment for optronic imaging/laser systems, (2) computer simulators of electro-optical imaging systems (SIMTERM, VIRTEST, NIGHTMET), and (3) test services. Used by military procurement agencies, EO equipment manufacturers, maintenance workshops and research institutes worldwide.',
+  badges:['ONLY COMPANY — ALL EO TYPES','THERMAL/SWIR/UV/THz/LASER','COMPUTER SIMULATORS','TEST SERVICES'],
+  stats:[{v:'ALL',l:'EO IMAGER TYPES SUPPORTED'},{v:'3',l:'MAIN BUSINESS AREAS'},{v:'SIMTERM',l:'THERMAL IMAGER SIMULATOR'},{v:'GLOBAL',l:'MILITARY & COMMERCIAL USE'}],
+  apps:[
+    {icon:'🛡',name:'MILITARY EO TEST',desc:'Qualification and acceptance testing of military thermal imagers, night vision, SWIR and laser systems for defence procurement'},
+    {icon:'📸',name:'IMAGING QA',desc:'Production quality control testing for thermal imager and camera manufacturers — NETD, MTF, FPN, NUC verification'},
+    {icon:'🔬',name:'RESEARCH',desc:'University and institute EO research with collimators, blackbodies and test software'},
+    {icon:'🌌',name:'SPACE IMAGERS',desc:'Test systems for space-qualified EO imagers — vacuum, extreme temperature, space environment simulation'},
+    {icon:'🚗',name:'AUTOMOTIVE',desc:'Test systems for automotive thermal imagers (TCAR system) and night vision cameras for ADAS'},
+  ],
+  refs:[
+    {agency:'DEFENCE AGENCIES',detail:'Military thermal imager and laser system acceptance testing for procurement agencies in multiple NATO and non-NATO countries'},
+    {agency:'EO MANUFACTURERS',detail:'INFRAMET test systems used in production QA lines by thermal imager manufacturers for NETD, MTF and FPN testing'},
+    {agency:'RESEARCH INSTITUTES',detail:'Off-axis reflective collimators and blackbody sources deployed at university EO research labs and national institutes'},
+    {agency:'SPACE PROGRAMMES',detail:'Modified TVT test systems for space imager testing — adapted for vacuum and extreme temperature environments'},
+  ],
+  products:[
+    {name:'THERMAL IMAGER TEST SYSTEMS',
+     brief:'Complete test systems for measuring all parameters of MWIR/LWIR thermal imagers: MRTD/MRT, NETD, MTF, FPN, NUC, dynamic range. Multiple system types for different FOV, size and use-case requirements.',
+     pills:['MWIR / LWIR','MRTD / NETD / MTF','MULTIPLE SYSTEM TYPES','PRODUCTION & R&D'],
+     desc:'INFRAMET offers a comprehensive range of thermal imager test systems covering all standard measurement methodologies:\n\n• DT series: off-axis reflective collimator systems — primary choice for testing medium/large thermal imagers with wide FOV\n• TAIM: standard system for most thermal imager testing needs\n• TAFT/TCLIP: compact systems for testing medium/small imagers\n• DTR: refractive collimator optimised for testing small imagers with very wide FOV\n• TSIM: simple low-cost system for basic testing (focus + resolution)\n• SAFT: small system for measurement thermal imagers at short focus distance\n• TWAP: portable wide-angle projector for medium/wide FOV imagers\n• TCAR: dedicated system for testing automotive thermal imagers\n\nAll systems use precision temperature-controlled blackbodies (ΔT = 0.01°C accuracy) and motorised four-bar target wheels.',
+     specs:[['Measurement Parameters','MRT, MRTD, MDT, NETD, FPN, MTF, NUC, dynamic range, focal distance'],['Blackbody Accuracy','ΔT = 0.01°C (precision extended area blackbody)'],['Collimator Types','Off-axis reflective (DT), refractive (DTR)'],['Target Types','Four-bar resolution patterns, edge targets, point sources'],['Motorisation','Motorised rotary wheel for automated target exchange'],['Systems','DT, TAIM, TAFT, TCLIP, DTR, TSIM, SAFT, TWAP, TCAR (automotive)']],
+     parts:['DT system (standard)','TAIM system','TCAR (automotive)','TWAP (portable wide-angle)','Custom per requirement'],
+     app:'Military thermal imager QA, manufacturer production testing, ADAS thermal camera testing, research and development'},
+    {name:'VIS-NIR CAMERA & NIGHT VISION TEST SYSTEMS',
+     brief:'Test systems for visible, near-infrared cameras and image intensifier night vision devices. TVT series: standard VIS-NIR camera tester. NV series: night vision device testing. Modified TVT versions for space camera qualification.',
+     pills:['VIS/NIR/SWIR','NIGHT VISION','TVT SERIES','SPACE QUALIFIED VARIANT'],
+     desc:'INFRAMET provides test systems for the full range of low-light and visible imaging systems:\n\n• TVT series: standard test systems for VIS-NIR cameras covering resolution (MTF), sensitivity, noise and dynamic range measurements. Modified versions for space imager qualification under vacuum and extreme temperature conditions.\n• NV/NITE series: test systems for image intensifier tubes and night vision devices — measuring resolution, signal-to-noise ratio, luminous gain and distortion.\n• SINIS system: simplified version of ST for SWIR cameras sensitive up to 1700 nm.\n• SWIR test systems: for InGaAs cameras (up to 1700 nm) and cooled SWIR (up to 2200 nm).',
+     specs:[['VIS-NIR Range','400 nm – 1000 nm (silicon FPA)'],['SWIR Range','900 – 1700 nm (InGaAs); 900 – 2200 nm (cooled SWIR)'],['Night Vision','Image intensifier tube characterisation'],['Space Versions','Vacuum compatible, extreme temperature test chambers'],['Measurements','MTF, SNR, sensitivity, dynamic range, distortion, vignetting']],
+     parts:['TVT system (VIS-NIR camera)','SINIS system (SWIR simplified)','ST system (SWIR expanded)','NV system (night vision)'],
+     app:'Military NVD acceptance testing, camera manufacturer QA, space camera pre-flight qualification, SWIR camera research'},
+    {name:'LASER SYSTEM TEST EQUIPMENT',
+     brief:'Complete test benches for laser rangefinders, laser designators, laser trackers, laser pointers and laser illuminators. Measures range accuracy, beam divergence, PRF accuracy, power and boresight.',
+     pills:['LASER RANGEFINDER TEST','BEAM DIVERGENCE','PRF ACCURACY','BORESIGHT SYSTEMS'],
+     desc:'INFRAMET manufactures complete test benches for all military and commercial laser systems:\n\n• Laser rangefinder (LRF) test bench: range accuracy ± 0.5 m, PRF accuracy ± 1 Hz, beam divergence measurement\n• Laser designator test bench: laser spot position accuracy, power, beam quality\n• Boresight systems: multi-sensor boresight collimators allowing simultaneous alignment of thermal, visible and laser channels\n• Multi-sensor test systems: combined test benches for multi-sensor surveillance systems (visible + IR + laser)',
+     specs:[['LRF Range Accuracy','± 0.5 m'],['LRF PRF Accuracy','± 1 Hz'],['Beam Divergence','Full-angle beam divergence measurement'],['Boresight','Multi-sensor boresight via co-aligned collimator array'],['Measurements','Power, beam quality, pointing, divergence, PRF, range accuracy']],
+     parts:['LRF test bench','Laser designator test bench','Multi-sensor boresight system'],
+     app:'Military laser system acceptance testing, manufacturer QA, field calibration of laser rangefinders and designators'},
+    {name:'COMPUTER SIMULATORS (SIMTERM / VIRTEST / NIGHTMET)',
+     brief:'Three computer simulators: SIMTERM (thermal imager simulator), VIRTEST (simulates test process of thermal imagers for MRTD), NIGHTMET (image intensifier tube simulator). Used for training, design optimisation and test planning.',
+     pills:['SIMTERM THERMAL SIM','VIRTEST MRTD SIM','NIGHTMET NVD SIM','TRAINING & DESIGN'],
+     desc:'INFRAMET\'s computer simulators are unique tools that complement physical test equipment:\n\n• SIMTERM: simulates the performance of a thermal imaging system — models detector, optics, electronics and display chain. Used to predict thermal imager performance before hardware is built, optimise design parameters and train operators.\n• VIRTEST: simulates the MRTD (Minimum Resolvable Temperature Difference) measurement process — useful for understanding measurement methodology and predicting outcomes.\n• NIGHTMET: simulates image intensifier tube performance — helps design engineers and procurement specialists assess NVD performance without full hardware testing.',
+     specs:[['SIMTERM','Complete thermal imager system simulation — detector to display'],['VIRTEST','MRTD measurement process simulation'],['NIGHTMET','Image intensifier tube performance simulation'],['Use Cases','Design optimisation, training, test planning, procurement assessment']],
+     parts:['SIMTERM','VIRTEST','NIGHTMET'],
+     app:'EO system design optimisation, operator training, test methodology education, procurement technical assessment'},
+    {name:'COLLIMATORS, BLACKBODIES & TEST MODULES',
+     brief:'Precision optical collimators (off-axis parabolic and refractive), extended area and point source blackbodies, UV sources, colour blackbodies, light sources, rotary target wheels, optical tables and positioning stages.',
+     pills:['OFF-AXIS PARABOLIC','PRECISION BLACKBODY','UV SOLAR BLIND','OPTICAL TABLES'],
+     desc:'INFRAMET supplies all key hardware building blocks for EO test systems as individual components:\n\n• Collimators: refractive (NIR/VIS), off-axis reflective parabolic (MWIR/LWIR), with apertures from 75 mm to 500 mm\n• Blackbodies: extended area (ΔT = 0.01°C), point source, high-temperature (up to 1200°C for calibration), colour (for radiometric calibration)\n• UV sources: for solar-blind UV camera testing (250–280 nm range, NIST-traceable calibration)\n• Rotary wheels: motorised, programmable for automated target exchange\n• Optical tables: honeycomb steel with pneumatic vibration isolation\n• Positioning stages: motorised angular and linear stages for optical alignment\n• THz targets: metallic resolution charts and pattern targets for THz camera testing',
+     specs:[['Refractive Collimators','VIS to NIR; 75–300 mm aperture'],['Reflective Collimators','MWIR to LWIR; 100–500 mm aperture'],['Blackbody Accuracy','ΔT = 0.01°C (extended area)'],['UV Source','250–280 nm solar blind; NIST-traceable'],['Optical Tables','Pneumatic isolation; standard and cleanroom variants'],['THz Targets','Metal resolution charts, edge targets for THz imager testing']],
+     parts:['Off-axis parabolic collimator (specify aperture/waveband)','Extended area blackbody','Point source blackbody','UV solar-blind source','Rotary wheel (motorised)','Optical table (pneumatic isolation)','THz metal targets'],
+     app:'EO test system integration, calibration labs, university EO research, defence procurement test facilities'}
+  ]
+},
+
+'MOGLABS':{
+  url:'https://www.moglabs.com',email:'info@moglabs.com',
+  country:'BRUNSWICK (MELBOURNE), AUSTRALIA & USA',founded:'N/A',
+  sub:'TUNABLE DIODE LASERS, WAVEMETERS & LASER ELECTRONICS FOR QUANTUM LABS',
+  desc:'MOGLabs is a company of in-the-lab scientists and engineers who know what researchers need because they come from labs just like theirs. Products balance outstanding performance, superb features, high-quality design, excellent ergonomics and moderate cost. MOGLabs specialises in tunable external cavity diode lasers (CEM CatEye and MLD Littrow), optical amplifiers (tapered and fiber), Fizeau/grating wavemeters, ultra-low-noise diode laser controllers, servo controllers and AOM/RF drivers. Products are used in leading quantum computing, quantum sensing, cold atom, BEC and precision spectroscopy laboratories worldwide.',
+  badges:['CATEYE & LITTROW ECDLs','FIZEAU WAVEMETER','IN-LAB SCIENTISTS','QUANTUM COMPUTING LABS'],
+  stats:[{v:'< 200kHz',l:'CEM LASER LINEWIDTH'},{v:'200MHz',l:'WAVEMETER ACCURACY'},{v:'5W',l:'MAX TAPERED AMPLIFIER'},{v:'350–1970nm',l:'WAVELENGTH COVERAGE'}],
+  apps:[
+    {icon:'⚛',name:'QUANTUM COMPUTING',desc:'Tunable lasers for qubit addressing in neutral atom, ion trap and NV-centre quantum computers'},
+    {icon:'❄',name:'COLD ATOMS / BEC',desc:'ECDLs and tapered amplifiers for MOT laser cooling, BEC creation and atom interferometry'},
+    {icon:'🔬',name:'PRECISION SPECTROSCOPY',desc:'Ultra-narrow linewidth tunable lasers for high-resolution atomic and molecular spectroscopy'},
+    {icon:'⏱',name:'OPTICAL CLOCKS',desc:'Stable tunable laser sources for optical lattice clocks (Sr, Yb) and ion trap clocks'},
+    {icon:'🧲',name:'QUANTUM SENSING',desc:'Laser sources for atom interferometry gravimeters, magnetometers and gyroscopes'},
+  ],
+  refs:[
+    {agency:'QUANTUM COMPUTING GROUPS',detail:'MOGLabs CEM CatEye lasers and tapered amplifiers deployed at quantum computing laboratories using neutral atoms (Rydberg atoms) and ions worldwide'},
+    {agency:'BEC & COLD ATOM LABS',detail:'MOGLabs diode laser systems used in Bose-Einstein condensate and cold atom interferometry experiments at leading physics institutes'},
+    {agency:'NATIONAL METROLOGY INSTITUTES',detail:'MOGLabs wavemeters and laser systems used at national metrology institutes for optical frequency standard research'},
+    {agency:'STRONTIUM / YTTERBIUM CLOCK LABS',detail:'MOGLabs ILA injection-locked amplifiers delivering > 1 W at 461 nm (Sr cooling) and 400 mW at 399 nm (Yb) for optical lattice clock experiments'},
+  ],
+  products:[
+    {name:'CEM — MOTORISED CATEYE EXTERNAL CAVITY DIODE LASER',
+     brief:'Revolutionary CatEye ECDL design using a lens + mirror retroreflector instead of a grating — superior feedback immunity, > 30 GHz mode-hop-free tuning, < 200 kHz linewidth. Motorised for automated wavelength control. Available 370–1120 nm and 980–1970 nm.',
+     pills:['> 30 GHz MODE-HOP FREE','< 200 kHz LINEWIDTH','FEEDBACK IMMUNE','370–1970 nm'],
+     desc:'The MOGLabs CEM (Cat Eye Motorised) is a breakthrough in ECDL design. Instead of a Littrow grating, the CEM uses a CatEye retroreflector (lens + curved mirror) for wavelength selection. Key advantages:\n\n• Superior feedback immunity: unlike grating-based ECDLs, the CEM does not need an external optical isolator in most applications — the CatEye geometry is naturally less sensitive to back-reflections\n• Mode-hop-free tuning: > 30 GHz continuous — important for scanning through multiple atomic resonances\n• Linewidth: < 200 kHz free-running (routinely below 100 kHz), easily locked to sub-Hz with PDH\n• Motorised: automated wavelength selection with stepper motor; full integration with MOGLabs diode laser controller\n• SAF fiber-coupled variant: CatEye ECDL around a butterfly-package single angled facet (SAF) fiber-coupled diode. Wavelengths 980–1610 nm and 1860–1970 nm, up to 200 mW, linewidth 5–10 kHz typical.',
+     specs:[['Mode-Hop-Free Tuning','> 30 GHz continuous scan'],['Linewidth (free-running)','< 200 kHz; typically < 100 kHz'],['Wavelength (free-space)','370 – 1120 nm (model dependent)'],['Wavelength (SAF fiber)','980–1610 nm; 1860–1970 nm; up to 200 mW; linewidth 5–10 kHz'],['Feedback Immunity','High — CatEye geometry; often no isolator needed'],['Tuning','Piezo (fast) + motor (slow/coarse) + current (ultra-fast)'],['DFB/DBR option','Compact DFB/DBR system around 14-pin butterfly package + mLC mini controller']],
+     parts:['CEM (free-space, 370–1120 nm, specify wavelength)','CEM-SAF (fiber-coupled, 980–1970 nm)','CEM with DFB/DBR option'],
+     app:'Rb/Cs/K/Sr/Yb/Ca atomic physics, quantum computing qubit addressing, optical lattice clocks, precision spectroscopy'},
+    {name:'MLD — LITTROW CONFIGURATION EXTENDED CAVITY DIODE LASER',
+     brief:'Monoblock chassis Littrow ECDL with linewidth routinely below 200 kHz and sub-100 kHz easily achievable. 630–1100 nm. 10–20 GHz mode-hop-free tuning. Motorised grating for coarse wavelength selection.',
+     pills:['< 200 kHz LINEWIDTH','MONOBLOCK CHASSIS','MOTORISED GRATING','630–1100 nm'],
+     desc:'The MLD is MOGLabs\'s Littrow configuration ECDL with a monoblock chassis design that provides excellent mechanical stability and reproducible mode-hop-free alignment. The linewidth is routinely below 200 kHz and can easily achieve sub-100 kHz. Mode-hop-free tuning range: 10–20 GHz. Motorised grating rotation for coarse wavelength selection combined with piezo fine tuning.',
+     specs:[['Linewidth','< 200 kHz routinely; sub-100 kHz easily'],['Mode-Hop-Free Tuning','10 – 20 GHz'],['Wavelength','630 nm – 1100 nm (model)'],['Coarse Tuning','Motorised grating rotation'],['Fine Tuning','Piezoelectric (200 Hz bandwidth)'],['Design','Monoblock chassis — mechanically stable, low drift']],
+     parts:['MLD (specify wavelength 630–1100 nm)'],
+     app:'Atomic spectroscopy, laser stabilisation experiments, Rb/Cs/K/Na spectroscopy, laser cooling R&D'},
+    {name:'OPTICAL AMPLIFIERS (TAPERED & FIBER)',
+     brief:'Tapered amplifiers (MSA series): compact integrated seed + TA, 650–1120 nm, up to 5 W. Fiber amplifiers (MGPA): Er/Yb doped, up to 20 W, SHG-compatible. ILA injection-locked: > 1W @ 461 nm (Sr), 400 mW @ 399 nm (Yb).',
+     pills:['UP TO 5W TAPERED','UP TO 20W FIBER','461nm Sr / 399nm Yb','INJECTION-LOCKED'],
+     desc:'MOGLabs optical amplifiers for scaling up seed laser power:\n\n• MSA (Seeded Amplifier): tapered amplifier with integrated MOGLabs CatEye seed laser. 650–1120 nm, up to 5 W. Inherently self-aligned. Very low frequency drift. Industry-leading passive linewidth preserved.\n• MGPA (Fiber Amplifier): modular high-power fiber amplifier based on Er (1530–1610 nm) and Yb (1020–1100 nm) doped fibers. Output powers up to 20 W. SHG-compatible.\n• MGFM: uses single-pass quasi-phase-matched non-linear crystals for frequency doubling or mixing.\n• ILA (Injection-Locked Amplifier): delivers > 1 W at 461 nm for strontium cooling and 400 mW at 399 nm for ytterbium — compact, low-cost alternative to expensive SHG systems with better beam quality than TA systems.',
+     specs:[['MSA (Tapered) Power','Up to 5 W (650–1120 nm)'],['MGPA (Fiber Er) Power','Up to 20 W (1530–1610 nm)'],['MGPA (Fiber Yb) Power','Up to 20 W (1020–1100 nm)'],['ILA 461 nm','> 1 W (for Sr cooling — CaF₂ / Sr lattice clocks)'],['ILA 399 nm','400 mW (for Yb cooling — Yb optical clocks)'],['SHG','MGFM: frequency doubling and mixing via quasi-phase-matched crystals']],
+     parts:['MSA (seeded TA, 650–1120 nm)','MGPA-Er (fiber, 1530–1610 nm)','MGPA-Yb (fiber, 1020–1100 nm)','ILA-461 (strontium)','ILA-399 (ytterbium)','MGFM (frequency doubling)'],
+     app:'MOT high-power beams, BEC creation, optical lattice loading, strontium/ytterbium optical clocks, atom interferometry'},
+    {name:'WAVEMETERS (FIZEAU & GRATING BASED)',
+     brief:'Standalone wavemeters covering 350–1280 nm with 200 MHz accuracy, built-in PID servo, on-device displays. Economical grating-based MWM with integrated display. Sub-picometer accuracy Fizeau wavemeter (RSI 2012 publication).',
+     pills:['200 MHz ACCURACY','350–1280 nm','BUILT-IN PID','FIZEAU & GRATING'],
+     desc:'MOGLabs offers two wavemeter families:\n\n• Fizeau wavemeter: standalone precision wavemeter covering 350–1280 nm with 200 MHz absolute accuracy. Built-in PID servo controller with on-device display for closed-loop laser frequency stabilisation without a PC. Academic publication in Review of Scientific Instruments (2012) verifying performance.\n• MWM (Economical Wavemeter): compact, grating-based wavelength measurement device with integrated display. Lower cost for simpler wavelength monitoring applications.',
+     specs:[['Fizeau Accuracy','200 MHz absolute wavelength accuracy'],['Fizeau Range','350 – 1280 nm'],['Built-in PID','Yes — on-device closed-loop laser frequency lock without PC'],['MWM','Economical grating-based; compact; integrated display'],['Publication','R.E. Scholten, Rev. Sci. Instrum. 83, 113104 (2012)']],
+     parts:['Fizeau wavemeter (350–1280 nm, 200 MHz, built-in PID)','MWM economical wavemeter'],
+     app:'Laser wavelength monitoring, closed-loop frequency lock, atomic transition finding, lab laser diagnostics'},
+    {name:'DIODE LASER CONTROLLERS & SERVO ELECTRONICS',
+     brief:'Ultra-low noise diode laser current + TEC controllers and high-bandwidth fast servo controllers for laser frequency locking, AOM drivers and RF synthesisers.',
+     pills:['ULTRA-LOW NOISE','HIGH BW SERVO','AOM DRIVER','RF SYNTHESISER'],
+     desc:'MOGLabs electronics portfolio:\n• Digital Diode Laser Controller (next-generation mLC): precision current source + TEC controller for tunable laser diodes. Ultra-low current noise for narrow linewidth performance.\n• Fast servo controller: high-bandwidth feedback for laser frequency locking (PDH), AOM stabilisation and other high-speed control loops. Designed specifically for quantum optics lab integration.\n• AOM driver: RF driver for acousto-optic modulators — integrated with MOGLabs lasers for frequency shifting and intensity modulation.\n• RF synthesiser: for generating RF signals needed in laser cooling and quantum computing sequences.',
+     specs:[['Current Controller','Ultra-low current noise — optimised for narrow-linewidth ECDLs'],['TEC Controller','High stability temperature control'],['Fast Servo','High-bandwidth for PDH locking, AOM stabilisation'],['AOM Driver','Matched for MOGLabs ECDL + AOM frequency-shifting setups'],['RF Synthesiser','For laser cooling frequency sequences and quantum gate pulses']],
+     parts:['mLC digital diode laser controller','Fast servo controller','AOM driver','RF synthesiser'],
+     app:'ECDL laser driving and locking, PDH stabilisation, MOT laser cooling sequences, quantum gate pulse generation'}
+  ]
+},
+
+'AC PHOTONICS':{
+  url:'https://acphotonics.com',email:'sales@acphotonics.com',
+  country:'SANTA CLARA, CALIFORNIA, USA',founded:'N/A',
+  sub:'POLARISATION-MAINTAINING FIBER OPTIC COMPONENTS',
+  desc:'AC Photonics Inc. (Santa Clara, CA, USA) is a leading manufacturer of high-performance fiber optic components including PM and polarisation-insensitive isolators, circulators (3 and 4 port), polarisation beam combiners/splitters, PM fused fiber couplers, lithium niobate modulators, GRIN lenses and precision optical lenses. With 25+ years of experience, ACP serves aerospace, communication, defence, LiDAR & sensing and medical photonics markets. All products are Telcordia qualified. Waveguide components use proprietary metal-bonding micro-optics packaging with optical path epoxy-free for maximum reliability.',
+  badges:['PM FIBER COMPONENTS','TELCORDIA QUALIFIED','25+ YEARS','AEROSPACE / DEFENCE / TELECOM'],
+  stats:[{v:'25+',l:'YEARS OF EXPERIENCE'},{v:'TELCORDIA',l:'QUALIFIED PRODUCTS'},{v:'1064/1310/1550nm',l:'KEY WAVELENGTHS'},{v:'>40dB',l:'PM ISOLATOR ISOLATION'}],
+  apps:[
+    {icon:'🌐',name:'FIBER TELECOM',desc:'Isolators, circulators and couplers for DWDM, EDFA and coherent optical communication systems'},
+    {icon:'🔬',name:'SENSING / DAS',desc:'PM circulators and couplers for distributed acoustic sensing, fiber gyroscopes and interferometric sensors'},
+    {icon:'🛡',name:'DEFENCE / LiDAR',desc:'High-isolation PM components for defence fiber laser systems, coherent LiDAR and EW photonics'},
+    {icon:'⚕',name:'MEDICAL',desc:'Precision fiber components for OCT (optical coherence tomography) and medical imaging systems'},
+    {icon:'⚛',name:'QUANTUM PHOTONICS',desc:'PM components for polarisation-entangled photon sources and quantum key distribution systems'},
+  ],
+  refs:[
+    {agency:'TELECOM / DATACOM OEMs',detail:'PM isolators, circulators and couplers integrated in commercial DWDM transceivers, amplifiers and coherent receivers'},
+    {agency:'DEFENCE FIBER LASER SYSTEMS',detail:'High-power PM isolators and combiners for military high-energy laser systems requiring precise polarisation control'},
+    {agency:'OCT MEDICAL IMAGING',detail:'PM couplers, circulators and components for optical coherence tomography medical imaging instruments'},
+    {agency:'FIBER GYROSCOPE MANUFACTURERS',detail:'PM couplers and depolarisers for fibre optic gyroscope (FOG) navigation systems'},
+    {agency:'QUANTUM PHOTONICS RESEARCH',detail:'PM fiber components for entangled photon pair sources, QKD systems and quantum optics experiments'},
+  ],
+  products:[
+    {name:'PM ISOLATORS (POLARISATION-MAINTAINING)',
+     brief:'Polarisation-maintaining optical isolators providing > 40 dB isolation while maintaining PER > 23 dB. Available at 1064, 1310, 1480, 1550 nm and custom wavelengths. Slow axis, fast axis or both axes working options. Telcordia qualified.',
+     pills:['> 40 dB ISOLATION','PER > 23 dB','1064/1310/1550 nm','TELCORDIA QUALIFIED'],
+     desc:'ACP PM isolators are designed to prevent back-reflections from reaching sensitive laser sources while precisely maintaining the polarisation state of the transmitted light. Key specifications:\n• Isolation: > 40 dB\n• Polarisation Extinction Ratio: > 23 dB (PER maintained through device)\n• Insertion Loss: < 0.8 dB typical\n• Return Loss: > 60 dB\n• Operating temperature: −20°C to +70°C\n\nThree polarisation working options: slow axis working (standard), fast axis working, or both axes simultaneously. Optical path is epoxy-free for maximum reliability and laser damage resistance.',
+     specs:[['Isolation','> 40 dB'],['Insertion Loss','< 0.8 dB'],['PER (Polarisation Extinction Ratio)','> 23 dB'],['Return Loss','> 60 dB'],['Wavelengths','1064, 1310, 1480, 1550 nm (standard); custom on request'],['PM Options','Slow axis working / fast axis working / both axes'],['Temperature','−20°C to +70°C operating'],['Qualification','Telcordia qualified'],['Packaging','Optical path epoxy-free; metal-bonding micro-optics']],
+     parts:['PM Isolator (1064 nm)','PM Isolator (1310 nm)','PM Isolator (1550 nm)','Custom wavelength PM isolator'],
+     app:'Fiber laser back-reflection protection, PM amplifier isolation, coherent sensor source isolation, DFB laser protection'},
+    {name:'PM CIRCULATORS (3-PORT & 4-PORT)',
+     brief:'Polarisation-maintaining optical circulators (3 and 4 port) providing directional signal routing with high isolation. Used for EDFA, wavelength add/drop, DAS systems and bi-directional transmission. Telcordia qualified. Epoxy-free optical path.',
+     pills:['3-PORT & 4-PORT','PM FIBER','HIGH ISOLATION','EPOXY-FREE PATH'],
+     desc:'ACP PM circulators route light directionally (port 1→2→3, or 1→2→3→4) while maintaining polarisation state. Unlike isolators, circulators allow access to the isolated (reflected) light — useful for DAS, FBG sensing and OCT.\n\nBoth polarisation-maintaining and polarisation-insensitive versions available. The polarisation-insensitive circulator uses proprietary metal-bonding micro-optics packaging providing low insertion loss, broadband high isolation, low PDL and excellent temperature stability with epoxy-free optical path.',
+     specs:[['Ports','3-port and 4-port configurations'],['PM Versions','PM circulator at 1064, 1310, 1550 nm'],['PI Version','Polarisation-insensitive circulator (DWDM-compatible)'],['Isolation','> 40 dB (PM); broadband high isolation (PI)'],['Insertion Loss','< 1.0 dB (PM); < 0.5 dB (PI, port 1→2)'],['PDL','Low PDL (PI version)'],['Applications','EDFA, wavelength add/drop, DAS, OCT, FBG sensor readout'],['Qualification','Telcordia qualified; epoxy-free optical path']],
+     parts:['PM Circulator 3-port (1064 nm)','PM Circulator 3-port (1310/1550 nm)','PM Circulator 4-port','PI Circulator (polarisation-insensitive)'],
+     app:'Distributed acoustic sensing (DAS), OCT medical imaging, FBG sensor interrogation, EDFA pump/signal multiplexing'},
+    {name:'POLARISATION BEAM COMBINERS / SPLITTERS (PBC/PBS)',
+     brief:'PM polarisation beam combiners (PBC) and splitters (PBS) for combining orthogonal polarisations in PM fiber. Used in coherent IQ receivers, polarisation-diversity systems and pump/signal combining. > 20 dB PER.',
+     pills:['PBC / PBS','> 20 dB PER','PM FIBER','IQ / DIVERSITY RECEIVERS'],
+     desc:'PBC accepts two orthogonally polarised PM fiber inputs and combines them into one PM output (or splits one input into two polarisation components for PBS). Critical components in coherent optical receivers (IQ mixing), polarisation-diversity receivers and polarisation-entangled photon sources.',
+     specs:[['PER','> 20 dB (polarisation extinction ratio)'],['Insertion Loss','< 0.8 dB per port'],['Bandwidth','± 20 nm around centre wavelength'],['Wavelengths','1064 nm, 1310 nm, 1550 nm standard'],['Ports','2 PM inputs + 1 PM output (PBC); 1 input + 2 PM outputs (PBS)']],
+     parts:['PBC (1064 nm)','PBC (1550 nm)','PBS (specify wavelength)'],
+     app:'Coherent IQ receiver, polarisation diversity receiver, OSNR monitoring, PM fiber pump combining, quantum optics'},
+    {name:'LITHIUM NIOBATE MODULATORS & GRIN LENSES',
+     brief:'LiNbO₃ electro-optic intensity modulators (10–40 GHz) for microwave photonics and coherent transceivers. GRIN micro-lenses for fiber collimation and precision single lenses (plano-convex, bi-convex, concave) with AR coatings.',
+     pills:['LiNbO₃ MODULATOR','10–40 GHz BW','GRIN MICRO-LENS','PRECISION OPTICS'],
+     desc:'ACP LiNbO₃ modulators:\n• Mach-Zehnder modulators (MZM): 10 GHz, 20 GHz, 40 GHz bandwidth. Vπ < 5 V (RF). Insertion loss < 4 dB. Extinction ratio > 20 dB. PM and SM fiber pigtails. For microwave photonic links, coherent DWDM transmitters and analog optical links.\n\nGRIN lenses: Gradient-Index micro-lenses for fiber-to-fibre and fibre-to-free-space coupling without conventional lens housings. Available in standard pitches (0.23, 0.25, 0.29). Apertures 1.8–5 mm.\n\nPrecision single lenses: plano-convex, bi-convex, plano-concave, bi-concave in BK7, N-SF11, fused silica and CaF₂. Standard and broadband AR coatings. Surface quality 40-20 scratch-dig.',
+     specs:[['LiNbO₃ MZM Bandwidth','10, 20, 40 GHz (model)'],['LiNbO₃ Vπ (RF)','< 5 V @ 1550 nm, 10 GHz'],['LiNbO₃ Extinction','> 20 dB'],['GRIN Pitch','0.23, 0.25, 0.29 (standard)'],['GRIN Aperture','1.8 – 5 mm diameter'],['Lens Materials','BK7, N-SF11, Fused Silica, CaF₂'],['AR Coatings','Single-layer or broadband V-coat'],['Surface Quality','40-20 scratch-dig (standard)']],
+     parts:['LiNbO₃ MZM 10 GHz (1310/1550 nm)','LiNbO₃ MZM 20/40 GHz','GRIN lens (specify pitch/aperture)','Precision lens (specify material/coating)'],
+     app:'Microwave photonics links, coherent optical transmitters, photonic ADC, fiber collimators, OCT beam delivery'}
+  ]
+},
+
+'AERODIODE':{
+  url:'https://www.aerodiode.com',email:'contact@aerodiode.com',
+  country:'BORDEAUX, FRANCE',founded:'N/A',
+  sub:'LASER DRIVERS, AOMs, PULSE PICKERS & PHOTONICS COMPONENTS',
+  desc:'AeroDIODE (Bordeaux, France) is a photonics instrumentation company — member of the EPIC (European Photonics Industry Consortium) and the "Route des Lasers" cluster — providing laser diode drivers, acousto-optic modulators (AOM), fiber-coupled AOMs, pulse pickers, SOA drivers, laser lock PID controllers, laser seeders and educational kits. All products leverage proprietary technology developed at the ALPhANOV technology centre over 15+ years. Products ship same-day (most models in stock). Customers include quantum physics labs, precision spectroscopy groups, lidar/sensing OEMs and photonics educators.',
+  badges:['SAME-DAY SHIPPING','EPIC MEMBER','ALPhANOV TECHNOLOGY','380 nm – 1850 nm AOMs'],
+  stats:[{v:'380–1850nm',l:'AOM WAVELENGTH RANGE'},{v:'19 MODELS',l:'FREE-SPACE AOM VARIANTS'},{v:'14 MODELS',l:'FIBER AOM VARIANTS'},{v:'< 10ns',l:'AOM RISE/FALL TIME (HIGH SPEED)'}],
+  apps:[
+    {icon:'⚛',name:'QUANTUM PHYSICS',desc:'AOMs for laser frequency shifting and intensity control in MOT, BEC, quantum computing and sensing experiments'},
+    {icon:'📡',name:'LiDAR / RANGING',desc:'Fiber AOMs for pulse picking and frequency shifting in coherent LiDAR and ranging systems'},
+    {icon:'🔒',name:'LASER STABILISATION',desc:'PID laser lock controllers for PDH and other laser frequency stabilisation techniques'},
+    {icon:'🌱',name:'SPECTROSCOPY',desc:'AOMs and seeders for narrow-linewidth seeding and precise frequency control in laser spectroscopy'},
+    {icon:'🎓',name:'EDUCATION',desc:'Educational kits for hands-on learning of laser emission, detection, modulation and fiber optics'},
+  ],
+  refs:[
+    {agency:'QUANTUM LABS WORLDWIDE',detail:'AeroDIODE AOMs and drivers deployed in cold atom and quantum computing laboratories for laser frequency shifting and intensity control'},
+    {agency:'LiDAR OEMs',detail:'Fiber-coupled AOMs and fiber laser seeders used in commercial coherent LiDAR systems for autonomous vehicles and topographic mapping'},
+    {agency:'SPECTROSCOPY SYSTEMS',detail:'Laser diode drivers and lock PID controllers used in precision laser spectroscopy instruments and gas sensing systems'},
+    {agency:'UNIVERSITIES & ENGINEERING SCHOOLS',detail:'Educational kits for AOM, laser emission and optical fiber courses — hands-on lab training in photonics technology'},
+  ],
+  products:[
+    {name:'FREE-SPACE ACOUSTO-OPTIC MODULATORS (AOM)',
+     brief:'19 versions of free-space AOMs from 380 to 1700 nm at 80/100/200 MHz standard RF frequencies. Up to 90% diffraction efficiency. < 10 ns rise/fall time (high-speed models). Ships today — most models in stock. Tombak pulse picker option.',
+     pills:['380–1700 nm','80/100/200 MHz','< 10 ns RISE TIME','SHIPS TODAY'],
+     desc:'AeroDIODE free-space AOMs use TeO₂ crystal in the Bragg diffraction regime to diffract laser light into the first order with up to 90% efficiency, shifting the optical frequency by exactly the RF drive frequency (80, 100 or 200 MHz). Available in 19 wavelength configurations covering 380–1700 nm.\n\nHigh-speed models achieve rise/fall time < 10 ns (< 9 ns typical) with appropriate beam focusing (beam diameter < 50 µm). Standard models < 150 ns.\n\nRF Drivers available in 3 models:\n• TTL/digital input: for On/Off mode — best extinction, output power independent of voltage signal stability\n• Analog input: for amplitude modulation proportional to voltage\n• Combined analog + TTL: full flexibility with 1 V or 5 V / 50 Ω output\n\nOptional TOMBAK pulse picker: synchronisation tool for pulse-picking mode-locked lasers with the AOM — frequency divider, external triggering and burst shaping modes.',
+     specs:[['Wavelength Range','380 – 1700 nm (19 versions)'],['RF Frequencies','80 MHz, 100 MHz, 200 MHz (stock); custom up to 350 MHz'],['Diffraction Efficiency','Up to 90% into first order'],['Rise/Fall Time','< 10 ns (high-speed, beam diameter < 50 µm); < 150 ns (standard)'],['Crystal','TeO₂ (visible/NIR); optimised for wavelength range'],['RF Driver Options','TTL/digital, Analog, Combined analog+TTL'],['Custom RF','Custom RF frequency available up to 350 MHz on request'],['TOMBAK','Pulse picker for mode-locked laser pulse selection']],
+     parts:['AOM-80-VIS (380–700 nm)','AOM-80-NIR','AOM-100-NIR','AOM-200-NIR','AOM-200-1550nm','RF Driver (TTL)','RF Driver (Analog)','TOMBAK Pulse Picker'],
+     app:'MOT frequency shifting, quantum gate laser control, LiDAR pulse generation, spectroscopy frequency offset, laser chopping'},
+    {name:'FIBER-COUPLED ACOUSTO-OPTIC MODULATORS',
+     brief:'14 fiber-coupled AOM versions from 680 to 1850 nm. Insertion loss < 2.5 dB over 700–1300 nm. PM fiber available as stock. 80/100/200 MHz standard + custom frequencies to ±250 MHz. Dual-output (zeroth order) option.',
+     pills:['680–1850 nm','< 2.5 dB INSERTION LOSS','PM FIBER STOCK','DUAL OUTPUT OPTION'],
+     desc:'AeroDIODE fiber AOMs integrate the AOM crystal between input and output single-mode or PM fibers. They also serve as fixed frequency shifters — shifting the optical frequency by exactly ±80, ±100 or ±200 MHz depending on direction of use.\n\n14 models cover 680–1850 nm. Standard RF frequencies 80, 100, 200 MHz (all stock). Custom RF frequency from −250 to +250 MHz available on request.\n\nKey features:\n• PM fibers available as stock items (SM fibers on request)\n• Insertion loss: typically < 2.5 dB over 700–1300 nm; < 5 dB for 680–1850 nm\n• Tolerant to other RF frequencies — low IL over broad RF range\n• Dual-output option: adds third fiber for zeroth order output — useful for power monitoring\n• TOMBAK pulse picker compatible\n\nApplications: fiber laser Q-switching, pulse picking, narrow linewidth laser measurements, coherent LiDAR, DAS frequency shifting.',
+     specs:[['Wavelength Range','680 – 1850 nm (14 versions)'],['Insertion Loss','< 2.5 dB (700–1300 nm); < 5 dB (680–1850 nm)'],['RF Frequencies','80, 100, 200 MHz (stock); ±250 MHz range custom'],['PM Fiber','Available as stock items'],['Frequency Shift','Up-shifted or down-shifted by RF frequency'],['Dual Output','Optional zeroth-order additional fiber output'],['TOMBAK','Compatible with TOMBAK pulse picker']],
+     parts:['Fiber AOM-80-780nm (PM)','Fiber AOM-100-1064nm (PM)','Fiber AOM-200-1550nm (PM)','Dual-output option','Custom RF fiber AOM'],
+     app:'Fiber laser pulse picking, DAS frequency shifting, coherent LiDAR, narrow linewidth test, Q-switching'},
+    {name:'LASER DIODE DRIVERS & TEC CONTROLLERS',
+     brief:'Precision CW and pulsed laser diode drivers: single/multi-channel, with TEC control, GUI software and multiple trigger modes. Life-test systems for laser reliability evaluation. 8-channel independent driver with single pulse generator and low noise current source per channel.',
+     pills:['CW TO 1 ns PULSED','8-CHANNEL INDEPENDENT','TEC CONTROLLER','LIFE-TEST SYSTEM'],
+     desc:'AeroDIODE laser diode drivers cover CW and pulsed operation from 1 ns to CW:\n\n• Multi-channel pulsed SLD driver: any pulsed or CW signal from 1 ns to CW. 3 trigger modes, 3 peak power adjustment modes. GUI software, libraries for software integration.\n• 8-channel driver: fully independent control of up to 8 laser diodes from CW down to very short pulses. Each channel has: one pulse generator, one very low noise current and modulation driver, one TEC controller. Front panel control + remote interface.\n• Educational laser driver (all AOM kits): advanced performance driver with TEC, transimpedance circuit for power monitoring, dedicated educational GUI.\n• Life-test system: qualification and reliability evaluation of laser diodes in CW or pulsed regime down to 1 ns.',
+     specs:[['Pulsed Range','1 ns to CW (SLD driver)'],['8-Channel','Fully independent — current, pulse, TEC per channel'],['TEC','Thermal regulation for wavelength stability'],['Trigger Modes','3 modes (SLD driver)'],['GUI','Software GUI + integration libraries'],['Life-Test','CW or pulsed, down to 1 ns — for reliability/qualification testing']],
+     parts:['SLD pulsed driver (1 ns to CW)','8-channel independent driver','Life-test system (qualification)'],
+     app:'Laser diode characterisation, quantum experiment laser control, OEM laser module driving, accelerated life testing'},
+    {name:'LASER SEEDERS (CENTRALE-I) & PULSE PICKERS',
+     brief:'Centrale-I: turnkey laser seeder designed for Yb-glass, Nd-YLF and Nd-YAG/YVO₄ amplification systems. Narrow linewidth, ns-domain modulation. Fiber-coupled pulse picker (700–1750 nm) with high rejection. TOMBAK: pulse picker synchronisation board.',
+     pills:['TURNKEY SEEDER','Yb / Nd SYSTEMS','FIBER PULSE PICKER','TOMBAK SYNC BOARD'],
+     desc:'AeroDIODE seeder and pulse picker products:\n\n• Centrale-I series: turn-key laser seeder for amplification systems (Yb-Glass, Nd-YLF, Nd-YAG/YVO₄). Narrow linewidth emission with modulated intensity down to nanosecond range. AOMI variant: seed laser + fiber AOM in one unit.\n• Fiber-coupled laser pulse picker (700–1750 nm): designed for selecting optical pulses from a pulse train with high rejection of unselected pulses.\n• TOMBAK: synchronisation tool to drive external modulating devices (EOM, AOM, SOA). 3 pulse picking modes: frequency divider, external triggering & high-frequency clock, burst shaping. Works with low-level electrical or optical input pulse power.',
+     specs:[['Centrale-I Targets','Yb-Glass, Nd-YLF, Nd-YAG/YVO₄ amplifier seeding'],['Centrale-I Modulation','Narrow linewidth, intensity modulation to nanosecond domain'],['Fiber Pulse Picker','700–1750 nm; high rejection of unselected pulses'],['TOMBAK Modes','Frequency divider, external trigger, burst shaping'],['TOMBAK Input','Low-level electrical or optical input pulse'],['TOMBAK Output','Drives EOM, AOM or SOA']],
+     parts:['Centrale-I (specify amplifier system)','AOMI (seeder + fiber AOM)','Fiber pulse picker (700–1750 nm)','TOMBAK pulse picker board'],
+     app:'High-energy pulsed amplifier seeding, mode-locked laser pulse picking, regenerative amplifier seeding, burst shaping for quantum control'},
+    {name:'LASER LOCK PID CONTROLLER & LOW NOISE PSU',
+     brief:'High-bandwidth PID servo controller for laser phase locking and linewidth narrowing. Ultra-low noise linear power supply (pV-range noise density) for amplifiers, oscillators and phase lock loops.',
+     pills:['HIGH BW PID SERVO','LASER PHASE LOCKING','pV NOISE DENSITY PSU','ACTIVE STABILISATION'],
+     desc:'AeroDIODE precision electronics:\n\n• Laser lock PID controller: ultra-high bandwidth servo controller that dynamically minimises the difference between a system signal and its setpoint. Ideal for laser phase locking and linewidth narrowing applications requiring high bandwidth and low noise correction.\n• Low noise linear power supply: achieves pV-range (picovolt) noise density — critical for the most demanding applications such as amplifiers, oscillators, phase lock loops and active stabilisation setups. Linear topology (no switching noise).',
+     specs:[['PID Controller','Ultra-high bandwidth; for laser phase locking and linewidth narrowing'],['PID Noise','Low noise correction signal'],['Power Supply Type','Linear (no switching noise — zero EMI)'],['PSU Noise Density','pV-range noise density'],['Applications','Amplifiers, oscillators, PLLs, active optical stabilisation']],
+     parts:['Laser Lock PID Controller','Low Noise Linear Power Supply'],
+     app:'Laser linewidth narrowing (PDH), phase lock loops, optical cavity locking, ultra-stable oscillator power supply'}
+  ]
+},
+
+'SIMTRUM':{
+  url:'https://www.simtrum.com',email:'info@simtrum.com',
+  country:'SINGAPORE',founded:'N/A',
+  sub:'PHOTONICS STORE — LASERS, MICROSCOPY & SPECTROSCOPY SYSTEMS',
+  desc:'SIMTRUM Pte. Ltd. (Singapore) is an online photonics store and systems integrator making advanced optical spectroscopy and microscopy affordable to research groups and providing hands-on experience. SIMTRUM offers a wide variety of state-of-the-art products including: DPSS/diode nanosecond pulsed lasers (266 nm–3.4 µm), fiber lasers (CW and pulsed), quantum cascade lasers (1–17 µm), supercontinuum lasers, optical frequency combs, Raman fiber amplifiers, spinning disk confocal and laser point scanning confocal microscopes, Raman microscopes, hyperspectral cameras, spectroscopy systems (transient absorption, PL, photocurrent), terahertz QCLs and LED light sources. OEM and custom solutions available.',
+  badges:['DPSS/FIBER/QCL LASERS','SPINNING DISK CONFOCAL','RAMAN MICROSCOPE','FREQUENCY COMBS'],
+  stats:[{v:'266nm–17µm',l:'LASER WAVELENGTH RANGE'},{v:'4',l:'MICROSCOPE SYSTEMS'},{v:'QCL',l:'THz & MID-IR LASERS'},{v:'OEM',l:'CUSTOM SOLUTIONS AVAILABLE'}],
+  apps:[
+    {icon:'🔬',name:'BIOMEDICAL RESEARCH',desc:'Spinning disk confocal and 2-photon microscopy for live cell imaging, single molecule and super-resolution studies'},
+    {icon:'🧪',name:'SPECTROSCOPY',desc:'Transient absorption, photoluminescence, Raman and photocurrent spectroscopy for materials research'},
+    {icon:'🛡',name:'DEFENCE / SENSING',desc:'Quantum cascade lasers for standoff chemical detection, atmospheric sensing and IR countermeasures'},
+    {icon:'🏭',name:'INDUSTRIAL',desc:'High-power nanosecond lasers for material processing, marking, engraving and LIBS elemental analysis'},
+    {icon:'🌱',name:'AGRICULTURE',desc:'Hyperspectral imaging for crop health monitoring, food quality inspection and precision agriculture'},
+  ],
+  refs:[
+    {agency:'ASIA-PACIFIC RESEARCH INSTITUTES',detail:'SIMTRUM supplies advanced laser and microscopy systems to leading universities and research institutes across Asia-Pacific'},
+    {agency:'PHARMACEUTICAL LABS',detail:'Spinning disk confocal microscopes for pharmaceutical cell biology and drug discovery research'},
+    {agency:'MATERIALS SCIENCE GROUPS',detail:'Transient absorption and PL spectroscopy systems for perovskite solar cell, organic semiconductor and quantum dot research'},
+    {agency:'DEFENCE LABORATORIES',detail:'Quantum cascade lasers for chemical warfare agent standoff detection research programmes'},
+  ],
+  products:[
+    {name:'DPSS & DIODE NANOSECOND PULSED LASERS',
+     brief:'SIMTRUM\'s own designed and manufactured DPSS nanosecond pulsed lasers: Lancer series (266/351/355 nm, up to 40 W), Galver series (527/532 nm, up to 50 W), and 1064 nm models. 10–12 ns pulses. 7-day power instability ≤ 1.4%. 365×24×7 continuous operation capable.',
+     pills:['266–1064 nm','UP TO 50W AVERAGE','10–12 ns PULSES','≤ 1.4% INSTABILITY'],
+     desc:'SIMTRUM designs and manufactures 4 models of DPSS nanosecond pulsed lasers:\n\n• Lancer series (UV): 266, 351, 355 nm. Maximum output 40 W. Pulse width 12 ns. 7-day power instability ≤ 1.4%. Customisable specifications.\n• Galver series (Green): 527, 532 nm. Maximum output 50 W. Pulse width 10–20 ns. 7-day instability ≤ 1.4%. 365×7×24 hours continuous high-intensity operation.\n• 1064 nm model: Nd:YAG fundamental, various power levels.\n• 3.4 µm model: mid-IR DPSS laser for molecular spectroscopy.\n\nAll models designed for 365×7×24 continuous use in demanding industrial/research environments.',
+     specs:[['Lancer UV','266, 351, 355 nm — max 40 W; 12 ns pulses'],['Galver Green','527, 532 nm — max 50 W; 10–20 ns pulses'],['1064 nm','Nd:YAG fundamental — customisable power'],['3.4 µm','Mid-IR DPSS — molecular spectroscopy'],['Stability','7-day power instability (2×RMS) ≤ 1.4%'],['Operation','365×7×24 hours continuous high-intensity use'],['Customisation','Output power, repetition rate, pulse width customisable']],
+     parts:['Lancer series (UV, 266/351/355 nm)','Galver series (Green, 527/532 nm)','1064 nm model','3.4 µm model'],
+     app:'Material processing, micro-machining, LIBS, spectroscopy, pumping, fluorescence excitation, scientific research'},
+    {name:'FIBER LASERS (CW & PULSED, 1–2 µm)',
+     brief:'CW and pulsed fiber lasers in Yb (1060–1080 nm), Er (1530–1570 nm) and Tm (1950–2050 nm) bands. 2 µm nanosecond pulsed fiber laser. Supercontinuum fiber lasers (450–2300 nm frequency tunable).',
+     pills:['Yb / Er / Tm FIBER','CW & NANOSECOND','2 µm PULSED','SUPERCONTINUUM 450–2300nm'],
+     desc:'SIMTRUM offers a comprehensive fiber laser portfolio:\n\n• Yb-doped CW fiber lasers (1060–1080 nm): watts to hundreds of watts for pumping and processing\n• Er-doped CW fiber lasers (1530–1570 nm): narrow linewidth options for coherent applications\n• Tm-doped CW fiber lasers (1950–2050 nm): for medical, soft tissue and atmospheric window applications\n• 2 µm nanosecond pulsed fiber laser: pulsed Tm fiber laser for material processing and spectroscopy\n• Supercontinuum fiber lasers (450–2300 nm): frequency-tunable with bandwidths covering VIS through SWIR — for broadband spectroscopy and microscopy illumination',
+     specs:[['Yb Fiber','1060–1080 nm, CW, watts to hundreds of W'],['Er Fiber','1530–1570 nm, CW, narrow linewidth options'],['Tm Fiber','1950–2050 nm, CW, up to tens of W'],['2 µm Pulsed','Nanosecond pulsed Tm fiber — material processing / spectroscopy'],['Supercontinuum','450–2300 nm, frequency tunable, broadband']],
+     parts:['Yb CW fiber laser (1060–1080 nm)','Er CW fiber laser (1530–1570 nm)','Tm CW fiber laser (1950–2050 nm)','2 µm nanosecond pulsed fiber laser','Supercontinuum fiber laser (450–2300 nm)'],
+     app:'Material cutting/welding, coherent LiDAR, ophthalmology, atmospheric remote sensing, broadband spectroscopy, super-resolution microscopy'},
+    {name:'QUANTUM CASCADE LASERS (THz & MID-IR)',
+     brief:'Terahertz QCLs (1–4.5 THz) and mid-IR QCL systems (3–17 µm). MIR QCL turn-key systems, packaged QCLs and chips. Room temperature operation (with TE cooling). Used for standoff detection, breath analysis and CBRN defence.',
+     pills:['1–4.5 THz','3–17 µm MID-IR','ROOM TEMPERATURE','TURN-KEY & CHIPS'],
+     desc:'SIMTRUM offers the complete QCL product range:\n\n• Terahertz QCLs (1–4.5 THz): cryogenically cooled THz emission for THz imaging, sensing and spectroscopy research\n• MIR packaged QCLs (4–9.7 µm): HHL-packaged QCLs with integrated driver modules — turnkey systems for immediate deployment\n• CW LWIR QCLs (4–17 µm): continuous-wave long-wave IR for trace gas detection and atmospheric sensing\n• MIR QCL chips (4–12 µm): bare chips for custom packaging — research and OEM\n• DFB-QCLs: single-frequency for molecular fingerprint absorption spectroscopy\n\nApplications: chemical warfare agent detection (CBRN), breath analysis for medical diagnostics, industrial gas monitoring, atmospheric LIDAR, IR countermeasures (DIRCM).',
+     specs:[['THz QCL Range','1 – 4.5 THz'],['MIR QCL Range','3 – 17 µm (model dependent)'],['HHL Packaged','4–9.7 µm, with laser driver module, turnkey'],['Operation','Room temperature with TE cooling (MIR); cryogenic (THz)'],['DFB-QCL','Single-frequency for molecular spectroscopy'],['Chips','4–12 µm, custom packaging, OEM']],
+     parts:['THz QCL (1–4.5 THz)','MIR QCL turn-key system (3–13 µm)','MIR packaged QCL HHL (4–9.7 µm)','MIR QCL chips (4–12 µm)'],
+     app:'CBRN standoff detection, breath analysis, gas monitoring, atmospheric LIDAR, IR countermeasures, THz imaging research'},
+    {name:'SPINNING DISK CONFOCAL & LASER SCANNING MICROSCOPES',
+     brief:'SpinDisk series: spinning disk confocal microscopes (Basic and SpinDisk Advance) for depth imaging and fast real-time imaging. Laser Point Scanning Confocal Microscope. Compatible with upright and inverted microscope platforms.',
+     pills:['SPINNING DISK CONFOCAL','LASER POINT SCANNING','MULTI-COLOR FLIM','LIVE CELL IMAGING'],
+     desc:'SIMTRUM manufactures and integrates microscopy systems:\n\n• SpinDisk Basic: compatible with any upright or inverted microscope with a camera port. Can be coupled with LED and laser light sources. For depth imaging and fast real-time imaging.\n• SpinDisk Advance: next-generation spinning disk with cutting-edge optical design. Three modes of use for the most demanding fluorescence imaging. Multi-color fluorescence localisation, Z-stack data processing, large image stitching, image analysis, 3D construction.\n• Laser Point Scanning Confocal Microscope: traditional confocal for high-resolution fluorescence imaging.\n• Raman Confocal Microscope: combined confocal Raman for materials and biological sample chemical mapping.',
+     specs:[['SpinDisk Basic','Camera port compatible; LED + laser coupling; depth + real-time imaging'],['SpinDisk Advance','3 modes; multi-color FLIM; Z-stack; 3D reconstruction'],['Point Scanning','High-resolution confocal fluorescence'],['Raman Confocal','Simultaneous confocal + Raman chemical mapping'],['Software','Multi-color FL localisation, Z-stack, stitching, 3D construction']],
+     parts:['SpinDisk Basic','SpinDisk Advance','Laser Point Scanning Confocal','Raman Confocal Microscope'],
+     app:'Live cell imaging, single molecule, drug discovery, materials characterisation, neuroscience, super-resolution'},
+    {name:'RAMAN MICROSCOPE & SPECTROSCOPY SYSTEMS',
+     brief:'Confocal Raman microscope for non-destructive chemical mapping of materials. Transient absorption, photoluminescence and photocurrent spectroscopy systems for advanced materials research.',
+     pills:['CONFOCAL RAMAN','TRANSIENT ABSORPTION','PL SPECTROSCOPY','PHOTOCURRENT'],
+     desc:'SIMTRUM spectroscopy portfolio:\n\n• Confocal Raman Microscope: chemical mapping of materials (solid, liquid, biological) with confocal spatial resolution. Wideband handheld confocal Raman skin analyser also available.\n• Transient Absorption Spectroscopy: for studying ultrafast excited state dynamics in perovskites, organic semiconductors, quantum dots and other materials.\n• Photoluminescence (PL) Spectroscopy: steady-state and time-resolved PL systems for materials characterisation.\n• Photocurrent Detection: for characterising photovoltaic and photodetector materials.\n\nOEM and custom spectroscopy solutions available: email info@simtrum.com with your application.',
+     specs:[['Raman Excitation','532 nm, 785 nm, other options'],['Raman Resolution','Sub-micron confocal spatial resolution'],['Transient Absorption','Ultrafast timescales — fs to µs; UV-NIR probe'],['PL Spectroscopy','Steady-state and TRPL (time-resolved)'],['Custom','Full OEM and custom solutions available']],
+     parts:['Confocal Raman Microscope','Wideband handheld Raman (skin)','Transient Absorption System','PL Spectroscopy System','Photocurrent System'],
+     app:'Materials science (perovskite, QD, organic), solar cell characterisation, biological tissue analysis, polymer identification, semiconductor inspection'}
+  ]
+},
+
+'BODKIN DESIGN':{
+  url:'https://www.bodkindesign.com',email:'info@bodkindesign.com',
+  country:'NEWTON, MASSACHUSETTS, USA',founded:'2003',
+  sub:'HYPERSPECTRAL CAMERAS, IR CALIBRATION & CUSTOM OPTICAL DESIGN',
+  desc:'Bodkin Design & Engineering LLC (Newton, MA, USA), founded 2003, is a specialist in snapshot hyperspectral imaging systems, IR calibration instruments and custom electro-optic design. Their patented HyperPixel Array™ (HPA™) technology captures complete spectral data cubes in a single video frame — no scanning required. Products cover VNIR through LWIR spectral bands. Bodkin holds contracts with US Army, Air Force, Navy, Department of Homeland Security, NASA and the Missile Defense Agency. Exclusive North American distributor of Cubert hyperspectral cameras and authorised distributor of Corning microHSI. DoD-funded programmes include chemical warfare agent detection, helicopter testing and satellite enhancement systems.',
+  badges:['HYPERPIXEL ARRAY™ (HPA™)','SNAPSHOT — NO SCANNING','US ARMY / AIR FORCE / NASA','MISSILE DEFENSE AGENCY'],
+  stats:[{v:'2003',l:'FOUNDED'},{v:'HPA™',l:'PATENTED SNAPSHOT TECHNOLOGY'},{v:'DoD',l:'US ARMY/AIR FORCE/NAVY/NASA'},{v:'VNIR–LWIR',l:'SPECTRAL COVERAGE'}],
+  apps:[
+    {icon:'🛡',name:'DEFENCE / SURVEILLANCE',desc:'Hyperspectral imaging for chemical warfare agent detection, target identification, camouflage detection — DoD funded'},
+    {icon:'🚁',name:'AEROSPACE',desc:'US Air Force slow-motion video system for helicopter testing and satellite measurement enhancement'},
+    {icon:'🌱',name:'AGRICULTURE',desc:'Snapshot hyperspectral for crop health monitoring, vegetation stress mapping and precision agriculture'},
+    {icon:'🏥',name:'MEDICAL / CANCER',desc:'Hyperspectral for tissue characterisation, cancer screening and surgical guidance applications'},
+    {icon:'🏭',name:'INDUSTRIAL',desc:'Process control, food quality inspection, PCB defect detection and material sorting using spectral imaging'},
+  ],
+  refs:[
+    {agency:'US ARMY',detail:'Army-funded portable hyperspectral imager for detecting chemical warfare agents and toxic industrial chemicals (DoD contract)'},
+    {agency:'US AIR FORCE',detail:'Two USAF contracts: slow-motion video system for helicopter testing and advanced measurement system for enhancing satellites'},
+    {agency:'MISSILE DEFENSE AGENCY',detail:'Hyperspectral imaging of missile exhaust plumes using HPA™ technology for IR signature characterisation and DIRCM countermeasure research'},
+    {agency:'US NAVY',detail:'VNIR-20 content identification system integrated into Type 18 Naval periscopes for spectral identification'},
+    {agency:'NASA / DoD SBIR',detail:'Multiple SBIR programme developments — original VNIR-20 designed under SBIR funding; subsequent programmes with DHS, NASA'},
+    {agency:'DoD — $200k CONTRACT 2024',detail:'DoD contract to develop on-demand laser written prescription lenses (2024 announcement)'},
+  ],
+  products:[
+    {name:'HPA™ SNAPSHOT HYPERSPECTRAL CAMERAS (VNIR / SWIR / MWIR / LWIR)',
+     brief:'Patented HyperPixel Array™ (HPA™) snapshot hyperspectral cameras capturing complete spatial + spectral datacubes in one video frame — no scanning, no motion artefacts. VNIR-20B (90×75 pixels, 20 bands), SWIR-60, MWIR-20/60, LWIR-62, FOHSI (UV/visible fibre optic).',
+     pills:['PATENTED HPA™','SINGLE-FRAME DATACUBE','VNIR/SWIR/MWIR/LWIR','VIDEO RATE CAPTURE'],
+     desc:'Bodkin\'s HPA™ technology is fundamentally different from pushbroom and AOTF hyperspectral cameras — it captures a complete 3D (x, y, λ) datacube in a single video frame without any scanning. This eliminates motion artefacts and maximises signal-to-noise response, making it ideal for transient events, moving targets and dynamic scenes.\n\nProducts:\n• VNIR-20B: 90×75 spatial pixels, 20 spectral bands, 11.25 nm spectral resolution, up to 25 cubes/second\n• SWIR-60: SWIR snapshot — 60 spectral channels, proprietary HPA™\n• MWIR-20/MWIR-60: mid-wave IR snapshot hyperspectral — 20 or 60 spectral channels\n• LWIR-62: long-wave IR snapshot — 62 spectral channels, video rate\n• FOHSI: Fiber Optic UV/Visible Hyperspectral Imager — fiber input allows insertion directly into combustion flames, rocket exhausts or other environments inaccessible to conventional optics\n\nAll systems compatible with ENVI Image Processing & Analysis Solutions. Can interface with virtually any fore-optic from telescope to microscope.',
+     specs:[['Technology','HyperPixel Array™ (HPA™) — patented snapshot imaging spectrometer'],['VNIR-20B Pixels','90 × 75 spatial pixels'],['VNIR-20B Bands','20 spectral bands; 11.25 nm per bin; 25 cubes/sec'],['SWIR-60','SWIR snapshot, 60 spectral channels'],['MWIR-20/60','Mid-wave IR, 20 or 60 spectral channels'],['LWIR-62','Long-wave IR, 62 spectral channels, video rate'],['FOHSI','UV/Visible, fibre optic input — for extreme environments'],['ENVI Compatible','All systems — ENVI Image Processing & Analysis Solutions']],
+     parts:['VNIR-20B','SWIR-60','MWIR-20','MWIR-60','LWIR-62','FOHSI (UV/Vis fibre optic)'],
+     app:'Chemical warfare agent detection, missile plume characterisation, cancer screening, geological mapping, food inspection'},
+    {name:'CUBERT SNAPSHOT HYPERSPECTRAL CAMERAS (VNIR) — North America Distributor',
+     brief:'Bodkin Design is the exclusive North American distributor of Cubert light field snapshot hyperspectral cameras. ULTRIS 5: 5 MP sensor, 250×250 pixels, 51 spectral bands, 15 Hz. ULTRIS 5 HFR: 79 Hz. ULTRIS X20 Plus: 1880×1880 pixels. ULTRIS SWIR 1: 980–1650 nm.',
+     pills:['CUBERT EXCLUSIVE NA DISTRIBUTOR','ULTRIS SERIES','5 MP SNAPSHOT','450–1650 nm'],
+     desc:'Bodkin Design is the exclusive North American distributor for Cubert\'s light field snapshot hyperspectral cameras — the gold standard in compact, high-speed VNIR hyperspectral imaging.\n\n• ULTRIS 5: 5 megapixel sensor, 30×30×50 mm package. Records complete datacubes of 250×250 pixels and 51 spectral bands at 15 Hz across 450–850 nm.\n• ULTRIS 5 HFR (High Frame Rate): all benefits of ULTRIS 5 at 79 Hz — record-setting non-scanning snapshot.\n• ULTRIS X20 Plus: pan sensor + 410×410 native sensor = 1880×1880 pixel resolution with full spectral data.\n• ULTRIS SWIR 1: 980–1650 nm SWIR range, light field camera technology.',
+     specs:[['ULTRIS 5','5 MP sensor; 250×250 pixels; 51 bands; 15 Hz; 30×30×50 mm'],['ULTRIS 5 HFR','79 Hz (record-setting non-scanning datacube rate)'],['ULTRIS X20 Plus','1880×1880 pixels (pan+native); full spectral'],['ULTRIS SWIR 1','980–1650 nm SWIR range'],['Data Compatibility','ENVI Image Processing & Analysis']],
+     parts:['Cubert ULTRIS 5','Cubert ULTRIS 5 HFR','Cubert ULTRIS X20 Plus','Cubert ULTRIS SWIR 1'],
+     app:'Biomedical research, plasma studies, machine vision, precision agriculture, environmental monitoring'},
+    {name:'IR CALIBRATION PRODUCTS (BLACKBODY SOURCES)',
+     brief:'Precision blackbody reference sources and calibration systems for MWIR, LWIR and hyperspectral IR platforms. Bodkin IR blackbodies: ± 0.05°C temperature accuracy, > 0.995 emissivity. Infrared calibration services available.',
+     pills:['± 0.05°C ACCURACY','>0.995 EMISSIVITY','MWIR / LWIR','CALIBRATION SERVICES'],
+     desc:'Bodkin Design manufactures precision IR blackbody calibration sources for radiometric calibration of thermal imagers, cooled IR detectors and hyperspectral systems.\n\nKey products:\n• Bodkin BB-300 and similar: extended-area blackbodies with temperature accuracy ± 0.05°C and emissivity > 0.995 for MWIR/LWIR camera calibration.\n• Portable/field blackbodies for on-site sensor calibration.\n• Calibration services: Bodkin offers IR calibration services for sensors and imaging systems — providing NIST-traceable calibration certificates.\n\nBlackbody Calculator: free online tool by Bodkin for fast, accurate IR calibration calculations.',
+     specs:[['Temperature Accuracy','± 0.05°C'],['Emissivity','> 0.995'],['Spectral Range','2 – 14 µm (blackbody emission)'],['Models','Extended area, portable/field variants'],['Services','IR calibration services for customer sensors and systems'],['NIST Traceable','Calibration certificates available']],
+     parts:['BodkinBB extended area blackbody','BodkinBB portable (field)','Calibration service (contact Bodkin)'],
+     app:'IR camera NETD and radiometric calibration, MWIR/LWIR detector characterisation, defence sensor acceptance testing'},
+    {name:'CUSTOM OPTICAL DESIGN & ENGINEERING SERVICES',
+     brief:'Complete custom electro-optical design and build — from concept to prototype to production. Specialities: dual-band (Vis+IR) imaging, UAV EO/IR payloads, satellite sensor enhancement, chemical agent detection systems. Tools: CODE V, Zemax OpticStudio, SolidWorks.',
+     pills:['CUSTOM EODESIGN','DUAL-BAND IMAGERS','UAV EO/IR PAYLOADS','CODE V / ZEMAX'],
+     desc:'Bodkin Design offers full-service custom optical and electro-optical design for government and commercial clients:\n\n• Design tools: CODE V, Zemax OpticStudio, SolidWorks for optical + opto-mechanical design\n• Specialties: dual-band (visible + IR) imaging through common aperture, wide-FOV systems, UAV/drone EO/IR gimbals, gun sights, telescope secondaries, satellite sensor systems\n• Deliverables: design reports, tolerance analysis, prototype hardware, small-series production\n• Recent programmes: $200,000 DoD contract for on-demand laser written prescription lenses (2024); USAF slow-motion video system for helicopter testing; USAF satellite measurement enhancement system\n\nBodkin has overseen successful introduction of products ranging from miniature infrared UAV cameras to heavy equipment for railroad yards.',
+     specs:[['Design Tools','CODE V, Zemax OpticStudio, SolidWorks'],['Specialties','Dual-band, wide-FOV, UAV EO/IR, gun sights, satellite sensors'],['Government','US Army, Air Force, Navy, DHS, NASA, MDA contracts'],['Commercial','OEM sensor pods, industrial imaging, railroad inspection'],['Deliverables','Design report, tolerance analysis, prototype, small-series production']],
+     parts:['Custom design services — contact Bodkin with requirements'],
+     app:'Defence EO sensor development, UAV payload design, satellite imaging instruments, custom commercial imaging products'}
+  ]
+},
+
+'FSO INSTRUMENTS':{
+  url:'https://www.fso-instruments.nl',email:'info@fso-instruments.nl',
+  country:'DELFT, NETHERLANDS',founded:'2023',
+  sub:'LASER COMMUNICATION TERMINALS & FINE STEERING MIRRORS FOR SPACE',
+  desc:'FSO Instruments B.V. (Delft, Netherlands), founded 2023, is a Dutch company specialising in the industrialisation of laser communication technology for satellites, airplanes, ground stations and drones. Founded as a joint venture between DEMCON and VDL Groep — two of the Netherlands\' leading high-tech manufacturers — FSO Instruments commercialises optical communication technology developed by TNO (Netherlands Organisation for Applied Scientific Research). In early 2024, an In-Orbit Demonstrator developed by FSO Instruments/TNO achieved a successful connection to the TNO ground station from LEO — securing space flight heritage as the world\'s fastest 1U laser terminal. Products: Resolite 20 (OBC-SAT optical terminal), Fine Steering Mirrors (FSM-20B and next generation) and optical bench components for MEO satellite constellations.',
+  badges:['SPACE FLIGHT HERITAGE 2024','TNO TECHNOLOGY','DEMCON + VDL JV','FASTEST 1U LASER TERMINAL'],
+  stats:[{v:'2023',l:'FOUNDED'},{v:'2024',l:'FIRST LEO FLIGHT DEMO'},{v:'1 Gbps',l:'RESOLITE 20 TRANSMIT RATE'},{v:'FSM',l:'FINE STEERING MIRROR SERIES'}],
+  apps:[
+    {icon:'🛰',name:'SATELLITE LASER COMMS',desc:'Inter-satellite laser links (OISL) and satellite-to-ground optical communication for LEO/MEO constellations'},
+    {icon:'✈',name:'AIRBORNE COMMS',desc:'Optical terminal for airborne platforms — aircraft-to-satellite and aircraft-to-ground laser links'},
+    {icon:'🚁',name:'UAV / DRONE COMMS',desc:'Compact laser communication terminals for UAV and drone platforms'},
+    {icon:'📡',name:'GROUND STATIONS',desc:'Mobile and fixed optical ground station terminals for satellite laser communication networks'},
+    {icon:'🔭',name:'ADAPTIVE OPTICS',desc:'Fine steering mirrors for adaptive optics systems correcting atmospheric turbulence'},
+  ],
+  refs:[
+    {agency:'TNO (Netherlands)',detail:'FSO Instruments commercialises optical communication technology developed by TNO — the large Dutch government technology laboratory'},
+    {agency:'AAC CLYDE SPACE',detail:'Resolite 20 is part of the laser communication terminal brought to market by AAC Clyde Space — 1 Gbps transmit, 200 kbps receive'},
+    {agency:'IN-ORBIT DEMONSTRATOR (2024)',detail:'TNO-developed terminal achieved successful LEO-to-ground optical link in early 2024 — world\'s fastest 1U laser terminal with space flight heritage'},
+    {agency:'MEO CONSTELLATION PROGRAMME',detail:'Optical InterSatellite Link (OISL) optical bench development for communication constellations in MEO orbit'},
+    {agency:'DEMCON / VDL GROEP',detail:'FSO Instruments joint venture with DEMCON (FSM manufacturing, optomechatronics) and VDL Groep (industrial manufacturing scale-up)'},
+  ],
+  products:[
+    {name:'RESOLITE 20 — 1U CubeSat LASER COMMUNICATION TERMINAL',
+     brief:'World\'s fastest 1U laser terminal with space flight heritage from 2024 LEO In-Orbit Demonstrator. 1 Gbps transmit, 200 kbps receive. Asymmetric duplex. Commercialised in partnership with AAC Clyde Space. Successor in development.',
+     pills:['1 Gbps TRANSMIT','200 kbps RECEIVE','1U CUBESAT FORM FACTOR','SPACE FLIGHT HERITAGE 2024'],
+     desc:'The Resolite 20 is FSO Instruments\' flagship CubeSat laser communication terminal — achieving the title of world\'s fastest 1U laser terminal following its successful In-Orbit Demonstration in early 2024 when it connected to the TNO ground station from LEO.\n\nThe Resolite 20 provides asymmetric laser communication: 1 Gbps downlink (transmit) and 200 kbps uplink (receive). This asymmetry suits the typical use case of small satellites — high-rate data downlink (imagery, sensor data) with lower-rate command uplink.\n\nBrought to market in partnership with AAC Clyde Space — an established small satellite platform and systems integrator. A successor to the Resolite 20 is currently in development.',
+     specs:[['Form Factor','1U CubeSat compatible'],['Transmit Rate','1 Gbps (laser downlink)'],['Receive Rate','200 kbps (laser uplink)'],['Duplex','Asymmetric (Tx >> Rx)'],['Heritage','Space flight proven — LEO In-Orbit Demonstrator, early 2024'],['Market Partner','AAC Clyde Space'],['Successor','Next-generation terminal in development']],
+     parts:['Resolite 20 (contact FSO Instruments / AAC Clyde Space)'],
+     app:'CubeSat high-rate data downlink, Earth observation small satellite, technology demonstration, nano-satellite optical communications'},
+    {name:'FINE STEERING MIRROR (FSM-20B & NEXT GENERATION)',
+     brief:'Space-compatible Fine Steering Mirror for precision laser beam pointing in satellite, airborne and ground station optical terminals. ± 2° tip/tilt optical range. > 1 kHz closed-loop bandwidth. < 0.2 W power. Flexure-based, maintenance-free. Manufactured by DEMCON.',
+     pills:['± 2° OPTICAL TIP/TILT','> 1 kHz BANDWIDTH','< 0.2 W POWER','SPACE-COMPATIBLE FLEXURE'],
+     desc:'The Fine Steering Mirror (FSM) is the precision beam-pointing component at the heart of every FSO laser communication terminal. It compensates for pointing errors caused by vibration, thermal distortion and platform motion — keeping the narrow laser beam precisely aligned on the receiver aperture.\n\nFSM-20B (current, space-flight proven by DEMCON Focal):\n• ± 2° tip/tilt optical range\n• Closed-loop bandwidth exceeding 1 kHz\n• High-efficiency variable-reluctance actuators\n• High-resolution, low-power wide-range eddy-current sensors\n• Very low power consumption: < 0.2 W at maximum tip/tilt\n• Flexure-based: maintenance-free, highly linear, no mechanical wear\n• Mirror: 20 mm diameter, extremely flat — prevents wavefront distortion\n\nNext generation FSM (in development):\n• Flexible platform supporting variety of standard commercially available mirrors\n• ± 5° mechanical range (expanded vs FSM-20B)\n• Optimised for high-volume manufacturing — no precision or quality compromise\n• Compact and efficient actuators\n\nManufactured by DEMCON using FSO Instruments\' optomechatronics design.',
+     specs:[['FSM-20B Tip/Tilt Range','± 2° (optical)'],['Closed-Loop Bandwidth','> 1 kHz'],['Power Consumption','< 0.2 W (at max tip/tilt)'],['Actuator','High-efficiency variable-reluctance'],['Sensor','Low-power wide-range eddy-current (position feedback)'],['Mirror Diameter','20 mm — extremely flat for wavefront quality'],['Bearing','Flexure-based — maintenance-free, highly linear, no wear'],['Next Gen Range','± 5° mechanical (expanded)'],['Qualification','European standards specifications; space-launch qualified']],
+     parts:['FSM-20B (current, space-proven)','FSM next generation (development)'],
+     app:'Satellite optical terminal pointing, airborne FSO beam steering, ground station adaptive correction, adaptive optics tip/tilt'},
+    {name:'OPTICAL INTERSATELLITE LINK (OISL) BENCH — MEO CONSTELLATIONS',
+     brief:'Custom optical bench for inter-satellite laser communication in MEO orbit constellations. Designed for high-throughput inter-satellite links (OISL) supporting global satellite communication networks.',
+     pills:['INTER-SATELLITE LINK','MEO ORBIT','HIGH-THROUGHPUT','CONSTELLATION SUPPORT'],
+     desc:'Beyond CubeSat terminals, FSO Instruments develops optical inter-satellite link (OISL) benches for larger MEO communication constellations. These provide the high data rate backbone links between satellites in a constellation, enabling global coverage without ground infrastructure.\n\nThe OISL bench integrates the optical telescope, FSM, detector and optical electronics into a complete optical terminal assembly for satellite integration. Designed for reliable continuous operation in the MEO radiation environment.',
+     specs:[['Application','Inter-satellite optical links (OISL) — MEO constellations'],['Orbit','Medium Earth Orbit (MEO)'],['Purpose','Constellation backbone high-throughput inter-satellite data links'],['Integration','Complete optical terminal assembly for satellite bus integration'],['Environment','MEO radiation environment qualified']],
+     parts:['OISL optical bench (MEO, contact FSO Instruments for configuration)'],
+     app:'Global satellite communication constellations (MEO backbone), broadband internet from space, secure government satellite networks'},
+    {name:'LASER COMMUNICATION TECHNOLOGY & ECOSYSTEM SERVICES',
+     brief:'FSO Instruments provides system design expertise, technology consulting and manufacturing scale-up services for the laser satellite communication ecosystem — leveraging TNO technology heritage and the DEMCON + VDL industrial manufacturing base.',
+     pills:['TECHNOLOGY CONSULTING','MANUFACTURING SCALE-UP','TNO HERITAGE','DUTCH ECOSYSTEM'],
+     desc:'FSO Instruments\' value extends beyond hardware products:\n\n• Technology consulting: drawing on TNO\'s decades of photonics and optomechatronics research to advise customers on laser communication system architecture and component selection\n• Manufacturing industrialisation: FSO Instruments\' mission is to industrialise laser communication technology — scaling from laboratory prototypes to cost-effective series production. DEMCON provides precision manufacturing; VDL Groep provides volume industrial production.\n• Ecosystem building: FSO Instruments is actively building a Dutch laser communication industry ecosystem — creating opportunities for further technological development and high-tech jobs in the Netherlands\n• Rental: selected equipment and systems available for rental for project-based use',
+     specs:[['Technology Base','TNO optical communication research (decades of development)'],['Manufacturing','DEMCON (precision) + VDL Groep (industrial volume)'],['Ecosystem','Dutch high-tech laser communication supply chain development'],['Services','Design consulting, technology transfer, manufacturing scale-up'],['Rental','Select systems available for rental']],
+     parts:['Technology consulting engagement (contact FSO Instruments)','System design service','Manufacturing scale-up partnership'],
+     app:'Startup satellite operators needing laser communication technology, space agencies designing optical communication payloads, system integrators building next-generation satellite networks'}
+  ]
+},
+
+'BECKER HICKL':{
+  url:'https://www.becker-hickl.com',email:'info@becker-hickl.com',
+  country:'BERLIN, GERMANY',founded:'1993',
+  sub:'TCSPC / FLIM / TIME TAGGERS — SINGLE PHOTON COUNTING SYSTEMS',
+  desc:'Becker & Hickl GmbH (Berlin, Germany), delivering TCSPC devices since 1993, is the world leader and technology pioneer in Time-Correlated Single Photon Counting (TCSPC). They were first to introduce TCSPC on single computer boards, made TCSPC 100× faster in acquisition time and 50× faster in time resolution, and developed multi-dimensional TCSPC techniques (FLIM, Multi-Wavelength FLIM, FLIM/PLIM, Time-Series FLIM). SPC-series modules are deployed in confocal and multiphoton microscopes worldwide (Leica, Zeiss, Olympus, Nikon, Leica STED). The bh TCSPC Handbook (10th edition, 2023, 768 pages) is the definitive reference. Applications span life sciences, clinical imaging, quantum optics, LIDAR, photochemistry, materials science and metrology.',
+  badges:['TCSPC WORLD LEADER','FLIM PIONEER','100× FASTER THAN PRIOR ART','30+ YEARS SINCE 1993'],
+  stats:[{v:'1993',l:'FOUNDED'},{v:'7 ps',l:'ELECTRICAL TIME RESOLUTION'},{v:'100×',l:'FASTER ACQUISITION VS PRIOR ART'},{v:'SPC-180',l:'FLAGSHIP MODULE'}],
+  apps:[
+    {icon:'🔬',name:'FLIM / FLUORESCENCE LIFETIME',desc:'Fluorescence Lifetime Imaging in confocal and multiphoton microscopes — Leica, Zeiss, Olympus, Nikon'},
+    {icon:'🧬',name:'LIFE SCIENCES / FRET',desc:'FLIM-FRET for protein-protein interactions, cell metabolism imaging (NADH/FAD), live cell molecular imaging'},
+    {icon:'⚛',name:'QUANTUM OPTICS',desc:'Single photon anti-bunching (HBT), photon correlation, g(2) measurements, quantum entanglement experiments'},
+    {icon:'🚗',name:'LIDAR / RANGING',desc:'Time-of-flight ranging using TCSPC for single-photon LIDAR applications'},
+    {icon:'🔭',name:'PHOTOCHEMISTRY / MATERIALS',desc:'Excited state dynamics, triplet decay, phosphorescence lifetime imaging (PLIM)'},
+  ],
+  refs:[
+    {agency:'LEICA MICROSYSTEMS',detail:'bh SPC modules integrated in Leica SP5, SP8 and STED confocal microscopes as the standard FLIM upgrade option'},
+    {agency:'ZEISS',detail:'bh FLIM systems for Zeiss LSM 710, 780, 880 and Airyscan confocal and multiphoton microscopes'},
+    {agency:'OLYMPUS',detail:'bh TCSPC/FLIM systems compatible with Olympus FV3000 and other laser scanning microscope platforms'},
+    {agency:'NIKON',detail:'bh FLIM integration for Nikon AXR and other Nikon confocal microscope systems'},
+    {agency:'UNIVERSITIES & CANCER RESEARCH',detail:'SPC modules and complete FLIM systems in cancer research, neuroscience and pharmaceutical labs at leading universities worldwide'},
+    {agency:'BOSTON ELECTRONICS (USA)',detail:'North American distributor for Becker & Hickl — supplying SPC modules and complete FLIM systems to US customers'},
+  ],
+  products:[
+    {name:'SPC TCSPC / FLIM MODULES (PCIe)',
+     brief:'SPC-series PCIe TCSPC/FLIM modules — the world standard. SPC-180NX: 2.5 ps RMS electrical resolution. SPC-160pcie: 2.5 ps RMS. SPC-154: 4-channel. MAX-Tau: 12-channel. Single SPCM software instance operates up to 4 modules. Up to 8 MHz count rate.',
+     pills:['2.5 ps RMS RESOLUTION','UP TO 8 MHz COUNT RATE','1–4 MODULE SYSTEMS','PCIe INTERFACE'],
+     desc:'The SPC-series is the bh TCSPC product family that established the field. Key features that set bh modules apart:\n\n• Time resolution: 2.5 ps RMS electrical (SPC-160pcie, SPC-180NX) — 50× better than pre-bh TCSPC\n• Count rate: up to 8 MHz (SPC-4x0, SPC-6x0, SPC-134) — 100× faster than prior art\n• Multi-dimensional: all SPC modules support classic TCSPC + FLIM + Multi-Wavelength TCSPC + PLIM + FCS + single molecule + anti-bunching in one device\n• Multi-detector capability: up to 16,384 detector channels with routing\n• Image size: up to 2048×2048 pixels, 256 time channels\n• Multi-module: up to 4 modules under single SPCM software instance\n\nKey models:\n• SPC-180NX / SPC-180N: flagship single-channel, 2.5 ps RMS\n• SPC-160pcie: 2.5 ps RMS, 2048×2048 pixel FLIM\n• SPC-154: 4-channel TCSPC/FLIM\n• MAX-Tau: 12-channel TCSPC system\n• FASTAC: ultra-fast time-series FLIM\n• Simple-Tau series: dual-channel compact systems',
+     specs:[['Electrical Resolution','2.5 ps RMS (SPC-160pcie, SPC-180NX)'],['Count Rate','Up to 8 MHz photons/second'],['Time Range','20 ps – 5 µs (programmable time range)'],['Channel Resolution','Down to 813 fs (channel width)'],['Image Size','Up to 2048 × 2048 pixels, 256 time channels'],['Multi-Module','Single SPCM software → up to 4 SPC modules'],['Multi-Detector','Up to 16,384 detector channels with HRT router'],['Interface','PCIe x1'],['Software','SPCM (acquisition) + SPCImage (analysis)']],
+     parts:['SPC-180NX','SPC-180N','SPC-160pcie','SPC-154 (4-channel)','MAX-Tau 12-channel','FASTAC (ultra-fast FLIM)','Simple-Tau 152 (dual-channel compact)'],
+     app:'Confocal FLIM, multiphoton FLIM, STED FLIM, single-molecule detection, FCS/FCCS, quantum photon correlation'},
+    {name:'DCS-120 — COMPLETE CONFOCAL & MULTIPHOTON FLIM SYSTEM',
+     brief:'Becker & Hickl DCS-120: complete turnkey confocal and multiphoton FLIM scanning system. Integrates galvanometer scanner (GVD-120), SPC TCSPC modules, detector heads, 64-bit acquisition software. Online FLIM up to 10 images/second. Compatible with all major microscope FLIM upgrades.',
+     pills:['COMPLETE FLIM SYSTEM','GALVO SCANNER','ONLINE FLIM 10Hz','MULTI-SPECTRAL'],
+     desc:'The DCS-120 is a complete FLIM system from bh — not just electronics, but a full confocal or multiphoton scanning system. It includes:\n\n• GVD-120pcie galvanometer scanner with scan controller\n• SPC TCSPC/FLIM modules (multiple channels)\n• DCC-100pcie detector controller\n• HPM-100 or PMH-100 hybrid detector heads\n• 64-bit SPCM acquisition software\n\nCapabilities: single and dual-channel FLIM, FCS, multi-wavelength FLIM, Z-stack FLIM, lateral mosaic FLIM, ultra-fast time-series FLIM, online FLIM up to ~10 images/second.\n\nWorks standalone (as a complete scanning microscope) or as an upgrade to existing Leica, Zeiss, Olympus and Nikon confocal microscopes.',
+     specs:[['System Components','GVD-120 scanner + SPC modules + DCC-100 + HPM detectors + software'],['Online FLIM Rate','Up to ~10 FLIM images per second'],['Acquisition','64-bit SPCM software'],['Capabilities','Single/dual FLIM, FCS, multi-WL FLIM, Z-stack, mosaic, ultra-fast time-series'],['Compatibility','Standalone + upgrade for Leica SP5/8, Zeiss LSM 710/780/880, Olympus FV3000, Nikon']],
+     parts:['DCS-120 Confocal FLIM system (complete)','DCS-120 Multiphoton FLIM system','FLIM upgrade module for Zeiss LSM','FLIM upgrade module for Leica SP'],
+     app:'Cancer research FLIM, neuroscience FRET imaging, live cell molecular imaging, pharmaceutical cell biology'},
+    {name:'BDL-SMC PULSED DIODE LASER HEADS',
+     brief:'BDL-SMC picosecond diode laser heads for TCSPC excitation. 375–1060 nm. < 100 ps pulse width. 20–80 MHz repetition rate. Single-mode PM fiber output. Compatible with DDG-210 driver. Compact < 5 cm head.',
+     pills:['375–1060 nm','< 100 ps PULSES','20–80 MHz','SINGLE-MODE PM FIBER'],
+     desc:'BDL-SMC series are compact picosecond laser heads designed specifically for TCSPC excitation. They provide clean, short (< 100 ps) laser pulses at high repetition rates to excite samples for fluorescence lifetime measurements.\n\nAvailable wavelengths: 375, 405, 445, 473, 638, 660, 780, 830, 905, 1060 nm\nRepetition rates: 20–80 MHz (model dependent)\nOutput: single-mode PM fiber pigtail — direct coupling into confocal microscope or cuvette systems\nTrigger output: TTL sync for TCSPC start trigger\nDriver: DDG-210 universal driver module',
+     specs:[['Wavelengths','375, 405, 445, 473, 638, 660, 780, 830, 905, 1060 nm'],['Pulse Width','< 100 ps FWHM'],['Repetition Rate','20 – 80 MHz (model)'],['Average Power','0.1 – 5 mW (wavelength dependent)'],['Output','Single-mode PM fiber pigtail (FC/APC)'],['Trigger','TTL sync output for TCSPC'],['Driver','DDG-210 universal laser driver'],['Size','< 5 cm compact head']],
+     parts:['BDL-375-SMC','BDL-405-SMC','BDL-445-SMC','BDL-473-SMC','BDL-638-SMC','BDL-660-SMC','BDL-780-SMC','BDL-830-SMC','BDL-905-SMC','BDL-1060-SMC'],
+     app:'TCSPC fluorescence lifetime excitation, FLIM laser source, single-molecule detection, photon correlation excitation'},
+    {name:'HPM-100 HYBRID PMT DETECTOR HEADS',
+     brief:'HPM-100 series GaAsP hybrid photodetector with < 25 ps IRF FWHM and negligible afterpulsing — the gold standard for TCSPC/FLIM detection. Spectral range 300–750 nm. Built-in shutter protection. Low dark count (< 100 cps). Active quenching.',
+     pills:['< 25 ps IRF FWHM','GaAsP PHOTOCATHODE','NEGLIGIBLE AFTERPULSING','BUILT-IN SHUTTER'],
+     desc:'The HPM-100 is bh\'s premium detector for TCSPC and FLIM — combining a GaAsP photocathode (300–750 nm, highest QE) with an avalanche photodiode section for active quenching. The result is an extremely short instrument response function (IRF) of < 25 ps FWHM — enabling fluorescence lifetime measurements down to ~10 ps.\n\nKey advantages:\n• Negligible afterpulsing: the hybrid PMT construction eliminates the afterpulsing that limits conventional APDs\n• Low dark count: < 100 cps\n• Built-in shutter: automated shutter protects the detector during bright intervals (e.g., sample exchange)\n• Active quenching: counts high photon flux without paralysis\n\nAvailable in multiple photocathode spectral variants (HPM-100-06: 300–600 nm; HPM-100-07: 300–700 nm; HPM-100-40: 300–750 nm)',
+     specs:[['IRF','< 25 ps FWHM'],['Spectral Range','300 – 750 nm (GaAsP photocathode)'],['Dark Count Rate','< 100 cps'],['Afterpulsing','Negligible'],['Shutter','Built-in automated shutter — overload protection'],['Quenching','Active quenching'],['Models','HPM-100-06, HPM-100-07, HPM-100-40 (different QE peaks)'],['Output','SMA connector, TTL photon pulse output']],
+     parts:['HPM-100-06 (peak QE ~500 nm)','HPM-100-07 (peak QE ~550 nm)','HPM-100-40 (broad GaAsP 300–750 nm)'],
+     app:'TCSPC FLIM, STED FLIM, single-molecule detection, quantum photon correlation, ultrafast fluorescence decay measurement'},
+    {name:'DPC-230 TIME TAGGER & PHOTON CORRELATOR',
+     brief:'16-channel TCSPC photon correlator module (PCIe). Records absolute photon times at 165 ps resolution. FCS, FCCS, single-molecule spectroscopy, fluorescence correlation over 10 orders of magnitude in time. LabVIEW drivers and DLLs.',
+     pills:['16-CHANNEL','165 ps RESOLUTION','FCS / FCCS / SINGLE MOLECULE','10 DECADES CORRELATION'],
+     desc:'The DPC-230 is a photon correlator PCIe module that records absolute photon arrival times in up to 16 parallel detection channels at 165 ps time resolution.\n\nKey applications:\n• Fluorescence Correlation Spectroscopy (FCS): correlates fluorescence from molecules in a tiny illuminated volume to measure diffusion times, concentration and molecular interactions\n• FCCS (Fluorescence Cross-Correlation): cross-correlates two colour channels — identifies co-diffusing molecules and binding interactions\n• FCS over 10 orders of magnitude: singlet decay, rotational relaxation, triplet transitions, conformational changes, diffusion of free and protein-bound fluorophores — all in one measurement\n• Single-molecule spectroscopy\n• Anti-bunching (HBT measurements)\n\nSoftware: Burst Analyzer for FCS/FCCS; SPCImage for FLIM; DLL and LabVIEW drivers for automation.',
+     specs:[['Channels','Up to 16 parallel detection channels'],['Time Resolution','165 ps per time channel'],['Correlation Range','10 orders of magnitude (µs to seconds)'],['Interface','PCI (PCIe-compatible)'],['Software','Burst Analyzer (FCS/FCCS) + SPCImage + DLL/LabVIEW'],['Applications','FCS, FCCS, single-molecule, anti-bunching, diffuse optical correlation']],
+     parts:['DPC-230 (16-channel photon correlator)'],
+     app:'FCS/FCCS protein interaction, diffusion measurements, single-molecule fluorescence, quantum anti-bunching (HBT), diffuse optical correlation'}
+  ]
+},
+
+'REDWAVE LABS':{
+  url:'https://www.redwavelabs.com',email:'info@redwavelabs.com',
+  country:'OXFORD, UK',founded:'N/A',
+  sub:'SINGLE PHOTON DETECTORS, TIME TAGGERS & LASER CONTROLLERS',
+  desc:'Redwave Labs (Oxford, UK) produces high-performance single-photon detectors, ultra-low-jitter time taggers, precision laser controllers, photoreceivers and temperature controllers for quantum photonics, quantum key distribution (QKD), quantum computing readout, TCSPC and precision photonics research. Specialising in superconducting nanowire single-photon detectors (SNSPD) and InGaAs APD-based detectors, Redwave serves leading quantum technology groups and photonics research institutes.',
+  badges:['SNSPD > 90% EFFICIENCY','< 5 ps JITTER TIME TAGGER','QKD / QUANTUM COMMS','OXFORD, UK'],
+  stats:[{v:'> 90%',l:'SNSPD SYSTEM EFFICIENCY'},{v:'< 5 ps',l:'TIME TAGGER JITTER'},{v:'< 10 Hz',l:'SNSPD DARK COUNT RATE'},{v:'< 1µA/√Hz',l:'LASER DRIVER CURRENT NOISE'}],
+  apps:[
+    {icon:'🔐',name:'QUANTUM KEY DISTRIBUTION',desc:'SNSPD and InGaAs APD detectors for QKD single-photon detection at telecom wavelengths (1310/1550 nm)'},
+    {icon:'⚛',name:'QUANTUM COMPUTING',desc:'Time taggers and laser controllers for qubit readout, quantum gate timing and photonic quantum computing'},
+    {icon:'🔬',name:'QUANTUM OPTICS',desc:'g(2) photon correlation, Hong-Ou-Mandel (HOM) measurements, entanglement verification'},
+    {icon:'💊',name:'BIOMEDICAL / FLIM',desc:'TCSPC time taggers and detectors for fluorescence lifetime imaging and single-molecule studies'},
+    {icon:'🌐',name:'QUANTUM NETWORKS',desc:'SNSPD detectors for quantum repeater and quantum network node single-photon detection'},
+  ],
+  refs:[
+    {agency:'QUANTUM COMMUNICATION LABS',detail:'SNSPD systems and time taggers deployed at leading quantum communication laboratories for QKD research and quantum network demonstrations'},
+    {agency:'QUANTUM COMPUTING GROUPS',detail:'Precision laser controllers and time taggers used in photonic quantum computing and neutral atom quantum computing experiments'},
+    {agency:'TCSPC / FLIM LABS',detail:'Time taggers and photoreceivers integrated into TCSPC fluorescence lifetime imaging systems for biomedical research'},
+    {agency:'NATIONAL QUANTUM TECHNOLOGY PROGRAMMES',detail:'Redwave products used in national quantum technology flagship programmes in Europe and UK'},
+  ],
+  products:[
+    {name:'SNSPD — SUPERCONDUCTING NANOWIRE SINGLE PHOTON DETECTOR',
+     brief:'Superconducting nanowire single-photon detectors (SNSPD) with > 90% system detection efficiency at 1550 nm, < 10 Hz dark count rate and < 50 ps timing jitter. Complete cryogenic systems and bare fibre-coupled devices. Optimum performance at 0.8–4 K.',
+     pills:['> 90% EFFICIENCY @ 1550nm','< 10 Hz DARK COUNT','< 50 ps TIMING JITTER','0.8–4 K OPERATING TEMP'],
+     desc:'Redwave Labs SNSPD systems represent the pinnacle of single-photon detector performance. Superconducting nanowires operated below their critical temperature absorb single photons and generate measurable voltage pulses.\n\nKey specifications:\n• System detection efficiency: > 90% at 1550 nm (system = detector + coupling losses)\n• Dark count rate: < 10 Hz — extraordinarily low background noise\n• Timing jitter: < 50 ps FWHM — critical for time-resolved measurements\n• Operating temperature: 0.8–4 K (liquid helium or closed-cycle cryostat)\n\nAvailable as:\n• Complete cryogenic systems: includes cryostat, controller electronics, fibre feedthrough\n• Bare fibre-coupled SNSPD chips: for integration into customer cryostats\n\nInGaAs APD alternative also available:\n• System detection efficiency: > 25% at 1550 nm\n• Dark count rate: < 1 kHz at 25% efficiency\n• Operating temperature: −60°C (thermoelectric cooled) — no cryostat needed',
+     specs:[['SNSPD Efficiency','> 90% system detection efficiency at 1550 nm'],['SNSPD Dark Counts','< 10 Hz'],['SNSPD Timing Jitter','< 50 ps FWHM'],['SNSPD Temperature','0.8 – 4 K (LHe or closed-cycle cryostat)'],['InGaAs APD Efficiency','> 25% at 1550 nm'],['InGaAs APD Dark Counts','< 1 kHz (at 25% efficiency)'],['InGaAs APD Temperature','−60°C (thermoelectric cooled)'],['Formats','Complete cryogenic system or bare fibre-coupled SNSPD']],
+     parts:['SNSPD complete cryogenic system (1550 nm)','SNSPD fibre-coupled chip (bare, for customer cryostat)','InGaAs APD detector (TE-cooled)'],
+     app:'QKD single-photon detection, quantum repeater nodes, quantum network single-photon sources, photonic quantum computing readout, photon-counting LIDAR'},
+    {name:'TIME TAGGERS (ULTRA-HIGH RESOLUTION)',
+     brief:'Multi-channel ultra-low-jitter time taggers with < 5 ps RMS jitter and 8–16 input channels. On-board coincidence logic and histogram generation. > 100 Mcounts/s per channel. USB 3.0 / PCIe interface. Python, MATLAB, LabVIEW APIs.',
+     pills:['< 5 ps RMS JITTER','8–16 CHANNELS','> 100 Mcounts/s','PYTHON / MATLAB / LABVIEW API'],
+     desc:'Redwave Labs time taggers record photon arrival timestamps with < 5 ps RMS jitter across 8–16 simultaneous input channels. Integrated on-board processing enables real-time coincidence detection, g(2) photon statistics histogramming and Hong-Ou-Mandel (HOM) interference measurements without external processing.\n\nKey capabilities:\n• g(2) measurement: photon statistics for single-photon source characterisation\n• HOM interference: two-photon interference for entanglement and quantum state measurement\n• TCSPC fluorescence lifetime: < 5 ps jitter enables sub-10 ps lifetime measurement\n• Coincidence counting: programmable coincidence window 1 ns to 1 s\n• Count rate: > 100 Mcounts/s per channel\n\nSoftware APIs: Python, MATLAB, LabVIEW for integration into experimental control systems.',
+     specs:[['Timing Resolution','< 5 ps RMS jitter'],['Channels','8–16 simultaneous inputs'],['Count Rate','> 100 Mcounts/s per channel'],['Coincidence Window','1 ns – 1 s (programmable)'],['On-Board Processing','g(2) histograms, HOM, coincidence counting'],['Interface','USB 3.0 / PCIe'],['APIs','Python, MATLAB, LabVIEW']],
+     parts:['Time Tagger 8-channel','Time Tagger 16-channel'],
+     app:'g(2) photon correlation, HOM quantum interference, QKD timing, TCSPC fluorescence lifetime, quantum network synchronisation'},
+    {name:'LASER CONTROLLERS (ULTRA-LOW NOISE) & PHOTORECEIVERS',
+     brief:'Ultra-low noise laser diode current controllers (< 1 µA/√Hz current noise, 0–500 mA) with precision TEC temperature control (< 0.001°C stability). High-bandwidth photoreceivers (DC–1.6 GHz, Si and InGaAs). For narrow-linewidth laser driving.',
+     pills:['< 1 µA/√Hz CURRENT NOISE','< 0.001°C TEC STABILITY','DC–1.6 GHz PHOTORECEIVER','Si & InGaAs'],
+     desc:'Redwave laser controllers provide the ultra-low noise current drive needed for narrow-linewidth DFB and ECDL laser diodes where current noise translates directly to frequency noise:\n\n• Current noise: < 1 µA/√Hz (white noise floor) — among the lowest commercially available\n• Current range: 0–200 mA and 0–500 mA models\n• TEC stability: < 0.001°C RMS — critical for DFB wavelength stability (typically ~0.1 nm/°C)\n\nPhotoreceivers:\n• Bandwidth: DC to 1.6 GHz (wideband)\n• Si receivers: 400–1100 nm\n• InGaAs receivers: 900–1700 nm\n• Used for RF photonic signal detection and laser noise characterisation',
+     specs:[['Current Noise','< 1 µA/√Hz (white noise floor)'],['Current Range','0–200 mA and 0–500 mA (models)'],['TEC Stability','< 0.001°C RMS'],['Photoreceiver BW','DC – 1.6 GHz'],['Si Detector Range','400 – 1100 nm'],['InGaAs Range','900 – 1700 nm'],['Application','Narrow-linewidth DFB/ECDL driving, laser noise characterisation']],
+     parts:['Laser Controller 200 mA (ultra-low noise)','Laser Controller 500 mA','Photoreceiver Si (400–1100 nm, DC–1.6 GHz)','Photoreceiver InGaAs (900–1700 nm)'],
+     app:'DFB laser driving for QKD and sensing, ECDL frequency noise characterisation, RF photonic signal detection, optical coherence tomography'},
+    {name:'LINEAR TEMPERATURE CONTROLLERS (ZERO SWITCHING NOISE)',
+     brief:'Ultra-stable linear (non-switching) TEC temperature controllers for laser diodes and optical components. < 0.001°C RMS stability. Zero switching noise. Up to 5 A TEC current. Eliminates EMI sidebands on narrow-linewidth laser spectra.',
+     pills:['< 0.001°C STABILITY','LINEAR — ZERO SWITCHING NOISE','UP TO 5A TEC CURRENT','NTC / PT100 SENSOR'],
+     desc:'Unlike switch-mode TEC controllers that generate switching noise (which appears as sidebands on narrow-linewidth laser spectra), Redwave\'s linear TEC controllers use a fully linear power stage — producing absolutely zero switching noise.\n\nThis is critical for ultra-narrow-linewidth DFB lasers used in QKD, atomic physics and coherent sensing — where even sub-Hz switching frequency components in the laser spectrum would be detrimental.\n\nSpecifications:\n• Temperature stability: < 0.001°C RMS\n• TEC current: up to 5 A (high-power TEC module compatible)\n• TEC voltage: up to 5 V\n• Sensor input: NTC thermistor and PT100 resistance thermometer\n• Control bandwidth: > 100 Hz',
+     specs:[['Temperature Stability','< 0.001°C RMS'],['TEC Current','Up to 5 A (max)'],['TEC Voltage','Up to 5 V'],['Power Stage','Linear (non-switching) — zero EMI'],['Sensor Input','NTC thermistor, PT100 resistance thermometer'],['Control Bandwidth','> 100 Hz'],['Use Case','Narrow-linewidth DFB laser stabilisation, etalon temperature control']],
+     parts:['Linear TEC Controller 5A','Linear TEC Controller 2A'],
+     app:'Narrow-linewidth DFB laser wavelength stabilisation, optical etalon temperature control, crystal oven control, precision optical component temperature regulation'}
+  ]
+}
+};
+
+const params=new URLSearchParams(window.location.search);
+const vKey=params.get('v')||'AC PHOTONICS';
+const V=OP_VENDORS[vKey];
+let cc=0;
+
+function tog(id){const c=document.getElementById('pc'+id),t=document.getElementById('pt'+id);const o=c.classList.toggle('open');t.textContent=o?'−':'+';}
+
+function render(){
+  if(!V){document.getElementById('root').innerHTML='<div style="text-align:center;padding:60px;font-family:Orbitron,monospace;color:#6a8aa0">VENDOR NOT FOUND<br><br><a href="product_explorer.html" style="color:#cc4400;font-size:12px;letter-spacing:2px">← BACK TO EXPLORER</a></div>';return;}
+  document.title=vKey+' – Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent=vKey+' – Optics & Laser';
+  const statsHTML=(V.stats||[]).map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML=V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML=(V.apps||[]).map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const refsHTML=(V.refs||[]).map(r=>`<div class="ref-card"><div class="ref-agency">${r.agency}</div><div class="ref-detail">${r.detail}</div></div>`).join('');
+  const prodsHTML=V.products.map((p,i)=>{const id=cc++;return`<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s"><div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div><div class="prod-brief">${p.brief}</div><div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div><div class="detail"><div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>${p.specs&&p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div><div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div></div></div>`;}).join('');
+  document.getElementById('root').innerHTML=`
+    <div class="hero"><div>
+      <div class="hero-domain">// OPTICS & LASER</div>
+      <div class="hero-name">${vKey}</div>
+      <div class="hero-sub">${V.sub}</div>
+      <div class="hero-country">▸ ${V.country}${V.founded?' &nbsp;·&nbsp; FOUNDED '+V.founded:''}</div>
+      <div class="hero-desc">${V.desc}</div>
+      <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT OFFICIAL WEBSITE</a>
+    </div><div class="badges">${badgesHTML}</div></div>
+    ${statsHTML?`<div class="stats-bar">${statsHTML}</div>`:''}
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    ${appsHTML?`<div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>`:''}
+    ${refsHTML?`<div class="sec"><div class="sec-title">Reference Customers & Projects</div><div class="ref-grid">${refsHTML}</div></div>`:''}
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div><div class="c-sub">Contact ${vKey} for datasheets, pricing and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div><div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div><div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div></div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; ${vKey}</div>
+    </div>`;
+}
+render();
+</script></body></html>

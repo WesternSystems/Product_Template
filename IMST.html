@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">RF & Microwave – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+
+/* COMPANY HEADER */
+.co-header{background:#fff;border-bottom:3px solid #0077aa;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#0077aa;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.co-nav{display:flex;gap:10px;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#0077aa;color:#0077aa;}
+
+.page-inner{padding-top:24px;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,170,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#0077aa;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#0077aa;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #0077aa;color:#0077aa;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,170,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #0077aa;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#0077aa;white-space:nowrap;background:rgba(0,119,170,0.04);}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#0077aa;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+
+/* SECTIONS */
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#0077aa;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#0077aa;box-shadow:0 4px 16px rgba(0,119,170,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#0077aa;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,170,0.08);color:#0077aa;border-color:#0077aa;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#0077aa;letter-spacing:1px;background:rgba(0,119,170,0.03);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+
+/* APPS GRID */
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#0077aa;background:rgba(0,119,170,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#0077aa;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* CONTACT */
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#0077aa;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+
+/* WST FOOTER */
+.wst-footer{margin-top:40px;padding:20px 28px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#0077aa;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+
+<!-- COMPANY HEADER -->
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="co-nav">
+    <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+  </div>
+</div>
+
+<div class="page">
+<div class="page-inner">
+  <div id="root"></div>
+</div>
+</div>
+
+<script>
+const RF_VENDORS = {
+'IMST':{
+  country:'KAMP-LINTFORT, GERMANY',founded:'1992',url:'https://www.imst.com',email:'info@imst.de',
+  sub:'HIGH-FREQUENCY CIRCUITS, WIRELESS MODULES & EDA SOFTWARE',
+  desc:'IMST GmbH is a leading design house and development centre for high-frequency circuits, wireless modules, LTCC technology, antenna systems, EDA software and regulatory certification. Covering 30 MHz to 100 GHz across Si, III-V, LTCC and PCB integration platforms. ESA-certified supplier of radiation-hard mixed-signal ASICs.',
+  badges:['30 MHz – 100 GHz','LTCC SPECIALIST','EMPIRE XPU EDA','ESA CERTIFIED'],
+  stats:[{v:'1992',l:'FOUNDED'},{v:'100 GHz',l:'MAX FREQUENCY'},{v:'30+',l:'YEARS EXPERTISE'},{v:'ESA',l:'CERTIFIED SUPPLIER'}],
+  apps:[
+    {icon:'📡',name:'RADAR',desc:'Automotive, EW, airborne radar using LTCC TR modules and EMPIRE XPU simulation'},
+    {icon:'🛰',name:'AEROSPACE',desc:'Satellite/airborne TR module development in L, S, C, X, Ku, Ka bands'},
+    {icon:'⚙',name:'METROLOGY',desc:'Industrial microwave metrology and RF circuit design'},
+    {icon:'🛡',name:'DEFENCE',desc:'EW system design, hardware-in-the-loop, phased array front-ends'},
+    {icon:'📶',name:'IoT / TELECOM',desc:'LoRa, LoRaWAN, BLE wireless modules for smart metering and Industry 4.0'}
+  ],
+  products:[
+    {name:'EMPIRE XPU – 3D FDTD EM SIMULATOR',
+     brief:'Industry-leading 3D electromagnetic field simulator based on the Finite Difference Time Domain (FDTD) method with patented XPU CPU-acceleration — faster than HFSS, CST and EMPro for antenna and LTCC designs.',
+     pills:['FDTD METHOD','14+ GCells/s','CLOUD/AWS','PERPETUAL LICENSE'],
+     desc:'EMPIRE XPU is IMST\'s flagship EM simulation tool. Proprietary XPU acceleration runs entirely on CPU, achieving 14+ GCells/s on Intel Xeon workstations — outperforming GPU solutions in speed and memory. One simulation run generates S-parameters, near/far fields, SAR, and RCS data across a broadband frequency range. Supports ODB++, ACIS, CATIA, IGES, STEP CAD import and Amazon EC2 cloud batch processing.',
+     specs:[['Method','Finite Difference Time Domain (FDTD)'],['Acceleration','XPU (CPU-based, not GPU)'],['Speed','14+ GCells/s on Intel Xeon'],['Outputs','S-parameters, Near/Far Field, SAR, RCS, VSWR'],['CAD Import','ODB++, ACIS, CATIA, IGES, STEP, DXF'],['Cloud','Amazon EC2 batch processing support'],['OS','Windows, Linux'],['Compared To','ANSYS HFSS, CST Studio, Keysight EMPro'],['Licensing','Perpetual or annual; Academic pricing available']],
+     parts:['EMPIRE XPU Standard','EMPIRE XPU Professional','EMPIRE XPU Academic Edition'],
+     app:'Antenna design, LTCC RF modules, microwave passives, EMC analysis, EM chip design, SAR compliance'},
+    {name:'LTCC MODULES & TR MODULE DEVELOPMENT',
+     brief:'Low Temperature Co-Fired Ceramic design and manufacturing for transmit-receive (TR) modules integrating antennas, PA, LNA, phase shifter and DC control in a compact multilayer ceramic substrate.',
+     pills:['L/S/C/X/Ku/Ka BAND','MULTILAYER CERAMIC','PHASED ARRAY','CUSTOM DESIGN'],
+     desc:'LTCC technology uses multilayer gold/silver conductor traces in co-fired ceramic substrates — ideal for microwave applications due to excellent electrical properties and competitive cost versus PCB/PTFE. IMST designs complete TR modules for phased-array radar, satellite comms and EW with integrated antenna elements, PAs, LNAs and digital beam-forming logic.',
+     specs:[['Technology','Low Temperature Co-Fired Ceramic (LTCC)'],['Sintering Temp','Below 900°C; gold/silver conductors'],['Frequency Coverage','L, S, C, X, Ku, Ka Bands (1–40 GHz)'],['Integration','Antenna + PA + LNA + Phase Shifter on one module'],['Design Tool','EMPIRE XPU FDTD'],['Custom Services','Full custom LTCC design and manufacture'],['Applications','Phased Array, EW, Satcom, Automotive Radar']],
+     parts:['Custom – contact IMST with requirements'],
+     app:'Phased-array radar TR modules, satellite comms payloads, 5G mmWave front-ends, EW systems'},
+    {name:'WiMOD – WIRELESS MODULES (LoRa / IoT)',
+     brief:'Compact, certified radio modules for LoRa, LoRaWAN and 2.4 GHz wireless communication. Ready-to-use hardware + firmware for fast market entry into IoT applications.',
+     pills:['LoRa/LoRaWAN','868/915 MHz','iM880 SERIES','CE & FCC'],
+     desc:'WiMOD modules enable rapid IoT product development. The iM880 series supports LoRa/LoRaWAN Class A/B/C with full AT-command firmware. The iM282A covers 2.4 GHz wireless. Evaluation kits, reference designs and software support included. IMST is a LoRa Alliance Authorized Test House (ATH).',
+     specs:[['Series','iM880A/B/C (LoRa 868/915 MHz), iM282A (2.4 GHz)'],['Protocol','LoRa, LoRaWAN Class A/B/C'],['Interface','UART/SPI with AT command set'],['Output Power','Up to +14 dBm (EU 868 MHz)'],['Sensitivity','−137 dBm (LoRa SF12)'],['Certifications','CE RED, FCC, LoRa Alliance'],['SDK','WiMOD LR Studio evaluation software']],
+     parts:['iM880A','iM880B-L','iM880C','iM282A','iU880A (USB dongle)'],
+     app:'Smart cities, agricultural IoT, utility metering, industrial monitoring, logistics tracking'},
+    {name:'SENTIRE RADAR SENSORS',
+     brief:'Compact radar sensor modules for precise distance and speed measurement, object detection and spatial mapping for automotive and industrial applications.',
+     pills:['77/79 GHz','FMCW','DISTANCE & SPEED','COMPACT MODULE'],
+     desc:'IMST\'s SENTIRE radar product line provides compact radar front-end modules for industrial and automotive distance/speed sensing. Using FMCW (Frequency Modulated Continuous Wave) radar principles, they deliver accurate range and velocity data. Multiple TX/RX configurations enable spatial mapping of targets.',
+     specs:[['Frequency','77 GHz / 79 GHz (automotive & industrial bands)'],['Technique','FMCW (Frequency Modulated Continuous Wave)'],['Range Accuracy','Sub-centimetre'],['Applications','Object detection, level sensing, traffic monitoring'],['Integration','Compact module with SPI/UART digital output']],
+     parts:['SENTIRE-S (single channel)','SENTIRE-M (multi-channel)'],
+     app:'Automotive ADAS, industrial level sensing, people counting, perimeter detection'}
+  ]
+},
+'CALLISTO':{
+  country:'GRENOBLE, FRANCE (Part of Celestia Technologies Group)',founded:'1999',url:'https://www.callisto-space.com',email:'callisto@celestia-tech.com',
+  sub:'CRYOGENIC & AMBIENT LNA SPECIALIST',
+  desc:'Celestia Callisto (formerly Callisto SAS) specialises in ultra-low noise cryogenic and ambient-temperature Low Noise Amplifiers (LNA) for deep space communications, radioastronomy, VLBI and satellite ground stations. Over 25 years of cryogenic LNA experience, with units deployed at ESA, CNES, ISRO, BKG and 70+ ground stations worldwide. ISO 9001:2015 certified.',
+  badges:['CRYOGENIC LNA','ESA/CNES HERITAGE','ISO 9001:2015','25+ YEARS CRYO'],
+  stats:[{v:'1999',l:'FOUNDED'},{v:'70+',l:'GROUND STATIONS'},{v:'100s',l:'UNITS DEPLOYED'},{v:'< 8K',l:'NOISE TEMP'}],
+  apps:[
+    {icon:'🌌',name:'DEEP SPACE',desc:'Ultra-cryo LNAs for ESA/NASA deep space network ground stations (S/X/Ka-band)'},
+    {icon:'📡',name:'RADIO ASTRONOMY',desc:'QRFH ultra-cryo receivers for VLBI radiotelescope networks (SKA, IUCAF)'},
+    {icon:'🛰',name:'SATELLITE GS',desc:'Compact cryo and ambient LNAs for TT&C, EO downlink and Ka-band ground stations'},
+    {icon:'🛡',name:'DEFENCE',desc:'Mini Ka-band cryo-LNA for military SATCOM — compact form factor, defence-grade'},
+    {icon:'⚛',name:'QUANTUM / SCIENCE',desc:'Cryogenic LNA chains for quantum computing readout and physics research front-ends'}
+  ],
+  products:[
+    {name:'ULTRA CRYOGENIC LNA — QRFH WIDEBAND RECEIVER',
+     brief:'World-class ultra-cryo LNA with integrated QRFH wideband feed. Noise temperature approaches quantum limits. Cold head replaceable in < 30 minutes. Deployed at ESA, BKG, ISRO stations.',
+     pills:['1.5–15 GHz QRFH','< 8K NOISE TEMP','STIRLING COOLED','VLBI / DEEP SPACE'],
+     desc:'The Ultra Cryo LNA integrates a wideband Quad-Ridge Flared Horn (QRFH) feed with a cryogenic LNA chain cooled to ~15–20 K using a closed-cycle Stirling cooler. Approaches fundamental quantum noise limits. "Sleeve System" allows cold head replacement in < 30 min by one operator. Deployed at ESA Cebreros, Malargüe, New Norcia and ISRO ISTRAC.',
+     specs:[['Frequency Coverage (QRFH)','1.5 – 15 GHz (wideband quad-ridge horn)'],['Physical Temperature','~15 – 20 K (closed-cycle Stirling)'],['System Noise Temperature','< 8 K'],['Cold Head Replacement','< 30 min, single operator, no warm-down'],['MTBF','> 90,000 hours (~10 years)'],['LNA Technology','InP HEMT']],
+     parts:['ULTRA-QRFH-S/X Band','ULTRA-QRFH-K/Ka Band','Custom frequency on request'],
+     app:'VLBI networks, ESA/NASA deep space ground stations, SKA precursor arrays, radioastronomy observatories'},
+    {name:'COMPACT CRYOGENIC LNA (MKII)',
+     brief:'Self-contained compact cryo-LNA housing up to 2 RF chains. 40K noise temperature at 26 GHz. 12+ global installations. 1:2 redundancy with in-house controller.',
+     pills:['S/X/K/Ka BAND','40K @ 26 GHz','2 RF CHAINS','ZERO-MAINTENANCE'],
+     desc:'The MKII Compact is Callisto\'s most widely deployed product — a self-contained cryogenic LNA with Stirling cooler (Sunpower Inc.) housing up to 2 RF chains. Compact size allows installation directly on medium-sized antennas. 1:2 hot-standby redundancy via Callisto in-house controller. MTBF > 90,000 hours. Deployed at 12+ ground stations.',
+     specs:[['Frequency (Bands)','S, X, K, Ka and combinations (dual-chain)'],['Noise Temperature (@ 26 GHz)','40 K at the LNA'],['RF Chains','Up to 2 simultaneous'],['Cooler','Sunpower Inc. Stirling, zero-maintenance'],['Redundancy','1:2 hot-standby with in-house controller'],['MTBF','> 90,000 hours (~10 years)'],['Installations','12+ global ground stations']],
+     parts:['COMPACT-MKII-SX','COMPACT-MKII-XKA','COMPACT-MKII-KA','COMPACT-MKII-SK'],
+     app:'Satellite TT&C ground stations, Earth Observation downlink, VLBI reference stations, Ka-band antenna upgrade'},
+    {name:'MINI CRYOGENIC LNA — MILITARY KA-BAND',
+     brief:'Newest (2026) ultra-compact cryo-LNA for military Ka-band (17.7–21.2 GHz). Under 5 kg. Noise temperature < 55K. Validated March 2026 for Airbus Defence & Space.',
+     pills:['17.7–21.2 GHz','< 55K NOISE TEMP','< 5 KG','MILITARY KA-BAND'],
+     desc:'The Mini is Callisto\'s most compact cryogenic LNA, validated March 2026. Commissioned by Airbus Defence & Space for a defence customer. Operates across military Ka band (17.7–21.2 GHz). Under 5 kg. Noise temperature < 55K at elevated ambient. Fully in-house design, RF chip through cryogenic integration.',
+     specs:[['Frequency','17.7 – 21.2 GHz (Military Ka-band)'],['System Noise Temp','< 55 K (elevated ambient)'],['Mass','< 5 kg'],['Form Factor','Ultra-compact — smallest cryo-LNA in class'],['Customer','Airbus Defence & Space (ADS)'],['Status','Validated March 2026']],
+     parts:['MINI-KA-MIL (programme-specific; contact Callisto)'],
+     app:'Mobile military satellite terminals, compact defence SATCOM receivers, deployable intelligence gathering systems'},
+    {name:'AMBIENT LNA — Ka-BAND 25.5–27 GHz (LPH)',
+     brief:'Room-temperature Ka-band LNA. Waveguide input / coaxial output — only product of its kind on market. In-house chip design. NF 1.5 dB typical, 44 dB gain. Full FAT report.',
+     pills:['25.5–27.0 GHz','1.5 dB NF','44 dB GAIN','WG IN / COAX OUT'],
+     desc:'The LPH is Callisto\'s unique ambient Ka-band LNA with waveguide input and coaxial output — simplifying integration into existing ground station RF chains. In-house chip design. 1.5 dB typical NF, 44 dB gain. 100% tested in environmental chamber. Delivered with full FAT report. Targets 26 GHz satellite downlink, ESA DSA1/DSA2 upgrades and lunar comms.',
+     specs:[['Operating Frequency','25.5 – 27.0 GHz (Ka-band)'],['Noise Figure (typical)','1.5 dB'],['Gain','44 dB'],['Input Interface','Waveguide (WR-34 / Ka-band)'],['Output Interface','Coaxial (SMA / K-connector)'],['Unique Feature','Only WG-input / coax-output Ka LNA on market'],['Chip Design','Fully in-house'],['Operating Temperature','−40°C to +60°C']],
+     parts:['CALLISTO-Ka-LNA-25.5-27GHz (Rev.1, 09/25)'],
+     app:'Ka-band satellite ground stations, 26 GHz EO downlinks, lunar communication receivers'},
+    {name:'CRYO-COOLED FEED RECEIVER SYSTEMS',
+     brief:'Complete turnkey cryogenically cooled feed receiver systems: custom feed, waveguide transitions, cryogenic dewar, LNA chain and Stirling cooler as a single deliverable.',
+     pills:['COMPLETE SYSTEM','CUSTOM FEED','STIRLING COOLED','FULL DELIVERY'],
+     desc:'Callisto designs and delivers complete cryogenically cooled feed receiver systems — integrating customer-specified feed (corrugated horn, QRFH, OMT), waveguide transitions, custom cryogenic dewar, LNA chain and Stirling cooler as one turnkey system. Recent deliveries include BKG Germany (X-band, SAT 2025) and AGGO Argentina (SAT Oct 2025). Rotating platform innovation (2024): laser telemetry positioning to 30 µm.',
+     specs:[['Feed Types','Corrugated horn, QRFH, scalar horn, custom'],['Frequency','S through Ka band (custom per project)'],['Physical Temperature','15 – 20 K at LNA stage'],['Acceptance Testing','Full FAT at Toulouse; SAT on-site available'],['Innovation','Rotating platform with 30 µm laser positioning (2024)']],
+     parts:['Custom — specify feed, frequency, cooler and performance requirements'],
+     app:'VLBI geodetic telescopes, deep space antenna feed upgrades, scientific radiotelescopes, new build cryogenic receive chains'}
+  ]
+},
+'MTI':{
+  country:'SAN JOSE, CA, USA',founded:'1969',url:'https://www.mtiwe.com',email:'sales@mtiwe.com',
+  sub:'BROADBAND ANTENNAS & RF/MICROWAVE COMPONENTS',
+  desc:'Microwave Technology Inc. (MTI) designs and manufactures broadband antennas, RF/microwave components and subsystems for defence, SIGINT, EW, communications and test applications. Founded in 1969. Products cover 100 MHz to 110 GHz.',
+  badges:['100 MHz – 110 GHz','SIGINT / EW','DF ANTENNAS','SINCE 1969'],
+  stats:[{v:'1969',l:'FOUNDED'},{v:'110 GHz',l:'MAX FREQUENCY'},{v:'50+',l:'YEARS EXPERTISE'},{v:'100s',l:'ANTENNA MODELS'}],
+  apps:[
+    {icon:'🛡',name:'DEFENCE / EW',desc:'Wideband antennas and components for electronic warfare, radar warning and jamming systems'},
+    {icon:'📡',name:'SIGINT / ELINT',desc:'Direction-finding arrays and wideband receivers for signals intelligence collection'},
+    {icon:'🔬',name:'TEST & MEASUREMENT',desc:'Standard gain horns and wideband antennas for antenna test ranges and EMC testing'},
+    {icon:'📻',name:'COMMUNICATIONS',desc:'Broadband antennas for tactical communications, SATCOM ground terminals and UAV datalinks'},
+    {icon:'✈',name:'AIRBORNE',desc:'Conformal and blade antennas for airborne EW and communications platforms'}
+  ],
+  products:[
+    {name:'BROADBAND SPIRAL & DISCONE ANTENNAS',
+     brief:'Wideband spiral antennas (0.5–18 GHz) and discone antennas for SIGINT, EW and direction-finding. Circular polarisation, multi-octave coverage, calibrated gain.',
+     pills:['0.5–18 GHz','RHCP / LHCP','DF ACCURACY < 2°','MULTI-OCTAVE'],
+     desc:'Cavity-backed spiral antennas provide circular polarisation and wide instantaneous bandwidth — essential for DF and ELINT systems. Archimedean and equiangular designs cover 0.5–18 GHz. Used in DF arrays for SIGINT and ESM.',
+     specs:[['Frequency','0.5 – 18 GHz (multi-octave; model dependent)'],['Polarisation','RHCP and LHCP (switchable with balun)'],['Axial Ratio','< 3 dB across band'],['DF Array Accuracy','< 2° RMS (in calibrated DF array)'],['Gain','2 – 4 dBiC (circular polarisation)'],['Cavity','Minimises backlobing; compact rear geometry']],
+     parts:['MTI-SPIRAL-2-8','MTI-SPIRAL-2-18','MTI-SPIRAL-0.5-6'],
+     app:'SIGINT/ELINT ground and airborne platforms, DF arrays, ESM receivers, wideband monitoring'},
+    {name:'HORN ANTENNAS FOR SYSTEMS & DF',
+     brief:'Precision microwave horn antennas for direction-finding, EMC testing, radar feeds and microwave system applications from L to W band.',
+     pills:['1–110 GHz','STANDARD GAIN HORNS','WIDEBAND HORNS','DF ARRAYS'],
+     desc:'MTI manufactures standard gain horn antennas (pyramidal and conical) from L-band to W-band. Wideband ridged horn antennas cover multi-octave spans for broadband DF and EMC applications. Calibrated antennas supplied with measured gain tables traceable to national standards.',
+     specs:[['Frequency','1 GHz – 110 GHz (model dependent)'],['Types','Pyramidal, conical, ridged waveguide horn'],['Gain','Standard-gain (calibrated) and high-gain types'],['Calibration','Measured gain tables with NIST-traceable calibration'],['Applications','EMC testing, radar feeds, DF, lab measurement']],
+     parts:['MTI-HORN-X','MTI-HORN-KU','MTI-HORN-KA','MTI-WBHORN-2-18'],
+     app:'EMC antenna measurement, radar feed horns, DF systems, calibration labs, antenna test ranges'}
+  ]
+},
+'ELDES':{
+  country:'SCANDICCI (FLORENCE), ITALY',founded:'1993',url:'https://www.eldesradar.com',email:'info@eldesradar.com',
+  sub:'X-BAND WEATHER RADAR & HWIL EW SIMULATION',
+  desc:'ELDES S.r.l., founded in Florence in 1993, is a pioneering developer of compact X-Band Weather Radar systems and Hardware-in-the-Loop (HWIL) simulation solutions for Electronic Warfare and Radar System Assessment. With 700+ installations worldwide and 30+ years of radar expertise, ELDES serves meteorological agencies, civil protection, airports and defence organisations globally.',
+  badges:['X-BAND WEATHER RADAR','HWIL EW SIMULATION','700+ INSTALLATIONS','SINCE 1993'],
+  stats:[{v:'1993',l:'FOUNDED'},{v:'700+',l:'RADAR INSTALLATIONS'},{v:'30+',l:'YEARS EXPERTISE'},{v:'X-BAND',l:'SPECIALISATION'}],
+  apps:[
+    {icon:'🌩',name:'WEATHER / METEO',desc:'Compact X-band Doppler weather radar for precipitation mapping, flood warning and QPE'},
+    {icon:'🌊',name:'HYDROLOGY',desc:'River flood monitoring, quantitative precipitation estimation, civil protection'},
+    {icon:'✈',name:'AVIATION',desc:'Airport weather surveillance and wind shear detection for safe operations'},
+    {icon:'🛡',name:'EW ASSESSMENT',desc:'HWIL simulation for testing EW receivers, RWR, AESA radar systems in the lab'},
+    {icon:'🔬',name:'RADAR RESEARCH',desc:'Research-grade weather radar with dual-polarisation for advanced meteorological studies'}
+  ],
+  products:[
+    {name:'WR-25XP – X-BAND WEATHER RADAR (DUAL-POL, MAGNETRON)',
+     brief:'Flagship X-band weather radar with simultaneous dual-polarisation and Doppler — the price/performance benchmark for advanced hydrometeorological applications.',
+     pills:['9.3–9.5 GHz','DUAL-POL + DOPPLER','MAGNETRON TX','PORTABLE / NETWORKING'],
+     desc:'The WR-25XP is ELDES\'s flagship magnetron-based radar. Simultaneous dual-polarisation (H+V) and Doppler processing enables rain rate estimation, hail detection, drop size distribution retrieval and wind measurement. Compact and trailer-mountable. Cluster networking for seamless mosaic integration.',
+     specs:[['Frequency','9.3 – 9.5 GHz (X-band)'],['Peak Power','25 kW (magnetron)'],['Polarisation','Simultaneous dual-pol (H+V)'],['Pulse Width','0.1 – 2 µs'],['PRF','250 – 2000 Hz'],['Range','Up to 80 km (precipitation)'],['Beam Width','1.2°'],['Deployment','Fixed, trailer-mounted or vehicle-mounted']],
+     parts:['WR-25XP-FIXED','WR-25XP-MOBILE'],
+     app:'National met services gap-filling, flood early warning, airport weather, civil protection, hydrology research'},
+    {name:'WR-J – X-BAND WEATHER RADAR (SOLID STATE, DUAL-POL)',
+     brief:'Latest-generation ELDES X-band weather radar with solid-state transmitter (SSPA), dual-polarisation, Doppler and high resolution — available in 5 power configurations.',
+     pills:['SOLID STATE TX','200W–800W','16m RESOLUTION','5 CONFIGURATIONS'],
+     desc:'The WR-J series uses a solid-state power amplifier (SSPA) for improved spectral purity, frequency agility and longer life. Available in five configurations: JS200, JS400, JL400, JL800 and JU800. Three antenna options (1.2m, 2.0m, 2.5m). Runs on METRANET II RDP software suite.',
+     specs:[['Frequency','9.3 – 9.5 GHz (X-band)'],['Transmitter','Solid-state PA (SSPA)'],['TX Power','200W, 400W, 800W (model)'],['Configurations','JS200, JS400, JL400, JL800, JU800'],['Antennas','1.2m, 2.0m, 2.5m dish options'],['Range Resolution','Up to 16 m (highest resolution)'],['Software','METRANET II RDP + PERSER PC']],
+     parts:['WR-J-JS200','WR-J-JS400','WR-J-JL800','WR-J-JU800'],
+     app:'Advanced research radars, airport/harbour surveillance, flood monitoring, national radar networks'},
+    {name:'WR-10X – X-BAND COMPACT WEATHER RADAR (SINGLE-POL)',
+     brief:'Entry-level compact X-band single-polarisation weather radar with magnetron transmitter — the most cost-effective solution for gap-filling and local storm monitoring.',
+     pills:['9.3–9.5 GHz','SINGLE-POL','COMPACT','LOW COST'],
+     desc:'The WR-10X is the entry product in the ELDES range — compact, affordable and optimised for rapid deployment where single-polarisation Doppler data is sufficient. Suitable for small meteorological networks, hydrology field campaigns and educational research.',
+     specs:[['Frequency','9.3 – 9.5 GHz'],['Transmitter','Magnetron'],['Polarisation','Single (horizontal)'],['Doppler','Yes'],['Range','Up to 60 km'],['Use Case','Gap-filling, local storm tracking, research']],
+     parts:['WR-10X-COMPACT'],
+     app:'Small met networks, university research, hydrological field campaigns, cost-effective gap-filling'},
+    {name:'HWIL SIMULATION – EW & RADAR ASSESSMENT',
+     brief:'Programmable Hardware-in-the-Loop simulation systems for testing electronic warfare receivers, radar warning systems and AESA radar seekers in a controlled lab environment.',
+     pills:['HW-IN-THE-LOOP','EW RECEIVER TEST','RADAR SEEKER TEST','PROGRAMMABLE RF'],
+     desc:'ELDES HWIL systems generate programmable RF environments representing multiple emitters, jamming waveforms, clutter and target signatures. Used to test EW receivers, radar warning receivers (RWR), AESA and radar seekers without live firing. Closed-loop integration with the device under test (DUT). Showcased at AOC Europe 2025 (Rome).',
+     specs:[['RF Generation','Programmable: multi-emitter, frequency, power, modulation, polarisation'],['Frequency Coverage','500 MHz – 18 GHz (extendable)'],['Scenarios','Multi-target, jamming (noise, RGPO, VGPO, deceptive), clutter'],['Integration','Closed-loop DUT interface (analogue and digital I/F)'],['Standards','NATO STANAG-compatible scenario libraries available']],
+     parts:['ELDES-HWIL-EW','ELDES-HWIL-RADAR','Custom HWIL configurations'],
+     app:'EW system qualification, radar seeker HWIL testing, AESA evaluation, military electronic attack simulation'}
+  ]
+},
+'OHB AUSTRIA':{
+  country:'GRAZ, AUSTRIA',founded:'N/A',url:'https://www.ohb-austria.at',email:'info@ohb-austria.at',
+  sub:'GNSS QUALITY ASSURANCE, SIMULATION & IoT PLATFORMS',
+  desc:'OHB Austria (part of OHB Group — one of Europe\'s leading space technology companies) specialises in GNSS quality assurance, GNSS signal simulation, satellite monitoring and the SARONTAR Industrial IoT platform. Provides GNSS integrity monitoring for safety-critical applications and multi-constellation GNSS simulators for receiver test and development.',
+  badges:['GNSS QA','SIGNAL SIMULATION','SARONTAR IoT','OHB GROUP'],
+  stats:[{v:'OHB',l:'GROUP MEMBER'},{v:'64',l:'SIMULATOR CHANNELS'},{v:'GPS+GAL',l:'MULTI-CONSTELLATION'},{v:'IP67',l:'SENSOR RATING'}],
+  apps:[
+    {icon:'📍',name:'GNSS INTEGRITY',desc:'Continuous GNSS signal quality and integrity monitoring for safety-critical infrastructure'},
+    {icon:'🛰',name:'SATELLITE MONITORING',desc:'Multi-constellation GNSS receiver for satellite signal quality assurance'},
+    {icon:'✈',name:'AVIATION',desc:'GNSS integrity monitoring for airport GBAS and aviation safety'},
+    {icon:'🏭',name:'INDUSTRIAL IoT',desc:'SARONTAR asset tracking, condition monitoring and predictive maintenance platform'},
+    {icon:'🚗',name:'AUTOMOTIVE',desc:'GNSS simulation for automotive ADAS and infotainment receiver testing'}
+  ],
+  products:[
+    {name:'GNSS QUALITY ASSURANCE SYSTEMS',
+     brief:'Continuous multi-constellation GNSS monitoring and quality assurance systems for verifying signal integrity, detecting spoofing, jamming and multipath at safety-critical sites.',
+     pills:['MULTI-CONSTELLATION','INTEGRITY MONITORING','SPOOFING DETECTION','ALL-IN-VIEW'],
+     desc:'OHB Austria GNSS QA systems use multi-constellation, multi-frequency GNSS receivers to continuously monitor signal quality indicators including C/N₀, multipath, cycle slips, ionospheric gradients and RAIM integrity. Spoofing detection algorithms analyse constellation geometry and signal consistency. GIDAS (GNSS Interference and Analysis System) integrates with IZT S1000 for complete end-to-end verification.',
+     specs:[['Constellations','GPS, GLONASS, Galileo, BeiDou, SBAS, QZSS'],['Signals','L1, L2, L5, E1, E5a/b, B1/B2'],['Monitoring','C/N₀, multipath, RAIM, ionospheric, spoofing indicators'],['Output','RTCM 3.x, RINEX 3.x, JSON via REST API'],['Integration','GIDAS with IZT S1000 for lab end-to-end simulation'],['Safety','Aviation DO-229, railway EN 50159 architecture support']],
+     parts:['QA-MON-COMPACT','QA-MON-PRO','GIDAS-SYSTEM'],
+     app:'Airport GBAS, harbour berthing, railway signalling, surveying base stations, critical infrastructure'},
+    {name:'GNSS SIGNAL SIMULATORS',
+     brief:'Multi-constellation GNSS signal simulators with up to 64 channels for comprehensive receiver testing including jamming, spoofing, multipath and dynamic trajectories.',
+     pills:['64 CHANNELS','REAL-TIME','JAMMING & SPOOFING','TRAJECTORY IMPORT'],
+     desc:'OHB Austria GNSS simulators generate all major constellations simultaneously in real-time. Fully programmable trajectories (automotive, aviation, maritime, space) and environmental models (ionosphere, troposphere, multipath). Jamming and spoofing scenarios test receiver robustness. Partners with IZT for integrated record-playback test solutions.',
+     specs:[['Constellations','GPS L1/L2/L5, GLONASS, Galileo E1/E5, BeiDou B1/B2'],['Channels','Up to 64 simultaneous'],['Dynamics','Automotive, airborne, maritime, spaceborne trajectories'],['Interference','AWGN, CW, pulsed, chirp, frequency hopping jamming'],['Spoofing','Scenario-based spoofing attack simulation'],['Timing Accuracy','Sub-nanosecond signal timing accuracy']],
+     parts:['SIM-GNSS-COMPACT','SIM-GNSS-PRO'],
+     app:'Receiver acceptance testing, anti-jamming/anti-spoofing validation, automotive GNSS chipset development'},
+    {name:'SARONTAR – INDUSTRIAL IoT PLATFORM',
+     brief:'End-to-end Industrial IoT platform for real-time asset tracking, condition monitoring and predictive maintenance using GNSS, LTE-M and multi-sensor data fusion.',
+     pills:['GNSS TRACKING','CONDITION MONITORING','LTE-M / NB-IoT','CLOUD DASHBOARD'],
+     desc:'SARONTAR combines GNSS positioning with sensor data (temperature, vibration, humidity, current) for real-time asset management. Connectivity via LTE-M, NB-IoT or LoRaWAN. Cloud dashboard with alerting, trend analysis, API integration and anomaly detection for predictive maintenance. Indoor positioning extension via BLE/UWB available.',
+     specs:[['Positioning','GNSS (GPS/Galileo) + BLE/UWB indoor extension'],['Sensors','Temperature, vibration, humidity, current, GPS'],['Connectivity','LTE-M, NB-IoT, LoRaWAN'],['Cloud','Azure/AWS hosted; REST API, MQTT, Webhooks'],['Battery','Up to 5 years (NB-IoT, low reporting rate)'],['Certifications','CE RED, IP67 sensor node']],
+     parts:['SARONTAR-NODE-LTE','SARONTAR-GATEWAY','SARONTAR-CLOUD-LICENSE'],
+     app:'Fleet management, cold chain logistics, industrial plant monitoring, smart city infrastructure, construction asset tracking'}
+  ]
+}
+};
+
+// URL param routing
+const params = new URLSearchParams(window.location.search);
+const vKey = params.get('v') || 'IMST';
+const V = RF_VENDORS[vKey];
+let cardCount = 0;
+
+function tog(id){
+  const c=document.getElementById('pc'+id),t=document.getElementById('pt'+id);
+  const o=c.classList.toggle('open'); t.textContent=o?'−':'+';
+}
+
+function render(){
+  if(!V){
+    document.getElementById('root').innerHTML='<div style="text-align:center;padding:60px;font-family:Orbitron,monospace;color:#6a8aa0">VENDOR NOT FOUND<br><br><a href="product_explorer.html" style="color:#0077aa;font-size:12px;letter-spacing:2px">← BACK TO EXPLORER</a></div>';
+    return;
+  }
+  document.title = vKey + ' – ' + (V.sub||'RF & Microwave Detail');
+  document.getElementById('ptitle').textContent = vKey + ' – Western Systems Technologies LLP';
+
+  const statsHTML = (V.stats||[]).map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML = V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML = (V.apps||[]).map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML = V.products.map((p,i)=>{
+    const id=cardCount++;
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>
+        ${p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}
+        ${p.parts.length?`<div class="dl"><div class="dl-label">Products / Part Numbers</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div>`:''}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;}).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// RF & MICROWAVE</div>
+        <div class="hero-name">${vKey}</div>
+        <div class="hero-sub">${V.sub||''}</div>
+        <div class="hero-country">▸ ${V.country}${V.founded&&V.founded!=='N/A'?' &nbsp;·&nbsp; FOUNDED '+V.founded:''}</div>
+        <div class="hero-desc">${V.desc}</div>
+        <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT OFFICIAL WEBSITE</a>
+      </div>
+      <div class="badges">${badgesHTML}</div>
+    </div>
+    ${statsHTML ? `<div class="stats-bar">${statsHTML}</div>` : ''}
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    ${appsHTML ? `<div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>` : ''}
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div><div class="c-sub">Contact ${vKey} directly for pricing, datasheets and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div>
+        <div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+        <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+      </div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; ${vKey}</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

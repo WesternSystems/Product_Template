@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">Time & Frequency – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #007755;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#007755;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#007755;color:#007755;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,85,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#007755;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#007755;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #007755;color:#007755;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,85,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #007755;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#007755;white-space:nowrap;background:rgba(0,119,85,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#007755;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#007755;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#007755;box-shadow:0 4px 14px rgba(0,119,85,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#007755;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,85,0.08);color:#007755;border-color:#007755;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,85,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#007755;letter-spacing:1px;background:rgba(0,119,85,0.02);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#007755;background:rgba(0,119,85,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#007755;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#007755;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:36px;padding:18px 26px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#007755;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+</div>
+<div class="page"><div class="page-inner"><div id="root"></div></div></div>
+<script>
+const TF_VENDORS={
+'RUKNAR JSC':{
+  url:'https://ruknar.com/en/',email:'info@ruknar.com',
+  country:'RUSSIA',founded:'N/A',
+  sub:'RUBIDIUM FREQUENCY STANDARDS & REFERENCE OSCILLATORS',
+  desc:'Ruknar JSC (Russia) is a specialist manufacturer of Rubidium frequency standards, reference oscillators, frequency comparators and optical elements for time and frequency applications. Their product range covers compact embedded Rubidium frequency standards (CH1-1012, CH1-1022 series) for size/weight/power-constrained applications, high-reliability rack-mount Rubidium reference generators (RRS-02) with up to 15 independent outputs and automatic switchover, and Rubidium frequency comparator modules. All products are designed for long-term continuous operation in telecommunications, navigation, measurement systems and broadcasting.',
+  badges:['RUBIDIUM STANDARDS','COMPACT EMBEDDED Rb','RRS-02 REFERENCE GENERATOR','FREQUENCY COMPARATORS'],
+  stats:[{v:'Rb',l:'CORE TECHNOLOGY'},{v:'15',l:'MAX OUTPUTS (RRS-02)'},{v:'10 MHz',l:'PRIMARY OUTPUT'},{v:'RS-232',l:'DIGITAL CONTROL'}],
+  apps:[
+    {icon:'📶',name:'TELECOM',desc:'Rubidium reference oscillators for SDH/PDH network synchronisation and broadcasting systems'},
+    {icon:'📍',name:'NAVIGATION',desc:'Compact Rb frequency standards for embedded navigation and positioning systems'},
+    {icon:'🛡',name:'DEFENCE',desc:'High-stability Rb standards for military timing and frequency control systems'},
+    {icon:'🔬',name:'METROLOGY / LAB',desc:'Frequency comparator modules and reference generators for laboratory time and frequency measurement'},
+    {icon:'🛰',name:'GNSS',desc:'Frequency references for GNSS receiver timing and satellite signal monitoring'},
+  ],
+  products:[
+    {name:'CH1-1022 SERIES — COMPACT RUBIDIUM FREQUENCY STANDARD',
+     brief:'Compact Rubidium frequency standard family designed for embedded applications with high demands on size, weight and power consumption. Three variants: CH1-1022/1 (basic), CH1-1022/2 (1PPS disciplined, RS-232), CH1-1022/3 (programmable output, RS-232). Used in telecoms, navigation and time/frequency measurement systems.',
+     pills:['COMPACT EMBEDDED','1PPS DISCIPLINED OPTION','RS-232 CONTROL','TELECOM / NAVIGATION'],
+     desc:'The CH1-1022 is Ruknar\'s flagship compact Rubidium frequency standard family, optimised for applications where size, weight and power consumption are critical constraints. Three variants address different integration needs:\n\n• CH1-1022/1: Basic compact Rb frequency standard — embedded signal source for frequency and time measuring systems, telecommunications and navigation. Designed for applications requiring high stability in a compact form.\n• CH1-1022/2: Disciplined by external 1 PPS signal. Rubidium clock with digital control and monitoring via RS-232 port. PC software included. Allows the internal Rb oscillator to be phase-locked to an external 1 PPS reference (GPS, H-maser, etc.) for enhanced long-term accuracy while maintaining Rb short-term stability.\n• CH1-1022/3: Rubidium clock with user-programmable output signal as well as digital control and monitoring via RS-232 port. PC software included. Output frequency can be programmed via RS-232 for flexible integration into different system frequency plans.',
+     specs:[['Type','Compact Rubidium Frequency Standard — embedded'],['Variants','CH1-1022/1 (basic), CH1-1022/2 (1PPS disciplined), CH1-1022/3 (programmable output)'],['CH1-1022/2 Disciplining','External 1 PPS input — phase-locks Rb to GPS/H-maser reference'],['CH1-1022/3 Output','User-programmable output frequency via RS-232'],['Interface','RS-232 digital control and monitoring (CH1-1022/2 and /3)'],['Software','PC software included with CH1-1022/2 and CH1-1022/3'],['Primary Output','10 MHz sinusoidal (standard)'],['Design Priority','Minimum size, weight and power consumption'],['Applications','Telecoms, navigation, time/frequency measurement systems']],
+     parts:['CH1-1022/1','CH1-1022/2 (1PPS disciplined + RS-232)','CH1-1022/3 (programmable output + RS-232)'],
+     app:'Embedded telecom equipment clocking, compact navigation systems, portable frequency references, GNSS receiver auxiliary timing'},
+    {name:'CH1-1012 — SMALL RUBIDIUM FREQUENCY STANDARD (MOBILE)',
+     brief:'Small Rubidium frequency standard for mobile applications with high demands on size, weight and power consumption. Designed as an embedded high-stability frequency source for mobile time and frequency measurement, telecoms and navigation systems.',
+     pills:['MOBILE APPLICATIONS','SMALL FORM FACTOR','HIGH STABILITY Rb','LOW POWER'],
+     desc:'The CH1-1012 is Ruknar\'s small Rubidium frequency standard specifically designed for mobile applications. It serves as an embedded high-stability signal source in mobile time and frequency measurement systems, mobile telecommunications equipment and mobile navigation systems. Its compact physical dimensions and low power consumption make it suitable for vehicle-mounted, man-portable and airborne installations where space and power are at a premium.',
+     specs:[['Type','Small Rubidium Frequency Standard — mobile'],['Design','Optimised for mobile use — minimum size, weight, power'],['Output','10 MHz sinusoidal high-stability reference'],['Applications','Mobile frequency measurement, mobile telecom, mobile navigation'],['Stability','Rubidium-grade — superior to OCXO for holdover in mobile use']],
+     parts:['CH1-1012'],
+     app:'Vehicle-mounted frequency standards, man-portable timing references, mobile telecom base station backup, airborne frequency sources'},
+    {name:'RRS-02 — RUBIDIUM REFERENCE GENERATOR (RACK MOUNT, REDUNDANT)',
+     brief:'High-reliability 19-inch 4U rack-mount Rubidium reference generator with up to 15 independent 10 MHz outputs (5 MHz optional). Fully redundant internal architecture with automatic switchover algorithm. Designed for long-term continuous unattended operation in telecoms, broadcasting and navigation infrastructure.',
+     pills:['UP TO 15 OUTPUTS','FULLY REDUNDANT','19-INCH 4U RACK','LONG-TERM CONTINUOUS OPS'],
+     desc:'The RRS-02 is Ruknar\'s flagship rack-mount product — a high-reliability Rubidium reference oscillator designed for use as a source of highly stable sinusoidal signals in time and frequency measurement systems, navigation systems and broadcasting systems.\n\nKey features:\n• Up to 15 independent outputs at 10 MHz (optional 5 MHz)\n• Fully redundant internal architecture: doubled base units with special automatic switchover algorithm — when an internal malfunction is detected, the system automatically switches to the backup unit without operator intervention or signal interruption\n• Standard 19-inch 4U rack-mount form factor for integration into existing equipment rooms\n• Designed for long-term continuous unattended operation — critical for telecom infrastructure and broadcast facilities where human intervention must be minimised\n• High reliability ensured by redundancy architecture and Rubidium physics (no mechanical wear)',
+     specs:[['Type','Rack-mount Rubidium Reference Oscillator — redundant'],['Form Factor','19-inch rack, 4U height'],['Outputs','Up to 15 independent outputs'],['Output Frequency','10 MHz sinusoidal (5 MHz optional)'],['Redundancy','Doubled base units + automatic switchover algorithm'],['Switchover','Automatic on malfunction detection — no signal interruption'],['Operation','Long-term continuous unattended operation'],['Applications','Telecoms, navigation, broadcasting, time/frequency measurement']],
+     parts:['RRS-02 (up to 15 outputs, 10 MHz)','RRS-02 (5 MHz output option)'],
+     app:'Telecom equipment room frequency reference, broadcast studio master clock, GNSS/navigation ground station reference, laboratory multi-output frequency distribution'},
+    {name:'FREQUENCY COMPARATORS & MODULES',
+     brief:'Rubidium frequency comparator modules for comparing and characterising frequency sources — used in metrology labs, calibration services and frequency standard inter-comparison campaigns.',
+     pills:['Rb FREQUENCY COMPARATOR','CALIBRATION USE','METROLOGY MODULE','INTER-COMPARISON'],
+     desc:'Ruknar manufactures Rubidium frequency comparator modules for use in metrology laboratories and calibration facilities. These modules enable accurate comparison and characterisation of frequency sources including Rubidium oscillators, OCXOs and GPS-disciplined references. Used in calibration services and frequency standard inter-comparison campaigns.',
+     specs:[['Type','Rubidium frequency comparator module'],['Applications','Metrology labs, calibration services, frequency standard inter-comparison'],['Use','Compare and characterise Rb, OCXO, GPS-disciplined frequency sources']],
+     parts:['Ruknar Frequency Comparator Module (contact Ruknar for specifications)'],
+     app:'National and accredited calibration laboratories, frequency standard inter-comparison, oscillator characterisation and acceptance testing'},
+    {name:'OPTICAL ELEMENTS',
+     brief:'Precision optical elements and assemblies manufactured by Ruknar for use in Rubidium atomic frequency standard physics packages — including discharge lamps, filter cells and detector assemblies.',
+     pills:['Rb PHYSICS PACKAGE','DISCHARGE LAMP','FILTER CELL','OPTICAL ASSEMBLY'],
+     desc:'Ruknar manufactures precision optical elements used in Rubidium atomic frequency standard physics packages. These include Rubidium discharge lamps (the optical pumping source), Rb filter cells (for narrowband filtering of the Rb resonance line) and complete optical assemblies. These components are also available to OEM manufacturers of Rubidium frequency standards.',
+     specs:[['Type','Optical elements for Rubidium atomic frequency standards'],['Components','Rb discharge lamp, Rb filter cell, detector assembly, optical package'],['OEM','Available to third-party Rb frequency standard manufacturers'],['Quality','Manufactured for long life and stability in frequency standard applications']],
+     parts:['Rb Discharge Lamp','Rb Filter Cell','Optical Assembly (contact Ruknar)'],
+     app:'OEM Rubidium frequency standard manufacturing, physics package repair and refurbishment, research applications'}
+  ]
+},
+
+'SPECTRADYNAMICS':{
+  url:'https://spectradynamics.com',email:'info@spectradynamics.com',
+  country:'LOUISVILLE, COLORADO, USA',founded:'N/A',
+  sub:'TIME & FREQUENCY DISTRIBUTION, SYNTHESIZERS & ATOMIC CLOCKS',
+  desc:'SpectraDynamics, Inc. (Louisville, Colorado, USA) designs and manufactures precision time and frequency instruments including ultra-low-noise frequency distribution amplifiers, high-resolution phase and frequency offset generators, low-noise frequency synthesizers, 1 PPS generators and the world\'s first commercially available portable cold Rubidium microwave atomic clock (cRb-CLOCK). Customers include US Department of Defense contractors, government agencies, national time and frequency laboratories (NIST, USNO), telecommunications companies, universities and quantum research entities. SpectraDynamics holds multiple patents in novel frequency synthesis architectures and time and frequency methods.',
+  badges:['cRb-CLOCK WORLD FIRST','PATENTED SYNTHESIZERS','NIST / USNO / DoD','LOUISVILLE, CO USA'],
+  stats:[{v:'< 1fs',l:'HROG-5 RESOLUTION'},{v:'3×10⁻²⁰',l:'EOG FREQ RESOLUTION'},{v:'DoD',l:'PRIMARY CUSTOMER BASE'},{v:'PATENTS',l:'NOVEL SYNTHESIS METHODS'}],
+  apps:[
+    {icon:'⏱',name:'NATIONAL TIME LABS',desc:'NIST, USNO and international NMI time and frequency lab instrumentation and distribution'},
+    {icon:'🛡',name:'DEFENCE / DoD',desc:'Precision timing and frequency distribution for US DoD contractors and government agencies'},
+    {icon:'⚛',name:'QUANTUM RESEARCH',desc:'Ultra-stable references and cold Rb atomic clock for quantum sensing and computing research'},
+    {icon:'📶',name:'TELECOM',desc:'Frequency distribution and 1 PPS timing for telecom infrastructure and calibration'},
+    {icon:'🎓',name:'UNIVERSITIES',desc:'Time and frequency instrumentation for university physics and engineering research labs'},
+  ],
+  products:[
+    {name:'cRb-CLOCK — WORLD\'S FIRST PORTABLE COLD RUBIDIUM ATOMIC CLOCK',
+     brief:'The cRb-CLOCK is the world\'s first commercially available portable cold Rubidium microwave atomic clock. Uses laser-cooled Rb atoms at microkelvin temperatures. Targets frequency stability far beyond conventional Rb standards. Designed for portable high-stability reference applications.',
+     pills:['COLD Rb ATOMS','LASER COOLED','WORLD\'S FIRST COMMERCIAL','PORTABLE'],
+     desc:'The cRb-CLOCK represents a major leap in portable atomic clock technology. Conventional Rubidium clocks use warm Rb atoms in a glass cell — the cRb-CLOCK uses laser cooling to bring Rb atoms to microkelvin temperatures, dramatically reducing thermal motion that limits frequency stability in warm-atom devices.\n\nKey significance:\n• First commercial portable cold Rb microwave atomic clock — previously only lab demonstrations existed\n• Cold atom interrogation eliminates Doppler broadening and collisional shifts that limit conventional Rb\n• Frequency stability target: significantly better than 1×10⁻¹³/√τ — approaching the performance of caesium fountain primary frequency standards in a portable form\n• Applications: portable primary standard, GPS-denied assured PNT, quantum sensing reference, NMI field work\n\nSpectraDynamics developed this through patented novel synthesis and laser cooling architecture, delivering what was previously only achievable in large laboratory installations.',
+     specs:[['Type','Cold Rubidium microwave atomic clock — laser cooled atoms'],['World First','First commercially available portable cold Rb atomic clock'],['Atom Cooling','Laser cooling to microkelvin temperatures'],['Benefit vs Warm Rb','Eliminates Doppler broadening, thermal collisional shifts'],['Stability Target','Far beyond conventional warm Rb (contact SpectraDynamics for spec)'],['Form Factor','Portable — field deployable'],['Applications','Portable primary standard, assured PNT, quantum reference, NMI']],
+     parts:['cRb-CLOCK (contact SpectraDynamics for availability and specifications)'],
+     app:'Portable primary frequency standard, GPS-denied PNT holdover, quantum computing/sensing reference, national metrology field campaigns'},
+    {name:'HROG-5RM — HIGH-RESOLUTION PHASE & FREQUENCY OFFSET GENERATOR',
+     brief:'SpectraDynamics\' featured flagship product. High-performance frequency and phase micro-stepper with under 1 femtosecond resolution. Output frequency resolution 5×10⁻¹⁹. Phase and frequency steps are phase-continuous. Five 100 MHz sinewave outputs. Used by NIST, USNO and DoD labs.',
+     pills:['< 1 fs RESOLUTION','5×10⁻¹⁹ FREQ RESOLUTION','PHASE CONTINUOUS','5× 100 MHz OUTPUTS'],
+     desc:'The HROG-5RM is SpectraDynamics\' featured flagship product — the highest-resolution phase and frequency offset generator commercially available. It enables engineers and metrologists to generate calibrated phase and frequency offsets from a 10 MHz reference with sub-femtosecond precision.\n\nKey specifications:\n• Output phase resolution: 2π/2³² radians = output time step resolution of 0.3 femtoseconds\n• Output frequency resolution: 5×10⁻¹⁹ — exceeding the resolution of any other commercial instrument\n• Both phase and frequency steps are fully phase-continuous (no phase jumps)\n• Five simultaneous 100 MHz sinewave outputs\n• 1 PPS sync input for synchronisation to GPS or atomic clock 1 PPS\n\nApplications: testing GPS-disciplined oscillators, frequency comparators, atomic clocks under test, calibration of synthesisers, and closed-loop frequency control research at national labs.',
+     specs:[['Phase Resolution','2π/2³² radians (0.3 femtoseconds time step)'],['Frequency Resolution','5 × 10⁻¹⁹'],['Step Type','Phase-continuous — no phase discontinuity on step'],['Outputs','Five 100 MHz sinewave outputs'],['1 PPS Sync Input','Max 2.5 V over 50 Ω, positive voltages only'],['Reference Input','10 MHz external reference'],['Users','NIST, USNO, DoD laboratories']],
+     parts:['HROG-5RM'],
+     app:'GPS-disciplined oscillator testing, atomic clock evaluation, frequency comparator calibration, national lab precision metrology, closed-loop frequency control'},
+    {name:'EOG — ENHANCED OFFSET GENERATOR (3×10⁻²⁰ RESOLUTION)',
+     brief:'Enhanced Offset Generator with frequency resolution of 3×10⁻²⁰ and time offset resolution < 0.1 picoseconds. Five 100 MHz sinewave outputs + five 1 PPS outputs. Phase and frequency steps are phase-continuous. The ultimate precision frequency offset instrument.',
+     pills:['3×10⁻²⁰ FREQ RESOLUTION','< 0.1 ps TIME OFFSET','PHASE CONTINUOUS','5× 100MHz + 5× 1PPS'],
+     desc:'The EOG (Enhanced Offset Generator) pushes frequency resolution to its practical limits at 3×10⁻²⁰ — an extraordinary level of precision enabling studies of atomic clocks, optical frequency standards and fundamental physics measurements.\n\nThe EOG provides:\n• Frequency resolution: 3×10⁻²⁰ (most precise commercially available)\n• Time offset resolution: < 0.1 picoseconds\n• Phase-continuous frequency and phase steps\n• Five 100 MHz sinewave outputs\n• Five 1 PPS timing outputs\n• 1 PPS sync input (max 2.5 V / 50 Ω)\n\nThis instrument is the tool of choice for national metrology institutes studying primary frequency standards and optical clocks, where even sub-femtosecond resolution is insufficient.',
+     specs:[['Frequency Resolution','3 × 10⁻²⁰'],['Time Offset Resolution','< 0.1 ps (sub-picosecond)'],['Step Type','Phase-continuous frequency and phase steps'],['Outputs','5× 100 MHz sinewave + 5× 1 PPS'],['1 PPS Sync Input','Max 2.5 V / 50 Ω positive'],['Use Case','Primary standard comparison, optical clock evaluation, fundamental physics']],
+     parts:['EOG (Enhanced Offset Generator)'],
+     app:'Primary frequency standard evaluation, optical atomic clock comparison, fundamental physics timing experiments, national metrology institute precision instrumentation'},
+    {name:'HPDA-15RMi-C — ULTRA LOW NOISE FREQUENCY DISTRIBUTION AMPLIFIER',
+     brief:'SpectraDynamics\' featured ultra-low-noise frequency distribution amplifier. 15 outputs. Exceptionally low phase noise with excellent channel-to-channel isolation. Output level monitor LEDs on each module front panel. Drives 50-ohm cables.',
+     pills:['15 OUTPUTS','ULTRA LOW PHASE NOISE','HIGH ISOLATION','50-OHM DRIVE'],
+     desc:'The HPDA-15RMi-C is SpectraDynamics\' featured ultra-low-noise RF and clock distribution amplifier — the highest performance product in the frequency distribution range. It distributes a single 10 MHz (or other RF) reference to 15 outputs with phase noise that is exceptionally low and inter-channel isolation that is excellent.\n\nKey features:\n• 15 buffered outputs driving 50-ohm loads and long cables\n• Phase noise of RF distribution modules: exceptionally low — preserves input reference quality\n• Channel-to-channel isolation: excellent — prevents crosstalk between outputs\n• Output level monitor LED on each module front panel for immediate visual status\n• AC and DC power operation',
+     specs:[['Outputs','15 buffered outputs (3 modules × 5 outputs)'],['Output Impedance','50 Ω — drives long 50-ohm coaxial cables'],['Phase Noise','Exceptionally low — among lowest added noise of any distribution amplifier'],['Channel Isolation','Excellent — prevents inter-channel crosstalk'],['Status','Output level monitor LED on each module front panel'],['Power','AC 100–240 V and DC operation'],['Applications','Frequency lab distribution, NMI, DoD test labs, telecom timing rooms']],
+     parts:['HPDA-15RMi-C'],
+     app:'National time and frequency laboratory distribution, DoD precision timing rooms, telecom equipment room 10 MHz distribution, radar test facility reference distribution'},
+    {name:'PD-15RMe / CSDA-1 — PULSE & CLOCK SIGNAL DISTRIBUTION AMPLIFIERS',
+     brief:'PD-15RMe: TTL Pulse Distribution Amplifier for 1 PPS to 100 MHz with Ethernet control. 15 outputs. CSDA-1: modular Clock Signal Distribution Amplifier with customisable PPS and RF modules in one chassis. < 100 ps channel-to-channel delay. 3 ps/°C temperature coefficient.',
+     pills:['1PPS TO 100MHz','ETHERNET CONTROL','< 100ps CHANNEL DELAY','MODULAR CSDA-1'],
+     desc:'SpectraDynamics offers a family of pulse and clock signal distribution amplifiers:\n\n• PD-15RMe (Ethernet): TTL Pulse Distribution Amplifier for 1 PPS signals, also usable for pulses up to 100 MHz repetition rate. 15 outputs. Ethernet control interface for remote management. Three input modules drive three distribution modules, each providing five buffered outputs. Output: 4.3 V peak-to-peak into 50 Ω. Channel-to-channel delay typically < 100 ps. Temperature coefficient: 3 ps/°C.\n\n• PD-15RMi-C: Three inputs driving three modules × five outputs = 15 total. Drives 50 or 75 Ω. Output 4.3 Vpp / 50 Ω. < 100 ps channel-to-channel delay. 3 ps/°C. AC 100–240 V or DC +12 to +36 V.\n\n• CSDA-1 (Clock Signal Distribution Amplifier): Modular unit with customisable combination of PPS distribution modules and RF/clock distribution modules in a single chassis. PPS module: 5 buffered outputs, 3.8 Vpp / 50 Ω, propagation delay 7 ns typical, 3 ps/°C. RF module: MHz square wave digital outputs, high isolation (110 dB), low phase noise.\n\n• PPS-2: 1 PPS generator from 1/5/10 MHz sine-wave input. Variable output pulse width. Sync to external event.',
+     specs:[['PD-15RMe Outputs','15 TTL outputs (3 modules × 5)'],['PD-15RMe Control','Ethernet remote control'],['Output Level','4.3 Vpp into 50 Ω'],['Channel Delay','< 100 ps (typical)'],['Temp Coefficient','3 ps/°C'],['CSDA-1','Modular: mix PPS + RF distribution modules in one chassis'],['RF Module Isolation','110 dB channel isolation'],['PPS-2','1 PPS generator from 1/5/10 MHz input; variable pulse width; external sync'],['Power','AC 100–240 V or DC +12 to +36 V']],
+     parts:['PD-15RMe (Ethernet, 15 outputs)','PD-15RMi-C (15 outputs, AC+DC)','CSDA-1 (modular, custom config)','PPS-2 (1 PPS generator)','PD-100i (1–100 MHz, 6 outputs)'],
+     app:'1 PPS distribution for atomic time scales, GPS receiver farm distribution, radar timing, NMI 1 PPS distribution, telecom network synchronisation nodes'}
+  ]
+},
+
+'TIMETECH GMBH':{
+  url:'https://www.timetech.de',email:'info@timetech.de',
+  country:'STUTTGART, GERMANY',founded:'1994',
+  sub:'SATELLITE TIME TRANSFER (SATRE TWSTFT) & GROUND STATION SYSTEMS',
+  desc:'TimeTech GmbH (Stuttgart, Germany), founded 1994, is the sole European manufacturer of Two-Way Satellite Time and Frequency Transfer (TWSTFT) modems — the SATRE (Satellite Time and Ranging Equipment) product family. SATRE modems are used by European, North-American and Asian national standard institutes (PTB, NIST, USNO, BIPM) to compare high-accuracy atomic clocks and contribute to TAI (International Atomic Time). TimeTech\'s product range also covers complete C-band and Ku-band VSAT ground stations for satellite time transfer, GPS-disciplined oscillators, frequency distribution amplifiers, satellite orbit determination systems and Bit-Error-Rate Test (BERT) Receivers for ESA missions (MSG, METOP, CryoSAT). All SATRE-based systems achieve < 1 ns time transfer uncertainty with 30 ps precision.',
+  badges:['SOLE EUROPEAN SATRE MFR','< 1ns TIME TRANSFER','BIPM / PTB / NIST / USNO','TAI CONTRIBUTOR'],
+  stats:[{v:'1994',l:'FOUNDED'},{v:'< 1ns',l:'TIME TRANSFER UNCERTAINTY'},{v:'30ps',l:'SATRE PRECISION'},{v:'SOLE',l:'EUROPEAN SATRE MANUFACTURER'}],
+  apps:[
+    {icon:'⏱',name:'TAI / UTC',desc:'BIPM TAI computation — SATRE TWSTFT links between national institutes contribute to International Atomic Time'},
+    {icon:'🔬',name:'CLOCK COMPARISON',desc:'Precise comparison of H-masers, Cs fountains and optical clocks between NMIs worldwide'},
+    {icon:'🛰',name:'SATELLITE ORBIT',desc:'Precise GEO satellite orbit determination using SATRE two-way ranging from multiple ground stations'},
+    {icon:'📡',name:'NETWORK SYNC',desc:'Time synchronisation of remote clocks to central master clock via satellite TWSTFT link'},
+    {icon:'🌍',name:'INTERCONTINENTAL',desc:'Intercontinental time transfer links (Europe–Americas–Asia) using geostationary satellites'},
+  ],
+  products:[
+    {name:'SATRE MODEM — TWO-WAY SATELLITE TIME & FREQUENCY TRANSFER',
+     brief:'The SATRE modem is TimeTech\'s flagship product and the global industry standard for Two-Way Satellite Time and Frequency Transfer (TWSTFT). Achieves < 1 ns time comparison uncertainty with 30 ps precision. Used by BIPM, PTB, NIST, USNO. Three applications: clock comparison, orbit determination, network synchronisation.',
+     pills:['< 1ns UNCERTAINTY','30 ps PRECISION','TWSTFT STANDARD','BIPM / PTB / NIST / USNO'],
+     desc:'The SATRE modem implements the ITU-R TF.1153 TWSTFT standard. Two stations simultaneously exchange spread-spectrum modulated signals via a geostationary satellite transponder. By measuring the two-way signal arrival times, the satellite path delay cancels out — leaving only the clock difference between the two stations, achievable at < 1 ns uncertainty and 30 ps precision. This performance is obtainable within the first minutes of operation.\n\nThree main fields of application:\n1. Precise monitoring and comparison of distant clocks: NMIs compare H-masers, Cs fountains and optical clocks for TAI computation (BIPM) and for calibrating GPS-based time transfer\n2. Precise satellite ranging and orbit determination: SATRE\'s two-way ranging provides GEO satellite orbital position accuracy at the metre level\n3. Time transfer and synchronisation of remote clocks: synchronise a remote clock to a central master with two-way link performance — better than GPS common-view by orders of magnitude\n\nKey technical features:\n• Fully automated operation — after initial configuration, runs unattended\n• On-line real-time data evaluation (max. 5 second delay)\n• High-resolution receive frequency measurement (0.001 Hz resolution at 1 second)\n• Internal time interval counter for RefDelay measurement\n• Simultaneous operation of several modems using a single satellite transponder channel\n• Remote monitoring and control via serial link or IP network\n• Low RF power requirements — compatible with occupied transponder channels (spread spectrum)\n• Interface to Comtech and SSE ground station transceivers\n• Interface to SATSIM station delay monitor\n• Chip rate configurable from 1 to 20 Mcps (20 Mcps = best performance)',
+     specs:[['Standard','ITU-R TF.1153 TWSTFT (Two-Way Satellite Time and Frequency Transfer)'],['Time Transfer Uncertainty','< 1 ns (after calibration)'],['Precision','30 ps (with 20 Mcps chip rate)'],['Chip Rate','Configurable 1 – 20 Mcps'],['Transponder Bands','C-band and Ku-band'],['Reference Input','External 5/10 MHz and coherent 1 PPS (Cs, H-maser, etc.)'],['Reference Output','BNC, 5/10 MHz, +3 to +10 dBm'],['Data Evaluation','Real-time (max. 5 s delay); freq. resolution 0.001 Hz @ 1 s'],['Automation','Fully automated unattended operation'],['Control','Remote monitoring/control: serial link or IP network/internet'],['Multi-modem','Multiple modems share single satellite transponder'],['G/S Interface','Comtech, SSE ground station transceivers; SATSIM monitor'],['ADEV (TWTS mode)','1×10⁻¹⁴ for t > 10⁴ s (Two-Way Time Synchronisation)'],['Users','BIPM, PTB, NIST, USNO, NICT, NPL, OP, SP, AOS, TUG, ROA']],
+     parts:['SATRE Modem C-band','SATRE Modem Ku-band','SATRE + VSAT Ground Station (turnkey C or Ku-band)'],
+     app:'TAI/UTC computation (BIPM), national metrology clock comparison, GEO satellite orbit determination, remote clock synchronisation to master standard'},
+    {name:'SATRE NETWORK SYNCHRONISATION — TWO-WAY TIME SYNCHRONISATION VIA SATELLITE',
+     brief:'Extension of SATRE TWSTFT to real-time clock synchronisation: the SATRE modem uses its inherent TWSTFT function to continuously monitor and correct a built-in BVA oscillator — providing physical output signals synchronised to a remote master clock with ADEV < 1×10⁻¹⁴ for t > 10⁴ s.',
+     pills:['REMOTE CLOCK SYNC','BVA OSCILLATOR','ADEV < 1×10⁻¹⁴','REAL-TIME CORRECTION'],
+     desc:'SATRE Network Synchronisation extends the TWSTFT modem capability into real-time clock synchronisation. The modem uses its inherent two-way function to continuously monitor the synchronisation state of a built-in BVA (Bovar Oscillator) oscillator. The monitoring data are used to calculate a corrective term that estimates the actual error of the physical output signals.\n\nAchieved performance:\n• ADEV: 1×10⁻¹⁴ for t > 10⁴ seconds — matching or exceeding GPS common-view performance\n• Output: precise 10 MHz and 1 PPS synchronised to a remote master atomic clock\n• Remote clock monitoring: SATRE at PTB was used to monitor two remote clocks — one BVA oscillator at DLR (Stuttgart) and one GPS-disciplined Rb oscillator at SES\n• Carrier phase measurements: using dual receiver-channel modems, frequency transfer via carrier phase achieves even higher performance by eliminating satellite oscillator errors and satellite motion effects',
+     specs:[['Function','Real-time synchronisation of local clock to remote master via satellite TWSTFT'],['Oscillator','Built-in BVA oscillator continuously corrected by TWSTFT monitoring'],['ADEV','1×10⁻¹⁴ for t > 10⁴ s'],['Outputs','10 MHz and 1 PPS — synchronised to remote master'],['Carrier Phase','Dual receiver-channel modem: eliminates satellite oscillator + motion errors'],['Advantage vs GPS','Far superior to GPS common-view for medium/long-term stability']],
+     parts:['SATRE Modem with Network Sync option','SATRE dual-channel modem (carrier phase)'],
+     app:'Remote timing node synchronisation, national institute clock coordination, satellite ground station time alignment, international frequency comparison campaigns'},
+    {name:'SATSIM — SATELLITE SIMULATOR & STATION DELAY MONITOR',
+     brief:'SATSIM is the SATRE station delay monitor and satellite transponder simulator — used for end-to-end calibration and testing of SATRE ground station installations without requiring live satellite access.',
+     pills:['STATION DELAY MONITOR','SAT TRANSPONDER SIM','SATRE CALIBRATION','END-TO-END TEST'],
+     desc:'SATSIM is the satellite simulator and station delay monitor designed specifically for use with SATRE TWSTFT ground stations. It enables:\n\n• End-to-end calibration of the SATRE modem and ground station RF chain without live satellite access\n• Simulation of a satellite transponder to generate realistic test conditions\n• Measurement and monitoring of station delay — critical for accurate TWSTFT uncertainty budgets\n• Pre-deployment testing and commissioning of new SATRE ground stations\n\nThe SATSIM interface is directly built into the SATRE modem, allowing integrated operation and automated calibration sequences.',
+     specs:[['Function','Satellite transponder simulation + station delay monitor'],['Integration','Built-in SATRE modem interface'],['Use','End-to-end ground station calibration without live satellite'],['Benefit','Accurate station delay characterisation for TWSTFT uncertainty budget']],
+     parts:['SATSIM (contact TimeTech for configuration)'],
+     app:'SATRE ground station commissioning, station delay calibration, time transfer uncertainty budget characterisation, periodic system self-test'},
+    {name:'GPS DISCIPLINED OSCILLATOR & FREQUENCY DISTRIBUTION',
+     brief:'GPS-disciplined OCXO providing precise 10 MHz and 1 PPS locked to GPS time. Frequency and pulse distribution amplifiers for routing timing signals through a laboratory or ground station facility. Interface to external 5/10 MHz atomic references.',
+     pills:['GPS DISCIPLINED OCXO','10 MHz + 1PPS','FREQUENCY DISTRIBUTION','ATOMIC REFERENCE INPUT'],
+     desc:'TimeTech provides GPS-disciplined oscillators (GPSDO) and frequency/pulse distribution amplifiers as supporting infrastructure for SATRE ground stations and time/frequency laboratories:\n\n• GPS Disciplined OCXO: locks a high-stability OCXO to GPS time. Provides 10 MHz and 1 PPS outputs traceable to UTC(GPS). In holdover (GPS outage), the OCXO maintains < 1 µs/day.\n• Interface to external 5/10 MHz coherent atomic references (H-maser, Cs fountain) for highest-performance SATRE operation\n• Frequency Distribution Amplifier (FDA): distributes 5/10 MHz reference to multiple outputs with low added phase noise\n• Pulse Distribution Amplifier (PDA): distributes 1 PPS to multiple outputs with < 1 ns jitter\n• Used in remote SATRE stations where a local atomic standard is not available — GPS disciplined OCXO provides the timing reference.',
+     specs:[['GPSDO Accuracy','< 100 ns to UTC(GPS) when GPS-locked'],['GPSDO Holdover','< 1 µs/day (OCXO holdover)'],['External Reference','Input: 5/10 MHz coherent + 1 PPS from H-maser or Cs fountain'],['FDA Outputs','Multiple 5/10 MHz buffered outputs — low added phase noise'],['PDA Outputs','Multiple 1 PPS buffered outputs — < 1 ns jitter'],['Application','Remote SATRE station timing reference, ground station distribution']],
+     parts:['GPS Disciplined OCXO (TimeTech)','Frequency Distribution Amplifier (FDA)','Pulse Distribution Amplifier (PDA)'],
+     app:'Remote SATRE ground station timing, time lab frequency distribution, satellite ground station 10 MHz/1PPS infrastructure'},
+    {name:'BERT RECEIVERS — BIT ERROR RATE TEST RECEIVERS (ESA MISSIONS)',
+     brief:'Custom Bit-Error-Rate Test (BERT) Receivers developed and manufactured by TimeTech for ESA Earth Observation satellite missions — MSG (Meteosat Second Generation), METOP and CryoSAT. Mission-specific designs for satellite telemetry and payload data link testing.',
+     pills:['ESA MISSION HERITAGE','MSG / METOP / CRYOSAT','BER TESTING','CUSTOM DESIGN'],
+     desc:'TimeTech has developed and manufactured a number of mission-specific Bit-Error-Rate Test Receivers for ESA Earth Observation satellites:\n\n• MSG (Meteosat Second Generation): BERT receivers for testing the satellite\'s meteorological data transmission links\n• METOP (Meteorological Operational satellite programme): BERT receivers for METOP-A/B/C polar orbit weather satellites\n• CryoSAT: BERT receivers for ESA\'s ice thickness measurement mission\n\nThese are custom-engineered products delivered to ESA and its prime contractors. They demonstrate TimeTech\'s capability to deliver space-programme-grade test and measurement equipment beyond its core SATRE product line.',
+     specs:[['Type','Mission-specific Bit-Error-Rate Test Receivers'],['ESA Missions','MSG (Meteosat), METOP, CryoSAT'],['Custom','Yes — each designed to mission-specific modulation, protocol and frequency'],['Heritage','Multiple delivered units across three ESA EO satellite programmes']],
+     parts:['BERT Receiver MSG','BERT Receiver METOP','BERT Receiver CryoSAT','Custom BERT (contact TimeTech)'],
+     app:'ESA satellite telemetry BER testing, Earth Observation satellite data link verification, satellite acceptance test infrastructure'}
+  ]
+},
+
+'MESIT DEFENCE':{
+  url:'https://www.mesitasd.cz/en/',email:'asd@mesit.cz',
+  country:'UHERSKÉ HRADIŠTĚ, CZECH REPUBLIC',founded:'1952',
+  sub:'MULTI-SYSTEM GNSS TIME & FREQUENCY TRANSFER RECEIVERS',
+  desc:'MESIT asd, s.r.o. (formerly MESIT defence / DICOM, Uherské Hradiště, Czech Republic), part of MESIT Holding — a technology company with roots dating to 1952 — develops and manufactures highly dependable products for armed forces, aerospace and utilities. Their Time & Frequency division produces the GTR family of multi-system, multi-frequency GNSS receivers specifically designed for precise time and frequency transfer. GTR51, GTR52 and the new GTR55 support GPS, GLONASS, Galileo and SBAS constellations with sub-nanosecond code measurement accuracy. Products are used at national metrology institutes (NMIs), GNSS timing laboratories and scientific institutions including NASA Goddard Laser Ranging Facility. ISO 9001, MIL-STD, STANAG and ITAR compliant.',
+  badges:['GTR FAMILY GNSS RECEIVERS','SUB-NANOSECOND ACCURACY','NASA GODDARD HERITAGE','CZECH REPUBLIC'],
+  stats:[{v:'1952',l:'COMPANY ROOTS'},{v:'< 1ns',l:'CODE MEAS. ACCURACY'},{v:'GTR55',l:'NEWEST RECEIVER'},{v:'NASA',l:'GODDARD LASER RANGING FACILITY'}],
+  apps:[
+    {icon:'⏱',name:'NATIONAL METROLOGY',desc:'Time and frequency transfer between NMI primary standards — GPS/GNSS common-view and all-in-view methods'},
+    {icon:'🛰',name:'GNSS TIME LABS',desc:'GNSS signal monitoring, timing receiver testing and IGS reference station operations'},
+    {icon:'🛡',name:'DEFENCE',desc:'Precise military timing synchronisation for defence operations requiring GPS/GNSS multi-constellation resilience'},
+    {icon:'🌍',name:'GEODESY',desc:'Time transfer for geodetic VLBI and satellite laser ranging (SLR) timing systems'},
+    {icon:'🔬',name:'RESEARCH',desc:'Scientific GNSS timing research, carrier phase time transfer, ionospheric and tropospheric studies'},
+  ],
+  products:[
+    {name:'GTR51 — MULTI-SYSTEM GNSS TIME & FREQUENCY TRANSFER RECEIVER',
+     brief:'GTR51 is MESIT\'s established multi-system/multi-frequency GNSS receiver for time and frequency transfer. Supports GPS, GLONASS, Galileo and SBAS. Sub-nanosecond code measurement accuracy. Three variants: standard, with internal reference output and rack-mount. Used at NASA Goddard Laser Ranging Facility.',
+     pills:['GPS / GLONASS / GALILEO / SBAS','SUB-NANOSECOND CODE ACCURACY','3 VARIANTS','NASA GODDARD HERITAGE'],
+     desc:'The GTR51 is MESIT\'s established and proven GNSS timing receiver for time and frequency transfer. Key features:\n\n• Multi-system support: GPS, GLONASS, Galileo and SBAS — multi-constellation operation provides resilience and improved geometry vs. GPS-only\n• Multi-frequency: supports multiple frequency channels per system — L1, L2, E1 etc.\n• Sub-nanosecond code accuracy: large receiver bandwidth and advanced signal processing achieve sub-nanosecond accuracy from code (pseudorange) measurements alone — without carrier phase\n• Critical elements in thermostat box: temperature-sensitive components are thermostated for stability\n• Network connectivity: directly connects to local network/internet for remote control, data download and upload\n• Fully automatic operation: after initial configuration, continuously collects measurement data. Output files in standard/proprietary formats generated by scheduler (daily, weekly, etc.)\n\nThree variants:\n1. GTR51 (2065.100.11): standard receiver\n2. GTR51 with internal reference output\n3. GTR51 rack-mount version\n\nUsed at NASA Goddard Space Flight Center Laser Ranging Facility — one of the world\'s premier satellite laser ranging stations.',
+     specs:[['Constellations','GPS, GLONASS, Galileo, SBAS'],['Measurement Types','Code (pseudorange) and carrier phase'],['Code Accuracy','Sub-nanosecond (thanks to large bandwidth + advanced processing)'],['Critical Elements','Thermostat box for temperature-sensitive components'],['Network','Direct LAN/internet connection — remote control, data up/download'],['Operation','Fully automatic — scheduler for daily/weekly data output'],['Output Formats','Standard and proprietary GNSS timing formats'],['Variants','Standard, with internal reference output, rack-mount'],['Heritage','NASA Goddard Laser Ranging Facility'],['Standard','ISO 9001, MIL-STD, STANAG']],
+     parts:['GTR51 (2065.100.11) — standard','GTR51 (2065.100.12) — receiver set with accessories','GTR51 with internal reference output','GTR51 rack-mount'],
+     app:'National metrology institute time transfer, geodetic SLR/VLBI timing, IGS reference station, defence timing, scientific GNSS research'},
+    {name:'GTR52 — MULTI-SYSTEM GNSS RECEIVER (GPS + GALILEO FOCUSED)',
+     brief:'GTR52 is the GPS and Galileo focused variant — unlike GTR51, does not support GLONASS and does not have internal time reference output. Sub-nanosecond code accuracy. Three variants. Ideal for applications requiring GPS+Galileo dual-constellation without GLONASS.',
+     pills:['GPS + GALILEO + SBAS','NO GLONASS','SUB-NANOSECOND CODE ACCURACY','3 VARIANTS'],
+     desc:'The GTR52 shares the core architecture and performance of the GTR51 but is focused on GPS and Galileo constellations — it does not support the GLONASS system and does not have an internal time reference output.\n\nThis makes the GTR52 the preferred choice for:\n• Applications where GLONASS is not required or not desired (e.g., certain export-controlled environments)\n• Applications where GPS + Galileo dual-constellation is sufficient\n• Cost-sensitive deployments where the additional GLONASS capability of GTR51 is not needed\n\nSub-nanosecond code accuracy, thermostat box for critical elements, network connectivity and automatic operation are identical to the GTR51.\n\nThree variants:\n1. GTR52 (2065.100.21): standard\n2. GTR52 (2065.100.22): receiver with accessories\n3. GTR52 rack-mount',
+     specs:[['Constellations','GPS, Galileo, SBAS (no GLONASS)'],['vs GTR51','No GLONASS; no internal time reference output'],['Code Accuracy','Sub-nanosecond (identical processing architecture to GTR51)'],['Critical Elements','Thermostat box for temperature-sensitive components'],['Network','LAN/internet connection — remote control and data management'],['Operation','Fully automatic, scheduler-based output'],['Variants','Standard (2065.100.21), with accessories (2065.100.22), rack-mount']],
+     parts:['GTR52 (2065.100.21) — standard','GTR52 (2065.100.22) — receiver set with accessories','GTR52 rack-mount'],
+     app:'GPS+Galileo timing applications, NMI time transfer (non-GLONASS environments), research timing, export-controlled deployments'},
+    {name:'GTR55 — ADVANCED GNSS TIME & FREQUENCY RECEIVER WITH BUILT-IN CALIBRATOR',
+     brief:'GTR55 is MESIT\'s newest and most advanced GNSS timing receiver. Key innovation: built-in internal calibrator continuously measures internal delays of all supported signals — ensuring high long-term stability without external calibration campaigns. Supports code and carrier phase measurements.',
+     pills:['BUILT-IN CALIBRATOR','CONTINUOUS DELAY MEASUREMENT','CODE + CARRIER PHASE','NEWEST GENERATION'],
+     desc:'The GTR55 is MESIT\'s latest generation GNSS timing receiver — the most advanced product in the GTR family. The key innovation that distinguishes it from GTR51 and GTR52 is the built-in internal calibrator:\n\n• Continuous internal delay measurement: the calibrator measures the internal delays of all supported GNSS signals continuously during operation — not just at commissioning\n• High long-term stability: by continuously compensating for internal delay variations due to temperature, ageing and other environmental effects, the GTR55 maintains much higher long-term timing accuracy than uncalibrated receivers\n• Eliminates external calibration campaigns: traditional GNSS timing receivers require periodic external calibration to characterise internal delays. The GTR55\'s continuous self-calibration eliminates this burden.\n\nMeasurement capability:\n• Both code (pseudorange) delay measurements AND carrier phase measurements — providing the highest timing accuracy achievable with GNSS\n• Sub-nanosecond code accuracy (same as GTR51/GTR52)\n• Carrier phase measurements add sub-centimetre level ranging for ultimate precision',
+     specs:[['Key Innovation','Built-in internal calibrator — continuous internal delay measurement'],['Calibration','Continuously measures delays of ALL supported signals during operation'],['Long-term Stability','Superior to GTR51/52 — continuous compensation of internal delay drift'],['Code Accuracy','Sub-nanosecond (same as GTR family)'],['Carrier Phase','Yes — sub-centimetre ranging for ultimate precision time transfer'],['vs GTR51/52','Adds continuous self-calibration; eliminates external calibration campaigns'],['Generation','Newest GTR family member']],
+     parts:['GTR55'],
+     app:'Highest-accuracy NMI time transfer, optical clock comparison via GNSS, IGS analysis centre reference receivers, scientific research requiring long-term stability without periodic calibration'},
+    {name:'RECEIVER ACCESSORIES & COMPLETE SETS',
+     brief:'MESIT supplies complete GTR receiver sets including all accessories required for immediate deployment — GNSS antenna, cables, power supply, mounting hardware and software. Available as individual receiver or complete set.',
+     pills:['COMPLETE SETS','GNSS ANTENNA INCLUDED','DEPLOYMENT READY','REMOTE CONTROL SW'],
+     desc:'MESIT offers all GTR receivers in two supply configurations:\n\n• Individual receiver unit: just the GTR receiver module for integration into existing timing installations\n• Complete set (e.g., GTR51 set 2065.100.12, GTR52 set 2065.100.22): receiver + all accessories for immediate deployment\n\nComplete set includes:\n• GNSS timing antenna (calibrated, choke ring option available)\n• Antenna cable and connectors\n• Power supply\n• Mounting hardware (bench or rack-mount)\n• PC software for remote control, data download and scheduling\n• Documentation: user manual, installation guide, output format specifications\n\nThe web-based user interface allows full remote monitoring and control over LAN/internet — operators can configure measurement schedules, download data files and monitor receiver status from any networked computer.',
+     specs:[['Individual Unit','GTR receiver only — for integration into existing timing system'],['Complete Set','GTR + antenna + cable + PSU + hardware + software'],['Antenna','GNSS timing antenna — calibrated; choke ring option'],['Software','Remote control: web UI over LAN/internet; PC data processing software'],['Documentation','User manual, installation guide, output format specification'],['Support','MESIT technical support: asd@mesit.cz, +420 572 522 200']],
+     parts:['GTR51 complete set (2065.100.12)','GTR52 complete set (2065.100.22)','GTR55 (contact MESIT for set configuration)'],
+     app:'Turn-key deployment at NMIs, calibration labs, geodetic observatories, defence timing nodes and research institutions'}
+  ]
+}
+};
+
+const params=new URLSearchParams(window.location.search);
+const vKey=params.get('v')||'SPECTRADYNAMICS';
+const V=TF_VENDORS[vKey];
+let cc=0;
+
+function tog(id){const c=document.getElementById('pc'+id),t=document.getElementById('pt'+id);const o=c.classList.toggle('open');t.textContent=o?'−':'+';}
+
+function render(){
+  if(!V){document.getElementById('root').innerHTML='<div style="text-align:center;padding:60px;font-family:Orbitron,monospace;color:#6a8aa0">VENDOR NOT FOUND</div>';return;}
+  document.title=vKey+' – Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent=vKey+' – Time & Frequency';
+  const statsHTML=(V.stats||[]).map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML=V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML=(V.apps||[]).map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML=V.products.map((p,i)=>{const id=cc++;return`<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s"><div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div><div class="prod-brief">${p.brief}</div><div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div><div class="detail"><div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>${p.specs&&p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div><div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div></div></div>`;}).join('');
+  document.getElementById('root').innerHTML=`
+    <div class="hero"><div>
+      <div class="hero-domain">// TIME & FREQUENCY</div>
+      <div class="hero-name">${vKey}</div>
+      <div class="hero-sub">${V.sub}</div>
+      <div class="hero-country">▸ ${V.country}${V.founded?' &nbsp;·&nbsp; FOUNDED '+V.founded:''}</div>
+      <div class="hero-desc">${V.desc}</div>
+      <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT OFFICIAL WEBSITE</a>
+    </div><div class="badges">${badgesHTML}</div></div>
+    ${statsHTML?`<div class="stats-bar">${statsHTML}</div>`:''}
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    ${appsHTML?`<div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>`:''}
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div><div class="c-sub">Contact ${vKey} for datasheets, pricing and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div><div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div><div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div></div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; ${vKey}</div>
+    </div>`;
+}
+render();
+</script></body></html>

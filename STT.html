@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">STT System Technik – RF & Microwave – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #0077aa;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#0077aa;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.co-nav{display:flex;gap:10px;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#0077aa;color:#0077aa;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,170,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#0077aa;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#0077aa;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #0077aa;color:#0077aa;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,170,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #0077aa;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#0077aa;white-space:nowrap;background:rgba(0,119,170,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#0077aa;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#0077aa;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#0077aa;box-shadow:0 4px 16px rgba(0,119,170,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#0077aa;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,170,0.08);color:#0077aa;border-color:#0077aa;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#0077aa;letter-spacing:1px;background:rgba(0,119,170,0.03);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#0077aa;background:rgba(0,119,170,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#0077aa;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#0077aa;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:40px;padding:20px 28px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#0077aa;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="co-nav">
+    <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+  </div>
+</div>
+
+<div class="page">
+<div class="page-inner">
+  <div id="root"></div>
+</div>
+</div>
+
+<script>
+const V = {
+  url: 'https://www.stt-systemtechnik.de/en/',
+  email: 'mail@stt-systemtechnik.de',
+  country: 'MUNICH (ROSENHEIM), GERMANY',
+  founded: '1990s',
+  sub: 'RF TELEMETRY & SPACE PRODUCTS',
+  desc: 'STT System Technik GmbH is a Munich-based specialist in S-band RF telemetry transmitters, satellite TT&C transceivers, payload data transmitters, receivers, antennas and sensors for industrial, military, aerospace and space applications. STT products are IRIG-106 compliant, flight-proven on ISS (ROKVISS, KONTUR) and numerous LEO satellites. Fully made in Germany with ISO-certified manufacturing.',
+  badges: [
+    'S-BAND SPECIALIST',
+    'IRIG-106 COMPLIANT',
+    'ISS / LEO HERITAGE',
+    'MADE IN GERMANY',
+    'ECSS / CCSDS'
+  ],
+  stats: [
+    {v:'2200',  l:'TX FREQ (MHz START)'},
+    {v:'40',    l:'Mbps MAX DATA RATE'},
+    {v:'10W',   l:'MAX TX POWER (DATA-LINK)'},
+    {v:'170g',  l:'MIN TRANSMITTER WEIGHT'},
+    {v:'16yr',  l:'ISS ROKVISS OPERATION'}
+  ],
+  apps: [
+    {icon:'✈',  name:'FLIGHT TEST',       desc:'S-band telemetry transmitters and ground stations for test aircraft and rotorcraft data acquisition'},
+    {icon:'🚀', name:'LAUNCH VEHICLES',    desc:'S-band TT&C and payload data transmitters for sounding rockets, small launch vehicles and sub-orbital missions'},
+    {icon:'🛰', name:'LEO SATELLITES',     desc:'ECSS-qualified TM/TC transceivers (SSTRC-1000/3000) and DVB-S2 payload transmitters (PDTX-1000) for LEO missions'},
+    {icon:'🤖', name:'SPACE ROBOTICS',     desc:'STT products supported ROKVISS and KONTUR-2 ISS experiments for 16 years — telerobotic and teleoperation applications'},
+    {icon:'🛡', name:'DEFENCE / MILITARY', desc:'Rugged TS-series transmitters for military UAV, missile and range telemetry in harsh environments'},
+    {icon:'🚁', name:'UAV & DRONES',       desc:'Ultra-miniature TS900/TS2100 transmitters for compact drone and UAV telemetry downlinks'},
+    {icon:'🌊', name:'MARITIME (AIS)',      desc:'DVB-S2 PDTX-1000 payload transmitter flew on ESAIL maritime AIS satellite constellation'},
+    {icon:'📡', name:'GROUND STATIONS',    desc:'Complete FTCGS-1 and MRS-100 turnkey ground station systems for data acquisition and range control'}
+  ],
+  products: [
+    /* ── SPACE DIVISION ── */
+    {
+      name: 'SSTRC-1000 — S-BAND SATELLITE TRANSCEIVER MODULE',
+      brief: 'Extremely compact and robust S-band TT&C transceiver qualified for LEO satellites. Integrates BPSK telemetry transmitter, telecommand receiver with bit synchroniser/data regenerator and diplexing filter in one assembly. Radiation tolerant > 20 kRad.',
+      pills: ['2200–2290 MHz TX','2025–2110 MHz RX','BPSK 10kbps–4Mbps','> 20 kRad RADIATION'],
+      desc: `The SSTRC-1000 is STT's most compact satellite transceiver module, designed for LEO satellite TT&C where mounting space is extremely limited. It has been flight-proven on multiple LEO satellites. The system handles full bi-directional telemetry and telecommand between the satellite and its ground station. Qualified to MIL-STD vibration and shock levels.`,
+      specs: [
+        ['TX Carrier Frequency',        '2200 – 2290 MHz (S-band)'],
+        ['TX Frequency Stability / Aging','±10 ppm / 1 ppm/year'],
+        ['TX Output Power',             '100 mW to 5 W (10 W optional)'],
+        ['TX Modulation',               'BPSK, 10 kbps – 4 Mbps'],
+        ['TX Carrier Suppression',      '30 dBc'],
+        ['TX Spurious / Harmonics',     '−60 dBc'],
+        ['TX Phase Noise',              '2° RMS'],
+        ['TX Dimensions',               '170 × 90 × 49 mm (incl. mounting flange)'],
+        ['TX Weight',                   '730 g'],
+        ['TX Power Supply',             '20 – 36 VDC | Consumption: 18 W typ. (@ 5 W o/p)'],
+        ['RX Carrier Frequency',        '2025 – 2110 MHz (S-band)'],
+        ['RX Modulation',               '2/4 kbps on 8/16 kHz subcarrier; 8–256 kbps SP-L'],
+        ['RX Sensitivity (BER 10⁻⁶)',   '−118 dBm typ. (@ 4 kbps)'],
+        ['RX Dimensions',               '170 × 90 × 38 mm'],
+        ['RX Weight',                   '750 g'],
+        ['Diplexer TX/RX Isolation',    '> 80 dB | BW: 60 MHz | Loss: < 1 dB'],
+        ['Diplexer Dimensions',         '224 × 46 × 19 mm | Weight: 280 g'],
+        ['Radiation Tolerance',         '> 20 kRad'],
+        ['Vibration',                   '20–2000 Hz, 16 grms random 3-axis'],
+        ['Shock',                       '100 g, 11 ms half-sine'],
+        ['Operating Temperature',       '−20°C to +50°C (extended range on request)'],
+        ['Connector',                   'HD SUB-D per MIL-C-24308 | Finish: Alodine 1200']
+      ],
+      parts: ['SSTRC-1000 (standard)', 'SSTRC-1000 (10W TX option)'],
+      app: 'LEO satellite TT&C, CubeSats, technology demonstrators, scientific small satellites'
+    },
+    {
+      name: 'SSTRC-1100 — DUAL REDUNDANT S-BAND TRANSCEIVER',
+      brief: 'Dual-redundant S-band satellite transceiver built from two SSTRC-1000 modules plus a 3 dB hybrid — providing a fully redundant, highly reliable TT&C system for satellites requiring high availability.',
+      pills: ['DUAL REDUNDANT','2× BPSK TX','2× TC RECEIVER','3dB HYBRID COMBINER'],
+      desc: `The SSTRC-1100 provides full 1+1 redundancy for satellite TT&C by combining two SSTRC-1000 modules with a 3 dB RF hybrid combiner. Two BPSK telemetry transmitters, two telecommand receivers with integrated bit synchroniser/data regenerator, and two diplexing filters are combined in one compact and robust assembly. This is the preferred choice for missions where TT&C loss must be mitigated.`,
+      specs: [
+        ['Configuration',   'Dual redundant: 2× SSTRC-1000 + 3 dB Hybrid'],
+        ['TX Frequency',    '2200 – 2290 MHz (per SSTRC-1000 spec)'],
+        ['RX Frequency',    '2025 – 2110 MHz (per SSTRC-1000 spec)'],
+        ['Redundancy',      '1+1 full redundancy with 3 dB RF hybrid combiner'],
+        ['Components',      '2× BPSK TX, 2× TC RX, 2× Diplexer, 1× 3dB Hybrid']
+      ],
+      parts: ['SSTRC-1100'],
+      app: 'High-reliability LEO satellites, government/defence satellites, science missions requiring redundant TT&C'
+    },
+    {
+      name: 'SSTRC-3000 — LEO SATELLITE TM/TC UNIT (ECSS CLASS 3)',
+      brief: 'Compact, low-cost, fully redundant TM/TC unit specifically designed for LEO satellites. ECSS Class 3 qualified. Full-duplex telemetry and telecommand. Compliant with ECSS and CCSDS standards. 7.5 kg complete unit.',
+      pills: ['ECSS CLASS 3','FULL DUPLEX TT&C','SP-L / BPSK / OQPSK','DVB-S2 OVER CCSDS OPTION'],
+      desc: `The SSTRC-3000 provides the full-duplex telemetry and telecommand interface between a LEO satellite and its ground station. Designed as a compact, low-cost unit without compromising space heritage quality. Two transceivers plus an RFDU (RF Distribution Unit) are housed in a small form factor of approximately 7.5 kg. Finished with Aeroglaze Z306/Z307 flat black polyurethane coating. Uses non-magnetic SMA RF connectors (MIL-C-39012) and non-magnetic HD sub-miniature data connectors (NASA GSFC-S-311).`,
+      specs: [
+        ['TX Downlink Frequency', '2200 – 2290 MHz'],
+        ['TX Modulation',         'SP-L, BPSK, (O)QPSK'],
+        ['TX Data Rate',          '10 kbps – 6 Mbps'],
+        ['TX Output Power',       '+20 dBm to +33 dBm at antenna port'],
+        ['TX Option',             'DVB-S2 over CCSDS available'],
+        ['Redundancy',            'Fully redundant (2× transceivers + RFDU)'],
+        ['Standards',             'ECSS Class 3, CCSDS compliant'],
+        ['Total Weight',          '~7.5 kg (complete unit)'],
+        ['RF Connector',          'SMA, non-magnetic (MIL-C-39012)'],
+        ['Data Connector',        'HD sub-miniature (NASA GSFC-S-311)'],
+        ['EMI',                   'MIL-STD-461C reflected ripple current limits met'],
+        ['Coating',               'Aeroglaze Z306/Z307 flat black polyurethane'],
+        ['Power',                 'Separate DC/DC converters for RX and TX, with EMI filters']
+      ],
+      parts: ['SSTRC-3000'],
+      app: 'LEO satellites, small satellite constellations, government LEO missions, technology demonstrators'
+    },
+    {
+      name: 'PDTX-1000 — DVB-S2 PAYLOAD DATA TRANSMITTER',
+      brief: 'Space-grade high-rate payload data downlink transmitter using DVB-S2 (CCSDS 131.3-B-1). Available in C-band and X-band. CAN-bus interface. 1W–8W adjustable power. < 4.5 kg. Proven on ESAIL satellite (launched VEGA VV16).',
+      pills: ['DVB-S2 / CCSDS','C-BAND & X-BAND','50 MBd SYMBOL RATE','1–8 W ADJUSTABLE'],
+      desc: `The PDTX-1000 is STT's answer to cost-effective high-rate Earth Observation and science payload data downlink. It uses DVB-S2 — a widely deployed commercial standard — ensuring access to mature, cost-effective ground segment receivers. Fully compliant with CCSDS 131.3-B-1 Blue Book and ETSI EN 302 307 V1.3.1. A CAN-bus interface handles commanding and housekeeping. Proven in space aboard the ESAIL maritime AIS satellite, launched on VEGA VV16.`,
+      specs: [
+        ['Standards',             'ETSI EN 302 307 V1.3.1 (DVB-S2), CCSDS 131.3-B-1'],
+        ['Symbol Rate',           '50 MBd'],
+        ['C-band TX Frequency',   '5183 MHz (centre frequency, ITU band)'],
+        ['X-band TX Frequency',   '8025 – 8400 MHz'],
+        ['TX Power',              '1 W – 8 W (adjustable in < 0.1 dB steps)'],
+        ['Error Vector Magnitude','< 8%'],
+        ['Out-of-band Emissions', 'Compliant ITU-R SM.1541-6, Annex 5.1'],
+        ['Spurious Signals',      '< 70 dBc (ITU-R spurious domain)'],
+        ['Interface',             'CAN-bus for commanding and housekeeping'],
+        ['Primary Voltage',       '22 V – 34 V'],
+        ['Power Consumption',     '< 45 W'],
+        ['Mass',                  '< 4.5 kg'],
+        ['Volume',                '< 3.5 litres'],
+        ['Operating Temperature', '−30°C to +60°C'],
+        ['Flight Heritage',       'ESAIL satellite (launched VEGA VV16)']
+      ],
+      parts: ['PDTX-1000 C-band', 'PDTX-1000 X-band'],
+      app: 'Earth Observation payload downlink, maritime monitoring satellites (AIS), scientific missions, high data volume LEO satellites'
+    },
+
+    /* ── DATA-LINK DIVISION ── */
+    {
+      name: 'TS900 SERIES — MINIATURE S-BAND TELEMETRY TRANSMITTER',
+      brief: 'Ultra-miniature, extremely lightweight S-band FM telemetry transmitter for aerospace, military and industrial applications. IRIG-106 compliant. Only 170 g, 76 × 51 × 21 mm. 0.6 A typical consumption at 28 VDC.',
+      pills: ['2000–2600 MHz','1–10W OUTPUT','170g / 76×51×21mm','IRIG-106 COMPLIANT'],
+      desc: `The TS900 is STT's smallest and lightest telemetry transmitter, optimised for applications where size, weight and power (SWaP) are critical — UAVs, miniature aircraft pods, test rockets and compact drone systems. Synthesiser-controlled with programmable frequency within any 100 MHz band in 100 kHz steps. Programmable deviation and output power. IRIG-106 pre-emphasis and CCIR filtering options.`,
+      specs: [
+        ['Frequency Range',       '2000 – 2600 MHz'],
+        ['Frequency Selection',   'Programmable in 100 kHz steps within 100 MHz band'],
+        ['Frequency Stability',   '≤ ±0.003%'],
+        ['Output Power',          '1 to 10 W (minimum)'],
+        ['Output Impedance',      '50 Ω'],
+        ['VSWR',                  '< 1.5:1'],
+        ['Spurious Radiation',    '≤ −70 dBc'],
+        ['Harmonics',             '≤ −55 dBc'],
+        ['Open/Short Protection', 'Yes — internal isolator'],
+        ['Modulation',            'True FM'],
+        ['Modulation Input',      'Analog, digital or video'],
+        ['Input Signal Range',    '1 kHz – 10 MHz (−3 dB)'],
+        ['Modulation Options',    'IRIG pre-emphasis, CCIR filtering'],
+        ['Power Supply',          '24 – 32 VDC'],
+        ['Power Consumption',     '0.6 A typ. @ 28 VDC (5 W output)'],
+        ['Overvoltage Protection','Up to 50 V / 10 ms spikes'],
+        ['Dimensions',            '76 × 51 × 21 mm (L × W × H)'],
+        ['Weight',                '~170 g'],
+        ['RF Connector',          'SMA-female'],
+        ['Data/Power Connector',  '15P Micro-D']
+      ],
+      parts: ['TS900 (standard)', 'TS940-FD (field-deployable variant)', 'Various frequency/power options on request'],
+      app: 'UAV telemetry, miniature airborne pods, test rockets, sounding rockets, compact drone systems'
+    },
+    {
+      name: 'TS1000 SERIES — RUGGED S-BAND FM TELEMETRY TRANSMITTER',
+      brief: 'Rugged S-band FM telemetry transmitter series for industrial, military, aerospace and space environments. 1–10 W (20 W option). IRIG-106. Programmable frequency, deviation and power. 270 g, 90 × 70 × 23 mm.',
+      pills: ['2200–2600 MHz','1–20W OUTPUT','270g / 90×70×23mm','IRIG-106 COMPLIANT'],
+      desc: `The TS1000 is STT's most established airborne telemetry transmitter. Synthesiser-controlled with true FM modulation, it transmits wideband digital multiplex signals, video or telemetry to IRIG-106 standards. The highly reliable and rugged design is used across flight test, rotorcraft, missiles, and sub-orbital vehicles. Multiple frequency, modulation, programming and power options available to meet specific requirements.`,
+      specs: [
+        ['Frequency Range',       '2200 – 2600 MHz'],
+        ['Frequency Selection',   'Programmable in 100 kHz steps within 100 MHz band'],
+        ['Frequency Stability',   '≤ ±0.003%'],
+        ['Output Power',          '1 – 10 W (20 W option available)'],
+        ['Output Impedance',      '50 Ω'],
+        ['VSWR',                  '< 1.5:1'],
+        ['Spurious Radiation',    '≤ −60 dBc'],
+        ['Harmonics',             '≤ −60 dBc'],
+        ['Open/Short Protection', 'Yes — internal isolator'],
+        ['Modulation',            'True FM; programmable deviation'],
+        ['Modulation Sense',      'Positive'],
+        ['Input',                 'Analog, digital or video'],
+        ['Input Signal Range',    '1 kHz – 10 MHz (−3 dB)'],
+        ['Modulation Options',    'IRIG pre-emphasis, CCIR filtering'],
+        ['Power Supply',          '24 – 32 VDC'],
+        ['Power Consumption',     '1.1 A typ. @ 28 VDC (5 W output)'],
+        ['Overvoltage Protection','Up to 50 V / 10 ms spikes'],
+        ['Dimensions',            '90 × 70 × 23 mm (L × W × H)'],
+        ['Weight',                '~270 g'],
+        ['RF Connector',          'SMA-female'],
+        ['Data/Power Connector',  'HD-Sub 15 (options: BENDIX PT1 H-8-4P, SMA mod. input)']
+      ],
+      parts: ['TS1000-40-03 (5W standard)', 'TS1000 with 20W PA option', 'Various frequency/modulation/environment options'],
+      app: 'Fixed-wing flight test, rotorcraft, missiles, sub-orbital vehicles, range instrumentation, military airborne test'
+    },
+    {
+      name: 'TS1100 — MULTIMODE TRANSMITTER (FM / SOQPSK / MULTI-H)',
+      brief: 'Next-generation multimode S-band transmitter supporting FM, SOQPSK and multi-h CPM modulations. 1–10 W output. 1 Mbps to 40 Mbps input bit rate. Small size and low mass. Made in Germany.',
+      pills: ['FM / SOQPSK / MULTI-H','1–40 Mbps','1–10W OUTPUT','ARTM COMPLIANT'],
+      desc: `The TS1100 is STT's advanced multimode transmitter, adding SOQPSK-TG and multi-h CPM modulations alongside classic FM. SOQPSK and multi-h are spectrally efficient ARTM (Advanced Range Telemetry) modulations that allow higher data rates within the same RF bandwidth — critical for modern flight test where video and telemetry streams are combined. Supports bit rates from 1 Mbps up to 40 Mbps. Small size and low mass make it suitable for both airborne pods and ground transmitters.`,
+      specs: [
+        ['Modulations',   'FM, SOQPSK-TG, multi-h CPM (ARTM)'],
+        ['Input Bit Rate','1 Mbps – 40 Mbps'],
+        ['Output Power',  '1 W – 10 W'],
+        ['Standard',      'IRIG-106, ARTM compliant'],
+        ['Size',          'Small — contact STT for exact dimensions'],
+        ['Advantage',     'Higher data rates in same RF bandwidth vs. classic FM']
+      ],
+      parts: ['TS1100-series (various power/frequency options)'],
+      app: 'High-data-rate flight test, combined video+telemetry downlinks, advanced range operations, ARTM-compliant test ranges'
+    },
+    {
+      name: 'TS2100 — MINIATURE TELEMETRY TRANSMITTER',
+      brief: 'Highly integrated miniature telemetry transmitter for very size- and weight-constrained installations. Special handling required due to miniaturisation. Contact STT for full specifications.',
+      pills: ['ULTRA MINIATURE','HIGHLY INTEGRATED','SPECIAL HANDLING','LOW POWER'],
+      desc: `The TS2100-40-01 is STT's most miniaturised telemetry transmitter — a highly integrated unit that requires special handling precautions due to its ultra-small form factor. Designed for applications where even the TS900 is too large. Full technical specification available upon request from STT.`,
+      specs: [
+        ['Form Factor',       'Ultra-miniature — most compact STT transmitter'],
+        ['Integration Level', 'Highly integrated (special handling required)'],
+        ['Full Spec',         'Available on request from STT System Technik']
+      ],
+      parts: ['TS2100-40-01'],
+      app: 'Ultra-compact telemetry pods, miniature UAVs, embedded transmitter modules, tight-space vehicle integration'
+    },
+    {
+      name: 'R0405 — S-BAND TELEMETRY RECEIVER',
+      brief: 'S-band telemetry receiver for ground station use — designed to receive and demodulate FM, SOQPSK and multi-h signals transmitted by STT TS-series airborne transmitters.',
+      pills: ['S-BAND RECEIVER','FM / SOQPSK','GROUND STATION','RACK-MOUNT'],
+      desc: `The STT R0405 is the matching ground station receiver for the TS-series transmitter family. Demodulates FM, SOQPSK and other IRIG-106 modulations for ground-based data acquisition. Suitable for fixed and mobile ground station installations. Full specifications available from STT.`,
+      specs: [
+        ['Frequency Band', 'S-band (2200 – 2400 MHz)'],
+        ['Demodulation',   'FM, SOQPSK-TG, multi-h (ARTM)'],
+        ['Standard',       'IRIG-106 compliant'],
+        ['Format',         '19-inch rack-mount']
+      ],
+      parts: ['R0405'],
+      app: 'Flight test ground stations, range instrumentation receive sites, mobile ground stations for airborne telemetry'
+    },
+    {
+      name: 'S2400A / S2400B — S-BAND AIRBORNE ANTENNAS',
+      brief: 'S-band airborne telemetry antennas for flush or blade mounting on aircraft and UAVs — covering the 2200–2500 MHz telemetry band. Low-drag aerodynamic profile.',
+      pills: ['2200–2500 MHz','BLADE / FLUSH MOUNT','LOW DRAG','AIRBORNE RATED'],
+      desc: `STT's S2400A and S2400B are S-band antennas designed for airborne mounting on test aircraft and UAVs. The blade antenna profile minimises aerodynamic drag. Ruggedised for the airborne environment with vibration and temperature qualification. Compatible with all TS-series transmitters.`,
+      specs: [
+        ['Frequency',    '2200 – 2500 MHz (S-band telemetry)'],
+        ['Mount Type',   'Blade (S2400A) / Flush (S2400B)'],
+        ['Application',  'Airborne transmitter antenna'],
+        ['Environment',  'Airborne — vibration and temperature qualified']
+      ],
+      parts: ['S2400A (blade mount)', 'S2400B (flush mount)'],
+      app: 'Fixed-wing aircraft, helicopters, UAVs, sounding rockets, airborne telemetry systems'
+    },
+    {
+      name: 'LNF01 — S-BAND LOW NOISE AMPLIFIER',
+      brief: 'S-band low noise amplifier for boosting received telemetry signals at the ground station receive antenna — improves G/T and extends effective receive range.',
+      pills: ['S-BAND LNA','LOW NOISE FIGURE','MAST-HEAD MOUNT','GROUND STATION'],
+      desc: `The LNF01 is STT's mast-head low noise amplifier for S-band ground station receive chains. Mounting the LNA at the antenna minimises cable losses before amplification, significantly improving system noise temperature (G/T) and extending the effective receive range of the ground station.`,
+      specs: [
+        ['Frequency', 'S-band (2200 – 2400 MHz)'],
+        ['Type',      'Mast-head low noise amplifier'],
+        ['Benefit',   'Reduces system noise temperature; increases receive range']
+      ],
+      parts: ['LNF01'],
+      app: 'S-band flight test ground stations, telemetry receive sites, range monitoring stations'
+    },
+    {
+      name: 'SYSTEMS: FTCGS-1 & MRS-100',
+      brief: 'Complete integrated ground station systems: FTCGS-1 (Flight Test Control and Ground Station) and MRS-100 (Mobile Receive Station) — turnkey S-band data acquisition systems.',
+      pills: ['TURNKEY SYSTEM','FLIGHT TEST GS','MOBILE RECEIVE','S-BAND ACQUISITION'],
+      desc: `STT offers complete ground station systems integrating antenna, LNA, receiver, demodulator and data recording:\n• FTCGS-1: Fixed flight test control and ground station for permanent range installations.\n• MRS-100: Mobile, rapidly deployable S-band receive station for field operations and temporary range support.`,
+      specs: [
+        ['FTCGS-1',     'Fixed flight test control ground station — antenna + electronics + software'],
+        ['MRS-100',     'Mobile receive station — rapid deployment for field operations'],
+        ['Frequency',   'S-band (2200 – 2400 MHz)'],
+        ['Integration', 'Antenna + LNA + STT receiver + demodulator + recording']
+      ],
+      parts: ['FTCGS-1 (fixed system)', 'MRS-100 (mobile system)'],
+      app: 'Permanent flight test ranges, temporary range operations, military test instrumentation, mobile ground support'
+    }
+  ]
+};
+
+const vKey = 'STT SYSTEM TECHNIK';
+let cardCount = 0;
+
+function tog(id){
+  const c=document.getElementById('pc'+id), t=document.getElementById('pt'+id);
+  const o=c.classList.toggle('open'); t.textContent=o?'−':'+';
+}
+
+function render(){
+  document.title = vKey + ' – Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent = vKey + ' – Western Systems Technologies LLP';
+
+  const statsHTML = V.stats.map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML = V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML = V.apps.map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML = V.products.map((p,i)=>{
+    const id = cardCount++;
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>
+        ${p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}
+        ${p.parts.length?`<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div>`:''}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// RF & MICROWAVE · TELEMETRY & SPACE SYSTEMS</div>
+        <div class="hero-name">${vKey}</div>
+        <div class="hero-sub">${V.sub}</div>
+        <div class="hero-country">▸ ${V.country} &nbsp;·&nbsp; FOUNDED ${V.founded} &nbsp;·&nbsp; PART OF TAUBENREUTHER GROUP</div>
+        <div class="hero-desc">${V.desc}</div>
+        <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT STT WEBSITE</a>
+      </div>
+      <div class="badges">${badgesHTML}</div>
+    </div>
+    <div class="stats-bar">${statsHTML}</div>
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    <div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>
+    <div class="contact-bar">
+      <div>
+        <div class="c-title">REQUEST DATASHEET OR QUOTE</div>
+        <div class="c-sub">STT System Technik GmbH · Gneisenaustraße 15, D-80992 München</div>
+      </div>
+      <div>
+        <div class="c-lbl">EMAIL</div>
+        <a class="c-email" href="mailto:mail@stt-systemtechnik.de">mail@stt-systemtechnik.de</a>
+      </div>
+    </div>
+    <div class="wst-footer">
+      <div>
+        <div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+        <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+      </div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; STT SYSTEM TECHNIK</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

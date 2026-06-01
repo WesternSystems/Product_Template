@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">EagleYard Photonics – Product Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #cc4400;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#cc4400;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#cc4400;color:#cc4400;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(204,68,0,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#cc4400;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#cc4400;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #cc4400;color:#cc4400;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(204,68,0,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #cc4400;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#cc4400;white-space:nowrap;background:rgba(204,68,0,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#cc4400;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#cc4400;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#cc4400;box-shadow:0 4px 14px rgba(204,68,0,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#cc4400;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(204,68,0,0.08);color:#cc4400;border-color:#cc4400;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(204,68,0,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#cc4400;letter-spacing:1px;background:rgba(204,68,0,0.02);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;}
+.app-card:hover{border-color:#cc4400;background:rgba(204,68,0,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#cc4400;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+.pkg-card{border:1px solid #cdd9e5;background:#fff;padding:16px;border-left:3px solid #cc4400;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.pkg-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:#cc4400;margin-bottom:5px;letter-spacing:1px;}
+.pkg-desc{font-size:13px;color:#4a6a80;line-height:1.45;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#cc4400;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:36px;padding:18px 26px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#cc4400;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF &amp; MICROWAVE · TIME &amp; FREQUENCY · OPTICS &amp; LASER</div>
+  </div>
+  <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+</div>
+<div class="page"><div class="page-inner"><div id="root"></div></div></div>
+<script>
+const FAMILIES = [
+  {
+    name: 'SINGLE FREQUENCY LASER DIODES',
+    brief: 'DFB, DBR, and RWS laser diodes delivering a single longitudinal mode with ultra-narrow linewidth. Ideal for precision spectroscopy, quantum technology and atomic clock applications.',
+    pills: ['760–1083 nm', '12–500 mW CW', 'Linewidth < 1 MHz', '≥30 dB SMSR'],
+    desc: 'Single frequency laser diodes emit in a single longitudinal mode defined by the grating structure built into the chip. DFB (Distributed Feedback) lasers use a periodic grating along the full active region. DBR (Distributed Bragg Reflector) lasers incorporate a passive grating section outside the gain region. RWS lasers use a ridge waveguide with short cavity for single-mode operation.',
+    specs: [
+      ['Wavelength Range', '760 nm to 1083 nm'],
+      ['Output Power', '12 mW to 500 mW (CW)'],
+      ['Typical Linewidth', '< 1 MHz (DFB/DBR)'],
+      ['Side Mode Suppression', '≥ 30 dB'],
+      ['Threshold Current', '≤ 70 mA'],
+      ['Slope Efficiency', '0.7 W/A (typ.)'],
+      ['Operating Temperature', '10°C to 40°C (with TEC)'],
+      ['Package', 'Butterfly (BFW, BFY), TO-can (TOC, TOV)']
+    ],
+    parts: ['EYP-DFB-0760-xxxxx', 'EYP-DFB-0780-xxxxx', 'EYP-DFB-0795-xxxxx', 'EYP-DFB-0852-xxxxx', 'EYP-DFB-1064-xxxxx', 'EYP-ECL-0770-xxxxx', 'EYP-ECL-0795-xxxxx', 'EYP-RWS-0780-xxxxx'],
+    app: 'Atomic clocks, Rb/Cs/K spectroscopy, cold atom interferometry, quantum optics, metrology, THz generation seed laser, LIDAR seed laser, interferometry'
+  },
+  {
+    name: 'TAPERED AMPLIFIERS',
+    brief: 'High-brightness, diffraction-limited beam amplification using a tapered active region. Delivers high CW output power with excellent beam quality from a single-spatial-mode input.',
+    pills: ['650–980 nm', '250 mW–3 W CW', 'Diffraction limited', 'C-Mount / Butterfly'],
+    desc: 'Tapered amplifiers (TPA) are seeded by a narrow-linewidth single-frequency laser diode. The tapered gain section expands the beam laterally to achieve high output power while maintaining the spectral properties of the seed laser. The miniTA product is a highly integrated fiber-pigtailed version for plug & play use.',
+    specs: [
+      ['Wavelength Range', '650 nm to 980 nm'],
+      ['Output Power', '250 mW to 3 W (CW)'],
+      ['Beam Quality', 'Diffraction-limited (M² ≈ 1)'],
+      ['Seed Power Required', '10–100 mW typical'],
+      ['Package', 'C-Mount (CMT), BTU Butterfly'],
+      ['Typical Gain', '20–30 dB'],
+      ['Operating Current', 'Up to 4 A']
+    ],
+    parts: ['EYP-TPA-0650-00250', 'EYP-TPA-0670-00500', 'EYP-TPA-0765-02000', 'EYP-TPA-0780-03000', 'EYP-TPA-0795-02000', 'EYP-TPA-0808-02000', 'EYP-TPA-0850-02000', 'EYP-TPA-0895-02500', 'EYP-TPA-0980-00500'],
+    app: 'Bose-Einstein condensate research, cold atom trapping, atom interferometry, quantum computing, optical pumping, high-power spectroscopy'
+  },
+  {
+    name: 'SINGLE MODE LASER DIODES',
+    brief: 'Fabry-Pérot RWL ridge waveguide laser diodes offering single spatial mode with up to 800 mW CW output. Available in hermetically sealed packages for long-term reliability.',
+    pills: ['808–1060 nm', 'Up to 800 mW CW', 'Single spatial mode', 'Hermetic packages'],
+    desc: 'Single mode laser diodes (RWL) are ridge waveguide Fabry-Pérot laser diodes with a narrow ridge defining the lateral mode. They are not single-frequency but emit with a single transverse (spatial) mode, providing excellent beam quality for fiber coupling and precision optics applications. The 400 mW and 800 mW variants are standout products in this family.',
+    specs: [
+      ['Wavelength Range', '808 nm to 1060 nm'],
+      ['Output Power', '100 mW to 800 mW (CW)'],
+      ['Spatial Mode', 'Single transverse mode'],
+      ['Spectral Width', 'Multi-longitudinal mode'],
+      ['Package', 'SOT, Butterfly (BFY02), Flatpack (FLW)'],
+      ['Operating Current', 'Up to 1 A'],
+      ['Reliability', 'Hermetically sealed (Hi-Rel)']
+    ],
+    parts: ['EYP-RWL-0808-00400-BFY02', 'EYP-RWL-0808-00800-BFW09', 'EYP-RWL-0850-00100', 'EYP-RWL-1060-00100', 'EYP-RWL-1060-00750'],
+    app: 'Nd:YAG pumping, fiber laser seeding, material processing seed, sensing, optical tweezers, inter/intra-satellite communication (space-qualified)'
+  },
+  {
+    name: 'MULTIMODE LASER DIODES (BAL)',
+    brief: 'Broad Area Laser (BAL) diodes delivering very high optical power (1 W to 8 W CW) from a wide emitting aperture. Designed for maximum power density and pump applications.',
+    pills: ['653–1064 nm', '1 W–8 W CW', 'Broad area emitter', 'CW and Pulsed'],
+    desc: 'Broad Area Laser diodes (BAL) use a wide emitting aperture (typically 100–200 µm) to produce high optical power. They are multimode both spectrally and spatially. Available in both CW and pulsed configurations. Packaged in reliable C-Mount and SOT formats for efficient thermal management. Used widely as pump sources for solid-state and fiber lasers.',
+    specs: [
+      ['Wavelength Range', '653 nm to 1064 nm'],
+      ['Output Power', '1 W to 8 W (CW)'],
+      ['Emitter Width', '100–200 µm (broad area)'],
+      ['Operating Mode', 'CW and Pulsed'],
+      ['Package', 'C-Mount (CMT04), SOT23'],
+      ['Pulsed Peak Power', 'Up to 20 W'],
+      ['Thermal Resistance', 'Low (C-Mount direct mounting)']
+    ],
+    parts: ['EYP-BAL-0808-00020', 'EYP-BAL-0808-08000', 'EYP-BAL-0905-00090', 'EYP-BAL-0980-08000', 'EYP-BAL-1064-08000', 'EYP-BAL-0653-01000', 'EYP-BAL-0670-00001'],
+    app: 'Solid-state laser pumping, Nd:YAG / Nd:YVO₄ pumping, fiber laser pumping, material processing, illumination, medical (ophthalmology, dental), direct diode applications'
+  },
+  {
+    name: 'GAIN CHIPS (AR-COATED)',
+    brief: 'AR-coated Fabry-Pérot laser diodes (RWE) with excellent anti-reflection output facet. Designed for use in external cavity diode laser (ECDL) setups to achieve ultra-narrow linewidth.',
+    pills: ['655–1060 nm', '20–100 mW', 'AR-coated facet', 'ECDL ready'],
+    desc: 'Gain chips are ridge waveguide laser diodes with a high-quality anti-reflection (AR) coating on the output facet. When placed in an external cavity with a grating or mirror, they form a tunable, narrow-linewidth external cavity diode laser (ECDL). EagleYard gain chips are recognized for their low threshold current, high gain and excellent AR coating quality (<0.1% residual reflectivity).',
+    specs: [
+      ['Wavelength Range', '655 nm to 1060 nm'],
+      ['Output Power', '20 mW to 100 mW (in cavity)'],
+      ['AR Coating Reflectivity', '< 0.1%'],
+      ['Package', 'SOT02 (open, no window)'],
+      ['Ridge Width', '3–4 µm typical'],
+      ['Threshold Current', '15–40 mA'],
+      ['Applications', 'ECDL, external resonator tunable laser']
+    ],
+    parts: ['EYP-RWE-0655-00505', 'EYP-RWE-0670-00703', 'EYP-RWE-0690-00703', 'EYP-RWE-0760-02010', 'EYP-RWE-0790-03010', 'EYP-RWE-0840-06010', 'EYP-RWE-0980-08020', 'EYP-RWE-1060-10020'],
+    app: 'Tunable laser research, ECDL systems, atomic & molecular spectroscopy, Littrow / Littman-Metcalf external cavity configurations, laser cooling and trapping'
+  }
+];
+
+const APPS = [
+  { icon: '⚛', name: 'ATOMIC CLOCK', desc: 'DFB lasers at Rb, Cs, K transition wavelengths for optically pumped atomic clock references' },
+  { icon: '🔬', name: 'SPECTROSCOPY', desc: 'Narrow linewidth DFB/ECL lasers for absorption spectroscopy of gases and atomic transitions' },
+  { icon: '🌡', name: 'METROLOGY', desc: 'Optical frequency standards, iodine-stabilized lasers, length and time metrology' },
+  { icon: '🛰', name: 'SPACE / SATELLITE', desc: 'Space-qualified laser diodes for inter/intra-satellite laser communication (LISA mission)' },
+  { icon: '❄', name: 'COLD ATOMS', desc: 'Laser cooling and trapping, Bose-Einstein condensate, atom interferometry' },
+  { icon: '🔭', name: 'LIDAR', desc: 'Seed lasers for pulsed high-power LIDAR systems for atmospheric and range-finding applications' },
+  { icon: '🌊', name: 'THz GENERATION', desc: 'Photomixing of two DFB lasers for continuous-wave THz source generation' },
+  { icon: '⚡', name: 'QUANTUM TECH', desc: 'Quantum computing, quantum communication, entanglement experiments' },
+  { icon: '🔎', name: 'GAS DETECTION', desc: 'TDLAS (Tunable Diode Laser Absorption Spectroscopy) for trace gas sensing and analysis' },
+  { icon: '🏭', name: 'MATERIAL PROCESSING', desc: 'High-power seed lasers for fiber amplifiers and solid-state laser pump sources' },
+  { icon: '🏥', name: 'MEDICAL / DENTAL', desc: 'High-power BAL diodes for ophthalmology and dental treatment applications' },
+  { icon: '🎯', name: 'SENSING / RANGING', desc: 'Velocimetry, interferometry, laser Doppler vibrometry and distance measurement' }
+];
+
+const PACKAGES = [
+  { name: 'BUTTERFLY (BFW / BFY)', desc: '14-pin hermetically sealed butterfly package with integrated TEC and thermistor. Ideal for spectroscopy and metrology.' },
+  { name: 'TO-CAN (TOV / TOC)', desc: 'Compact TO-package with collimation optics. Suitable for space-constrained system integration.' },
+  { name: 'C-MOUNT (CMT)', desc: 'High-power C-mount package for efficient heat dissipation. Used in tapered amplifiers and broad-area lasers.' },
+  { name: 'FLATPACK (FLW)', desc: 'Low-profile flatpack for space-qualified and high-reliability laser diode applications.' },
+  { name: 'SOT PACKAGE (SOT)', desc: 'Small outline transistor package. Used for gain chips and AR-coated laser diodes in ECDL setups.' },
+  { name: 'MINI ECL (BFY12)', desc: 'Plug & play fiber-pigtailed butterfly package with integrated optical isolator. Minimal setup complexity.' }
+];
+
+let cc = 0;
+
+function tog(id) {
+  const c = document.getElementById('pc'+id), t = document.getElementById('pt'+id);
+  const o = c.classList.toggle('open'); t.textContent = o ? '\u2212' : '+';
+}
+
+function render() {
+  // HERO
+  const heroHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// OPTICS &amp; LASER &nbsp;·&nbsp; PHOTONICS</div>
+        <div class="hero-name">EAGLEYARD PHOTONICS</div>
+        <div class="hero-sub">HIGH-POWER LASER DIODES — GaAs TECHNOLOGY</div>
+        <div class="hero-country">&#9658; BERLIN, GERMANY &nbsp;·&nbsp; FOUNDED 2002 &nbsp;·&nbsp; NOW: TOPTICA EAGLEYARD</div>
+        <div class="hero-desc">Global leading provider of high-power laser diodes with wavelengths from 630–1120 nm based on GaAs (Gallium Arsenide). Products combine maximum power, highest durability and excellent beam quality — engineered for the most demanding high-end scientific, defence, space and industrial applications worldwide.</div>
+        <a href="https://www.toptica-eagleyard.com" target="_blank" rel="noopener" class="hero-link">&#8599; VISIT OFFICIAL WEBSITE</a>
+      </div>
+      <div class="badges">
+        <div class="badge">630–1120 nm</div>
+        <div class="badge">GaAs TECHNOLOGY</div>
+        <div class="badge">SPACE QUALIFIED</div>
+        <div class="badge">5 PRODUCT FAMILIES</div>
+        <div class="badge">ISO CERTIFIED</div>
+      </div>
+    </div>`;
+
+  // STATS
+  const statsHTML = `
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-val">5</div><div class="stat-label">PRODUCT FAMILIES</div></div>
+      <div class="stat"><div class="stat-val">630–1120nm</div><div class="stat-label">WAVELENGTH RANGE</div></div>
+      <div class="stat"><div class="stat-val">8W</div><div class="stat-label">MAX CW POWER (BAL)</div></div>
+      <div class="stat"><div class="stat-val">GaAs</div><div class="stat-label">CORE TECHNOLOGY</div></div>
+    </div>`;
+
+  // PRODUCTS
+  const prodsHTML = FAMILIES.map((p, i) => {
+    const id = cc++;
+    const specsHTML = p.specs && p.specs.length
+      ? `<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>` : '';
+    const partsHTML = p.parts && p.parts.length
+      ? `<div class="dl"><div class="dl-label">Sample Part Numbers</div><div class="pnums">${p.parts.map(pt => `<span class="pnum">${pt}</span>`).join('')}</div></div>` : '';
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl => `<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc}</div></div>
+        ${specsHTML}${partsHTML}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // APPS
+  const appsHTML = APPS.map(a =>
+    `<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`
+  ).join('');
+
+  // PACKAGES
+  const pkgsHTML = PACKAGES.map(p =>
+    `<div class="pkg-card"><div class="pkg-name">${p.name}</div><div class="pkg-desc">${p.desc}</div></div>`
+  ).join('');
+
+  document.getElementById('root').innerHTML = heroHTML + statsHTML + `
+    <div class="sec"><div class="sec-title">Product Families</div><div class="prod-grid">${prodsHTML}</div></div>
+    <div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>
+    <div class="sec"><div class="sec-title">Available Packages</div><div class="pkg-grid">${pkgsHTML}</div></div>
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST A QUOTE OR TECHNICAL SUPPORT</div>
+      <div class="c-sub">Contact EagleYard / TOPTICA directly for pricing, datasheets and engineering consultation</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:info@toptica-eagleyard.com">info@toptica-eagleyard.com</a></div>
+    </div>
+    <div class="wst-footer">
+      <div><div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+      <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF &amp; MICROWAVE · TIME &amp; FREQUENCY · OPTICS &amp; LASER</div></div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; EAGLEYARD PHOTONICS</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

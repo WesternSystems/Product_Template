@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">RIO – Optasense – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #cc4400;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#cc4400;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#cc4400;color:#cc4400;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(204,68,0,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#cc4400;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#cc4400;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #cc4400;color:#cc4400;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(204,68,0,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #cc4400;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#cc4400;white-space:nowrap;background:rgba(204,68,0,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#cc4400;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#cc4400;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#cc4400;box-shadow:0 4px 14px rgba(204,68,0,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#cc4400;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(204,68,0,0.08);color:#cc4400;border-color:#cc4400;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(204,68,0,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#cc4400;letter-spacing:1px;background:rgba(204,68,0,0.02);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;}
+.app-card:hover{border-color:#cc4400;background:rgba(204,68,0,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#cc4400;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#cc4400;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:36px;padding:18px 26px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#cc4400;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF &amp; MICROWAVE · TIME &amp; FREQUENCY · OPTICS &amp; LASER</div>
+  </div>
+  <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+</div>
+<div class="page"><div class="page-inner"><div id="root"></div></div></div>
+<script>
+const VENDOR = {
+  name: 'RIO – OPTASENSE',
+  url: 'https://rio-lasers.com/',
+  email: 'sales@rio-lasers.com',
+  country: 'SANTA CLARA, CALIFORNIA, USA',
+  founded: null,
+  sub: 'SINGLE FREQUENCY NARROW LINEWIDTH LASER DIODES, MODULES & SUBSYSTEMS',
+  desc: 'RIO Lasers (a Luna Innovations company, Santa Clara, CA, USA) is an industry-leading global supplier of single frequency narrow linewidth lasers, modules and subsystems. Based on RIO\'s proprietary PLANEX™ planar external cavity laser technology, products combine the high performance of long-cavity fiber lasers with the low cost, simplicity and Telcordia GR-468-qualified reliability of semiconductor lasers. RIO serves clean energy, security, oil & gas, test & measurement, coherent communication, LIDAR, quantum optics and fiber optic sensing markets worldwide.',
+  badges: ['PLANEX™ TECHNOLOGY', 'TELCORDIA GR-468 QUALIFIED', '< 1 kHz LINEWIDTH', 'LUNA INNOVATIONS COMPANY'],
+  stats: [
+    {v:'< 1 kHz', l:'PLANEX LINEWIDTH'},
+    {v:'Up to 2W', l:'GRANDE OUTPUT POWER'},
+    {v:'1528–1565nm', l:'WAVELENGTH RANGE'},
+    {v:'8–14 GHz', l:'OPLL FREQ LOCK RANGE'}
+  ],
+  apps: [
+    {icon:'🌊', name:'DISTRIBUTED SENSING', desc:'Distributed temperature, strain and acoustic sensing (DAS/DTS) — Brillouin BOTDA/BOTDR and interferometric fiber optic sensing'},
+    {icon:'🔭', name:'LIDAR & REMOTE SENSING', desc:'Coherent LIDAR for atmospheric monitoring, wind sensing, range finding and automotive LiDAR systems'},
+    {icon:'🛡', name:'DEFENCE & SECURITY', desc:'Perimeter security, acoustic sensing networks, undersea surveillance and counter-drone fiber optic detection'},
+    {icon:'🛢', name:'OIL & GAS', desc:'Downhole DAS for seismic acquisition, hydraulic fracture monitoring and wellbore integrity assessment'},
+    {icon:'🔬', name:'SPECTROSCOPY & METROLOGY', desc:'High resolution laser spectroscopy, absolute frequency metrology, optical coherence tomography (OCT)'},
+    {icon:'📡', name:'RF & MICROWAVE PHOTONICS', desc:'Coherent RF over fibre, microwave photonic links, radar and electronic warfare photonic subsystems'},
+    {icon:'🌐', name:'COHERENT COMMUNICATIONS', desc:'Seed lasers for coherent optical transceivers, DWDM channel generation and local oscillators'},
+    {icon:'⚛', name:'QUANTUM OPTICS', desc:'Ultra-stable narrow linewidth sources for quantum sensing, atom interferometry and quantum key distribution'},
+  ],
+  products: [
+    {
+      name: 'PLANEX / ORION ECL DIODE — 1550 nm LASER DIODE',
+      brief: 'High performance single frequency External Cavity Laser at 1550 nm based on PLANEX™ planar technology. Up to 20 mW output, < 2 kHz linewidth, ultra-low RIN and phase noise. Telcordia GR-468 qualified. SMF or PMF pigtail. Ideal OEM laser diode for volume production.',
+      pills: ['< 2 kHz LINEWIDTH', '1530–1565 nm', 'TELCORDIA GR-468', 'SMF / PMF PIGTAIL'],
+      desc: 'The PLANEX™ 1550 nm laser diode is RIO\'s flagship OEM product. It combines a gain chip with a planar lightwave circuit (PLC) Bragg grating to form an external cavity — delivering performance that rivals long-cavity fiber lasers at semiconductor laser cost and reliability.\n\nKey advantages:\n• Single longitudinal mode — guaranteed mode-hop-free operation over life and temperature\n• Ultra-low phase noise and RIN — critical for coherent sensing and communications\n• Low sensitivity to vibration and acoustic noise — robust in field-deployed instruments\n• Very low wavelength sensitivity to bias current and temperature\n• Industry-standard footprint, mounting pattern and electrical connections — drop-in replacement or upgrade\n• ITU-T DWDM wavelength or custom — 1530–1565 nm range\n• Wavelength tunability with excellent SMSR\n• CW, modulated and pulsed operation modes\n• Operating case temperature: −5°C to +75°C\n• Telcordia GR-468 Qualified, RoHS Compliant',
+      specs: [
+        ['Wavelength', '1530 – 1565 nm (ITU-T DWDM or custom)'],
+        ['Output Power', 'Up to 20 mW'],
+        ['Linewidth', '< 2 kHz (typical < 1 kHz)'],
+        ['Phase Noise', 'Ultra-low — best-in-class for semiconductor laser'],
+        ['RIN', 'Ultra-low relative intensity noise'],
+        ['SMSR', 'Excellent side mode suppression ratio'],
+        ['Pigtail', 'SMF or PMF (polarisation-maintaining fiber)'],
+        ['Operating Temp', '−5°C to +75°C case temperature'],
+        ['Qualification', 'Telcordia GR-468 Qualified'],
+        ['Compliance', 'RoHS Compliant'],
+        ['Operation Modes', 'CW, modulated and pulsed'],
+        ['Form Factor', 'Industry-standard footprint — OEM drop-in']
+      ],
+      parts: ['PLANEX 1550 nm (specify wavelength channel and pigtail type)', 'PLANEX SMF variant', 'PLANEX PMF variant'],
+      app: 'Distributed acoustic sensing (DAS), coherent LIDAR seed laser, fiber optic gyroscope, coherent communication local oscillator, OCT, spectroscopy'
+    },
+    {
+      name: 'PLANEX / ORION ECL DIODE — 1064 nm LASER DIODE',
+      brief: 'Narrow linewidth single frequency External Cavity Laser at 1064 nm. PLANEX™ planar technology. SMF or PMF pigtail. Ideal for coherent sensing, Doppler wind LIDAR, spectroscopy and quantum applications requiring 1064 nm single-mode operation.',
+      pills: ['1064 nm', 'SINGLE FREQUENCY', 'NARROW LINEWIDTH', 'SMF / PMF PIGTAIL'],
+      desc: 'The PLANEX™ 1064 nm laser diode extends RIO\'s proven planar external cavity technology to the 1064 nm wavelength — critical for Nd:YAG-seeded amplifiers, coherent Doppler wind LIDAR, gravitational wave detection sidebands, and other applications requiring a highly coherent 1064 nm source.\n\nKey features:\n• Single longitudinal mode — mode-hop free operation\n• Narrow linewidth — long coherence length for interferometric applications\n• Ultra-low phase noise and RIN\n• Low sensitivity to vibration and acoustic noise\n• SMF or PMF pigtail options\n• Telcordia GR-468 qualified reliability\n• RoHS Compliant',
+      specs: [
+        ['Wavelength', '1064 nm'],
+        ['Mode', 'Single longitudinal mode — mode-hop free'],
+        ['Linewidth', 'Narrow linewidth — contact RIO for specification'],
+        ['Phase Noise', 'Ultra-low'],
+        ['Pigtail', 'SMF or PMF'],
+        ['Qualification', 'Telcordia GR-468 Qualified'],
+        ['Compliance', 'RoHS Compliant']
+      ],
+      parts: ['PLANEX 1064 nm SMF', 'PLANEX 1064 nm PMF'],
+      app: 'Coherent Doppler wind LIDAR, gravitational wave detector local oscillator, Nd:YAG amplifier seeding, quantum optics, precision spectroscopy at 1064 nm'
+    },
+    {
+      name: 'HIGH POWER LOW PHASE NOISE MODULE — UP TO 1 W, EDFA AMPLIFIED, PM1550',
+      brief: 'GRANDE: high power narrow linewidth laser module — PLANEX™ ECL integrated with low-noise EDFA. Up to 2 W output at 1550 nm. Ultra-low phase noise and RIN. PM or SM fiber. RS-232 control. −10°C to +70°C. Compact rugged OEM module for advanced sensing and LIDAR.',
+      pills: ['UP TO 2W OUTPUT', 'LOW NOISE EDFA', 'PM1550 FIBER', 'RS-232 CONTROL'],
+      desc: 'The GRANDE builds upon the proven ORION™/PLANEX™ performance by integrating a high-performance, low-noise EDFA (Erbium-Doped Fiber Amplifier) into a single compact module. This delivers up to 2 W output power while maintaining the exceptional narrow linewidth, low phase noise and vibration insensitivity of the PLANEX laser.\n\nKey features:\n• Up to 2 W output power — PLANEX ECL + low-noise EDFA, fully integrated\n• Ultra-low phase noise and RIN — EDFA designed to preserve PLANEX source noise performance\n• Single longitudinal mode — guaranteed mode-hop free over life and temperature\n• Narrow linewidth (< 1 kHz) — long coherence length for interferometric and LIDAR applications\n• 1545–1565 nm, ITU-T DWDM wavelength or custom\n• Wavelength tunability — excellent SMSR\n• Low sensitivity to vibration and acoustic noise\n• SMF or PMF pigtail options\n• CW, modulated and pulsed operation; fast frequency modulation option\n• External monitoring and control via RS-232\n• Compact OEM design: −10°C to +70°C case temperature\n• RoHS Compliant',
+      specs: [
+        ['Output Power', 'Up to 2 W (PLANEX + integrated EDFA)'],
+        ['Wavelength', '1545 – 1565 nm (ITU-T DWDM or custom)'],
+        ['Linewidth', '< 1 kHz'],
+        ['Phase Noise', 'Ultra-low — EDFA preserves PLANEX noise floor'],
+        ['RIN', 'Ultra-low relative intensity noise'],
+        ['Pigtail', 'SMF or PMF (polarisation-maintaining)'],
+        ['Control Interface', 'RS-232 standard interface'],
+        ['Operating Temp', '−10°C to +70°C case temperature'],
+        ['Form Factor', 'Compact, rugged OEM module'],
+        ['Operation Modes', 'CW, modulated, pulsed; fast FM option'],
+        ['Compliance', 'RoHS Compliant']
+      ],
+      parts: ['GRANDE 1W (SMF)', 'GRANDE 2W (SMF)', 'GRANDE 1W (PMF)', 'GRANDE 2W (PMF)'],
+      app: 'Long-range coherent LIDAR, high-sensitivity distributed acoustic sensing (DAS), interferometric fiber optic sensing, RF and microwave photonics, coherent OTDR'
+    },
+    {
+      name: 'TUNABLE LASER SOURCE — ORION BENCHTOP LASER SOURCE',
+      brief: 'Turn-key compact benchtop laser source based on the industry-proven ORION™/PLANEX™ laser module. Plug-and-play for lab and test use. 1550 nm or 1064 nm. Low phase noise, narrow linewidth. Ideal for R&D characterisation, system integration testing and lab sensing demonstrations.',
+      pills: ['TURN-KEY BENCHTOP', '1550 nm / 1064 nm', 'LOW PHASE NOISE', 'LAB & SYSTEM TEST'],
+      desc: 'The ORION Laser Source is a complete, turn-key benchtop instrument built around the same PLANEX™/ORION™ laser module used in OEM instruments — providing researchers and system developers with immediate access to RIO\'s ultra-low-noise single frequency laser performance without designing a custom driver and housing.\n\nKey features:\n• Complete compact benchtop turn-key system\n• Based on industry-proven ORION™/PLANEX™ module\n• Ultra-low phase noise and RIN\n• Narrow linewidth, long coherence length\n• Available at 1550 nm and 1064 nm\n• Simple plug-and-play operation\n• Ideal for system integration testing, algorithm development and lab sensing setups',
+      specs: [
+        ['Wavelengths', '1550 nm and 1064 nm (model dependent)'],
+        ['Type', 'ORION™/PLANEX™-based turn-key benchtop system'],
+        ['Phase Noise', 'Ultra-low — same source as OEM modules'],
+        ['Linewidth', 'Narrow (< 2 kHz) — long coherence length'],
+        ['Form Factor', 'Compact benchtop — plug and play'],
+        ['Use Case', 'R&D, system integration test, lab sensing demonstration']
+      ],
+      parts: ['ORION Laser Source 1550 nm', 'ORION Laser Source 1064 nm'],
+      app: 'Fiber optic sensing system development, coherent algorithm testing, laboratory spectroscopy, LIDAR bench testing, teaching and demonstration'
+    },
+    {
+      name: 'OPTICAL PHASE LOCK LOOP — 1 MHz–100 GHz OFFSET, HETERODYNE SPECTROSCOPY',
+      brief: 'OPLL: Optical Phase Locked Loop system with selectable frequency offset. Two PLANEX™ lasers phase-locked with 8–14 GHz tunable frequency offset. < 15 kHz linewidth. PM output fiber. 19" 2U rackmount with GUI and USB control. Used in Brillouin sensing, DTSS, heterodyne LIDAR and microwave photonics.',
+      pills: ['8–14 GHz FREQ OFFSET', '< 15 kHz LINEWIDTH', 'PM OUTPUT FIBER', '19" 2U RACKMOUNT'],
+      desc: 'The RIO Optical Phase Lock Loop (OPLL) system provides two phase-coherent PLANEX™ laser outputs with a user-selectable, highly stable frequency offset — generating an optical heterodyne beat at a precise microwave frequency. This is the key enabling component for Brillouin-based distributed sensing (BOTDA/BOTDR), tunable heterodyne sources and RF/microwave photonic applications.\n\nKey features:\n• Two laser outputs with specified wavelengths — both PLANEX™ single frequency\n• Narrow linewidth: < 15 kHz (long coherence length)\n• Selectable frequency offset: 8–14 GHz locking range — tunable and monitorable\n• Two operational modes: step tuning and continuous sweep\n• Monitoring ports: optical signal, RF beat frequency, PLL lock signal\n• PM (polarisation-maintaining) output fiber\n• Higher output power option available\n• Ultra-low phase noise and RIN — PLANEX source quality maintained\n• 1528–1565 nm, ITU-T DWDM wavelength or custom\n• 19" 2U rackmount with GUI and USB control — fully integrated and user-friendly\n• Guaranteed mode-hop-free operation\n• RoHS Compliant',
+      specs: [
+        ['Frequency Offset Range', '8 – 14 GHz (selectable and tunable)'],
+        ['Linewidth', '< 15 kHz (both output lasers)'],
+        ['Wavelength', '1528 – 1565 nm (ITU-T DWDM or custom)'],
+        ['Output Fiber', 'PM (polarisation-maintaining)'],
+        ['Output Power', 'Up to 5 mW standard; higher power option available'],
+        ['Tuning Modes', 'Step tuning and continuous sweep'],
+        ['Monitoring', 'Optical signal, RF beat, PLL lock signal monitor ports'],
+        ['Control Interface', 'GUI + USB connection'],
+        ['Form Factor', '19" 2U rackmount — integrated turn-key system'],
+        ['Phase Noise', 'Ultra-low — PLANEX source quality'],
+        ['Compliance', 'RoHS Compliant']
+      ],
+      parts: ['OPLL System (specify wavelength pair and offset frequency)', 'OPLL with higher power option'],
+      app: 'Brillouin BOTDA/BOTDR distributed sensing, DTSS (distributed temperature and strain), tunable heterodyne source, RF and microwave photonics, high-speed optical receiver testing, coherent LIDAR, metrology'
+    }
+  ]
+};
+
+let cc = 0;
+function tog(id) {
+  const c = document.getElementById('pc'+id), t = document.getElementById('pt'+id);
+  const o = c.classList.toggle('open'); t.textContent = o ? '\u2212' : '+';
+}
+
+function render() {
+  const V = VENDOR;
+  document.title = V.name + ' \u2013 Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent = V.name + ' \u2013 Optics & Laser';
+
+  const statsHTML = V.stats.map(s =>
+    `<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`
+  ).join('');
+
+  const badgesHTML = V.badges.map(b => `<div class="badge">${b}</div>`).join('');
+
+  const appsHTML = V.apps.map(a =>
+    `<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`
+  ).join('');
+
+  const prodsHTML = V.products.map((p, i) => {
+    const id = cc++;
+    const specsHTML = p.specs && p.specs.length
+      ? `<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>` : '';
+    const partsHTML = p.parts && p.parts.length
+      ? `<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt => `<span class="pnum">${pt}</span>`).join('')}</div></div>` : '';
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl => `<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>
+        ${specsHTML}${partsHTML}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// OPTICS &amp; LASER</div>
+        <div class="hero-name">${V.name}</div>
+        <div class="hero-sub">${V.sub}</div>
+        <div class="hero-country">&#9658; ${V.country}</div>
+        <div class="hero-desc">${V.desc}</div>
+        <a href="${V.url}" target="_blank" rel="noopener" class="hero-link">&#8599; VISIT OFFICIAL WEBSITE</a>
+      </div>
+      <div class="badges">${badgesHTML}</div>
+    </div>
+    <div class="stats-bar">${statsHTML}</div>
+    <div class="sec"><div class="sec-title">Product Lines &amp; Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    <div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div>
+      <div class="c-sub">Contact RIO – Optasense for datasheets, pricing and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div><div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+      <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF &amp; MICROWAVE · TIME &amp; FREQUENCY · OPTICS &amp; LASER</div></div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; RIO &ndash; OPTASENSE</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">IZT GmbH – RF & Microwave – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+
+/* COMPANY HEADER */
+.co-header{background:#fff;border-bottom:3px solid #0077aa;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#0077aa;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.co-nav{display:flex;gap:10px;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#0077aa;color:#0077aa;}
+
+.page-inner{padding-top:24px;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,170,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#0077aa;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#0077aa;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #0077aa;color:#0077aa;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,170,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #0077aa;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#0077aa;white-space:nowrap;background:rgba(0,119,170,0.04);}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#0077aa;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+
+/* SECTIONS */
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#0077aa;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#0077aa;box-shadow:0 4px 16px rgba(0,119,170,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#0077aa;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,170,0.08);color:#0077aa;border-color:#0077aa;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#0077aa;letter-spacing:1px;background:rgba(0,119,170,0.03);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+
+/* APPS GRID */
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#0077aa;background:rgba(0,119,170,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#0077aa;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* CONTACT */
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#0077aa;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+
+/* WST FOOTER */
+.wst-footer{margin-top:40px;padding:20px 28px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#0077aa;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+
+<!-- COMPANY HEADER -->
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="co-nav">
+    <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+  </div>
+</div>
+
+<div class="page">
+<div class="page-inner">
+  <div id="root"></div>
+</div>
+</div>
+
+<script>
+const V = {
+  url: 'https://www.izt-labs.de',
+  email: 'info@izt-labs.de',
+  country: 'ERLANGEN (NUREMBERG), GERMANY',
+  sub: 'SIGNAL GENERATORS, RECEIVERS & CHANNEL EMULATORS',
+  desc: 'IZT GmbH is a leading German developer and manufacturer of wideband RF receivers, multi-channel signal generators, satellite channel emulators, record & playback systems, direction finding sensors and digital broadcasting equipment. IZT\'s patented signal processing algorithms enable simultaneous multi-channel signal generation and reception with unmatched flexibility — trusted by intelligence agencies, satellite operators, automotive OEMs, broadcasters and defence organisations worldwide.',
+  badges: [
+    'PATENTED SIGNAL PROCESSING',
+    '31 VIRTUAL SIGNAL GENERATORS',
+    '9 kHz – 18 GHz COVERAGE',
+    '120 MHz INSTANTANEOUS BW',
+    'COMINT / SIGINT / GNSS'
+  ],
+  stats: [
+    {v:'31',       l:'VIRTUAL SIG GENERATORS (S1000)'},
+    {v:'18 GHz',   l:'MAX RECEIVE FREQUENCY (R5040)'},
+    {v:'120 MHz',  l:'INSTANTANEOUS BW (R5040)'},
+    {v:'25 MHz',   l:'REAL-TIME BW (R3000)'},
+    {v:'100 MHz',  l:'CHANNEL EMULATOR BW (C3040)'}
+  ],
+  apps: [
+    {icon:'📍', name:'GNSS TESTING',      desc:'Multi-constellation GNSS simulation with jamming, spoofing, HIL interface and trajectory replay (IZT S1000 GNSS)'},
+    {icon:'🛡',  name:'COMINT / SIGINT',  desc:'Wideband signal search, interception, TDOA geolocation and DF operator training (R-series + S1000 COMINT)'},
+    {icon:'🛰',  name:'SATELLITE TESTING',desc:'Full bidirectional satellite link emulation with real-time payload and propagation effects (C3040, C5040, C6000)'},
+    {icon:'🚗',  name:'AUTOMOTIVE',       desc:'FM-RDS, DAB+, DVB-T, GNSS receiver development and type approval testing for infotainment (S1000 + RecPlay)'},
+    {icon:'📺',  name:'BROADCAST',        desc:'DAB+ multiplex generation for broadcast networks and receiver development (DAB ContentServer + S1000)'},
+    {icon:'✈',   name:'ATC',              desc:'VHF direction finding for Air Traffic Control — aircraft identification and airspace safety (IZT R5509)'},
+    {icon:'🔍',  name:'SPECTRUM MONITORING', desc:'ITU-compliant wideband spectrum monitoring, signal search, analysis and recording (R3000 family)'},
+    {icon:'🔄',  name:'RECORD & PLAYBACK',desc:'Capture real RF environments in the field; replay bit-accurately in the lab for repeatable testing (IZT RecPlay)'}
+  ],
+  products: [
+    /* ── SIGNAL GENERATORS ── */
+    {
+      name: 'IZT S1000 / S1010 — MULTI-CHANNEL SIGNAL GENERATOR',
+      brief: 'Revolutionary multi-channel RF signal generator replaying up to 31 independent RF signal channels simultaneously from one compact 2U chassis. IZT patented architecture consolidates entire labs of conventional generators into one unit. Used for GNSS simulation, COMINT training, broadcast receiver testing and record-playback.',
+      pills: ['31 VIRTUAL GENERATORS','GNSS / COMINT / DAB','9 kHz – 6 GHz','2U COMPACT CHASSIS'],
+      desc: `The IZT S1000 is IZT's flagship product and a breakthrough in RF test equipment. IZT's patented signal processing algorithm combines multiple technologies to match complex receiver test requirements — replacing extensive multi-generator setups with a single compact, cost-effective, flexible unit.
+
+The S1000 simultaneously replays 31 RF signal channels with independent carriers and modulation formats. These channels are fed from an internal memory with 12- or 16-bit I/Q data, frequency/delay/power profiles and recordings from IZT R-series receivers.
+
+• GNSS Mode: Real-time multi-constellation GNSS simulation (GPS L1/L2/L5, GLONASS, Galileo, BeiDou, SBAS) with live orbit propagation, ionosphere/troposphere models, jamming (CW, chirp, frequency hopping) and Hardware-in-the-Loop (HIL) interface.
+• COMINT Simulator: Complex electromagnetic environment generation for DF system testing and operator training.
+• Broadcast Testing: FM-RDS, DAB+, DVB-T2, HD Radio, ISDB-T, Sirius/XM signal generation for automotive and consumer receiver development.
+• RecPlay Replay: Replays recorded real-world RF from IZT R-series recorders — bit-accurate field signal reproduction in the lab.
+
+The IZT S1010 is the extended-memory variant for the most demanding applications.`,
+      specs: [
+        ['Architecture',        'IZT patented: 31 virtual signal generators in one chassis'],
+        ['Form Factor',         'Compact 2U rack-mount chassis'],
+        ['Memory',              'Internal I/Q memory for arbitrary/pre-encoded signals (S1000); Extended memory (S1010)'],
+        ['I/Q Resolution',      '12-bit or 16-bit raw I/Q data input'],
+        ['Signal Types',        'GNSS, FM-RDS, DAB+, DVB-T2, ISDB-T, HD Radio, Sirius/XM, arbitrary'],
+        ['GNSS Constellations',  'GPS L1/L2/L5, GLONASS L1/L2, Galileo E1/E5, BeiDou B1/B2, SBAS'],
+        ['GNSS Channels',       'Up to 64 simultaneous GNSS tracking channels'],
+        ['GNSS Atmosphere',     'Klobuchar ionosphere, Saastamoinen troposphere'],
+        ['GNSS Jamming',        'CW, chirp, frequency hopping (configurable power and duration)'],
+        ['HIL Interface',       'Real-time external position/dynamics input'],
+        ['Dual Master/Slave',   'Phase-coherent multi-unit for L1+L2+E5+L5 simultaneous'],
+        ['Replay Input',        'R3000/R3301 recordings at any sample rate; 16/32-bit resolution'],
+        ['Frequency Coverage',  '9 kHz – 6 GHz (configuration dependent)'],
+        ['Remote Control',      'SCPI, IZT Signal Studio GUI, Python API']
+      ],
+      parts: ['IZT S1000 (standard memory)', 'IZT S1010 (extended memory)'],
+      app: 'GNSS receiver testing and development, GNSS anti-jam/anti-spoof validation, COMINT DF system testing, operator training, automotive receiver development (FM/DAB/DVB), broadcast receiver lab testing'
+    },
+
+    /* ── RECEIVERS ── */
+    {
+      name: 'IZT R3000 FAMILY — WIDEBAND DIGITAL RECEIVERS',
+      brief: 'Outstanding-performance wideband receiver family with 24 MHz real-time bandwidth, 9 kHz – 3 GHz (to 6 GHz / 18 GHz). Multi-channel operation, ITU-compliant measurements, digital IF to GigE LAN. The benchmark for COMINT, SIGINT and spectrum monitoring.',
+      pills: ['9 kHz – 3/6/18 GHz','24 MHz REAL-TIME BW','4 INDEPENDENT CHANNELS','ITU COMPLIANT'],
+      desc: `The IZT R3000 receiver family is IZT's most widely deployed product line — the benchmark for COMINT, SIGINT and spectrum monitoring. Exceptional performance with 24 MHz real-time bandwidth allows handling of wideband signals while exceeding traditional narrowband receiver performance.
+
+Family members:
+• R3000: Original 1U rack model for 19-inch rack environments — multiple units can be stacked.
+• R3200: Same performance as R3000 in a 2U shallow-depth design for depth-constrained installations.
+• R3410: Compact variant with 25 MHz real-time bandwidth, under 7 kg, fanless — ideal for mobile and harsh-environment installations.
+• R3411: Ruggedised version of R3410 with 30% size/weight reduction — ideal for man-portable systems. Available in 9 kHz–30 MHz (HF) or 20 MHz–3 GHz configurations.`,
+      specs: [
+        ['Frequency Range',     '9 kHz – 3 GHz (R3000/R3200); to 6 GHz / 18 GHz (options)'],
+        ['Real-time Bandwidth', '24 MHz (R3000/R3200); 25 MHz (R3410/R3411)'],
+        ['Multi-channel',       'Up to 4 independent channels within 24 MHz bandwidth'],
+        ['IF Filter Bandwidth', '6.25 kHz – 24 MHz'],
+        ['Tuning Resolution',   '1 Hz'],
+        ['Digital IF Output',   'Gigabit LAN (I/Q complex baseband, complex FFT, PSD)'],
+        ['LAN Data Rate',       'Up to 115 MByte/s'],
+        ['Analog IF Output',    'Optional'],
+        ['Demodulation',        'AM, FM, SSB, CW, digital (FSK, PSK, QAM)'],
+        ['Measurements',        'ITU-compliant spectrum monitoring, TDOA direction finding'],
+        ['R3410 Weight',        '< 7 kg, fanless design'],
+        ['R3411',               '30% smaller/lighter than R3410; man-portable'],
+        ['Synchronisation',     'External reference for DF systems'],
+        ['Remote Control',      'Fully remote controllable via LAN']
+      ],
+      parts: ['IZT R3000 (1U rack)', 'IZT R3200 (2U shallow)', 'IZT R3410 (compact)', 'IZT R3411 (ruggedised, man-portable)'],
+      app: 'COMINT/SIGINT signal search and analysis, spectrum monitoring (ITU), TDOA direction finding, wideband signal interception, multi-channel recording, jamming monitoring'
+    },
+    {
+      name: 'IZT R5040 — WIDEBAND RECEIVER & RECORDER (UP TO 18 GHz)',
+      brief: 'IZT\'s highest-performance wideband receiver with frequency coverage to 18 GHz and 120 MHz instantaneous bandwidth. Rugged, waterproof enclosure for outdoor/field use. Sub-octave preselectors and dual conversion for maximum linearity. Built-in GNSS receiver for time-stamping.',
+      pills: ['UP TO 18 GHz','120 MHz INST. BW','WATERPROOF / RUGGED','BUILT-IN GNSS TIMEREF'],
+      desc: `The IZT R5040 is IZT's latest generation flagship receiver, using the newest tuner architecture with sub-octave preselectors, dual conversion and variable 1st IF for maximum robustness against false reception and intermodulation. Two high-power mixers ensure maximum linearity for demanding satellite monitoring, COMINT and broadband recording applications.
+
+Key differentiators:
+• Low-noise preamplifier (switchable) for maximum sensitivity
+• Built-in test source for end-to-end verification and alignment
+• Manual and automatic gain control
+• All internal clocks synchronisable to external reference or built-in GNSS
+• Rugged, waterproof enclosure for outdoor installation and field deployment`,
+      specs: [
+        ['Frequency Range',      'Up to 18 GHz (model-dependent)'],
+        ['Instantaneous BW',     'Up to 120 MHz'],
+        ['Architecture',         'Sub-octave preselectors, dual conversion, variable 1st IF'],
+        ['Linearity',            'Dual high-power mixers for maximum linearity'],
+        ['Preamplifier',         'Switchable low-noise preamplifier for maximum sensitivity'],
+        ['Built-in GNSS',        'Yes — for time-stamping and clock synchronisation'],
+        ['Enclosure',            'Rugged, waterproof — suitable for outdoor installation'],
+        ['Test Source',          'Built-in test source for end-to-end verification'],
+        ['Gain Control',         'Manual and automatic (AGC)'],
+        ['Clock Sync',           'External reference or internal GNSS-disciplined'],
+        ['Typical Use',          'Satellite monitoring, COMINT, broadband RF recording']
+      ],
+      parts: ['IZT R5040'],
+      app: 'Satellite signal monitoring and recording, wideband COMINT, broadband RF quality measurement in LTE/5G networks, field-deployable signal intelligence'
+    },
+    {
+      name: 'IZT R5020 — BROADBAND HF RECEIVER (PATENTED PRESELECTOR)',
+      brief: 'Broadband HF receiver with IZT patented preselector filter bank — digitises the complete HF band (50 kHz – 30 MHz) simultaneously with exceptional dynamic range. 12 overlapping sub-octave channels, independent AGC per channel.',
+      pills: ['50 kHz – 30 MHz','COMPLETE HF BAND','PATENTED PRESELECTOR','EXCEPTIONAL DYNAMIC RANGE'],
+      desc: `The IZT R5020 is designed to overcome the fundamental limitations of legacy HF receivers. IZT's patented design uses a passive, low-loss channelising filter with 12 overlapping sub-octave frequency bands placed in front of any active electronics. Each output channel has a dedicated ADC preceded by an electronic attenuator and low-noise high-linearity amplifier, with independent AGC per channel.
+
+This architecture eliminates second-order intermodulation from strong adjacent signals — critical when large receive antenna systems deliver high input power. The receiver can be operated without an external preamplifier in most cases.`,
+      specs: [
+        ['Frequency Range',  '50 kHz – 30 MHz (complete HF band)'],
+        ['Architecture',     'Passive preselector: 12 overlapping sub-octave bandpass filters'],
+        ['ADC',              'Dedicated ADC per channel'],
+        ['Dynamic Range',    'Exceptional — sub-octave preselection eliminates IM2'],
+        ['AGC',              'Independent automatic gain control per channel'],
+        ['Preamplifier',     'Not required in most applications'],
+        ['Software',         'IZT Signal Suite or 3rd-party via SDK'],
+        ['Use Case',         'Complete HF band digitisation, no signal missed']
+      ],
+      parts: ['IZT R5020'],
+      app: 'HF spectrum monitoring, COMINT over complete HF band, SWFR/BCFR monitoring, atmospheric sensing'
+    },
+    {
+      name: 'IZT R5506 — REMOTE DIRECTION FINDING SENSOR',
+      brief: 'Multi-channel remote DF sensor with up to 6 coherent receive channels to 6 GHz — single hybrid cable delivers both power and data to shelter. Eliminates RF switch losses. GPS-disciplined internal reference.',
+      pills: ['6 COHERENT CHANNELS','UP TO 6 GHz','SINGLE HYBRID CABLE','GPS DISCIPLINED'],
+      desc: `The IZT R5506 is a mobile direction-finding sensor designed for rapid field deployment. Its key innovation is the single hybrid cable that simultaneously delivers DC power to the sensor and returns digitised I/Q data to the processing shelter — eliminating long RF cable losses that would otherwise degrade DF accuracy.
+
+Up to six high-performance coherent receivers (to 6 GHz) sample all antenna elements simultaneously — no RF switches needed, eliminating detection gaps for frequency-agile signals. One channel can have an independent local oscillator configured as a monitoring channel.`,
+      specs: [
+        ['Channels',        'Up to 6 coherent receive channels'],
+        ['Frequency',       'Up to 6 GHz'],
+        ['Interface',       'Single hybrid cable (power + optical data)'],
+        ['Advantage',       'No RF switches — eliminates gaps for freq-agile signals'],
+        ['Clock',           'High-stability internal reference + integrated GPS'],
+        ['Optional',        'DF processor module, independent monitoring channel (LO)'],
+        ['Design',          'Modular — customer-specific mechanical modifications possible'],
+        ['Remote Control',  'Full remote control via optical interface']
+      ],
+      parts: ['IZT R5506 (with optional DF processor)'],
+      app: 'Mobile COMINT/DF, SIGINT field operations, TDOA geolocation, border surveillance, rapid deployment DF systems'
+    },
+    {
+      name: 'IZT R5509 — ATC VHF DIRECTION FINDER',
+      brief: 'High-accuracy Air Traffic Control (ATC) direction finding system — 9-element antenna array with 10 coherent receive channels for superior immunity to multipath. Improves situational awareness for ATC operators and reduces misidentification risk.',
+      pills: ['ATC DIRECTION FINDING','9-ELEMENT ARRAY','10 COHERENT CHANNELS','MULTIPATH IMMUNE'],
+      desc: `The IZT R5509 is specifically designed for Air Traffic Control radio direction finding. Its 9-element antenna array and 10 coherent receiver channels provide superior immunity to multipath propagation — the dominant error source in ATC VHF DF environments. An optional centre antenna element further improves spatial resolution.
+
+The system avoids misreading of aircraft call-signs by accurately identifying which aircraft is transmitting, improving operator situational awareness and enabling higher flight density per controller.`,
+      specs: [
+        ['Application',       'Air Traffic Control (ATC) VHF direction finding'],
+        ['Antenna Array',     '9-element antenna array (optional 10th centre element)'],
+        ['Receive Channels',  '10 coherent receive channels'],
+        ['Multipath Immunity','Superior — 9-element array geometry optimised for ATC'],
+        ['Wind Rating',       'Verified to withstand 200 km/h even under icing conditions'],
+        ['Protection',        'Lightning protection built-in'],
+        ['DF Algorithm',      'High-resolution spatial spectrum estimation'],
+        ['Benefit',           'Reduces call-sign misidentification; increases flights/operator']
+      ],
+      parts: ['IZT R5509 (complete system: antenna + receiver + processing)'],
+      app: 'Airport ATC VHF direction finding, frequency management, pilot identification, airspace safety enhancement'
+    },
+
+    /* ── CHANNEL EMULATORS ── */
+    {
+      name: 'IZT C3040 — SATELLITE CHANNEL EMULATOR (100 MHz BW)',
+      brief: 'Successor to the DCS3020, the C3040 is a real-time satellite channel emulator with 100 MHz instantaneous bandwidth. Simulates complete uplink, satellite payload and downlink propagation effects for testing satellite modems and terminals.',
+      pills: ['100 MHz BW','REAL-TIME','UPLINK+PAYLOAD+DOWNLINK','SCPI REMOTE CONTROL'],
+      desc: `The IZT C3040 channel emulator provides real-time simulation of all effects present in a satellite communication link. Effects are grouped into three stages:
+
+UPLINK: Path delay and delay change, Doppler shift, ionospheric effects, interference.
+PAYLOAD: IMUX filtering, amplifier non-linearity (AM/AM, AM/PM), phase noise, OMUX filtering.
+DOWNLINK: Ionospheric effects, large- and small-scale fading, interference, thermal noise.
+
+The 100 MHz instantaneous bandwidth supports testing of modern high-throughput satellite (HTS) systems. Remote control via SCPI and SNMP.`,
+      specs: [
+        ['Instantaneous BW', '100 MHz (vs. predecessor DCS3020\'s narrower BW)'],
+        ['Uplink Effects',   'Path delay + rate, Doppler, ionosphere, interference'],
+        ['Payload Effects',  'IMUX/OMUX filters, AM/AM and AM/PM non-linearity, phase noise'],
+        ['Downlink Effects', 'Ionosphere, large/small scale fading, interference, thermal noise'],
+        ['Flexibility',      'More RF module options than predecessor'],
+        ['Remote Control',   'SCPI, SNMP'],
+        ['Use Case',         'Satellite modem and terminal testing, link margin verification']
+      ],
+      parts: ['IZT C3040'],
+      app: 'DVB-S2/S2X modem testing, satellite receiver qualification, HTS link margin analysis, gateway modem development'
+    },
+    {
+      name: 'IZT C5040 — SCALABLE SATELLITE CHANNEL SIMULATOR',
+      brief: 'Highly scalable bidirectional satellite channel simulator from single links to hundreds of terminals. State-of-the-art GUI. SCPI and SNMP remote control. Used throughout satellite system lifetime for pre-launch testing and in-orbit troubleshooting.',
+      pills: ['SCALABLE BIDIRECTIONAL','MULTI-TERMINAL','REAL-TIME','SCPI / SNMP'],
+      desc: `The IZT C5040 is IZT's most scalable satellite channel emulator — its modular hardware scales from simple unidirectional link simulation to complex bidirectional links with hundreds of terminals. This makes it ideal for testing complete satellite network equipment (modems, terminals, hubs) before deployment.
+
+The system simulates satellite payload effects (non-linearity, IMUX/OMUX filtering, phase noise, Doppler, interference, antenna gain) and downlink propagation (rain fading, scintillation, reflections, thermal noise). The state-of-the-art GUI allows easy parameter changes and scenario switching. Remote control via SCPI and SNMP.`,
+      specs: [
+        ['Scalability',         'Uni- to bi-directional; single terminal to hundreds'],
+        ['Payload Simulation',  'Non-linearity (AM/AM, AM/PM), IMUX/OMUX, phase noise, Doppler, gain'],
+        ['Downlink Simulation', 'Rain fading, scintillation, reflections, thermal noise, interference'],
+        ['GUI',                 'State-of-the-art graphical user interface'],
+        ['Remote Control',      'SCPI and SNMP'],
+        ['Lifetime Use',        'Pre-launch testing and in-orbit problem analysis'],
+        ['Architecture',        'Scalable individual hardware units; configurable topology']
+      ],
+      parts: ['IZT C5040 (scalable configuration — specify number of terminals)'],
+      app: 'Complete satellite network testing, DVB-S2X gateway/modem/terminal interoperability, HTS multi-beam validation, in-orbit anomaly simulation'
+    },
+    {
+      name: 'IZT C6000 — SATELLITE LINK EMULATOR (BIDIRECTIONAL)',
+      brief: 'Highly optimised, scalable real-time bidirectional satellite link emulator — simulates complete signal path from uplink through satellite payload to downlink. Cost-effective alternative to actual satellite access for system development and testing.',
+      pills: ['FULL BIDIRECTIONAL','REAL-TIME HW','IONOSPHERE / RAIN FADING','COST-EFFECTIVE TESTING'],
+      desc: `The IZT C6000 is IZT's premium satellite link emulator, optimised for real-time, hardware-based simulation of the complete bidirectional satellite transmission path. Unlike software simulations, the C6000 inserts real RF hardware impairments into the signal path — making it indistinguishable from a real satellite channel for the equipment under test.
+
+Simulated effects include: satellite non-linearity, IMUX/OMUX filters, phase noise, interference, antenna gain patterns, Doppler shift (satellite payload side) and ionospheric influence, rain fading, scintillation, thermal noise (on the transmission link). The state-of-the-art GUI supports easy scenario management and parameter modification.`,
+      specs: [
+        ['Type',          'Bidirectional satellite link emulator — hardware real-time'],
+        ['Payload Effects','Non-linearity, IMUX/OMUX filters, phase noise, interference, antenna gain, Doppler'],
+        ['Link Effects',   'Ionospheric influence, rain fading, scintillation, thermal noise'],
+        ['Architecture',   'Highly optimised and scalable signal processing units'],
+        ['GUI',            'State-of-the-art graphical control interface'],
+        ['Benefit',        'Cost-effective alternative to actual satellite access'],
+        ['Use Case',       'Receiver/transmitter/modem testing, satellite phone testing, operational scenario simulation']
+      ],
+      parts: ['IZT C6000 (contact IZT for configuration)'],
+      app: 'Satellite modem and terminal R&D, VSAT equipment testing, satellite phone development, complete system acceptance testing'
+    },
+
+    /* ── RECORD & PLAYBACK / BROADCASTING ── */
+    {
+      name: 'IZT RECPLAY — RF RECORD & PLAYBACK SYSTEM',
+      brief: 'Full-featured RF recording and replay system combining IZT R-series receivers for field capture with IZT S1000 for lab playback. Up to 25 MHz bandwidth, 9 kHz – 3 GHz. Multiple receivers synchronised for antenna diversity. Software: IZT Signal Suite.',
+      pills: ['9 kHz – 3 GHz','25 MHz BANDWIDTH','FIELD CAPTURE → LAB REPLAY','MULTI-RECEIVER SYNC'],
+      desc: `IZT RecPlay enables engineers to capture real-world RF environments in the field and replay them bit-accurately in the laboratory — enabling repeatable, controlled testing without repeated field deployments.
+
+RECORD side: Uses IZT R3000 family receivers (R3301 for portable use). Multiple receivers can be synchronised for antenna diversity capture. IZT software provides easy storage and signal processing. Data stored as I/Q files at any sample rate with 16- or 32-bit resolution.
+
+PLAYBACK side: IZT S1000 multi-channel signal generator replays recorded scenarios with its 31 virtual signal generators — reconstructing the exact RF environment. The IZT Signal Suite Data Processor enables offline review and editing before playback.`,
+      specs: [
+        ['Capture Receiver',  'IZT R3000 (rack) / IZT R3301 (portable)'],
+        ['Capture Frequency', '9 kHz – 3 GHz'],
+        ['Capture Bandwidth', 'Up to 25 MHz per channel'],
+        ['Multi-channel',     'Several receivers synchronised for antenna diversity'],
+        ['Data Format',       'I/Q files, 16-bit or 32-bit resolution, any sample rate'],
+        ['Playback Unit',     'IZT S1000 (31 virtual generators for reconstruction)'],
+        ['Playback Accuracy', 'Bit-accurate field signal reproduction'],
+        ['Post-processing',   'IZT Signal Suite Data Processor (offline review/edit)'],
+        ['Application',       'Repeatable lab testing of receivers with real-world signals']
+      ],
+      parts: ['IZT RecPlay (IZT R3301 + IZT S1000 / S1010)'],
+      app: 'GNSS receiver acceptance testing, automotive infotainment receiver development, COMINT receiver testing, anti-jamming validation, broadcast receiver lab certification'
+    },
+    {
+      name: 'IZT DAB CONTENTSERVER — DIGITAL AUDIO BROADCASTING',
+      brief: 'Complete DAB/DAB+ multiplex generation and receiver testing platform. Operates as service or ensemble multiplexer. Multi-stream real-time audio encoding. Based on Fraunhofer IIS software. Developer Edition enables DAB receiver development with IZT S1000.',
+      pills: ['DAB / DAB+','ENSEMBLE MULTIPLEXER','FRAUNHOFER IIS SOFTWARE','RECEIVER DEVELOPMENT'],
+      desc: `The IZT DAB ContentServer is IZT's solution for digital audio broadcasting infrastructure and DAB receiver development. Operating as service or ensemble multiplexer, it generates a complete DAB multiplex from all audio signals and data services.
+
+Editions:
+• Standard: Production multiplex generation for broadcast networks
+• Developer: Facilitates DAB receiver chip development — combined with IZT S1000, creates a versatile lab test environment for generating any DAB multiplex scenario
+
+Based on highly available standard server hardware and proven Fraunhofer IIS (Fraunhofer Institute for Integrated Circuits) DAB software — providing the lowest risk and best interoperability in the industry.`,
+      specs: [
+        ['Function',      'DAB/DAB+ service and ensemble multiplexer'],
+        ['Audio Encoding','Multi-stream real-time audio encoding (HE-AAC, MP2)'],
+        ['DAB Features',  'All DAB standard options: PAD, SLS, DLS, journaline, EPG'],
+        ['Hardware',      'Standard server hardware (high availability)'],
+        ['Software',      'Fraunhofer IIS DAB system (proven, widely deployed)'],
+        ['Editions',      'Standard (broadcast production), Developer (receiver testing)'],
+        ['Integration',   'S1000 + ContentServer = complete DAB receiver test lab'],
+        ['Interface',     'IP-based audio and data input']
+      ],
+      parts: ['IZT DAB ContentServer Standard', 'IZT DAB ContentServer Developer Edition'],
+      app: 'DAB broadcast network operations, DAB receiver chip development, automotive DAB+ receiver testing and certification, national broadcaster DAB+ rollout'
+    }
+  ]
+};
+
+const vKey = 'IZT GmbH';
+let cardCount = 0;
+
+function tog(id){
+  const c=document.getElementById('pc'+id), t=document.getElementById('pt'+id);
+  const o=c.classList.toggle('open'); t.textContent=o?'−':'+';
+}
+
+function render(){
+  document.title = vKey + ' – Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent = vKey + ' – Western Systems Technologies LLP';
+
+  const statsHTML = V.stats.map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML = V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML = V.apps.map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML = V.products.map((p,i)=>{
+    const id = cardCount++;
+    return `<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s">
+      <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div>
+      <div class="prod-brief">${p.brief}</div>
+      <div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div>
+      <div class="detail">
+        <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>
+        ${p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}
+        ${p.parts.length?`<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div>`:''}
+        <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('root').innerHTML = `
+    <div class="hero">
+      <div>
+        <div class="hero-domain">// RF & MICROWAVE · SIGNAL INTELLIGENCE & TEST SYSTEMS</div>
+        <div class="hero-name">${vKey}</div>
+        <div class="hero-sub">${V.sub}</div>
+        <div class="hero-country">▸ ${V.country}</div>
+        <div class="hero-desc">${V.desc}</div>
+        <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT IZT WEBSITE</a>
+      </div>
+      <div class="badges">${badgesHTML}</div>
+    </div>
+    <div class="stats-bar">${statsHTML}</div>
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    <div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>
+    <div class="contact-bar">
+      <div>
+        <div class="c-title">REQUEST DATASHEET OR DEMO</div>
+        <div class="c-sub">IZT GmbH · Ostendstraße 14, 91052 Erlangen, Germany</div>
+      </div>
+      <div>
+        <div class="c-lbl">WEBSITE</div>
+        <a class="c-email" href="https://www.izt-labs.de/contact/" target="_blank">www.izt-labs.de/contact</a>
+      </div>
+    </div>
+    <div class="wst-footer">
+      <div>
+        <div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+        <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+      </div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; IZT GmbH</div>
+    </div>`;
+}
+render();
+</script>
+</body>
+</html>

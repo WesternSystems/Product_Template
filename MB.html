@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="ptitle">Time & Frequency – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+.co-header{background:#fff;border-bottom:3px solid #007755;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#007755;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#007755;color:#007755;}
+.page-inner{padding-top:24px;}
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,85,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#007755;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#007755;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #007755;color:#007755;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,85,0.07);}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #007755;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#007755;white-space:nowrap;background:rgba(0,119,85,0.04);}
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#007755;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#007755;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#007755;box-shadow:0 4px 14px rgba(0,119,85,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#007755;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,85,0.08);color:#007755;border-color:#007755;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,85,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#007755;letter-spacing:1px;background:rgba(0,119,85,0.02);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#007755;background:rgba(0,119,85,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#007755;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.04);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#007755;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+.wst-footer{margin-top:36px;padding:18px 26px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#007755;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+</div>
+<div class="page"><div class="page-inner"><div id="root"></div></div></div>
+<script>
+const TF_VENDORS={
+'VREMYA-CH':{
+  url:'https://www.vremya-ch.com/index.php/en/',email:'info@vremya-ch.com',
+  country:'NIZHNY NOVGOROD, RUSSIA',founded:'1985',
+  sub:'HYDROGEN MASER FREQUENCY STANDARDS',
+  desc:'Vremya-CH JSC (Nizhny Novgorod, Russia) is one of the world\'s leading manufacturers of active and passive hydrogen maser frequency standards, frequency comparators and multichannel phase measurement systems. Their hydrogen masers — VCH-1003M, VCH-2021 and VCH-1008/1025 — are deployed at national timekeeping services, VLBI networks, deep space tracking stations and GNSS satellite monitoring facilities worldwide. Full digital processing with Cavity Auto Tuning and remote PC control via Windows/Linux.',
+  badges:['ACTIVE H-MASER','PASSIVE H-MASER','VLBI STANDARD','DEEP SPACE TRACKING'],
+  stats:[{v:'1985',l:'FOUNDED'},{v:'< 1×10⁻¹⁵',l:'ADEV (1000s) VCH-2021'},{v:'5/10/100MHz',l:'OUTPUT SIGNALS'},{v:'VLBI',l:'PRIMARY APPLICATION'}],
+  apps:[
+    {icon:'⏱',name:'NATIONAL TIME',desc:'UTC(k) timescale generation for national metrology institutes and time keeping services'},
+    {icon:'📡',name:'VLBI',desc:'Very Long Baseline Interferometry — local oscillator reference for radiotelescope networks'},
+    {icon:'🌌',name:'DEEP SPACE',desc:'Frequency reference for deep space tracking and satellite navigation stations'},
+    {icon:'🛰',name:'GNSS MONITORING',desc:'GNSS satellite signal monitoring and calibration reference'},
+    {icon:'🔬',name:'RESEARCH',desc:'Scientific research, frequency verification, precise time dissemination'},
+  ],
+  products:[
+    {name:'VCH-2021 — ACTIVE HYDROGEN MASER (RECORD STABILITY)',
+     brief:'First-ever active hydrogen maser with single state selection system — record frequency stability for active H-masers. Inherits Cavity Auto Tuning from VCH-1003M. New optical output at 1310/1550 nm for fiber distribution.',
+     pills:['RECORD H-MASER STABILITY','SINGLE STATE SELECTION','OPTICAL OUTPUT 1310/1550nm','CAT SYSTEM'],
+     desc:'The VCH-2021 is Vremya-CH\'s most advanced active hydrogen maser and a world first — it is the first successful realisation of an active hydrogen maser using a single state selection system, which achieves absolutely record frequency stability for active H-masers. All the best technologies from the VCH-1003M are inherited, including the stand-alone Cavity Auto Tuning (CAT) system that compensates for cavity dimensional changes. A new option provides optical output at 1310 nm and 1550 nm wavelengths, enabling direct distribution of the maser signal over fibre optic links.\n\nKey applications: National Time Keeping Services, Deep Space tracking and navigation, VLBI systems, GNSS satellite monitoring.',
+     specs:[['Type','Active Hydrogen Maser — Single State Selection'],['Frequency Stability','Record level for active H-masers (published IEEE EFTF/IFCS 2021)'],['CAT System','Internal stand-alone Cavity Auto Tuning'],['Output Signals (sine)','5 MHz, 10 MHz, 100 MHz — 1±0.2 V RMS into 50 Ω'],['Output Signals (pulse)','1 Hz (1 PPS): Amplitude >2.5 V / 50 Ω, width 15±5 µs'],['Optical Output','New option: 1310 nm and 1550 nm fibre output'],['Control','Full data monitoring via local or remote PC (Windows/Linux)']],
+     parts:['VCH-2021','VCH-2021 + Optical Output option (1310/1550 nm)'],
+     app:'National time keeping (UTC contributors), VLBI radiotelescope LO reference, deep space network frequency standard, GNSS satellite monitoring'},
+    {name:'VCH-1003M — ACTIVE HYDROGEN MASER (HIGH PERFORMANCE)',
+     brief:'High-performance active hydrogen maser with low phase noise output. State-of-the-art technology with internal stand-alone Cavity Auto Tuning system. 2× outputs each at 5/10/100 MHz and 1 PPS. Full PC monitoring via Windows/Linux. Option LT: extended temperature operation.',
+     pills:['σy < 1×10⁻¹⁵ @ 1000s','2× EACH OUTPUT','LOW PHASE NOISE','CAT SYSTEM'],
+     desc:'The VCH-1003M is the flagship active hydrogen maser of Vremya-CH — widely deployed at national timekeeping institutes and VLBI stations worldwide. It provides extremely high frequency stability through state-of-the-art H-maser physics combined with an internal stand-alone Cavity Auto Tuning (CAT) system that compensates for cavity ageing and temperature effects.\n\nThe PLL Unit locks the 5 MHz local crystal oscillator to the maser signal (1420 MHz → 405.7 kHz IF). Multiplier generates 100 MHz and 1500 MHz from the VCO. Full PC monitoring and control via the "Active Hydrogen Maser" software program (Windows 7/8/10 or Linux). Remote access supported over any network.\n\nOption LT: extended temperature range operation for demanding environments.',
+     specs:[['Type','Active Hydrogen Maser'],['Allan Deviation (σy @ 1 s)','< 1 × 10⁻¹³'],['Allan Deviation (σy @ 1000 s)','< 1 × 10⁻¹⁵'],['Allan Deviation (σy @ 10000 s)','< 2 × 10⁻¹⁶ (typical)'],['Output Signals (sine)','2× 5 MHz, 2× 10 MHz, 2× 100 MHz — 1±0.2 V RMS / 50 Ω'],['Output Signals (pulse)','2× 1 Hz (1 PPS) — >2.5 V / 50 Ω, width 10–20 µs, rise <3 ns'],['Harmonic Distortion','< −30 dBc (5 MHz)'],['Non-Harmonic Distortion','< −100 dBc (10 Hz to 10 kHz)'],['Cavity Auto Tuning','Internal stand-alone CAT — automatic compensation'],['Warm-up','Full spec reached after 10 days from cold start'],['Control','PC software: Windows 7/8/10 and Linux — local or remote over any network'],['Option LT','Extended temperature range operation']],
+     parts:['VCH-1003M','VCH-1003M Option LT (extended temperature)'],
+     app:'National metrology institutes (UTC contributors), VLBI geodetic networks, deep space antenna frequency standards, primary frequency reference labs'},
+    {name:'VCH-1008 — PASSIVE HYDROGEN MASER (COMPACT)',
+     brief:'Compact passive hydrogen maser with full digital processing of modulation and servo loop signals. GPS/GLONASS/BeiDou internal option for automatic output frequency calibration. Excellent stability in smaller form factor than active maser.',
+     pills:['PASSIVE H-MASER','DIGITAL SERVO LOOP','GPS/GLONASS/BEIDOU OPTION','COMPACT'],
+     desc:'The VCH-1008 is Vremya-CH\'s compact passive hydrogen maser. Unlike the active maser, it uses full digital processing of the modulation and servo loop signals, making it ideal for high-accuracy applications in space-constrained installations. An optional internal GPS/GLONASS/BeiDou receiver provides automatic output signal frequency calibration against GNSS time — eliminating the need for external disciplining equipment.\n\nAvailable with operation manuals in English (Maintenance/Service manual and User guide). Applications: National Time Keeping Service, space tracking and navigation, frequency verification, scientific research.',
+     specs:[['Type','Passive Hydrogen Maser — fully digital processing'],['Output Signals (sine)','5 MHz, 10 MHz, 100 MHz — 1±0.2 V RMS / 50 Ω'],['Output Signals (pulse)','2.048 MHz (square, 75 Ω, ITU-T G.703 part 15); 1 Hz (1 PPS, TTL/50 Ω)'],['1 PPS Width','100, 10, 1, 0.1 µs (±0.01 µs), TTL/50 Ω, rise <10 ns, jitter ≤1 ns RMS'],['1 PPS Input','1 Hz sync input (width 100 ns–100 µs, rise ≤50 ns)'],['GNSS Option','Internal GPS/GLONASS/BeiDou for automatic frequency calibration'],['Processing','Full digital modulation and servo loop signal processing']],
+     parts:['VCH-1008','VCH-1008 + internal GPS/GLONASS/BeiDou option'],
+     app:'National time keeping, space tracking stations, GNSS monitoring, compact laboratory frequency reference'},
+    {name:'VCH-1025 — PASSIVE HYDROGEN MASER (ADVANCED)',
+     brief:'Advanced compact passive hydrogen maser — latest generation with same digital processing architecture as VCH-1008 but enhanced performance. GPS/GLONASS/BeiDou option for automatic calibration.',
+     pills:['ADVANCED PASSIVE H-MASER','LATEST GENERATION','DIGITAL PROCESSING','GNSS CALIBRATION OPTION'],
+     desc:'The VCH-1025 is the latest generation of Vremya-CH\'s passive hydrogen maser family. Built on the same proven digital servo loop architecture as the VCH-1008 but offering enhanced performance characteristics. The optional GPS/GLONASS/BeiDou internal receiver enables fully automatic frequency calibration. Comprehensive user documentation available.',
+     specs:[['Type','Passive Hydrogen Maser — latest generation'],['Output Signals (sine)','5 MHz, 10 MHz, 100 MHz — 1±0.2 V RMS / 50 Ω'],['Output Signals (pulse)','2.048 MHz (square, 75 Ω), 1 Hz (1 PPS, TTL/50 Ω, jitter ≤1 ns)'],['1 PPS Input','1 Hz sync input (TTL compatible)'],['GNSS Option','GPS/GLONASS/BeiDou internal for automatic calibration'],['Generation','Latest — enhanced performance vs. VCH-1008']],
+     parts:['VCH-1025','VCH-1025 + GPS/GLONASS/BeiDou option'],
+     app:'High-accuracy compact frequency reference, national timescale backup, satellite navigation ground stations'},
+    {name:'MULTICHANNEL FREQUENCY COMPARATOR',
+     brief:'Multichannel phase measurement and frequency comparison system — simultaneously compares multiple frequency standards (H-maser, Rb, OCXO) with sub-nanosecond resolution. Used in national labs for TAI and UTC computation.',
+     pills:['MULTICHANNEL PHASE MEAS.','< 0.1 ns RESOLUTION','1–100 MHz INPUT','ALLAN DEV. COMPUTATION'],
+     desc:'Vremya-CH\'s multichannel frequency comparator allows simultaneous phase measurement of multiple 1–100 MHz reference sources at different frequencies against a single reference. Used in national metrology institutes to compare hydrogen masers, caesium frequency standards and GPS-disciplined oscillators as part of UTC computation.\n\nThe system supports multiple simultaneous inputs at different frequencies (all inputs allowed to be at different frequencies). Noise bandwidth selectable: 1, 10, 100, 1000 Hz. Averaging time range: 0.001 s to 10⁶ s. Phase noise spectrum measurement range: 0.001 Hz to 100 kHz.',
+     specs:[['Input Frequency Range','1 to 100 MHz (sine, different frequencies on all inputs allowed)'],['Input Level','0.6–1.2 V RMS into 50 Ω'],['Phase Resolution','Sub-nanosecond'],['Noise Bandwidth','1, 10, 100, 1000 Hz (selectable)'],['Averaging Time','0.001 s to 10⁶ s'],['Phase Noise Measurement','0.001 Hz to 100 kHz offset'],['Outputs','Data to PC via interface'],['Software','Allan deviation computation, logging, graphing']],
+     parts:['VCH Frequency Comparator (contact Vremya-CH for model)'],
+     app:'National metrology labs (TAI/UTC computation), frequency standard inter-comparison, calibration services, VLBI time comparison'}
+  ]
+},
+'MORION':{
+  url:'https://morion.com.ru/en/',email:'morion@morion.spb.ru',
+  country:'ST. PETERSBURG, RUSSIA',founded:'1991',
+  sub:'PRECISION QUARTZ OSCILLATORS — OCXO / TCXO / VCXO',
+  desc:'Morion, Inc. (St. Petersburg, Russia), founded in 1991, is a world-class manufacturer of high-end and top-level precision quartz oscillators — OCXOs, TCXOs, VCXOs and XOs. Morion\'s OCXOs cover frequencies from 4 MHz to 1228.8 MHz (up to 120 MHz without multiplication), achieving Allan Deviation up to 1.5×10⁻¹³ per 1–10 s, phase noise up to −120 dBc/Hz at 1 Hz offset, temperature stability up to ±1×10⁻¹¹, and power consumption as low as 0.2–0.4 W in packages as small as 21×13×9.5 mm. Custom and OEM solutions available. Volume production capability.',
+  badges:['OCXO / TCXO / VCXO','4 MHz – 1228.8 MHz','ADEV UP TO 1.5×10⁻¹³','21×13mm MINIATURE OCXO'],
+  stats:[{v:'1991',l:'FOUNDED'},{v:'1.5×10⁻¹³',l:'BEST ADEV (OCXO)'},{v:'−120dBc/Hz',l:'PHASE NOISE @ 1Hz'},{v:'0.2W',l:'MIN POWER CONSUMPTION'}],
+  apps:[
+    {icon:'📶',name:'TELECOM',desc:'OCXOs and TCXOs as network element clocking references for SDH/SONET, LTE, 5G base stations'},
+    {icon:'🛡',name:'DEFENCE',desc:'MIL-grade quartz oscillators for radar coherent reference, EW synthesisers, tactical communication'},
+    {icon:'🛰',name:'SATELLITE / GNSS',desc:'GPS/GNSS receiver reference oscillators, satellite payload oscillators, space-qualified variants'},
+    {icon:'🔬',name:'METROLOGY / LAB',desc:'High-stability OCXOs as Rb backup, frequency comparator reference, precision instrumentation'},
+    {icon:'⚙',name:'INDUSTRIAL',desc:'TCXOs for industrial IoT, instrumentation, COSPAS-SARSAT beacons and custom OEM applications'},
+  ],
+  products:[
+    {name:'OCXOs — OVEN CONTROLLED CRYSTAL OSCILLATORS',
+     brief:'Morion\'s OCXO range covers 4 MHz to 1228.8 MHz with best-in-class combination of stability, phase noise, size and power. Flagship models: MV89A (ultra-precision), MV200/MV201 (high stability, miniature), MV218 (high frequency, low noise). Allan Deviation up to 1.5×10⁻¹³ at 1–10 s.',
+     pills:['4 MHz – 1228.8 MHz','ADEV UP TO 1.5×10⁻¹³','< 0.2W MINI OCXO','−120dBc/Hz @ 1Hz'],
+     desc:'Morion\'s OCXO product family is the core of their business and where they have the deepest expertise. Key characteristics across the range:\n\n• Frequency range: 4 MHz to 1228.8 MHz (up to 120 MHz without multiplication)\n• Temperature stability: up to ±1×10⁻¹¹ across operating temperature range\n• Long-term stability: up to ±5×10⁻⁹/year; ±5×10⁻⁸/10 years\n• Short-term stability (Allan Deviation): up to 1.5×10⁻¹³ per 1–10 s\n• Phase noise: up to −120 dBc/Hz at 1 Hz; −176 dBc/Hz noise floor at 10 kHz\n• Size: 21×13×9.5 mm for a precision OCXO (MV89A family)\n• Power: as low as 0.2–0.4 W\n\nKey flagship models:\n• MV89A: Ultra-precision OCXO, 21×13 mm package, SC-cut crystal, −120 dBc/Hz @ 1 Hz\n• MV200 / MV201: High stability 51×51 mm package. MV200: ±5×10⁻¹⁰ stability, ULN option −137 dBc/Hz @ 10 Hz. MV201: LN option −130 dBc/Hz @ 10 Hz\n• MV218: High frequency (80–120 MHz), low phase noise −167 dBc/Hz @ 10 kHz, 20×20 mm\n• Custom OCXOs: adapted to exact customer frequency, package, temperature and power requirements',
+     specs:[['Frequency Range','4 MHz – 1228.8 MHz (up to 120 MHz without multiplication)'],['Temperature Stability','Up to ±1×10⁻¹¹ (over operating temp range)'],['Long-term Aging','Up to ±5×10⁻⁹/year; ±5×10⁻⁸/10 years'],['Allan Deviation (1–10 s)','Up to 1.5×10⁻¹³'],['Phase Noise @ 1 Hz','Up to −120 dBc/Hz'],['Phase Noise Floor','Up to −176 dBc/Hz @ 10 kHz'],['Minimum Package','21×13×9.5 mm (precision OCXO)'],['Minimum Power','0.2–0.4 W'],['Output Waveforms','SIN, HCMOS, CMOS'],['Power Supply','3.3 V, 5 V, 9 V, 12 V, 24 V, 27 V (model)'],['Special Features','2 outputs, digital frequency control, E-13 ADEV, fast warm-up, low g-sensitivity']],
+     parts:['MV89A (21×13mm ultra-precision)','MV200 (51×51mm high stability, ULN option)','MV201 (51×51mm, LN option)','MV218 (20×20mm high frequency 80–120MHz)','Custom OCXO (contact Morion)'],
+     app:'Telecom SDH/SONET clocking, radar COHO reference, GPS receiver reference, network element timing, lab frequency standards, satellite payload'},
+    {name:'TCXOs — TEMPERATURE COMPENSATED CRYSTAL OSCILLATORS',
+     brief:'Morion\'s TCXO range provides ±0.1 ppm to ±2 ppm stability over −40°C to +85°C in compact SMD packages. Frequency range 5–120 MHz+. COSPAS-SARSAT qualified variants. New generation: MV202/MV203 with OCXO-like performance.',
+     pills:['±0.1 ppm STABILITY','5–120 MHz+','SMD PACKAGE','COSPAS-SARSAT OPTION'],
+     desc:'Morion TCXOs use analogue or digital temperature compensation networks to achieve ±0.1 to ±2 ppm frequency stability over industrial and military temperature ranges without the power or warm-up delay of an oven.\n\nNew generation models MV202 and MV203 — announced 2024 — achieve OCXO-like stability in a TCXO power budget. These offer < 199 mV voltage, fast operation after turn-on (< 2 s), and target package: 36×27 mm footprint, 12.7/16 mm height (future target: 10 mm). Optimised for applications requiring quick availability after power-on.\n\nCOSPAS-SARSAT qualified variants available for emergency beacon applications (MV176 series).',
+     specs:[['Frequency Range','5.0–52 MHz (MV176); 10–120+ MHz (other models)'],['Stability','±0.1×10⁻⁶ to ±2×10⁻⁶ (model dependent)'],['Aging','< ±0.5×10⁻⁶/year'],['Temperature Range','−40°C to +85°C (standard); extended on request'],['Output Waveforms','Clipped sine wave, CMOS, CMOS/TTL'],['Power Supply','2.7 V, 2.8 V, 3 V, 3.3 V, 5 V'],['Package Sizes','5×3.2 mm, 7×5 mm, 20×20 mm, 36.1×27.2 mm'],['Mounting','SMD, DIP (DIL14)'],['Special','COSPAS-SARSAT qualified (MV176); MV202/MV203 OCXO-like new gen']],
+     parts:['MV176 (COSPAS-SARSAT, 5–52 MHz)','MV202 (new gen OCXO-like TCXO)','MV203 (new gen OCXO-like TCXO)','Custom TCXO (contact Morion)'],
+     app:'Emergency beacons (COSPAS-SARSAT), portable instruments, GPS receivers, industrial IoT, handheld radio communication, fast-startup avionics'},
+    {name:'VCXOs — VOLTAGE CONTROLLED CRYSTAL OSCILLATORS',
+     brief:'Morion VCXOs provide linear voltage-to-frequency tuning for PLL clock recovery, frequency synthesis and telecom timing applications. Frequency range 1–200 MHz. Low jitter. Miniature 20×20×10 mm package for 80–120 MHz high-frequency variants.',
+     pills:['1–200 MHz','LINEAR TUNING','LOW JITTER','20×20mm HF PACKAGE'],
+     desc:'Morion VCXOs are optimised for use as the variable frequency element in PLL circuits, clock recovery, frequency synthesisers and telecom timing systems. Low phase noise and high pulling range linearity are the key performance drivers.\n\nHigh-frequency VCXO family: miniature 20×20×10 mm package for 80–120 MHz, low phase noise — ideal for high-data-rate telecom and digital signal processing applications where a compact, clean, tunable reference is needed.',
+     specs:[['Frequency Range','1 – 200 MHz (model dependent)'],['HF Package (80–120 MHz)','Miniature 20×20×10 mm — low phase noise'],['Pulling Range','±50 to ±200 ppm (model)'],['Linearity','>90% over full pulling range'],['Phase Noise','< −140 dBc/Hz @ 1 kHz (10 MHz model)'],['Control Voltage','0 – 5 V or 0 – 3.3 V'],['Output','SIN, CMOS/TTL']],
+     parts:['VC-740 (standard VCXO)','VC-742','High-frequency VCXO 80–120 MHz (20×20mm)','Custom VCXO'],
+     app:'PLL synthesisers, SDH/SONET/DOCSIS clock recovery, base station timing, digital signal processing, VCXO element in GPS disciplined oscillators'}
+  ]
+},
+'MEINBERG':{
+  url:'https://www.meinbergglobal.com',email:'sales@meinberg.de',
+  country:'BAD PYRMONT, GERMANY',founded:'1979',
+  sub:'NTP / PTP TIME SERVERS & SYNCHRONISATION SYSTEMS',
+  desc:'Meinberg Funkuhren GmbH & Co. KG (Bad Pyrmont, Germany), founded in 1979, is a world leader in precision time and frequency synchronisation products. Their LANTIME NTP time server family, microSync PTP Grandmaster family, IEEE-1588 solutions, GNSS/GPS systems, IRIG time code systems, PC clocks and signal distribution equipment are deployed in telecoms, finance (MiFID II), power utilities (IEC 61850), broadcast (SMPTE/AES67), data centres and defence networks worldwide. meinbergOS firmware with free lifetime software updates. Compliant with ITU-T G.8265.1 and G.8275.1/2 telecom PTP profiles.',
+  badges:['LANTIME NTP SERVERS','IEEE 1588 PTP GRANDMASTER','SINCE 1979','FREE LIFETIME SW UPDATES'],
+  stats:[{v:'1979',l:'FOUNDED'},{v:'< 100ns',l:'UTC ACCURACY (GNSS)'},{v:'LANTIME',l:'FLAGSHIP PRODUCT FAMILY'},{v:'MiFID II',l:'FINANCIAL COMPLIANCE'}],
+  apps:[
+    {icon:'🌐',name:'ENTERPRISE IT',desc:'LANTIME NTP Stratum-1 servers for synchronising data centres, server farms and enterprise networks'},
+    {icon:'⚡',name:'POWER UTILITIES',desc:'IEEE 1588 PTP Grandmasters (IEC 61850, IEEE C37.238) for smart grid substation automation'},
+    {icon:'📺',name:'BROADCAST',desc:'PTP Grandmasters supporting SMPTE ST 2059, AES67/RAVENNA for studio-over-IP synchronisation'},
+    {icon:'🏦',name:'FINANCE',desc:'< 100 µs timestamp accuracy for MiFID II / RTS 25 regulatory compliance'},
+    {icon:'📶',name:'TELECOM',desc:'ITU-T G.8265.1 and G.8275.1/G.8275.2 PTP profiles for 4G/LTE/5G network synchronisation'},
+    {icon:'🛡',name:'DEFENCE / IRIG',desc:'IRIG-B time code systems for defence, test range and industrial equipment synchronisation'},
+  ],
+  products:[
+    {name:'LANTIME M-SERIES — NTP TIME SERVER FAMILY',
+     brief:'Complete family of rack-mount and DIN-rail NTP time servers from compact M150 to modular M3000 — all GNSS-disciplined to Stratum 1. NTP/SNTP/NTS protocols. HTTPS web GUI, SNMP, REST API. Free lifetime software updates. MiFID II compliant.',
+     pills:['STRATUM 1 NTP/SNTP/NTS','GPS/GNSS/DCF77','M150 TO M3000','FREE LIFETIME SW UPDATES'],
+     desc:'The LANTIME M-Series is Meinberg\'s cornerstone product line — proven, flexible and widely deployed across every industry. All models are GPS/GNSS or DCF77 disciplined, serving NTP/SNTP/NTS to network clients with < 100 ns accuracy to UTC.\n\nKey models:\n• M150: DIN rail 35 mm mount. GPS/GNSS/DCF77 reference. Highly stable TCXO holdover. 100–240 V AC or DC power supply. Ideal for industrial substations and process control.\n• M250: Entry-level 19-inch rack. All NTP server features. Compact, cost-effective.\n• M320: 1U rack. Up to 6 Ethernet ports (copper/fibre). TCR variant: IRIG-B AM/DCLS input (time code reader as reference). GNS variant: GPS+GLONASS+Galileo+BeiDou.\n• M450: Rail-mounted with LCD panel for local status display. MRS (Multi Reference Source) option.\n• M500: Modular 1U DIN rail system. IRIG output option. Frequency synthesiser output. Programmable pulse outputs.\n• M1000 / M1000S: Modular 1U rack platform. M1000S: front-panel connectors, cost-effective alternative.\n• M3000: High-capacity modular system for the most demanding environments.\n\nAll LANTIME models: meinbergOS firmware with HTTPS/REST API/SNMP v1/v2c/v3. Free lifetime software updates. RoHS compliant.',
+     specs:[['Models','M150 (DIN rail), M250, M320, M450, M500, M1000, M1000S, M3000'],['Reference Sources','GPS, GNSS (GPS+GLONASS+Galileo+BeiDou), DCF77, MSF, WWVB, IRIG-B, external PPS/10MHz (MRS/RDT)'],['Protocols','NTP v4, SNTP, NTS (Network Time Security), DAYTIME, TIME'],['Accuracy','< 100 ns to UTC (GNSS-disciplined)'],['Network','10/100/1000 Mbit Ethernet; up to 6 ports (M320); SFP fibre option'],['Holdover Oscillator','TCXO standard; OCXO HQ / OCXO DHQ option for enhanced holdover'],['Management','HTTPS web GUI, SSH, SNMP v1/v2c/v3, REST API, SYSLOG, LDAP, TACACS+, RADIUS'],['Power','AC 100–240 V; DC variants; redundant PSU options'],['Software Updates','Free lifetime software updates'],['Compliance','RoHS; MiFID II; IEC 61850 MMS server support']],
+     parts:['LANTIME M150/GPS','LANTIME M250/GNS','LANTIME M320/GNS','LANTIME M320/TCR (IRIG reader)','LANTIME M450','LANTIME M500','LANTIME M1000','LANTIME M1000S','LANTIME M3000'],
+     app:'Data centre NTP, enterprise IT synchronisation, industrial process control, utility substation clocking, financial timestamp compliance'},
+    {name:'microSYNC FAMILY — IEEE 1588 PTP GRANDMASTER & NTP SERVERS',
+     brief:'Powerful, versatile IEEE 1588 PTP Grandmaster and NTP server family in multiple housing types — microSyncXS (ultra-compact), microSyncHR/THR (half-rack), microSyncRX/TRX (19-inch rack). Supports ALL major PTP profiles. meinbergOS with PTP Track Hound integrated.',
+     pills:['IEEE 1588-2008 PTPv2','ALL MAJOR PTP PROFILES','PTP TRACK HOUND BUILT-IN','LDAP/TACACS+/RADIUS'],
+     desc:'The microSync family is Meinberg\'s newest generation of synchronisation devices — powerful, feature-rich PTP Grandmasters and NTP servers supporting all major industry PTP profiles:\n\n• Default IEEE 1588-2008\n• Power: IEEE C37.238-2011 / C37.238-2017 (utility substation)\n• Telecom: ITU-T G.8265.1 (frequency), G.8275.1 / G.8275.2 (frequency + phase)\n• Broadcast: SMPTE ST 2059, AES67/RAVENNA\n• AVB/TSN: IEEE 802.1AS\n• IEC 61850-9-3, IEC 62439-3 Annex B\n\nKey models:\n• microSyncXS: ultra-compact, fully-featured GNSS-synchronised NTP & PTP server. Two PTP-capable ports operable as grandmaster, boundary clock or ordinary clock.\n• microSyncHR/THR: half-rack enclosure, two IEEE 1588 ports, high accuracy. All the meinbergOS features including LDAP, TACACS+, RADIUS, native PRP for NTP/PTP, IEC 61850 MMS, PTP Track Hound (Capture licence pre-activated).\n• microSyncRX/TRX: full 19-inch rack, high-performance NTP+PTP, multiple output signals.\n\nFree lifetime software updates. Meinberg Device Manager for Windows/Linux management.',
+     specs:[['Models','microSyncXS (compact), microSyncHR/THR (half-rack), microSyncRX/TRX (19-inch)'],['PTP Standard','IEEE 1588-2008 (PTPv2) — fully compliant'],['PTP Profiles','Default, Power (C37.238), Telecom (G.8265.1 / G.8275.1/2), Broadcast (SMPTE, AES67), AVB/TSN (802.1AS), IEC 61850'],['Network','1 GE / 10 GE ports with SFP; IMS-PSX210: 10 GbE module for IMS systems'],['Accuracy','Nanosecond-level PTP synchronisation'],['Authentication','LDAP, TACACS+, RADIUS (meinbergOS)'],['PTP Monitoring','PTP Track Hound v2 built-in (Capture licence) + central Pro forwarding'],['Holdover','OCXO HQ standard; OCXO DHQ option'],['Software Updates','Free lifetime updates via meinbergOS'],['Management','Meinberg Device Manager (Windows/Linux); HTTPS web; SNMP; REST API']],
+     parts:['microSyncXS','microSyncHR','microSyncTHR','microSyncRX','microSyncTRX','IMS-HPS100 (high precision)','IMS-PSX210 (10GbE PTP module)','IMS-GXL (high-security GNSS clock)'],
+     app:'5G/LTE network synchronisation (G.8275.1), power substation automation (IEC 61850), broadcast studio IP (AES67/SMPTE), financial trading (MiFID II), data centre timing'},
+    {name:'PC CLOCKS — PCIe / USB RADIO CLOCKS',
+     brief:'PCIe and USB radio clocks adding an internal Stratum-1 GPS, GNSS or DCF77 time source directly to a server or workstation. PCIe GPS card with 1 PPS hardware output. USB DCF77 for simple plug-and-play Stratum-1 NTP. Drivers for Windows and Linux.',
+     pills:['PCIe GPS CARD','USB DCF77','1 PPS HARDWARE OUTPUT','WINDOWS & LINUX'],
+     desc:'For applications requiring an internal time source without a separate NTP server appliance, Meinberg provides PCIe GPS radio clocks and USB DCF77/GPS receivers.\n\n• PCIe GPS (PCI32S, GPS170PCI): PCIe x1 GPS radio clock with SMA external antenna connector and 1 PPS hardware output for precision timestamping. Used with NTP reference implementation (all Meinberg clock drivers included). < 1 µs accuracy to UTC.\n• USB DCF77/GPS (USB5131): simple plug-and-play USB radio clock. No hardware installation. Stratum-1 accuracy via software NTP. < 10 ms (DCF77) to < 1 µs (GPS) depending on variant.\n\nCompatible with NTP reference implementation. Meinberg clock drivers included supporting all products on popular operating systems.',
+     specs:[['PCIe Interface','PCIe x1 (GPS/GNSS); PCI (legacy GPS card)'],['USB Interface','USB 2.0 (DCF77 or GPS variant)'],['PCIe Accuracy','< 1 µs to UTC (GPS-disciplined)'],['USB Accuracy','< 1 µs (GPS USB); < 10 ms (DCF77 USB)'],['1 PPS Output','Yes — SMA connector (PCIe card); hardware timestamping'],['Antenna','External SMA GPS/GNSS active antenna (PCIe); built-in ferrite (DCF77)'],['OS Support','Windows 7/8/10/11, Linux (kernel drivers provided)'],['NTP Driver','NTP reference implementation driver included']],
+     parts:['PCI32S (PCIe GPS)','GPS170PCI (PCI GPS)','USB5131 (USB DCF77/GPS)'],
+     app:'Server-side NTP (Linux PPS), software timestamping, Windows Time Server (W32TM), lab instrument GPS-disciplined reference'},
+    {name:'IRIG TIME CODE SYSTEMS',
+     brief:'IRIG-B time code generators, decoders and combined NTP+IRIG servers — AM sinewave and DCLS outputs. LANTIME M320/TCR: IRIG input as NTP reference (time code reader). Defence, broadcast and industrial applications.',
+     pills:['IRIG-B AM / DCLS','GENERATOR + READER','M320/TCR','DEFENCE STANDARD'],
+     desc:'Meinberg IRIG time code products:\n\n• IRIG generators: produce IRIG-B AM (modulated sinewave) and IRIG-B DCLS (unmodulated TTL) from GPS reference. Options available on LANTIME M-series (output module).\n• M320/TCR: IRIG time code reader — accepts IRIG-B AM or DCLS input via BNC connectors as the time reference, then serves NTP to network clients. Input accuracy < 1 µs from IRIG to NTP output. Ideal for environments where GPS antenna is not available but an IRIG signal is distributed from an existing master clock.\n• Additional IRIG codes: AFNOR NFS 87-500 supported.\n\nAll LANTIME IRIG outputs are expansion modules — retro-fittable to existing LANTIME M-series platforms.',
+     specs:[['IRIG Codes','IRIG-B AM (sinewave), IRIG-B DCLS (TTL), AFNOR NFS 87-500'],['M320/TCR Input','IRIG-B AM or DCLS via BNC — used as NTP reference source'],['IRIG Input Accuracy','< 1 µs (IRIG source to NTP output)'],['IRIG Generator','IRIG-B output module for LANTIME M500/M1000 platform'],['Connector','BNC (AM and DCLS)'],['Combination','M320/TCR: IRIG input + NTP server + optional GNSS in 1U']],
+     parts:['LANTIME M320/GPS (with IRIG output option)','LANTIME M320/TCR (IRIG reader + NTP server)','IRIG output expansion module (M500/M1000)'],
+     app:'Defence system synchronisation (MIL-STD time code), industrial control IRIG, broadcast master clock distribution, power utility IRIG time stamping'},
+    {name:'GNSS ANTENNAS, SIGNAL DISTRIBUTION & ACCESSORIES',
+     brief:'Complete antenna ecosystem: active multi-GNSS antennas (GPS/GLONASS/Galileo/BeiDou), explosion-proof GPS antenna, optical antenna links (GOAL/GOAL-S), antenna distributors and RF-over-fibre (RFoF) modules. Signal distribution units (SDU) for buffered timing outputs.',
+     pills:['MULTI-GNSS ANTENNA','OPTICAL ANTENNA LINK','RF OVER FIBRE','EXPLOSION-PROOF OPTION'],
+     desc:'Meinberg provides a complete antenna and signal distribution ecosystem:\n\n• GPSANTv2: single-band GPS/Galileo active antenna\n• GNMANTv2: dual-band multi-frequency active antenna (GPS L1/L2, GLONASS, Galileo, BeiDou)\n• GPS EX-PROOF: explosion-proof active GPS L1 antenna — for use in hazardous areas (ATEX certified)\n• GOAL (GPS Optical Antenna Link): extends GPS antenna signal over multimode fibre — eliminates long coax cable RF losses. GOAL-S: single-mode fibre version for longer distances.\n• RFoF (RF over Fibre): analogue RF over fibre module for GPS/GNSS signal distribution over optical links\n• ADU/FOS/MP: GPS single-mode antenna distribution unit\n• GPSAV4: GPS antenna distributor — splits one antenna feed to multiple LANTIME units\n• GPS-CON: GPS signal converter\n• SDU (Signal Distribution Units): add more buffered timing signal outputs (1 PPS, 10 MHz, IRIG) to a distribution rack',
+     specs:[['GPSANTv2','Single-band GPS/Galileo active patch antenna'],['GNMANTv2','Dual-band multi-frequency: GPS L1/L2 + GLONASS + Galileo + BeiDou'],['GPS EX-PROOF','ATEX-certified explosion-proof GPS active antenna — hazardous areas'],['GOAL','Multimode optical antenna extension link — eliminates coax losses'],['GOAL-S','Single-mode fibre version of GOAL for longer distances'],['RFoF','Analogue RF over fibre module — GPS/GNSS signal over optical'],['GPSAV4','4-way active GPS antenna splitter/distributor'],['SDU','Signal distribution unit — adds 1 PPS, 10 MHz, IRIG buffered outputs to rack']],
+     parts:['GPSANTv2','GNMANTv2','GPS EX-PROOF','GOAL (multimode)','GOAL-S (single-mode)','RFoF module','GPSAV4 (4-way splitter)','ADU/FOS/MP','GPS-CON','SDU series'],
+     app:'Building GPS antenna installations, multi-server sites, hazardous area timing, long-cable-run solutions, signal distribution for NTP/PTP infrastructure'},
+    {name:'SOFTWARE TOOLS — PTP TRACK HOUND, MPS, mbgNMS',
+     brief:'Meinberg software suite: PTP Track Hound v2 (IEEE 1588/PTP debugging & monitoring), MPS v2 (NTP/PTP simulation), mbgNMS (Meinberg Network Management System), IMS-FDM (Frequency Deviation Monitor). Windows/Linux.',
+     pills:['PTP TRACK HOUND v2','NTP/PTP SIMULATION','NETWORK MANAGEMENT','FREQUENCY DEVIATION'],
+     desc:'Meinberg provides a suite of software tools for managing, monitoring and testing synchronisation infrastructure:\n\n• PTP Track Hound v2: dedicated IEEE 1588/PTP debugging and monitoring tool. Captures and analyses PTP traffic from network taps or LANTIME/microSync devices. Identifies synchronisation anomalies, PTP profile compliance issues and network path asymmetry. Available in Capture and Professional editions; microSync devices include pre-activated Capture licence.\n• MPS v2 (Meinberg PTP Simulation): simulates NTP and PTP behaviour for testing and network planning without physical hardware.\n• mbgNMS (Meinberg Network Management System): centralised management of all Meinberg LANTIME and microSync devices across the network. Status monitoring, alerts, firmware updates.\n• IMS-FDM (Frequency Deviation Monitor): dedicated module for monitoring frequency deviation of synchronisation signals in IMS systems.',
+     specs:[['PTP Track Hound v2','IEEE 1588/PTP traffic capture, analysis and compliance monitoring'],['PTP Track Hound Editions','Capture (basic, pre-activated in microSync) and Professional'],['MPS v2','NTP/PTP network simulation and planning software'],['mbgNMS','Centralised LANTIME/microSync device management and monitoring'],['IMS-FDM','Frequency deviation monitoring for IMS modular systems'],['OS','Windows and Linux (where applicable)'],['Licence','PTP Track Hound pre-activated (Capture) in all microSync devices']],
+     parts:['PTP Track Hound v2 Capture (free with microSync)','PTP Track Hound v2 Professional','MPS v2','mbgNMS','IMS-FDM module'],
+     app:'PTP network troubleshooting, synchronisation compliance validation, network planning simulation, Meinberg infrastructure management'}
+  ]
+},
+'FREQUENCY ELECTRONICS':{
+  url:'https://freqelec.com',email:'info@freqelec.com',
+  country:'MITCHEL FIELD, NEW YORK, USA',founded:'1961',
+  sub:'RUBIDIUM ATOMIC CLOCKS & PRECISION TIMING FOR SPACE, DEFENCE & TELECOM',
+  desc:'Frequency Electronics, Inc. (FEI, NASDAQ: FEIM), Mitchel Field, NY — founded 1961 — is the world leader in precision atomic frequency standards and timing solutions for space, defence and commercial applications. FEI\'s Rubidium Atomic Frequency Standards (RAFS) are the master clocks at the heart of the GPS III satellite constellation (GPS III SV10 carries the DRAFS). FEI supports USNO, NIST, the Department of Defense JADC2 mission, and naval EW (SEWIP Block 3). Three divisions: FEI core (atomic clocks, quartz oscillators, timing systems), FEI-Zyfer (GPS/SAASM secure timing) and FEI-Elcom Tech (EW synthesisers). In-house quartz fabrication and rubidium vapor cell production.',
+  badges:['GPS III MASTER CLOCK','SPACE QUALIFIED RAFS','NASDAQ: FEIM','SINCE 1961'],
+  stats:[{v:'1961',l:'FOUNDED'},{v:'GPS III',l:'SV10 MASTER CLOCK'},{v:'1ns/day',l:'DRAFS STABILITY'},{v:'1000s',l:'SPACE-QUAL UNITS DELIVERED'}],
+  apps:[
+    {icon:'🛰',name:'SPACE / GPS',desc:'Rubidium Atomic Frequency Standards (RAFS/DRAFS) for GPS III and other navigation satellite constellations'},
+    {icon:'🛡',name:'DEFENCE / EW',desc:'Timing systems, quartz oscillators and EW synthesisers for JADC2, SEWIP Block 3 and tactical PNT'},
+    {icon:'📍',name:'ASSURED PNT',desc:'GPS-denied holdover timing with atomic clock stability for assured PNT in contested environments'},
+    {icon:'🌊',name:'NAVAL',desc:'Rubidium clocks and EW synthesisers for naval electronic warfare (AOEW, SEWIP programmes)'},
+    {icon:'⏱',name:'METROLOGY',desc:'Supporting USNO and NIST timekeeping missions with 1000s of deployed frequency standards'},
+  ],
+  products:[
+    {name:'DRAFS / RAFS — DIGITAL RUBIDIUM ATOMIC FREQUENCY STANDARD',
+     brief:'FEI\'s flagship space-qualified Rubidium Atomic Frequency Standard — highest performance device of its type. DRAFS (Digital RAFS): digital tuning, clock ensembling, AI-ready, rapid recovery from radiation. GPS III SV10 carries DRAFS. Stability: 1 ns error per day (1 second error per 3 million years).',
+     pills:['GPS III SPACE HERITAGE','< 1ns/DAY STABILITY','DIGITAL TUNING','RADIATION TOLERANT'],
+     desc:'FEI\'s Rubidium Atomic Frequency Standards (RAFS) are the gold standard in space-qualified atomic clocks. They operate on the hyperfine transition of rubidium atoms (6.834 GHz), using a rubidium lamp and filter cell in a miniature physics package.\n\nDRAFS (Digital Rubidium Atomic Frequency Standard) — announced 2024 — is the next generation. Key advances:\n• Ultra-high stability oscillator with digital tuning capability\n• Clock ensembling: multiple DRAFS units can be ensemble-averaged for enhanced performance\n• AI-ready: digital interface supports data-driven AI for predictive frequency management\n• Rapid recovery from radiation: critical for GPS satellites where high-energy particles can affect clock performance\n• Improved holdover vs. analogue RAFS — extends GPS-denied PNT capability\n\nFuture programmes: POPRAFS (Pulsed Optically Pumped Rubidium — laser replaces lamp for 10× stability improvement); Mercury Ion Clock (in partnership with JPL — electromagnetically trapped ions for unmatched long-term stability).',
+     specs:[['Type','Rubidium Atomic Frequency Standard (RAFS) — space qualified'],['DRAFS Stability','< 1 ns error per day (≈ 1 second error per 3 million years)'],['Technology','Rubidium hyperfine transition at 6.834 GHz'],['DRAFS Feature','Digital tuning — clock ensembling, AI-ready'],['Radiation','Rapid recovery from high-energy radiation events'],['Space Heritage','GPS III SV10 DRAFS (experimental/evaluation slot); GPS Block II/IIA/IIR RAFS (1000s delivered)'],['Qualification','Space qualified — extreme environment rated'],['POPRAFS (future)','Pulsed laser replaces lamp — 10× stability improvement, 2-slot 3U VPX target'],['Mercury Ion (future)','Partnership with JPL — ultimate long-term stability, compact manufacturable']],
+     parts:['RAFS (standard space Rubidium)','DRAFS (digital, GPS III generation)','POPRAFS (development/future)','Mercury Ion Clock (partnership JPL, future)'],
+     app:'GPS III constellation master clocks, navigation satellite atomic timekeeping, USNO/NIST time standards, assured PNT holdover for GPS-denied environments'},
+    {name:'TURBO — TIMING UNIT RUBIDIUM OSCILLATOR',
+     brief:'Compact Rubidium oscillator specifically designed for timing units where quartz-only technology cannot meet fractional frequency stability and time holdover requirements. Target: < 3×10⁻¹² σy(τ) × τ⁻¹/² for 100 s; holdover < ±10 µs/day.',
+     pills:['COMPACT RUBIDIUM','< ±10µs/DAY HOLDOVER','TIMING UNIT INTEGRATION','QUARTZ SUPPLEMENT'],
+     desc:'The TURBO (Timing Unit Rubidium Oscillator) is designed for applications where quartz oscillator technology alone cannot meet the fractional frequency stability and accuracy requirements, but a full RAFS is excessive. TURBO bridges the gap — compact, cost-effective rubidium for timing unit integration.\n\nKey requirements it addresses:\n• Fractional frequency stability: better than 3×10⁻¹² × τ⁻¹/² for averaging times around 100 s\n• Time holdover: better than ±10 µs over 1 day (critical for GPS-denied operation)\n\nTypical integration: tactical datalink timing units, secure communication synchronisation, EW timing.',
+     specs:[['Type','Compact Rubidium oscillator for timing unit integration'],['Stability Target','< 3×10⁻¹² σy(τ)×τ⁻¹/² for ~100 s averaging'],['Holdover','< ±10 µs over 1 day (GPS-denied operation)'],['Application','Bridges quartz/atomic gap for timing-critical military systems'],['Form','Compact — suitable for tactical hardware integration']],
+     parts:['TURBO (contact FEI for specifications and availability)'],
+     app:'Tactical datalink timing, secure military communication synchronisation, EW timing units, GPS-denied PNT subsystems'},
+    {name:'QUARTZ OSCILLATORS & MASTER CLOCKS',
+     brief:'High-performance OCXOs and g-compensated quartz oscillators for space, defence and commercial applications. MIL-PRF-55310 qualified. G-compensated models achieve effective g-sensitivity of 6.3×10⁻¹² /g for vibrating platforms. Space-qualified master crystal oscillators (cost-effective).',
+     pills:['MIL-PRF-55310','G-COMPENSATED','σy < 3×10⁻¹³','SPACE QUALIFIED'],
+     desc:'FEI designs and manufactures a broad range of high-performance OCXO and quartz oscillators for applications where Rubidium is not needed but OCXO-grade performance is required:\n\n• G-compensated quartz oscillators: for UAVs, helicopters and vibrating platforms where mechanical vibration degrades frequency stability. FEI\'s electronic g-compensation reduces g-sensitivity from 1×10⁻⁹/g to 6.3×10⁻¹²/g at 10 Hz — a 45 dB phase noise improvement at 10 Hz offset during vibration. Combined with a Rubidium oscillator for long-term stability + low g-sensitivity + excellent phase noise.\n• Low ADEV quartz oscillator: σy(τ) ~ 3×10⁻¹³ at τ=1s (development) — approaching atomic clock stability from a quartz design.\n• Space-qualified master crystal oscillators (MO): cost-effective, ultra-high performance, MIL-qualified for next-generation space applications.\n• MIL-PRF-55310 and MIL-PRF-38534 qualified oscillators for defence system integration.',
+     specs:[['G-Compensation','Electronic: effective g-sensitivity 6.3×10⁻¹²/g at 10 Hz (from 1×10⁻⁹/g)'],['Phase Noise Improvement','45 dB at 10 Hz during vibration (vs. uncompensated)'],['Low ADEV (development)','σy(τ) ~ 3×10⁻¹³ at τ=1 s'],['Space MO','Ultra-high performance, space-qualified, cost-effective'],['Qualification','MIL-PRF-55310 (oscillators), MIL-PRF-38534 (hybrid circuits)'],['Temperature','-55°C to +125°C (hi-rel screened)'],['In-house','Quartz fabrication in-house for resonators and timing systems']],
+     parts:['G-compensated quartz oscillator (UAV/helicopter)','Low ADEV quartz (development)','Space MO (cost-effective space master oscillator)','Custom MIL-PRF-55310 OCXO'],
+     app:'UAV and helicopter navigation (vibration rejection), satellite payload oscillators, defence radar coherent reference, military communication timing'},
+    {name:'TIMING & SYNCHRONISATION SYSTEMS',
+     brief:'End-to-end precise time distribution systems for defence networks (JADC2), GPS-based timing, IEEE 1588 PTP, NTP, SyncE and DOCSIS. FEI-Zyfer division: GPS/SAASM M-code secure timing. Supports USNO and DoD common time reference.',
+     pills:['JADC2 SYNCHRONISATION','GPS/SAASM M-CODE','IEEE 1588 / NTP','USNO SUPPORT'],
+     desc:'FEI provides complete end-to-end precise timing and synchronisation systems for the most demanding defence, government and commercial applications:\n\n• JADC2 Timing: connecting all DoD sensors and shooters into a single synchronised network — FEI provides Stratum-1 timing systems and synchronisation equipment for the JADC2 (Joint All-Domain Command and Control) mission\n• GPS/SAASM timing (FEI-Zyfer): precise GPS-based timing with M-code SAASM for secure military use. Anti-jam, anti-spoof for GPS-denied/contested environments\n• IEEE 1588 PTP, NTP, SyncE, DOCSIS: precision timing over packet networks — frequency, phase and time synchronisation for 4G/5G networks and cable broadband\n• USNO support: FEI has a long history supporting the U.S. Naval Observatory (USNO) — the DoD\'s official time authority since 1830\n\nFEI-Elcom Tech: EW synthesisers. VMESG-2000 and VPXTR-6501 synthesisers serve US Navy SEWIP Block 3 upgrade program and AOEW (Active Offboard Electronic Warfare) AMP pod on MH-60R/S Seahawk.',
+     specs:[['Standards Supported','GPS, IEEE 1588 (PTP), NTP, Synchronous Ethernet, DOCSIS'],['SAASM','GPS M-code secure anti-jam timing (FEI-Zyfer)'],['JADC2','DoD multi-domain synchronisation systems'],['USNO Support','Long-term USNO and NIST timekeeping programme partner'],['EW Synthesisers','VMESG-2000, VPXTR-6501 — Navy SEWIP Block 3, AOEW AMP'],['Platforms','SEWIP Block 3 (AN/ALQ-248), AOEW AMP (MH-60R/S Seahawk)']],
+     parts:['FEI timing & synchronisation systems (contact FEI)','FEI-Zyfer GPS/SAASM modules','VMESG-2000 EW synthesiser (Elcom Tech)','VPXTR-6501 EW synthesiser (Elcom Tech)'],
+     app:'JADC2 battle network synchronisation, GPS-denied PNT holdover, naval EW electronic attack (SEWIP, AOEW), USNO/NIST time standards support'}
+  ]
+}
+};
+
+const params=new URLSearchParams(window.location.search);
+const vKey=params.get('v')||'MEINBERG';
+const V=TF_VENDORS[vKey];
+let cc=0;
+
+function tog(id){const c=document.getElementById('pc'+id),t=document.getElementById('pt'+id);const o=c.classList.toggle('open');t.textContent=o?'−':'+';}
+
+function render(){
+  if(!V){document.getElementById('root').innerHTML='<div style="text-align:center;padding:60px;font-family:Orbitron,monospace;color:#6a8aa0">VENDOR NOT FOUND</div>';return;}
+  document.title=vKey+' – Western Systems Technologies LLP';
+  document.getElementById('ptitle').textContent=vKey+' – Time & Frequency';
+  const statsHTML=(V.stats||[]).map(s=>`<div class="stat"><div class="stat-val">${s.v}</div><div class="stat-label">${s.l}</div></div>`).join('');
+  const badgesHTML=V.badges.map(b=>`<div class="badge">${b}</div>`).join('');
+  const appsHTML=(V.apps||[]).map(a=>`<div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+  const prodsHTML=V.products.map((p,i)=>{const id=cc++;return`<div class="prod-card" id="pc${id}" onclick="tog(${id})" style="animation-delay:${i*0.07}s"><div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${id}">+</div></div><div class="prod-brief">${p.brief}</div><div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div><div class="detail"><div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.desc.replace(/\n/g,'<br>')}</div></div>${p.specs.length?`<div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>`:''}<div class="dl"><div class="dl-label">Models / Products</div><div class="pnums">${p.parts.map(pt=>`<span class="pnum">${pt}</span>`).join('')}</div></div><div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div></div></div>`;}).join('');
+  document.getElementById('root').innerHTML=`
+    <div class="hero"><div>
+      <div class="hero-domain">// TIME & FREQUENCY</div>
+      <div class="hero-name">${vKey}</div>
+      <div class="hero-sub">${V.sub}</div>
+      <div class="hero-country">▸ ${V.country}${V.founded?' &nbsp;·&nbsp; FOUNDED '+V.founded:''}</div>
+      <div class="hero-desc">${V.desc}</div>
+      <a href="${V.url}" target="_blank" class="hero-link">↗ VISIT OFFICIAL WEBSITE</a>
+    </div><div class="badges">${badgesHTML}</div></div>
+    ${statsHTML?`<div class="stats-bar">${statsHTML}</div>`:''}
+    <div class="sec"><div class="sec-title">Product Lines & Solutions</div><div class="prod-grid">${prodsHTML}</div></div>
+    ${appsHTML?`<div class="sec"><div class="sec-title">Key Applications</div><div class="apps-grid">${appsHTML}</div></div>`:''}
+    <div class="contact-bar">
+      <div><div class="c-title">REQUEST INFORMATION OR QUOTE</div><div class="c-sub">Contact ${vKey} for datasheets, pricing and technical support</div></div>
+      <div><div class="c-lbl">EMAIL</div><a class="c-email" href="mailto:${V.email}">${V.email}</a></div>
+    </div>
+    <div class="wst-footer">
+      <div><div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div><div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div></div>
+      <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; ${vKey}</div>
+    </div>`;
+}
+render();
+</script></body></html>

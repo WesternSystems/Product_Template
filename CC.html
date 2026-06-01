@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celestia Callisto – Vendor Detail</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#f0f4f8;color:#1a2a3a;font-family:'Rajdhani',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,100,180,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,100,180,0.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.page{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 20px 70px;}
+
+/* COMPANY HEADER */
+.co-header{background:#fff;border-bottom:3px solid #0077aa;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:0;position:sticky;top:0;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.co-name{font-family:'Orbitron',monospace;font-size:clamp(11px,1.8vw,15px);font-weight:900;color:#0077aa;letter-spacing:1px;}
+.co-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;margin-top:2px;}
+.co-nav{display:flex;gap:10px;align-items:center;}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border:1px solid #cdd9e5;background:#f0f4f8;color:#6a8aa0;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;cursor:pointer;text-decoration:none;transition:all .2s;}
+.back-btn:hover{border-color:#0077aa;color:#0077aa;}
+
+.page-inner{padding-top:24px;}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;padding:28px 32px;border:1px solid #cdd9e5;background:#fff;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(0,119,170,0.05),transparent 60%);pointer-events:none;}
+.hero-domain{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:3px;color:#0077aa;margin-bottom:8px;}
+.hero-name{font-family:'Orbitron',monospace;font-size:clamp(20px,3.5vw,36px);font-weight:900;color:#1a2a3a;line-height:1.1;margin-bottom:4px;}
+.hero-sub{font-family:'Orbitron',monospace;font-size:12px;font-weight:400;color:#0077aa;letter-spacing:2px;margin-bottom:8px;}
+.hero-country{font-family:'Share Tech Mono',monospace;font-size:11px;color:#6a8aa0;margin-bottom:14px;letter-spacing:2px;}
+.hero-desc{font-size:15px;line-height:1.8;color:#4a6a80;max-width:640px;margin-bottom:18px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.hero-links{display:flex;flex-wrap:wrap;gap:10px;}
+.hero-link{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid #0077aa;color:#0077aa;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-decoration:none;transition:all .2s;}
+.hero-link:hover{background:rgba(0,119,170,0.07);}
+.hero-link.sec{border-color:#cdd9e5;color:#6a8aa0;}
+.hero-link.sec:hover{border-color:#0077aa;color:#0077aa;}
+.badges{display:flex;flex-direction:column;gap:7px;align-items:flex-end;}
+.badge{padding:4px 12px;border:1px solid #0077aa;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#0077aa;white-space:nowrap;background:rgba(0,119,170,0.04);}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;border:1px solid #cdd9e5;margin-bottom:24px;background:#cdd9e5;}
+.stat{background:#fff;padding:14px 16px;text-align:center;}
+.stat-val{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#0077aa;margin-bottom:3px;}
+.stat-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;}
+
+/* SECTIONS */
+.sec{margin-bottom:28px;}
+.sec-title{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:4px;color:#6a8aa0;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:12px;}
+.sec-title::after{content:'';flex:1;height:1px;background:#cdd9e5;}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px;}
+.prod-card{border:1px solid #cdd9e5;background:#fff;padding:20px;cursor:pointer;transition:all .22s;position:relative;animation:fadeIn .3s ease both;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.prod-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#0077aa;opacity:.2;transition:opacity .2s;}
+.prod-card:hover,.prod-card.open{border-color:#0077aa;box-shadow:0 4px 16px rgba(0,119,170,0.1);}
+.prod-card.open::before,.prod-card:hover::before{opacity:1;}
+.prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.prod-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:#0077aa;letter-spacing:1px;line-height:1.35;}
+.tog{width:22px;height:22px;border:1px solid #cdd9e5;background:#f0f4f8;display:flex;align-items:center;justify-content:center;font-size:14px;color:#6a8aa0;flex-shrink:0;transition:all .2s;}
+.prod-card.open .tog{background:rgba(0,119,170,0.08);color:#0077aa;border-color:#0077aa;}
+.prod-brief{font-size:14px;color:#4a6a80;line-height:1.6;margin-bottom:10px;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px;}
+.pill{padding:2px 9px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:10px;color:#0077aa;letter-spacing:1px;background:rgba(0,119,170,0.03);}
+.detail{display:none;border-top:1px solid #eef1f5;margin-top:12px;padding-top:14px;}
+.prod-card.open .detail{display:block;}
+.dl{margin-bottom:12px;}
+.dl-label{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:#6a8aa0;margin-bottom:5px;text-transform:uppercase;}
+.dl-text{font-size:14px;color:#4a6a80;line-height:1.7;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.stbl{width:100%;border-collapse:collapse;margin-top:4px;}
+.stbl tr{border-bottom:1px solid #eef1f5;}
+.stbl tr:last-child{border-bottom:none;}
+.stbl td{padding:5px 8px;font-size:11px;font-family:'Share Tech Mono',monospace;}
+.stbl td:first-child{color:#6a8aa0;width:44%;font-size:10px;letter-spacing:1px;}
+.stbl td:last-child{color:#1a2a3a;font-weight:600;}
+.pnums{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.pnum{padding:2px 8px;border:1px solid #cdd9e5;font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;background:#f8fafc;}
+.ref-badge{display:inline-block;padding:2px 8px;border:1px solid rgba(0,119,170,0.3);font-family:'Share Tech Mono',monospace;font-size:9px;color:#0077aa;letter-spacing:1px;margin:2px 2px 2px 0;background:rgba(0,119,170,0.03);}
+
+/* APPS GRID */
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.app-card{border:1px solid #cdd9e5;background:#fff;padding:14px 16px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.app-card:hover{border-color:#0077aa;background:rgba(0,119,170,0.03);}
+.app-icon{font-size:22px;margin-bottom:6px;}
+.app-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:600;letter-spacing:1px;color:#0077aa;margin-bottom:3px;}
+.app-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* SERVICES GRID */
+.srv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
+.srv-card{border:1px solid #cdd9e5;background:#fff;padding:16px 18px;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.srv-card:hover{border-color:#0077aa;}
+.srv-icon{font-size:20px;margin-bottom:6px;}
+.srv-name{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:#0077aa;letter-spacing:1px;margin-bottom:5px;}
+.srv-desc{font-size:13px;color:#4a6a80;line-height:1.5;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* REFERENCE GRID */
+.ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.ref-card{border:1px solid #cdd9e5;background:#fff;padding:13px 15px;box-shadow:0 1px 4px rgba(0,0,0,0.04);}
+.ref-agency{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:#0077aa;margin-bottom:4px;}
+.ref-detail{font-size:12px;color:#6a8aa0;line-height:1.4;font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* CONTACT */
+.contact-bar{border:1px solid #cdd9e5;background:#fff;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.c-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#1a2a3a;margin-bottom:4px;}
+.c-sub{font-size:14px;color:#6a8aa0;font-family:'Rajdhani',sans-serif;font-weight:500;}
+.c-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:#6a8aa0;letter-spacing:2px;margin-bottom:4px;}
+.c-email{font-family:'Share Tech Mono',monospace;font-size:13px;color:#0077aa;text-decoration:none;letter-spacing:1px;}
+.c-email:hover{text-decoration:underline;}
+
+/* WST FOOTER */
+.wst-footer{margin-top:40px;padding:20px 28px;border:1px solid #cdd9e5;background:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.wst-name{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:#0077aa;letter-spacing:1px;}
+.wst-sub{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:1px;margin-top:2px;}
+.wst-tag{font-family:'Share Tech Mono',monospace;font-size:10px;color:#6a8aa0;letter-spacing:2px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:#f0f4f8;}::-webkit-scrollbar-thumb{background:#cdd9e5;}
+@media(max-width:640px){.hero{grid-template-columns:1fr;}.badges{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}.co-header{position:relative;}}
+</style>
+</head>
+<body>
+
+<!-- COMPANY HEADER -->
+<div class="co-header">
+  <div>
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="co-nav">
+    <a href="index.html" class="back-btn">← BACK TO EXPLORER</a>
+  </div>
+</div>
+
+<div class="page">
+<div class="page-inner">
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-domain">// RF & MICROWAVE · CRYOGENIC SYSTEMS</div>
+    <div class="hero-name">CELESTIA CALLISTO</div>
+    <div class="hero-sub">RF & CRYO EXCELLENCE</div>
+    <div class="hero-country">▸ TOULOUSE, FRANCE &nbsp;·&nbsp; FOUNDED 1999 &nbsp;·&nbsp; PART OF CELESTIA TECHNOLOGIES GROUP</div>
+    <div class="hero-desc">Celestia Callisto is Europe's leading specialist in cryogenic and ambient Low Noise Amplifiers (LNAs) for satellite ground stations, deep space communications, radio astronomy and VLBI. With over 25 years of experience and hundreds of units deployed at ESA, CNES, ISRO, BKG, NASA DSN partner stations and 70+ ground stations worldwide, Callisto pushes receiver sensitivity to the fundamental limits of physics. ISO 9001:2015 certified. In-house chip design capability using InP and GaAs HEMT technologies.</div>
+    <div class="hero-links">
+      <a href="https://www.callisto-space.com" target="_blank" class="hero-link">↗ CALLISTO WEBSITE</a>
+      <a href="https://celestia-tech.com" target="_blank" class="hero-link sec">↗ CELESTIA GROUP</a>
+    </div>
+  </div>
+  <div class="badges">
+    <div class="badge">CRYOGENIC LNA SPECIALIST</div>
+    <div class="badge">ESA / CNES / ISRO HERITAGE</div>
+    <div class="badge">InP & GaAs HEMT</div>
+    <div class="badge">ISO 9001 : 2015</div>
+    <div class="badge">25+ YEARS CRYO EXPERTISE</div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">1999</div><div class="stat-label">FOUNDED</div></div>
+  <div class="stat"><div class="stat-val">70+</div><div class="stat-label">GROUND STATIONS SUPPLIED</div></div>
+  <div class="stat"><div class="stat-val">100s</div><div class="stat-label">UNITS DEPLOYED WORLDWIDE</div></div>
+  <div class="stat"><div class="stat-val">&lt; 8K</div><div class="stat-label">NOISE TEMP (ULTRA CRYO)</div></div>
+  <div class="stat"><div class="stat-val">10 YRS</div><div class="stat-label">MTBF (COMPACT LNA)</div></div>
+  <div class="stat"><div class="stat-val">50 GHz</div><div class="stat-label">IN-HOUSE BONDING CAPABILITY</div></div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="sec">
+  <div class="sec-title">Product Lines</div>
+  <div class="prod-grid" id="prodGrid"></div>
+</div>
+
+<!-- APPLICATIONS -->
+<div class="sec">
+  <div class="sec-title">Key Applications</div>
+  <div class="apps-grid" id="appsGrid"></div>
+</div>
+
+<!-- ENGINEERING SERVICES -->
+<div class="sec">
+  <div class="sec-title">Engineering Services</div>
+  <div class="srv-grid" id="srvGrid"></div>
+</div>
+
+<!-- REFERENCE CUSTOMERS -->
+<div class="sec">
+  <div class="sec-title">Reference Customers & Projects</div>
+  <div class="ref-grid" id="refGrid"></div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bar">
+  <div>
+    <div class="c-title">REQUEST A QUOTE OR DATASHEET</div>
+    <div class="c-sub">Contact Celestia Callisto directly for specifications, pricing and engineering consultation</div>
+  </div>
+  <div>
+    <div class="c-lbl">EMAIL</div>
+    <a class="c-email" href="mailto:callisto@celestia-tech.com">callisto@celestia-tech.com</a>
+  </div>
+</div>
+
+<!-- WST FOOTER -->
+<div class="wst-footer">
+  <div>
+    <div class="wst-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="wst-sub">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE · TIME & FREQUENCY · OPTICS & LASER</div>
+  </div>
+  <div class="wst-tag">AUTHORISED REPRESENTATIVE &nbsp;·&nbsp; CELESTIA CALLISTO</div>
+</div>
+
+</div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {
+    name: 'ULTRA CRYOGENIC LNA — QRFH WIDEBAND RECEIVER',
+    brief: 'World-class ultra-cryo LNA system with integrated Quad-Ridge Flared Horn (QRFH) wideband feed. Designed for VLBI and deep space — noise temperature approaches quantum limits. Cold head replaceable in < 30 minutes by a single operator.',
+    pills: ['1.5 – 15 GHz QRFH', '< 8K NOISE TEMP', 'STIRLING COOLED', 'VLBI / DEEP SPACE'],
+    overview: `The Ultra Cryo LNA is Callisto's flagship product for the most demanding sensitivity requirements. It integrates a wideband Quad-Ridge Flared Horn (QRFH) feed with a cryogenic LNA chain physically cooled to ~15–20 K using a closed-cycle Stirling cooler. The system approaches fundamental quantum noise limits in noise temperature. Designed specifically for VLBI (Very Long Baseline Interferometry) and deep space communication ground stations where every fraction of a Kelvin counts.
+
+A key maintainability feature is the "Sleeve System" — the cold head can be removed and replaced by a single operator in less than 30 minutes while the receiver remains at room temperature, eliminating downtime. Deployed at ESA's Cebreros, Malargüe, and New Norcia deep space stations, and at VLBI networks including BKG (German Federal Agency for Cartography and Geodesy) and ISRO's ISTRAC. Also supporting the Sardinia Deep Space Antenna (SDSA/SRT) upgrade via OHB Digital Connect (contracted 2025).`,
+    specs: [
+      ['Frequency Coverage (QRFH)', '1.5 – 15 GHz (wideband quad-ridge horn)'],
+      ['Physical Temperature', '~15 – 20 K (closed-cycle Stirling)'],
+      ['System Noise Temperature', '< 8 K (lab measurement; field performance better)'],
+      ['Cooler Type', 'Sunpower Inc. / Sumitomo zero-maintenance Stirling cooler'],
+      ['Cold Head Replacement', '< 30 min, single operator, no warm-down required'],
+      ['MTBF', '> 90,000 hours (~10 years)'],
+      ['LNA Technology', 'InP HEMT (Indium Phosphide HEMT)'],
+      ['Gain', '> 35 dB (cryogenic)'],
+      ['Applications', 'VLBI, deep space, radio astronomy (SKA, IUCAF)'],
+      ['Power Consumption', '< 200 W (complete system)'],
+    ],
+    refs: ['ESA Cebreros DSS', 'ESA Malargüe DSS', 'BKG Germany', 'ISRO ISTRAC', 'AGGO Argentina', 'Sardinia SRT / SDSA (2025)'],
+    models: ['ULTRA-QRFH-S/X Band', 'ULTRA-QRFH-K/Ka Band', 'Custom frequency on request'],
+    app: 'VLBI radio telescope networks, ESA/NASA deep space network ground stations, SKA precursor arrays, radioastronomy observatories'
+  },
+  {
+    name: 'COMPACT CRYOGENIC LNA (MKII)',
+    brief: 'Self-contained compact cryo-LNA housing up to 2 RF chains with zero-maintenance Stirling cooler. 40K noise temperature at 26 GHz. 12+ global installations. 1:2 redundancy with in-house controller.',
+    pills: ['S / X / K / Ka BAND', '40K @ 26 GHz', '2 RF CHAINS', 'ZERO-MAINTENANCE'],
+    overview: `The MKII Compact is Callisto's most widely deployed product. It is a smaller, self-contained cryogenic LNA system that "packs a punch" — equipped with a Stirling cooler (Sunpower Inc.), it can house up to 2 RF chains simultaneously (e.g., S+X band, or X+Ka band). Its compact physical size allows installation directly on medium-sized antennas, as a standalone unit or in a 1:2 redundancy scheme using Callisto's in-house redundancy controller and switches.
+
+The system is practically maintenance-free — the Stirling cooler operates continuously without liquid cryogens or scheduled maintenance intervals, achieving an MTBF of over 90,000 hours (approximately 10 years). At 26 GHz it achieves a noise temperature of 40K at the LNA. Currently deployed at 12+ ground stations worldwide.
+
+The Compact is the preferred solution when upgrading older S/X-band antennas to add Ka-band capability — it can be retrofitted without major antenna modification.`,
+    specs: [
+      ['Frequency (Bands Supported)', 'S, X, K, Ka and combinations (dual-chain)'],
+      ['Noise Temperature (@ 26 GHz)', '40 K at the LNA'],
+      ['Noise Temperature (@ 8 GHz)', '< 20 K (X-band typical)'],
+      ['Physical Temperature', '~20 K (Stirling cooled)'],
+      ['RF Chains', 'Up to 2 simultaneous RF chains in one unit'],
+      ['Cooler', 'Sunpower Inc. Stirling, zero-maintenance'],
+      ['Redundancy', '1:2 hot-standby with in-house redundancy controller & switches'],
+      ['MTBF', '> 90,000 hours (~10 years maintenance-free)'],
+      ['Power Consumption', '~200 W (complete system)'],
+      ['Gain (typical)', '> 50 dB'],
+      ['Installations', '12+ global ground stations'],
+      ['Certifications', 'ISO 9001:2015; full FAT report with every unit'],
+    ],
+    refs: ['ESA / ESOC', 'EUMETSAT', 'BKG Bremen', 'CNES', 'K-band 20 GHz units (North America)'],
+    models: ['COMPACT-MKII-SX', 'COMPACT-MKII-XKA', 'COMPACT-MKII-KA (Ka single)', 'COMPACT-MKII-SK'],
+    app: 'Satellite TT&C ground stations, Earth Observation data downlink, VLBI reference stations, Ka-band antenna upgrade'
+  },
+  {
+    name: 'MINI CRYOGENIC LNA — MILITARY KA-BAND',
+    brief: 'Newest (2026) ultra-compact cryo-LNA specifically engineered for military Ka-band (17.7–21.2 GHz). Under 5 kg. Noise temperature < 55K. Unprecedented compact form factor for defence applications.',
+    pills: ['17.7 – 21.2 GHz', '< 55K NOISE TEMP', '< 5 KG', 'MILITARY KA-BAND'],
+    overview: `"The Mini" is Callisto's newest and most compact cryogenic LNA, validated in March 2026. Commissioned by Airbus Defence & Space (ADS) on behalf of a defence customer requiring cryogenic sensitivity in an unprecedented compact form factor.
+
+The Mini operates across the military Ka band (17.7–21.2 GHz) — increasingly central to modern defence satellite communications, SATCOM uplinks and mobile intelligence gathering. Weighing under 5 kg, it offers a noise temperature of less than 55K even under elevated ambient conditions — placing it firmly among the most capable systems in its class.
+
+All RF architecture, cryogenic integration and testing were completed entirely in-house at Celestia Callisto in Toulouse — demonstrating full end-to-end capability from chip level to complete system delivery.`,
+    specs: [
+      ['Frequency', '17.7 – 21.2 GHz (Military Ka-band downlink)'],
+      ['System Noise Temperature', '< 55 K (at elevated ambient conditions)'],
+      ['Mass', '< 5 kg'],
+      ['Form Factor', 'Ultra-compact — smallest cryo-LNA in class'],
+      ['Cooling', 'Integrated zero-maintenance cryo-cooler'],
+      ['Design', 'Fully in-house: RF chip design → cryogenic integration'],
+      ['Customer', 'Commissioned by Airbus Defence & Space (ADS)'],
+      ['Status', 'Validated March 2026'],
+      ['Qualification', 'Passed full validation testing; field evaluation scheduled'],
+    ],
+    refs: ['Airbus Defence & Space (ADS)', 'Defence customer (confidential)'],
+    models: ['MINI-KA-MIL (programme-specific; contact Callisto)'],
+    app: 'Mobile military satellite terminals, compact defence SATCOM ground receivers, deployable intelligence gathering systems'
+  },
+  {
+    name: 'AMBIENT LNA — Ka-BAND 25.5–27 GHz (LPH)',
+    brief: 'Room-temperature Ka-band LNA with waveguide input / coaxial output — the only product of its kind on the market. In-house chip design. Noise figure 1.5 dB typical, 44 dB gain. Fully tested with FAT report.',
+    pills: ['25.5 – 27.0 GHz', '1.5 dB NF TYPICAL', '44 dB GAIN', 'WG INPUT / COAX OUTPUT'],
+    overview: `Dubbed "LPH", this is Callisto's newest ambient (room-temperature) LNA, announced in 2025. It holds a unique market position as the only Ka-band LNA offering a waveguide input with coaxial output — which simplifies integration into existing ground station RF chains without additional transitions.
+
+Featuring Callisto's in-house chip design (the entire production chain from RF chip to assembled unit is controlled internally), the LPH achieves 1.5 dB typical noise figure and 44 dB gain across 25.5–27.0 GHz. Each unit is fully tested in an environmental chamber and delivered with a complete Factory Acceptance Test (FAT) report.
+
+This product targets the growing 26 GHz satellite downlink band (relevant to ESA DSA1/DSA2 upgrade studies and new Ka-band Earth Observation missions), lunar communication programmes and advanced radioastronomy receivers where cryogenic cooling is not practical or available.`,
+    specs: [
+      ['Operating Frequency', '25.5 – 27.0 GHz (Ka-band)'],
+      ['Noise Figure (typical)', '1.5 dB'],
+      ['Noise Figure (maximum)', '1.55 dB'],
+      ['Gain', '44 dB'],
+      ['Input Interface', 'Waveguide (WR-34 / Ka-band standard)'],
+      ['Output Interface', 'Coaxial (SMA / K-connector)'],
+      ['Unique Feature', 'Only WG-input / coax-output Ka LNA on market'],
+      ['Chip Design', 'Fully in-house by Celestia Callisto RF engineers'],
+      ['Testing', '100% tested in environmental chamber'],
+      ['Deliverable', 'Complete Factory Acceptance Test (FAT) report'],
+      ['Operating Temperature', '−40°C to +60°C (outdoor rated)'],
+    ],
+    refs: ['ESA 26 GHz downlink study (Callisto contract)', 'Cebreros & Malargüe 26 GHz upgrade'],
+    models: ['CALLISTO-Ka-LNA-25.5-27GHz (Rev.1, 09/25)'],
+    app: 'Ka-band satellite ground stations, 26 GHz Earth Observation downlinks, lunar communication receivers, radioastronomy without cryogenic cooling'
+  },
+  {
+    name: 'AMBIENT LNA — K-BAND 20 GHz & WIDE-BAND COAXIAL',
+    brief: 'K-band 20 GHz waveguide LNA and Ku/Ka-band wide-band coaxial LNA for satellite receive chains requiring low noise performance without cryogenic cooling.',
+    pills: ['20 GHz K-BAND', 'KU / KA WIDEBAND', 'COAXIAL OUTPUT', 'LOW NOISE'],
+    overview: `In addition to the flagship Ka LPH product, Callisto offers K-band (20 GHz) and wideband Ku/Ka-band coaxial ambient LNAs.
+
+The K-band 20 GHz waveguide LNA was supplied in pairs to a North American customer, achieving > 50 dB gain and noise temperature < 50K (at operating conditions), making it suitable for remote locations with harsh weather conditions.
+
+The wide-band coaxial LNA targets satellite operators requiring low noise performance across the Ku and Ka bands in a simple coaxial interface for satellite VSAT and broadcast ground stations.`,
+    specs: [
+      ['K-band Frequency', '18.0 – 22.0 GHz (K-band)'],
+      ['K-band Gain', '> 50 dB'],
+      ['K-band NT (operating conditions)', '< 50 K'],
+      ['K-band Input/Output', 'Waveguide input / coaxial output'],
+      ['Wideband Coaxial Frequency', 'Ku/Ka-band (10.7 – 12.75 / 17.3 – 21.2 GHz)'],
+      ['Wideband Interface', 'Coaxial input and output'],
+      ['Operating Environment', 'Outdoor rated, suitable for remote harsh locations'],
+      ['Reliability', 'MTBF > 90,000 hours'],
+      ['FAT Report', 'Included with every unit'],
+    ],
+    refs: ['North American Earth Observation stations (K-band, 2 units)'],
+    models: ['CALLISTO-K-LNA-20GHz', 'CALLISTO-WIDEBAND-COAX-KU-KA'],
+    app: 'Earth Observation ground stations, VSAT teleports, satellite broadcast receive systems, meteorological satellite reception'
+  },
+  {
+    name: 'CRYO-COOLED FEED RECEIVER SYSTEMS',
+    brief: 'Complete cryogenically cooled feed receiver systems integrating custom feeds, waveguide transitions, cryogenic dewar, LNA chain and Stirling cooler into a single deliverable system.',
+    pills: ['COMPLETE SYSTEM', 'CUSTOM FEED INTEGRATION', 'STIRLING COOLED', 'FULL SYSTEM DELIVERY'],
+    overview: `Beyond standalone LNA products, Celestia Callisto designs and delivers complete cryogenically cooled feed receiver systems. These are bespoke solutions where Callisto integrates a customer-specified feed (corrugated horn, QRFH, OMT), waveguide transitions, a custom-designed cryogenic dewar, LNA chain and Stirling cooler into a single turnkey deliverable.
+
+Recent examples include X-band compact cryo-LNAs for the German Federal Agency for Cartography and Geodesy (BKG) — which passed Site Acceptance Testing (SAT) and were shipped for field commissioning — and the AGGO (Argentine-German Geodetic Observatory) radiotelescope in Pereyra, Argentina (SAT October 2025).
+
+The rotating platform innovation (announced 2024) features laser telemetry positioning to 30 µm resolution, allowing different cryo receivers to be positioned at the telescope focus without beam waveguide dichroic mirrors — reducing system complexity and losses.`,
+    specs: [
+      ['Feed Types', 'Corrugated horn, QRFH, scalar horn, custom'],
+      ['Frequency Coverage', 'S through Ka band (custom per project)'],
+      ['Dewar Design', 'In-house custom cryogenic dewar engineering'],
+      ['Cooler', 'Stirling (Sunpower/Sumitomo) or Gifford-McMahon'],
+      ['Physical Temperature', '15 – 20 K at LNA stage'],
+      ['Integration', 'Feed + waveguide + dewar + LNA + cooler in one system'],
+      ['Acceptance Testing', 'Full FAT at Toulouse; SAT on-site available'],
+      ['Innovation', 'Rotating platform with 30 µm laser positioning (2024)'],
+    ],
+    refs: ['BKG Germany (X-band cryo feed receiver, 2025 SAT)', 'AGGO Argentina (SAT Oct 2025)', 'ESA DSA series', 'Sardinia Deep Space Antenna (SRT, 2025)'],
+    models: ['Custom — specify feed, frequency, cooler and performance requirements'],
+    app: 'VLBI geodetic telescopes, deep space antenna feed upgrades, scientific radiotelescopes, new build ground station cryogenic receive chains'
+  }
+];
+
+const APPS = [
+  {icon:'🌌', name:'DEEP SPACE COMMS', desc:'Ultra-cryo LNAs for ESA/NASA deep space antenna receive chains — boosting G/T to receive signals from spacecraft billions of km away'},
+  {icon:'📡', name:'RADIO ASTRONOMY', desc:'Cryogenic receivers for radiotelescope arrays including VLBI networks (IVS, EVN) and future SKA precursor instruments'},
+  {icon:'🔭', name:'VLBI', desc:'Very Long Baseline Interferometry requires the lowest possible system noise — Callisto Ultra cryo systems are VLBI standard'},
+  {icon:'🛰', name:'SATELLITE GROUND STATIONS', desc:'Compact cryo-LNA and ambient LNA products for TT&C, EO data downlink and Ka-band ground station receive chains'},
+  {icon:'🛡', name:'DEFENCE SATCOM', desc:'Mini Ka-band cryogenic LNA for military satellite communications — compact form factor with defence-grade robustness'},
+  {icon:'🌕', name:'LUNAR COMMUNICATION', desc:'Ambient Ka LPH LNA for future lunar communication ground stations and Gateway programme support'},
+  {icon:'⚛', name:'QUANTUM COMPUTING', desc:'Ultra-low noise cryogenic LNA chains for quantum computing qubit readout and quantum sensing front-ends'},
+  {icon:'🔬', name:'RESEARCH & SCIENCE', desc:'Custom cryogenic front-ends for physics research, cosmology (CMB receivers), atmospheric sensing and laboratory science'},
+];
+
+const SERVICES = [
+  {icon:'🔩', name:'CRYO ENGINEERING', desc:'Complete cryogenic system design including dewar engineering, thermal management, cold head selection and cryogenic RF chain design. In-house cryogenic test facilities at Toulouse.'},
+  {icon:'🌡', name:'THERMAL (CRYO) CYCLING TESTS', desc:'Accelerated life testing of RF components and assemblies by thermal cycling between cryogenic and ambient temperatures. Available as a service to external customers.'},
+  {icon:'📐', name:'RF DESIGN & PROTOTYPING', desc:'Custom RF circuit and MMIC design from specification to prototype. In-house capability from InP/GaAs chip design through to packaged LNA modules at frequencies up to 50 GHz.'},
+  {icon:'🔗', name:'WIRE BONDING SERVICES', desc:'Gold wire and ribbon bonding on RF components up to 50 GHz. Wedge bonding in aluminium or brass housings with full integration reports and RF measurement.'},
+  {icon:'🏗', name:'RF INTEGRATION SERVICES', desc:'Integration of waveguide and coaxial RF interfaces into metallic housings up to 50 GHz, with RF parameter measurements and dimensional reports included.'},
+  {icon:'🛠', name:'MAINTENANCE & REFURBISHMENT', desc:'Preventive and corrective maintenance of Callisto and third-party cryogenic receiver systems. Remote diagnostics, spare cold heads, on-site commissioning and training support worldwide.'},
+];
+
+const REFS = [
+  {agency:'ESA / ESOC', detail:'Ultra cryo LNAs at Cebreros, Malargüe, New Norcia — ESA Deep Space Stations. 26 GHz upgrade study for DSA1 & DSA2.'},
+  {agency:'EUMETSAT', detail:'Cryogenic LNA systems for meteorological satellite receive chains and EO ground stations.'},
+  {agency:'CNES', detail:'Cryogenic LNA development since 1999 for French space agency ground station and space programme receivers.'},
+  {agency:'BKG GERMANY', detail:'X-band compact cryo-LNAs for German Federal Agency for Cartography and Geodesy VLBI telescopes (SAT 2025).'},
+  {agency:'ISRO / ISTRAC', detail:'Cryogenic LNA systems for ISRO Spacecraft Control Centre (ISTRAC) deep space and satellite tracking stations in India.'},
+  {agency:'SARDINIA SRT / SDSA', detail:'Cryogenic LNAs for Sardinia Radio Telescope / Deep Space Antenna upgrade (OHB Digital Connect, contracted 2025). X- and K-band, designed for 10 years maintenance-free.'},
+  {agency:'AGGO ARGENTINA', detail:'Refurbishment and cryogenic RF system upgrade of the Argentine-German Geodetic Observatory radiotelescope in Pereyra (SAT October 2025).'},
+  {agency:'THALES ALENIA SPACE', detail:'Cryogenic LNA development programme for satellite payload and ground station applications.'},
+  {agency:'NORTH AMERICA (K-BAND)', detail:'Two K-band 20 GHz compact cryo-LNA units supplied for Earth Observation ground stations — high reliability in remote harsh weather conditions.'},
+];
+
+function tog(i){
+  const c=document.getElementById('pc'+i), t=document.getElementById('pt'+i);
+  const o=c.classList.toggle('open');
+  t.textContent = o ? '−' : '+';
+}
+
+document.getElementById('prodGrid').innerHTML = PRODUCTS.map((p,i) => `
+  <div class="prod-card" id="pc${i}" onclick="tog(${i})" style="animation-delay:${i*0.07}s">
+    <div class="prod-head"><div class="prod-name">${p.name}</div><div class="tog" id="pt${i}">+</div></div>
+    <div class="prod-brief">${p.brief}</div>
+    <div class="pills">${p.pills.map(pl=>`<span class="pill">${pl}</span>`).join('')}</div>
+    <div class="detail">
+      <div class="dl"><div class="dl-label">Overview</div><div class="dl-text">${p.overview.replace(/\n/g,'<br>')}</div></div>
+      <div class="dl"><div class="dl-label">Key Specifications</div><table class="stbl">${p.specs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join('')}</table></div>
+      ${p.refs.length?`<div class="dl"><div class="dl-label">Reference Customers / Projects</div><div>${p.refs.map(r=>`<span class="ref-badge">${r}</span>`).join('')}</div></div>`:''}
+      <div class="dl"><div class="dl-label">Models / Part Numbers</div><div class="pnums">${p.models.map(m=>`<span class="pnum">${m}</span>`).join('')}</div></div>
+      <div class="dl"><div class="dl-label">Typical Applications</div><div class="dl-text">${p.app}</div></div>
+    </div>
+  </div>`).join('');
+
+document.getElementById('appsGrid').innerHTML = APPS.map(a=>`
+  <div class="app-card"><div class="app-icon">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></div>`).join('');
+
+document.getElementById('srvGrid').innerHTML = SERVICES.map(s=>`
+  <div class="srv-card"><div class="srv-icon">${s.icon}</div><div class="srv-name">${s.name}</div><div class="srv-desc">${s.desc}</div></div>`).join('');
+
+document.getElementById('refGrid').innerHTML = REFS.map(r=>`
+  <div class="ref-card"><div class="ref-agency">${r.agency}</div><div class="ref-detail">${r.detail}</div></div>`).join('');
+</script>
+</body>
+</html>
