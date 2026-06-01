@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Western Systems Technologies LLP – Product Line Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   RESET & ROOT — LIGHT ONLY
+═══════════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:           #f5f7fa;
+  --surface:      #ffffff;
+  --surface2:     #f0f3f7;
+  --border:       #dde3ec;
+  --border-soft:  #eaeff5;
+
+  --rf:           #0369a1;
+  --rf-light:     #e0f2fe;
+  --rf-mid:       #38bdf8;
+
+  --tf:           #047857;
+  --tf-light:     #d1fae5;
+  --tf-mid:       #34d399;
+
+  --op:           #b45309;
+  --op-light:     #fef3c7;
+  --op-mid:       #f59e0b;
+
+  --text:         #0f172a;
+  --text-2:       #334155;
+  --text-3:       #64748b;
+  --text-4:       #94a3b8;
+
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg:    0 10px 30px rgba(0,0,0,0.1);
+  --radius:       10px;
+  --radius-sm:    6px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* subtle dot grid */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════
+   TOP HEADER BAR
+═══════════════════════════════════════════════════ */
+.top-header {
+  background: #fff;
+  border-bottom: 2px solid var(--rf);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.top-header-left {}
+.co-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(12px, 1.6vw, 16px);
+  font-weight: 700;
+  color: var(--rf);
+  letter-spacing: 0.3px;
+}
+.co-tagline {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1.5px;
+  margin-top: 1px;
+}
+.top-header-right {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--text-4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════
+   MAIN CONTAINER
+═══════════════════════════════════════════════════ */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+
+/* ═══════════════════════════════════════════════════
+   HERO HEADER
+═══════════════════════════════════════════════════ */
+.page-hero {
+  text-align: center;
+  padding: 40px 20px 36px;
+  margin-bottom: 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rf), var(--tf), var(--op));
+}
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-3);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--rf) 0%, var(--tf) 50%, var(--op) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+}
+
+/* ═══════════════════════════════════════════════════
+   DOMAIN BUTTONS
+═══════════════════════════════════════════════════ */
+.domain-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+@media(max-width:640px){ .domain-nav { grid-template-columns: 1fr; } }
+
+.domain-btn {
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.22s ease;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.domain-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.22s;
+}
+.domain-btn.rf  { color: var(--rf); }
+.domain-btn.tf  { color: var(--tf); }
+.domain-btn.op  { color: var(--op); }
+
+.domain-btn.active::after, .domain-btn:hover::after { opacity: 1; }
+.domain-btn.rf.active, .domain-btn.rf:hover  { border-color: var(--rf);  background: var(--rf-light);  }
+.domain-btn.tf.active, .domain-btn.tf:hover  { border-color: var(--tf);  background: var(--tf-light);  }
+.domain-btn.op.active, .domain-btn.op:hover  { border-color: var(--op);  background: var(--op-light);  }
+
+.domain-btn.active { box-shadow: var(--shadow-md); }
+
+.d-icon  { font-size: 28px; margin-bottom: 10px; display: block; }
+.d-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 3px;
+  color: inherit;
+}
+.d-count {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ═══════════════════════════════════════════════════
+   SECTION LABEL
+═══════════════════════════════════════════════════ */
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ═══════════════════════════════════════════════════
+   APP FILTER TABS
+═══════════════════════════════════════════════════ */
+.app-section { margin-bottom: 24px; }
+.app-tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.app-tab {
+  padding: 7px 16px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-3);
+  transition: all 0.18s;
+}
+.app-tab:hover { color: var(--text-2); border-color: #94a3b8; background: var(--surface2); }
+.app-tab.active.rf { border-color: var(--rf); color: var(--rf); background: var(--rf-light); font-weight: 600; }
+.app-tab.active.tf { border-color: var(--tf); color: var(--tf); background: var(--tf-light); font-weight: 600; }
+.app-tab.active.op { border-color: var(--op); color: var(--op); background: var(--op-light); font-weight: 600; }
+
+/* ═══════════════════════════════════════════════════
+   PRODUCT CARDS GRID
+═══════════════════════════════════════════════════ */
+.products-section { margin-bottom: 24px; }
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  animation: fadeUp 0.3s ease both;
+}
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.product-card.rf::before { background: var(--rf); }
+.product-card.tf::before { background: var(--tf); }
+.product-card.op::before { background: var(--op); }
+
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.product-card.rf:hover { border-color: var(--rf); }
+.product-card.tf:hover { border-color: var(--tf); }
+.product-card.op:hover { border-color: var(--op); }
+
+/* vendor name */
+.product-vendor {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 3px;
+  margin-top: 6px;
+}
+.product-card.rf .product-vendor { color: var(--rf); }
+.product-card.tf .product-vendor { color: var(--tf); }
+.product-card.op .product-vendor { color: var(--op); }
+
+.product-country {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 12px;
+}
+
+/* product lines list */
+.product-items {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-2);
+  margin-bottom: 14px;
+}
+.product-items .pi-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+.product-items .pi-row:last-child { border-bottom: none; }
+.product-items .pi-dot { color: var(--text-4); flex-shrink: 0; margin-top: 2px; }
+.product-items .pi-name { font-weight: 600; color: var(--text); }
+.product-items .pi-detail { color: var(--text-3); font-size: 12.5px; }
+.product-items .more-badge {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-4);
+  font-style: italic;
+}
+
+/* app tags */
+.product-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.tag {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-family: 'IBM Plex Mono', monospace;
+  border-radius: 20px;
+  border: 1px solid;
+  font-weight: 500;
+}
+.product-card.rf .tag { border-color: var(--rf-mid); color: var(--rf); background: var(--rf-light); }
+.product-card.tf .tag { border-color: var(--tf-mid); color: var(--tf); background: var(--tf-light); }
+.product-card.op .tag { border-color: var(--op-mid); color: var(--op); background: var(--op-light); }
+
+/* view details button */
+.view-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  transition: all 0.18s;
+  cursor: pointer;
+  border: none;
+}
+.product-card.rf .view-btn { background: var(--rf-light); color: var(--rf); }
+.product-card.tf .view-btn { background: var(--tf-light); color: var(--tf); }
+.product-card.op .view-btn { background: var(--op-light); color: var(--op); }
+.product-card.rf .view-btn:hover { background: var(--rf); color: #fff; }
+.product-card.tf .view-btn:hover { background: var(--tf); color: #fff; }
+.product-card.op .view-btn:hover { background: var(--op); color: #fff; }
+
+/* ═══════════════════════════════════════════════════
+   EMPTY STATE
+═══════════════════════════════════════════════════ */
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-4);
+  font-size: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.empty-state .icon { font-size: 40px; margin-bottom: 14px; opacity: 0.4; }
+
+/* ═══════════════════════════════════════════════════
+   CONTACT TEAM SECTION
+═══════════════════════════════════════════════════ */
+.team-section {
+  margin-top: 40px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.team-header {
+  background: var(--rf);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.team-header-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+.team-header-sub {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 1px;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0;
+}
+.team-card {
+  padding: 22px 24px;
+  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  transition: background 0.18s;
+}
+.team-card:hover { background: var(--surface2); }
+.team-card:nth-child(4n)  { border-right: none; }
+@media(max-width:900px){
+  .team-card:nth-child(4n) { border-right: 1px solid var(--border-soft); }
+  .team-card:nth-child(3n) { border-right: none; }
+}
+@media(max-width:640px){
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { border-right: none; }
+}
+
+.tc-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--rf-light);
+  color: var(--rf);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.tc-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.tc-role {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+.tc-contact { display: flex; flex-direction: column; gap: 4px; }
+.tc-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+}
+.tc-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--surface2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.tc-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11.5px;
+  color: var(--text-2);
+  word-break: break-all;
+}
+.tc-val a { color: var(--rf); text-decoration: none; }
+.tc-val a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════════
+   MODAL OVERLAY
+═══════════════════════════════════════════════════ */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15,23,42,0.5);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 700px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.22s ease;
+}
+.modal-header {
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 10;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.modal-domain-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+.modal.rf .modal-domain-tag { color: var(--rf); }
+.modal.tf .modal-domain-tag { color: var(--tf); }
+.modal.op .modal-domain-tag { color: var(--op); }
+.modal-vendor {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.modal-country {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+}
+.modal-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 32px; height: 32px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--text-3);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.18s;
+}
+.modal-close:hover { color: var(--text); background: var(--border); }
+
+.modal-body { padding: 24px; }
+.modal-section-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-3);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.modal-app-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+.modal-app-tag {
+  padding: 5px 13px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  border-radius: 20px;
+  border: 1.5px solid;
+}
+.modal.rf .modal-app-tag { border-color: var(--rf); color: var(--rf); background: var(--rf-light); }
+.modal.tf .modal-app-tag { border-color: var(--tf); color: var(--tf); background: var(--tf-light); }
+.modal.op .modal-app-tag { border-color: var(--op); color: var(--op); background: var(--op-light); }
+
+.product-list { list-style: none; margin-bottom: 22px; }
+.product-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+  display: flex;
+  gap: 10px;
+}
+.product-list li:last-child { border-bottom: none; }
+.product-list li::before { content: '›'; color: var(--text-4); flex-shrink: 0; margin-top: 1px; }
+.product-list li strong { color: var(--text); font-weight: 600; }
+
+.modal-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.18s;
+  border: 1.5px solid;
+}
+.modal.rf .modal-link { border-color: var(--rf); color: var(--rf); background: var(--rf-light); }
+.modal.tf .modal-link { border-color: var(--tf); color: var(--tf); background: var(--tf-light); }
+.modal.op .modal-link { border-color: var(--op); color: var(--op); background: var(--op-light); }
+.modal.rf .modal-link:hover { background: var(--rf); color: #fff; }
+.modal.tf .modal-link:hover { background: var(--tf); color: #fff; }
+.modal.op .modal-link:hover { background: var(--op); color: #fff; }
+
+/* ═══════════════════════════════════════════════════
+   STATUS BAR
+═══════════════════════════════════════════════════ */
+.status-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: rgba(255,255,255,0.96);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  gap: 24px;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+.status-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--text-3);
+}
+.status-item b { color: var(--rf); font-weight: 500; }
+
+/* ═══════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface2); }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<div class="top-header">
+  <div class="top-header-left">
+    <div class="co-name">WESTERN SYSTEMS TECHNOLOGIES LLP</div>
+    <div class="co-tagline">BANGALORE, INDIA &nbsp;·&nbsp; RF & MICROWAVE &nbsp;·&nbsp; TIME & FREQUENCY &nbsp;·&nbsp; OPTICS & LASER</div>
+  </div>
+  <div class="top-header-right">PRODUCT LINE EXPLORER</div>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <div class="hero-eyebrow">Advanced Technology Solutions</div>
+    <div class="hero-title">Product Line Explorer</div>
+    <div class="hero-sub">RF & Microwave &nbsp;·&nbsp; Time & Frequency &nbsp;·&nbsp; Optics & Laser</div>
+  </div>
+
+  <!-- DOMAIN SELECTOR -->
+  <div class="domain-nav">
+    <button class="domain-btn rf active" onclick="setDomain('rf')">
+      <span class="d-icon">📡</span>
+      <span class="d-label">RF & Microwave</span>
+      <span class="d-count">9 PRINCIPALS</span>
+    </button>
+    <button class="domain-btn tf" onclick="setDomain('tf')">
+      <span class="d-icon">⏱</span>
+      <span class="d-label">Time & Frequency</span>
+      <span class="d-count">8 PRINCIPALS</span>
+    </button>
+    <button class="domain-btn op" onclick="setDomain('op')">
+      <span class="d-icon">🔬</span>
+      <span class="d-label">Optics & Laser</span>
+      <span class="d-count">13 PRINCIPALS</span>
+    </button>
+  </div>
+
+  <!-- APP FILTER -->
+  <div class="app-section">
+    <div class="section-label">Filter by Application</div>
+    <div class="app-tabs" id="appTabs"></div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products-section">
+    <div class="section-label">PRINCIPALS — <span id="productCount">0</span> results</div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- CONTACT TEAM -->
+  <div class="team-section">
+    <div class="team-header">
+      <div>
+        <div class="team-header-title">Our Team — Contact Us</div>
+        <div class="team-header-sub">WESTERN SYSTEMS TECHNOLOGIES LLP &nbsp;·&nbsp; BANGALORE, INDIA</div>
+      </div>
+    </div>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-item">DOMAIN: <b id="statusDomain">RF & MICROWAVE</b></div>
+  <div class="status-item">FILTER: <b id="statusApp">ALL</b></div>
+  <div class="status-item">RESULTS: <b id="statusCount">0</b></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalBg(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-domain-tag" id="modalDomainTag"></div>
+      <div class="modal-vendor" id="modalVendor"></div>
+      <div class="modal-country" id="modalCountry"></div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="modalApps"></div>
+      <div class="modal-section-title">Product Lines</div>
+      <ul class="product-list" id="modalProducts"></ul>
+      <div class="modal-links" id="modalLinks"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ─── TEAM DATA ─────────────────────────────────── */
+const TEAM = [
+  { name:'Arvind Balu',   role:'Director',          initials:'AB', email:'arvind@wsysind.com',   phone:'+91 90080 44066' },
+  { name:'Hariharakrishnan (South)',   role:'Regional Manager - Sales',      initials:'HK', email:'harihara@wsysind.com',    phone:'+91 93437 48783' },
+  { name:'Dilip Iyer (West)',    role:'Senior Executive - Administration',  initials:'DI', email:'dilip@wsysind.com',    phone:'+91 90224 82626' },
+  { name:'Dipak Kanase (West)',     role:'Marketing - Manager',initials:'DK', email:'dipak@wsysind.com',    phone:'+91 90046 47002' },
+  { name:'Karthikeyan P.S.',  role:'Manager - Technial Support',  initials:'KK', email:'karthik@wsysind.com',   phone:'+91 98866 61904' },
+  { name:'Nikhil Kumar Vijay (North)',   role:'Manager - Technical Sales',      initials:'NK', email:'nikhil@wsysind.com',   phone:'+91 94601 33722' },
+  { name:'Aruna K.N. (Educational Institutes)',   role:'Senior Engineer - Technical Support',          initials:'AR', email:'aruna@wsysind.com',  phone:'+91 96209 76422' },
+  { name:'B.G.Keshavamurthy',   role:'Accounts Manager',          initials:'KM', email:'km@wsysind.com',  phone:'+91 98808 92567' },
+  { name:'Subadra Arvind',   role:'Manager Administration and Support',          initials:'SA', email:'subadra@wsysind.com',  phone:'+91 90080 44033' },
+  { name:'Sundarapandiyan .K',   role:'Engineer - Sales Support',          initials:'SP', email:'support@wsysind.com',  phone:'+91 90920 06915' },
+];
+
+const avatarColors = [
+  { bg:'#e0f2fe', color:'#0369a1' },
+  { bg:'#d1fae5', color:'#047857' },
+  { bg:'#fef3c7', color:'#b45309' },
+  { bg:'#ede9fe', color:'#6d28d9' },
+  { bg:'#fce7f3', color:'#9d174d' },
+  { bg:'#dcfce7', color:'#15803d' },
+  { bg:'#fee2e2', color:'#b91c1c' },
+];
+
+function renderTeam() {
+  document.getElementById('teamGrid').innerHTML = TEAM.map((p,i) => {
+    const c = avatarColors[i % avatarColors.length];
+    return `<div class="team-card">
+      <div class="tc-avatar" style="background:${c.bg};color:${c.color}">${p.initials}</div>
+      <div class="tc-name">${p.name}</div>
+      <div class="tc-role">${p.role}</div>
+      <div class="tc-contact">
+        <div class="tc-row">
+          <div class="tc-icon">📧</div>
+          <div class="tc-val"><a href="mailto:${p.email}">${p.email}</a></div>
+        </div>
+        <div class="tc-row">
+          <div class="tc-icon">📞</div>
+          <div class="tc-val">${p.phone}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── VENDOR DATA ───────────────────────────────── */
+const DATA = {
+  rf:{
+    label:'RF & MICROWAVE',
+    apps:['ALL','METROLOGY','AEROSPACE','DEFENCE','SATELLITE','WEATHER','TELECOM','GNSS','EW & RADAR','ANTENNA TEST','DRONE',
+      'RESEARCH & SCIENCE', 'ATC', 'DEEP SPACE', 'GROUND STATION', 'COMINT/SIGINT', 'AUTOMOTIVE', 'SIGNAL RECEIVERS','MARITIME'
+    ],
+    vendors:[
+      { name:'IMST', country:'GERMANY', url:'https://www.imst.com/', page:'IMST.html',
+        apps:['AEROSPACE','DEFENCE','EW & RADAR', 'TELECOM', 'METROLOGY'],
+        products:[
+          {bold:'LTCC Development',detail:'Low Temperature Co-Fired Ceramic for RF & Microwave'},
+          {bold:'TR Modules',detail:'L, S, C, X, Ku and Ka Bands'},
+          {bold:'EMPIRE FDTD Software',detail:'EM simulation software for RF/Microwave'},
+          {bold:'Wireless IoT Modules',detail:'LoRa, LoRaWAN, 2.4 GHz modules'}
+        ]},
+      { name:'CALLISTO', country:'FRANCE', url:'https://www.callisto-space.com/', page:'CC.html',
+        apps:['AEROSPACE','METROLOGY','SATELLITE', 'DEEP SPACE','GROUND STATION', 'RESEARCH & SCIENCE', 'DEFENCE'],
+        products:[
+          {bold:'Ultra Cryogenic LNA',detail:'QRFH wideband receiver, < 8K noise temp'},
+          {bold:'Compact MKII Cryo LNA',detail:'Zero-maintenance Stirling cooled, S/X/Ka'},
+          {bold:'Mini Ka-Band Cryo LNA',detail:'Military Ka-band 17.7–21.2 GHz, < 5 kg'},
+          {bold:'Ambient Ka-Band LNA',detail:'1.5 dB NF, 44 dB gain, WG input / Coax output'}
+        ]},
+      { name:'STT SYSTEM TECHNIK', country:'GERMANY', url:'https://www.stt-systemtechnik.de/', page:'STT.html',
+        apps:['AEROSPACE','SATELLITE','TELECOM','DEFENCE','GROUND STATION','DRONE','MARITIME'],
+        products:[
+          {bold:'S-Band FM Telemetry Transmitters',detail:'Airborne TS900, TS1000, TS1100 series'},
+          {bold:'S-Band Satellite Transceiver',detail:'SSTRC-1000/1100/3000, LEO TT&C'},
+          {bold:'DVB-S2 Payload Transmitter',detail:'PDTX-1000 C/X-band, 1–8W, CAN-bus'},
+          {bold:'Ground Station Systems',detail:'FTCGS-1, MRS-100 mobile receive station'}
+        ]},
+      { name:'IZT', country:'GERMANY', url:'https://www.izt-labs.de/', page:'IZT.html',
+        apps:['SATELLITE','GNSS','EW & RADAR','COMINT/SIGINT','ATC','AUTOMOTIVE','SIGNAL RECEIVERS','DRONE'],
+        products:[
+          {bold:'S1000/S1010 Multi-Channel Signal Generator',detail:'31 virtual generators, GNSS/COMINT/Infotainment'},
+          {bold:'R3000 Wideband Receiver Family',detail:'24 MHz BW, 9 kHz–3 GHz, 4 channels'},
+          {bold:'R5040 Wideband Receiver',detail:'Up to 18 GHz, 120 MHz BW, waterproof'},
+          {bold:'Satellite Channel Emulators',detail:'C3040/C5040/C6000 bidirectional'}
+        ]},
+      { name:'TICRA', country:'DENMARK', url:'https://www.ticra.com/', page:'TICRA.html',
+        apps:['SATELLITE','ANTENNA TEST','AEROSPACE','DEFENCE','RESEARCH & SCIENCE'],
+        products:[
+          {bold:'GRASP',detail:'World-standard reflector antenna analysis (PO/GTD/MoM)'},
+          {bold:'CHAMP 3D',detail:'Waveguide & horn antenna analysis — Mode Matching'},
+          {bold:'ESTEAM',detail:'EM scattering of large complex structures — MoM/MLFMM'},
+          {bold:'QUPES / POS / UQ',detail:'Reflectarrays, contoured beam, uncertainty quantification'}
+        ]},
+      { name:'MARCH MICROWAVE', country:'NETHERLANDS', url:'https://www.marchmicrowave.com/', page:'MM.html',
+        apps:['ANTENNA TEST','DEFENCE','EW & RADAR','ANTENNA TEST','SATELLITE','AEROSPACE','RESEARCH & SCIENCE'],
+        products:[
+          {bold:'Dual-Reflector Compact Test Ranges',detail:'CATR 1 GHz–110 GHz, < 0.5 dB QZ ripple'},
+          {bold:'Single-Plane Collimating Ranges',detail:'Cost-effective principal-plane measurement'},
+          {bold:'ARCS Software Suite',detail:'Antenna + RCS measurement, ISAR processing'}
+        ]},
+      { name:'MTI', country:'ISRAEL', url:'https://www.mtiwe.com/', page:'MTI.html',
+        apps:['DEFENCE','EW & RADAR','TELECOM','ATC'],
+        products:[
+          {bold:'Military Airborne Antennas',detail:'Blade, conformal, DF spiral, GPS anti-jam'},
+          {bold:'Ground & Naval Antennas',detail:'HF whips, LPDA, submarine mast antennas'},
+          {bold:'DF & SIGINT Antennas',detail:'0.5–18 GHz cavity spiral, cross log-periodic'},
+          {bold:'5G Backhaul & RFID Antennas',detail:'E-Band, D-Band, dual-band parabolic, ABS'}
+        ]},
+      { name:'ELDES', country:'ITALY', url:'https://www.eldesradar.com/', page:'ELDES.html',
+        apps:['WEATHER','DEFENCE','EW & RADAR','ATC','METROLOGY','MARITIME'],
+        products:[
+          {bold:'WR-25XP X-Band Weather Radar',detail:'Dual-pol Doppler, 25 kW, 700+ installations'},
+          {bold:'WR-J Solid State Radar',detail:'SSPA, 200–800W, 5 configs, 16m resolution'},
+          {bold:'METRANET II RDP Software',detail:'Multi-brand radar data processing suite'},
+          {bold:'E-PRS / E-PSS Poseidon',detail:'HWIL EW & anti-ship missile seeker simulator'}
+        ]},
+      { name:'OHB AUSTRIA', country:'AUSTRIA', url:'https://www.ohb-austria.at/', page:'OHB.html',
+        apps:['GNSS','SATELLITE','AEROSPACE','MARITIME','DEFENCE','AEROSPACE','AUTOMOTIVE','DRONE','COMINT/SIGINT'],
+        products:[
+          {bold:'GIDAS',detail:'GNSS interference detection, classification & DF'},
+          {bold:'GNSS Signal Simulation (XPLORA)',detail:'Aviation, automotive, spaceborne receiver testing'},
+          {bold:'SARONTAR',detail:'Satellite-based SAR coordination platform'},
+          {bold:'ORBCOMM IoT (Reseller)',detail:'Fleet, cold chain, maritime industrial IoT'}
+        ]}
+    ]
+  },
+  tf:{
+    label:'TIME & FREQUENCY',
+    apps:['ALL','METROLOGY','TELECOM','DEFENCE','GNSS','SATELLITE','LAB','NATIONAL TIME',
+      'VLBI','DEEP SPACE','RESEARCH','TELECOM','NAVIGATION','DEFENCE','INDUSTRIAL','QUANTUM RESEARCH',
+      'UNIVERSITIES','CLOCK COMPARISON','NETWORK SYNC','ENTERPRISE IT','BROADCAST','FINANCE','NAVAL'
+    ],
+    vendors:[
+      { name:'VREMYA-CH', country:'RUSSIA', url:'https://www.vremya-ch.com/', page:'VR.html',
+        apps:['METROLOGY','LAB','TELECOM','NATIONAL TIME','VLBI','DEEP SPACE','DEEP SPACE','RESEARCH','CLOCK COMPARISON'],
+        products:[
+          {bold:'VCH-2021 Active H-Maser',detail:'Record stability, single state selection, optical output'},
+          {bold:'VCH-1003M Active H-Maser',detail:'σy < 1×10⁻¹⁵ @ 1000s, Cavity Auto Tuning'},
+          {bold:'VCH-1008 / VCH-1025 Passive H-Maser',detail:'Compact, digital servo, GPS/GLONASS option'},
+          {bold:'Multichannel Frequency Comparator',detail:'< 0.1 ns resolution, 1–100 MHz, multi-input'}
+        ]},
+      { name:'RUKNAR JSC', country:'RUSSIA', url:'https://ruknar.com/', page:'RK.html',
+        apps:['METROLOGY','LAB','DEFENCE','TELECOM','NAVIGATION','GNSS'],
+        products:[
+          {bold:'CH1-1022 Compact Rb Standard',detail:'Embedded, 1PPS disciplined, RS-232, programmable'},
+          {bold:'CH1-1012 Mobile Rb Standard',detail:'Small size, low power, mobile applications'},
+          {bold:'RRS-02 Rb Reference Generator',detail:'Up to 15 outputs, fully redundant, rack-mount'},
+          {bold:'Optical Elements',detail:'Rb discharge lamps, filter cells for frequency standards'}
+        ]},
+      { name:'MORION INC', country:'RUSSIA', url:'https://morion.com.ru/', page:'MR.html',
+        apps:['METROLOGY','LAB','TELECOM','DEFENCE','GNSS','SATELLITE','INDUSTRIAL'],
+        products:[
+          {bold:'OCXOs',detail:'4 MHz–1228.8 MHz, ADEV 1.5×10⁻¹³, −120 dBc/Hz @ 1 Hz'},
+          {bold:'TCXOs',detail:'±0.1 ppm, COSPAS-SARSAT qualified variants (MV176)'},
+          {bold:'VCXOs',detail:'1–200 MHz, linear tuning, 20×20 mm HF package'},
+          {bold:'New Gen MV202/MV203',detail:'OCXO-like TCXO performance, fast startup'}
+        ]},
+      { name:'SPECTRADYNAMICS', country:'USA', url:'https://spectradynamics.com/', page:'MS.html',
+        apps:['METROLOGY','LAB','DEFENCE','NATIONAL TIME','QUANTUM RESEARCH','TELECOM','UNIVERSITIES'],
+        products:[
+          {bold:'cRb-CLOCK',detail:"World's first portable cold Rubidium atomic clock"},
+          {bold:'HROG-5RM',detail:'< 1 fs resolution, 5×10⁻¹⁹ freq resolution, 5× 100 MHz'},
+          {bold:'EOG Enhanced Offset Generator',detail:'3×10⁻²⁰ freq resolution, < 0.1 ps time offset'},
+          {bold:'HPDA-15RMi-C Distribution Amp',detail:'15 outputs, ultra-low phase noise'}
+        ]},
+      { name:'TIMETECH GMBH', country:'GERMANY', url:'https://www.timetech.de/', page:'MS.html',
+        apps:['SATELLITE','METROLOGY','TELECOM','NATIONAL TIME','CLOCK COMPARISON','NETWORK SYNC',],
+        products:[
+          {bold:'SATRE Modem',detail:'TWSTFT < 1 ns uncertainty, 30 ps precision — BIPM/PTB/NIST'},
+          {bold:'SATRE Network Synchronisation',detail:'ADEV < 1×10⁻¹⁴ for t > 10⁴ s'},
+          {bold:'SATSIM Satellite Simulator',detail:'Station delay monitor & transponder simulator'},
+          {bold:'Frequency & Pulse Distribution',detail:'5 to 100 MHz, 1 Input - 16 Outputs, BNC, 1 pps to 10 MHz, 1 Input - 16 Outputs, BNC'}
+        ]},
+      { name:'MESIT DEFENCE', country:'CZECH REPUBLIC', url:'https://www.mesitasd.cz/', page:'MS.html',
+        apps:['GNSS','DEFENCE','METROLOGY','RESEARCH'],
+        products:[
+          {bold:'GTR51 GNSS Receiver',detail:'GPS+GLONASS+Galileo, sub-ns accuracy, NASA Goddard'},
+          {bold:'GTR52 GNSS Receiver',detail:'GPS+Galileo, sub-ns accuracy, 3 variants'},
+          {bold:'GTR55 GNSS Receiver',detail:'Built-in calibrator, continuous delay measurement'}
+        ]},
+      { name:'MEINBERG', country:'GERMANY', url:'https://www.meinbergglobal.com/', page:'MB.html',
+        apps:['TELECOM','GNSS','LAB','METROLOGY','DEFENCE','BROADCAST','FINANCE','ENTERPRISE IT','NETWORK SYNC'],
+        products:[
+          {bold:'LANTIME M-Series NTP Servers',detail:'M150–M3000, Stratum 1, GNSS/DCF77, free lifetime SW'},
+          {bold:'microSync PTP Grandmaster',detail:'All PTP profiles, G.8275.1/2, SMPTE, IEC 61850'},
+          {bold:'IRIG Time Code Systems',detail:'IRIG-B generator + M320/TCR reader + NTP'},
+          {bold:'PC Clocks & GNSS Antennas',detail:'PCIe GPS, USB DCF77, GNMANTv2, GOAL optical link'}
+        ]},
+      { name:'FREQUENCY ELECTRONICS', country:'USA', url:'https://freqelec.com/', page:'FE.html',
+        apps:['DEFENCE','GNSS','NAVAL','METROLOGY'],
+        products:[
+          {bold:'DRAFS / RAFS Rubidium Atomic Clock',detail:'GPS III heritage, < 1 ns/day, digital tuning'},
+          {bold:'TURBO Compact Rb Oscillator',detail:'< ±10 µs/day holdover for timing units'},
+          {bold:'G-Compensated Quartz Oscillators',detail:'6.3×10⁻¹² /g for UAV/helicopter vibration'},
+          {bold:'JADC2 Timing & GPS/SAASM Systems',detail:'SEWIP Block 3, AOEW EW synthesisers'}
+        ]}
+    ]
+  },
+  op:{
+    label:'OPTICS & LASER',
+    apps:['ALL','METROLOGY','DEFENCE','DETECTION','LAB','IMAGING','AEROSPACE','QUANTUM','SPECTROSCOPY','LASER COMMS','OPTICAL CLOCKS',
+      'SPACE','LIDAR','THz GENERATION','AGRICULTURE','MEDICAL','SENSING','RANGING','ASTHETICS','INDUSTRIAL','RESEARCH','OEM INTEGRATION',
+      'AUTOMOTIVE','SEMICONDUCTOR','FILM','EDUCATIONAL INSTITUTES','DRONE COMM','TELECOMM'
+    ],
+    vendors:[
+      { name:'EAGLEYARD PHOTONICS', country:'GERMANY', url:'https://www.toptica-eagleyard.com/', page:'EY.html',
+        apps:['LAB','METROLOGY','SPECTROSCOPY','ATOMIC CLOCKS','SPACE','SATELLITE','LIDAR','THz GENERATION',
+          'MEDICAL','SENSING','RANGING','QUANTUM',
+        ],
+        products:[
+          {bold:'DFB / DBR Single Freq Laser Diodes',detail:'760–1083 nm, < 1 MHz linewidth, SMSR ≥30 dB'},
+          {bold:'Tapered Amplifiers (TPA)',detail:'650–980 nm, up to 3 W, M²≈1'},
+          {bold:'Single Mode Laser Diodes (RWL)',detail:'808–1060 nm, up to 800 mW, hermetic'},
+          {bold:'Gain Chips (AR-Coated)',detail:'655–1060 nm, < 0.1% AR, for ECDL systems'}
+        ]},
+      { name:'MONOCROM', country:'SPAIN', url:'https://www.monocrom.com/', page:'MONOC.html',
+        apps:['DEFENCE','METROLOGY','LAB','MEDICAL','ASTHETICS','AEROSPACE','RESEARCH','OEM INTEGRATION','LIDAR'
+
+        ],
+        products:[
+          {bold:'Direct Diode Laser Stacks',detail:'640–1940 nm, up to 8 kW CW, Solder-free Clamping™'},
+          {bold:'CAST Medical Platform',detail:'Up to 7200 W, 755–1060 nm, hair removal / derm'},
+          {bold:'HiEN DPSS Solid State Lasers',detail:'400 mJ @ 1064/532/355 nm; 1 J/pulse @ 300 Hz'},
+          {bold:'LiDME Defence Module',detail:'760–2900 nm, < 3 kW peak, remote sensing'}
+        ]},
+      { name:'MENLO SYSTEMS', country:'GERMANY', url:'https://www.menlosystems.com/', page:'MS.html',
+        apps:['METROLOGY','LAB','QUANTUM','SPECTROSCOPY','OPTICAL CLOCKS','THz GENERATION','QUANTUM','SEMICONDUCTOR',
+          'EDUCATIONAL INSTITUTES','RESEARCH'
+        ],
+        products:[
+          {bold:'Optical Frequency Combs',detail:'FC1500-250-WG, SmartComb, OFC Engine — Nobel Prize tech'},
+          {bold:'Femtosecond Fiber Lasers',detail:'figure 9® mode-locking, ELMO/YLMO series'},
+          {bold:'THz Time-Domain Systems',detail:'TERA K15, TeraSmart — up to 6.5 THz, 80 dB SNR'},
+          {bold:'Timing Distribution (FEL)',detail:'ORS-1500 < 30 fs jitter, DESY/XFEL/SLAC deployed'}
+        ]},
+      { name:'RIO – OPTASENSE', country:'USA', url:'https://www.rio-lasers.com/', page:'MS.html',
+        apps:['LAB','SPECTROSCOPY','METROLOGY','QUANTUM','SENSING','LIDAR','DEFENCE','METROLOGY','EDUCATIONAL INSTITUTES',
+          'QUANTUM'
+        ],
+        products:[
+          {bold:'PLANEX / ORION ECL Diode',detail:'< 2 kHz linewidth, 1550/1064 nm, SM fiber'},
+          {bold:'High Power Low Phase Noise Module',detail:'Up to 1 W, EDFA amplified, PM1550'},
+          {bold:'Tunable Laser Source',detail:'> 40 nm tuning, C-band'},
+          {bold:'Optical Phase Lock Loop',detail:'1 MHz–100 GHz offset, heterodyne spectroscopy'}
+        ]},
+      { name:'AC PHOTONICS', country:'USA', url:'https://acphotonics.com/', page:'AC PHOTONICS.html',
+        apps:['LAB','LASER COMMS','SPECTROSCOPY','TELECOMM','SENSING','DEFENCE','LIDAR','MEDICAL','QUANTUM'],
+        products:[
+          {bold:'PM Isolators',detail:'> 40 dB isolation, PER > 23 dB, Telcordia qualified'},
+          {bold:'PM Circulators (3 & 4 port)',detail:'PM and polarisation-insensitive, epoxy-free path'},
+          {bold:'Polarisation Beam Combiners/Splitters',detail:'PBC/PBS, > 20 dB PER, PM fiber'},
+          {bold:'LiNbO₃ Modulators & GRIN Lenses',detail:'10–40 GHz MZM, GRIN 0.23–0.29 pitch'}
+        ]},
+      { name:'QUBIG GMBH', country:'GERMANY', url:'https://www.qubig.com/', page:'QB.html',
+        apps:['SPECTROSCOPY','LAB','QUANTUM','METROLOGY','LIDAR',],
+        products:[
+          {bold:'Resonant Phase Modulators',detail:'kHz–20 GHz, UV–MWIR, Rb/Cs/K/Li/Na/OH models'},
+          {bold:'Resonant Amplitude Modulators',detail:'AM6 (0.1–1.9 MHz), AM8 (31–160 MHz), > 50:1 ER'},
+          {bold:'Pockels Cells & Travelling Wave EOM',detail:'DC to GHz broadband, Q-switch / pulse pick'},
+          {bold:'Q-Driver RF Electronics',detail:'Q-Lock auto-tracking, PDH error signal, Python API'}
+        ]},
+      { name:'INFRAMET', country:'POLAND', url:'https://www.inframet.com/', page:'INFRA.html',
+        apps:['DETECTION','DEFENCE','IMAGING','LAB','RESEARCH','AUTOMOTIVE'],
+        products:[
+          {bold:'Thermal Imager Test Systems',detail:'MRTD/NETD/MTF — DT, TAIM, TCAR, TWAP series'},
+          {bold:'VIS-NIR & Night Vision Testers',detail:'TVT series, NV/NITE, space camera variants'},
+          {bold:'Laser System Test Equipment',detail:'LRF range accuracy ±0.5 m, PRF accuracy ±1 Hz'},
+          {bold:'SIMTERM / VIRTEST / NIGHTMET Simulators',detail:'Computer simulators for EO training & design'},
+          {bold:'COLLIMATORS, BLACKBODIES & TEST MODULES',detail:'blackbodies, UV sources, colour blackbodies, light sources, rotary target wheels, optical tables and positioning stages.'}
+        ]},
+      
+      { name:'REDWAVE LABS', country:'UK', url:'https://www.redwavelabs.com/', page:'MS.html',
+        apps:['DETECTION','QUANTUM','LAB','MEDICAL','FILM'],
+        products:[
+          {bold:'SNSPD Single Photon Detectors',detail:'> 90% efficiency, < 10 Hz dark count, < 50 ps jitter'},
+          {bold:'InGaAs APD Detectors',detail:'> 25% @ 1550 nm, TE-cooled, < 1 kHz dark count'},
+          {bold:'Time Taggers',detail:'< 5 ps jitter, 8–16 ch, > 100 Mcps, Python/MATLAB API'},
+          {bold:'Ultra-Low Noise Laser Controllers',detail:'< 1 µA/√Hz, < 0.001°C TEC, linear TEC'}
+        ]},
+      { name:'BECKER & HICKL', country:'GERMANY', url:'https://www.becker-hickl.com/', page:'MS.html',
+        apps:['LAB','IMAGING','DETECTION','METROLOGY','FILM','LIDAR','RANGING','SPACE'],
+        products:[
+          {bold:'SPC TCSPC/FLIM Modules',detail:'2.5 ps RMS, 8 MHz count rate, SPC-180NX/SPC-160pcie'},
+          {bold:'DCS-120 Complete FLIM System',detail:'Galvo scanner, online FLIM 10 Hz, Leica/Zeiss/Nikon'},
+          {bold:'BDL-SMC Pulsed Diode Lasers',detail:'375–1060 nm, < 100 ps, 20–80 MHz, PM fiber'},
+          {bold:'HPM-100 Hybrid PMT Detector',detail:'< 25 ps IRF, GaAsP, < 100 cps dark count'}
+        ]},
+      { name:'AERODIODE', country:'FRANCE', url:'https://www.aerodiode.com/', page:'MS.html',
+        apps:['LAB','DETECTION','SPECTROSCOPY','QUANTUM','LIDAR','RANGING','EDUCATIONAL INSTITUTES'],
+        products:[
+          {bold:'Free-Space AOMs',detail:'380–1700 nm, 19 models, < 10 ns rise time, 90% efficiency'},
+          {bold:'Fiber-Coupled AOMs',detail:'680–1850 nm, < 2.5 dB IL, PM fiber stock'},
+          {bold:'Laser Drivers & Life-Test Systems',detail:'1 ns to CW, 8-channel independent, TEC control'},
+          {bold:'TOMBAK Pulse Picker & Seeders',detail:'Centrale-I seeder for Yb/Nd amplifier systems'}
+        ]},
+      { name:'SIMTRUM', country:'SINGAPORE', url:'https://www.simtrum.com/', page:'MS.html',
+        apps:['LAB','IMAGING','SPECTROSCOPY','DEFENCE','MEDICAL','RESEARCH','SENSING','INDUSTRIAL','AGRICULTURE'],
+        products:[
+          {bold:'DPSS Nanosecond Pulsed Lasers',detail:'Lancer UV (266/355 nm, 40W), Galver Green (532 nm, 50W)'},
+          {bold:'Fiber Lasers CW & Pulsed',detail:'Yb/Er/Tm fiber, supercontinuum 450–2300 nm'},
+          {bold:'Quantum Cascade Lasers',detail:'THz QCL (1–4.5 THz), MIR QCL (3–17 µm), turnkey'},
+          {bold:'Spinning Disk Confocal Microscopes',detail:'SpinDisk Basic & Advance, Raman confocal'}
+        ]},
+      { name:'BODKIN DESIGN', country:'USA', url:'https://www.bodkindesign.com/', page:'MS.html',
+        apps:['IMAGING','DEFENCE','DETECTION','MEDICAL','INDUSTRIAL','AEROSPACE','AGRICULTURE'],
+        products:[
+          {bold:'HPA™ Snapshot HSI Cameras',detail:'VNIR-20B, SWIR-60, MWIR-20/60, LWIR-62 — patented'},
+          {bold:'Cubert ULTRIS Cameras (NA Excl.)',detail:'ULTRIS 5 (79 Hz HFR), X20 Plus (1880×1880 px)'},
+          {bold:'IR Blackbody Calibration Sources',detail:'±0.05°C accuracy, > 0.995 emissivity'},
+          {bold:'Custom Optical Design Services',detail:'US Army/Air Force/Navy/NASA — CODE V, Zemax'}
+        ]},
+      { name:'FSO INSTRUMENTS', country:'NETHERLANDS', url:'https://www.fso-instruments.nl/', page:'MS.html',
+        apps:['LASER COMMS','DEFENCE','AEROSPACE','SATELLITE','DRONE COMM','SPACE','LASER COMM'],
+        products:[
+          {bold:'Resolite 20 Laser Terminal',detail:'1U CubeSat, 1 Gbps Tx, space flight heritage 2024'},
+          {bold:'Fine Steering Mirror FSM-20B',detail:'± 2° tip/tilt, > 1 kHz BW, < 0.2 W, flexure-based'},
+          {bold:'OISL MEO Optical Bench',detail:'Inter-satellite link bench for MEO constellations'}
+        ]}
+    ]
+  }
+};
+
+/* ─── DETAIL PAGES MAP ──────────────────────────── */
+const DETAIL_PAGES = {
+  'IMST':'IMST.html','CALLISTO':'CC.html','STT SYSTEM TECHNIK':'STT.html',
+  'IZT':'IZT.html','TICRA':'TICRA.html','MARCH MICROWAVE':'MM.html',
+  'MTI':'MTI.html','ELDES':'ELDES.html','OHB AUSTRIA':'OHB.html',
+  'VREMYA-CH':'VR.html','RUKNAR JSC':'RK.html','MORION INC':'MR.html',
+  'SPECTRADYNAMICS':'SD.html','TIMETECH GMBH':'TT.html','MESIT DEFENCE':'MST.html',
+  'MEINBERG':'MB.html','FREQUENCY ELECTRONICS':'FE.html',
+  'EAGLEYARD PHOTONICS':'EY.html','MONOCROM':'MONOC.html','MENLO SYSTEMS':'MS.html',
+  'RIO – OPTASENSE':'RIO.html','AC PHOTONICS':'ACP.html','QUBIG GMBH':'QB.html',
+  'INFRAMET':'INFRA.html','REDWAVE LABS':'RW.html',
+  'BECKER & HICKL':'BH.html','AERODIODE':'AD.html','SIMTRUM':'SMT.html',
+  'BODKIN DESIGN':'BD.html','FSO INSTRUMENTS':'FSO.html'
+};
+
+/* ─── STATE ─────────────────────────────────────── */
+let curDomain = 'rf', curApp = 'ALL';
+
+/* ─── DOMAIN ────────────────────────────────────── */
+function setDomain(d) {
+  curDomain = d; curApp = 'ALL';
+  document.querySelectorAll('.domain-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.domain-btn.'+d).classList.add('active');
+  document.getElementById('statusDomain').textContent = DATA[d].label;
+  renderApps(); renderProducts();
+}
+
+/* ─── APPS ──────────────────────────────────────── */
+function renderApps() {
+  const apps = DATA[curDomain].apps;
+  document.getElementById('appTabs').innerHTML = apps.map(a =>
+    `<button class="app-tab ${a===curApp?'active '+curDomain:''}" onclick="setApp('${a}')">${a}</button>`
+  ).join('');
+}
+function setApp(app) {
+  curApp = app;
+  document.querySelectorAll('.app-tab').forEach(b=>b.classList.remove('active','rf','tf','op'));
+  event.target.classList.add('active', curDomain);
+  document.getElementById('statusApp').textContent = app;
+  renderProducts();
+}
+
+/* ─── PRODUCTS ──────────────────────────────────── */
+function renderProducts() {
+  const allVendors = DATA[curDomain].vendors;
+  const vendors = curApp==='ALL'
+    ? allVendors
+    : allVendors.filter(v=>v.apps.includes(curApp));
+
+  document.getElementById('productCount').textContent = vendors.length;
+  document.getElementById('statusCount').textContent = vendors.length;
+
+  if(!vendors.length){
+    document.getElementById('productsGrid').innerHTML =
+      `<div class="empty-state"><div class="icon">🔍</div>No vendors found for this filter.</div>`;
+    return;
+  }
+
+  document.getElementById('productsGrid').innerHTML = vendors.map((v,i) => {
+    const globalIdx = allVendors.indexOf(v);
+    const page = DETAIL_PAGES[v.name] || null;
+    const items = v.products.map(p =>
+  `<div class="pi-row">
+    <span class="pi-dot">›</span>
+    <span>
+      <span class="pi-name">${p.bold}</span>
+      ${p.detail ? `<span class="pi-detail"> — ${p.detail}</span>` : ''}
+    </span>
+  </div>`
+).join('');
+
+    const tags = v.apps.slice(0,3).map(a=>`<span class="tag">${a}</span>`).join('');
+
+    const btn = page
+      ? `<a class="view-btn" href="${page}" onclick="event.stopPropagation()">View Full Details ↗</a>`
+      : `<button class="view-btn" onclick="event.stopPropagation();openModalByIndex('${curDomain}',${globalIdx})">View Details →</button>`;
+
+    return `<div class="product-card ${curDomain}" style="animation-delay:${i*0.04}s"
+      onclick="openModalByIndex('${curDomain}',${globalIdx})">
+      <div class="product-vendor">${v.name}</div>
+      <div class="product-country">📍 ${v.country}</div>
+      <div class="product-items">${items}</div>
+      <div class="product-tags">${tags}</div>
+      ${btn}
+    </div>`;
+  }).join('');
+}
+
+/* ─── MODAL ─────────────────────────────────────── */
+function openModal(json) {
+  const v = JSON.parse(json);
+  const modal = document.getElementById('modal');
+  modal.className = 'modal ' + curDomain;
+  document.getElementById('modalDomainTag').textContent = '// ' + DATA[curDomain].label;
+  document.getElementById('modalVendor').textContent = v.name;
+  document.getElementById('modalCountry').textContent = '📍 ' + v.country;
+  document.getElementById('modalApps').innerHTML =
+    `<div class="modal-section-title">Applications</div>
+     <div class="modal-app-tags">${v.apps.map(a=>`<span class="modal-app-tag">${a}</span>`).join('')}</div>`;
+  document.getElementById('modalProducts').innerHTML = v.products.map(p=>
+    `<li><strong>${p.bold}</strong>${p.detail?' — '+p.detail:''}</li>`).join('');
+  const page = DETAIL_PAGES[v.name];
+  document.getElementById('modalLinks').innerHTML =
+    (page?`<a class="modal-link" href="${page}">📄 Full Product Page</a>`:'') +
+    (v.url?`<a class="modal-link" href="${v.url}" target="_blank">↗ Visit Website</a>`:'');
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModalBg(e) { if(e.target===document.getElementById('modalOverlay')) closeModal(); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ─── INIT ──────────────────────────────────────── */
+renderTeam();
+renderApps();
+renderProducts();
+</script>
+</body>
+</html>
